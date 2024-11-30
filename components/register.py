@@ -24,10 +24,10 @@ class Register:
     def fill_confirm_password(self, password):
         self.page.get_by_placeholder("Подтвердите пароль").fill(password)
 
-    @allure.step("Нажимаем на кнопку 'Я преподаватель'")
+    @allure.step("Кликаем на кнопку 'Я преподаватель'")
     def click_on_become_a_teacher_button(self):
         self.page.locator("#id_is_tutor").check()
 
-    @allure.step("Нажимаем на кнопку 'Зарегистрироваться'")
+    @allure.step("Кликаем на кнопку 'Зарегистрироваться'")
     def click_on_registration_button(self):
         self.page.get_by_test_id("submit-button").click()
