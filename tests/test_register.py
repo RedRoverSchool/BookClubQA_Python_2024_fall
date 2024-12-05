@@ -1,8 +1,8 @@
 from faker import Faker
 import pytest
 
-
 fake = Faker()
+
 
 def test_register_as_tutor(header, register):
     header.visit()
@@ -14,6 +14,7 @@ def test_register_as_tutor(header, register):
     register.click_on_become_a_teacher_button()
     register.click_on_registration_button()
     header.create_listing_button_should_be_visible()
+
 
 @pytest.mark.slow
 def test_register_as_student(header, register):
