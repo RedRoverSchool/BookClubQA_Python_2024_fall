@@ -1,6 +1,7 @@
 import pytest
 from components.header import Header
 from components.register import Register
+from components.main_body import MainBodyPage
 from playwright.sync_api import Page
 import allure
 from pytest import Item
@@ -14,6 +15,11 @@ def header(page: Page):
 @pytest.fixture
 def register(page: Page):
     return Register(page)
+
+
+@pytest.fixture
+def main_body(page: Page):
+    return MainBodyPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
