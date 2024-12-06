@@ -18,3 +18,4 @@ class Header:
     @allure.step("Проверяем видимость кнопки 'Создать объявление'")
     def create_listing_button_should_be_visible(self):
         expect(self.page.get_by_test_id("create-listing")).to_be_visible()
+
