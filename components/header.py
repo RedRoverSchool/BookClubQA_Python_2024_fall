@@ -11,6 +11,10 @@ class Header:
     def visit(self):
         self.page.goto(base_url)
 
+    @allure.step("Кликаем на кнопку 'Войти'")
+    def click_on_login_button(self):
+        self.page.locator('(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]').click()
+
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_on_registration_button(self):
         self.page.get_by_test_id("signup").click()
