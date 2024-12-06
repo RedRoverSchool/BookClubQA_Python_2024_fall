@@ -22,3 +22,7 @@ class Header:
     @allure.step("Проверяем видимость кнопки 'Создать объявление'")
     def create_listing_button_should_be_visible(self):
         expect(self.page.get_by_test_id("create-listing")).to_be_visible()
+
+    @allure.step("Кликаем на кнопку 'Найти репетитора'")
+    def click_on_find_tutor_button(self):
+        self.page.locator("//li/a[@href = '/list/']").click()
