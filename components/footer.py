@@ -43,11 +43,6 @@ class Footer:
     def privacy_policy_url_should_be_enabled(self):
         expect(self.page.get_by_text("Политика конфиденциальности")).to_be_enabled()
 
-    # @allure.step("Проверяем перенаправление на страницу 'Политика Конфиденциальности'")
-    # def clicking_privacy_policy_url_should_be_redirect_to_policy_page(self):
-    #     expect(self.page.url).to_have_url(policy_url)
-
     @allure.step("Проверяем перенаправление на страницу 'Политика Конфиденциальности'")
     def privacy_policy_page_should_contain_text(self):
         expect(self.page.get_by_text("Example Domain")).to_contain_text(title)
-
