@@ -26,3 +26,14 @@ class Header:
     @allure.step("Кликаем на кнопку 'Найти репетитора'")
     def click_on_find_tutor_button(self):
         self.page.locator("//li/a[@href = '/list/']").click()
+
+    @allure.step("Проверяем видимость кнопки 'Поддержка'")
+    def support_button_should_be_visible(self):
+        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
+        expect(button).to_be_visible()
+
+    @allure.step("Кликаем на кнопку 'Поддержка'")
+    def click_on_support_button(self):
+        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
+        button.click()
+        expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
