@@ -5,6 +5,7 @@ from components.header import Header
 from components.register import Register
 from components.login import Login
 from playwright.sync_api import Page
+from components.footer import Footer
 import allure
 from pytest import Item
 
@@ -23,10 +24,15 @@ def register(page: Page):
 def login(page: Page):
     return Login(page)
 
+
 @pytest.fixture
 def find_tutor(page: Page):
     return FindTutor(page)
 
+
+@pytest.fixture
+def footer(page: Page):
+    return Footer(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
