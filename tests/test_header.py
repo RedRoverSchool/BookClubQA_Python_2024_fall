@@ -21,3 +21,15 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor ):
     header.visit()
     header.click_on_find_tutor_button()
     find_tutor.check_title_of_registration()
+
+def test_support_visibility_as_teacher(login, header):
+    header.visit()
+    header.click_on_login_button()
+    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    header.support_button_should_be_visible()
+
+def test_support_clickability_as_teacher(login, header):
+    header.visit()
+    header.click_on_login_button()
+    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    header.click_on_support_button()
