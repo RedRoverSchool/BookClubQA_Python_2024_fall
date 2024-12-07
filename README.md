@@ -24,6 +24,10 @@
 5. Не работаем в одной ветке долго, чтобы уменьшить количество конфликтов
 6. Не самые важные тесты стоит помечать маркером slow (@pytest.mark.slow)
 
+## Как работаем с бордом
+
+[Инструкция](https://docs.google.com/document/d/1ob1So07HGUwlMcEEHpgEYTBLBQzAZ6laPCRItndNJqU/edit?tab=t.0)
+
 
 ## Установки:
 
