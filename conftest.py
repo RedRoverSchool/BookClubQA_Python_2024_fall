@@ -1,4 +1,6 @@
 import pytest
+
+from components.find_tutor import FindTutor
 from components.header import Header
 from components.register import Register
 from components.login import Login
@@ -21,6 +23,11 @@ def register(page: Page):
 @pytest.fixture
 def login(page: Page):
     return Login(page)
+
+
+@pytest.fixture
+def find_tutor(page: Page):
+    return FindTutor(page)
 
 
 @pytest.fixture
