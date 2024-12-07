@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-from core.settings import base_url, policy_url
+from core.settings import base_url, policy_url, list_url, signup_url, login_url, title
 import allure
 
 
@@ -8,10 +8,22 @@ class Footer:
         self.page = page
 
     @allure.step("Открываем Footer на главной странице")
-    def open(self):
+    def open_main_page(self):
         self.page.goto(base_url)
 
-    @allure.step("Прокучиваем страницу до Футера")
+    @allure.step("Открываем Footer на странице Найти Репетитора")
+    def open_find_tutor_page(self):
+        self.page.goto(list_url)
+
+    @allure.step("Открываем Footer на странице Регистрации")
+    def open_signup_page(self):
+        self.page.goto(signup_url)
+
+    @allure.step("Открываем Footer на странице Входа")
+    def open_login_page(self):
+        self.page.goto(login_url)
+
+    @allure.step("Прокручиваем страницу до Футера")
     def scroll_down_to_the_footer(self):
         self.page.get_by_text("© 2024 Мыслеплав. Все права защищены.").scroll_into_view_if_needed()
 
@@ -31,10 +43,11 @@ class Footer:
     def privacy_policy_url_should_be_enabled(self):
         expect(self.page.get_by_text("Политика конфиденциальности")).to_be_enabled()
 
-    @allure.step("Проверяем перенаправление на страницу 'Политика конфиденциальности'")
-    def clicking_privacy_policy_url_should_be_redirect_to_policy_page(self):
-        expect(self.page.url).to_have_url(policy_url)
+    # @allure.step("Проверяем перенаправление на страницу 'Политика Конфиденциальности'")
+    # def clicking_privacy_policy_url_should_be_redirect_to_policy_page(self):
+    #     expect(self.page.url).to_have_url(policy_url)
 
-    # @allure.step("Кликаем на кнопку 'Согласиться'")
-    # def click_on_agree_button(self):
-    #     self.page.get_by_text("Согласиться").click()
+    @allure.step("Проверяем перенаправление на страницу 'Политика Конфиденциальности'")
+    def privacy_policy_page_should_contain_text(self):
+        expect(self.page.get_by_text("Example Domain")).to_contain_text(title)
+
