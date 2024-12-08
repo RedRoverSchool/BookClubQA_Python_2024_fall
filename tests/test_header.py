@@ -36,11 +36,19 @@ def test_support_clickability_as_teacher(login, header):
     login.full_login("teacher_test", "a.9QA{!@HDB;en2")
     header.click_on_support_button()
 
-
 def test_verify_redirection_on_profile_page(login, header):
     header.visit()
     header.click_on_login_button()
     login.full_login("Garry", "Potter1$")
     header.click_on_profile_button()
     header.profile_button_should_be_visible()
+    
+def test_login_button_is_visible(login, header):
+    header.visit()
+    header.login_button_should_be_visible()
+
+def test_become_a_tutor_button_is_visible(header):
+    header.visit()
+    header.become_a_tutor_button_should_be_visible()
+
 

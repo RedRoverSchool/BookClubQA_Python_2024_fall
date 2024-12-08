@@ -48,3 +48,13 @@ class Header:
         button = self.page.get_by_test_id("profile")
         button.click()
         expect(self.page).to_have_url("http://testing.misleplav.ru/profile/")
+
+    @allure.step("Проверяем видимость кнопки 'Войти'")
+    def login_button_should_be_visible(self):
+        button = self.page.locator('(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]')
+        assert button.is_visible()
+        
+    @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
+    def become_a_tutor_button_should_be_visible(self):
+        button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
+
