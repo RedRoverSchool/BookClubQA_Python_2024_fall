@@ -1,4 +1,7 @@
+import os
+
 import pytest
+from dotenv import load_dotenv
 
 from components.find_tutor import FindTutor
 from components.header import Header
@@ -6,7 +9,7 @@ from components.register import Register
 from components.main_body import MainBodyPage
 
 from components.login import Login
-from playwright.sync_api import Page
+from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
 from components.main_body import MainBodyPage
 import allure
@@ -73,3 +76,24 @@ def video_and_screenshot(page: Page):
 def pytest_runtest_call(item: Item):
     yield
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
+
+
+
+
+
+load_dotenv()
+valid_password = os.getenv("VALID_PASSWORD")
+valid_login = os.getenv("VALID_LOGIN")
+invalid_login = os.getenv("INVALID_LOGIN")
+invalid_password = os.getenv("PASSWORD")
+
+
+@pytest.fixture
+def browser_fixture():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=False)
+        context = browser.new_context()
+        page = context.new_page()
+        yield page
+        page.close()
+        browser.close()
