@@ -132,3 +132,10 @@ dmypy.json
 allure-results/
 
 test-results/
+
+*~
+*.py~
+
+# Игнорировать кэш pytest
+pytest-cache/
+*.cache
