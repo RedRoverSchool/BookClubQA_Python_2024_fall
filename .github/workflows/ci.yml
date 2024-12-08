@@ -25,7 +25,7 @@ jobs:
 
       - name: Install Playwright browsers
         run: |
-          python -m playwright install  # Install necessary Playwright browsers
+          python -m playwright install chromium firefox opera  # Install necessary Playwright browsers
 
       - name: Run tests
         run: pytest  # Запуск всех тестов с помощью pytest
