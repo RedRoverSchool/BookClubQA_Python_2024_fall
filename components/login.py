@@ -43,6 +43,7 @@ class Login:
         self.enter_password(password)
         self.click_login_button()
 
+
     @allure.step("Выполняем вход с не корректным логином")
     def check_enter_invalid_username(self, username):
         self.enter_username(username)
