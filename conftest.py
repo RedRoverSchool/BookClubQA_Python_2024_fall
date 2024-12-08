@@ -6,6 +6,7 @@ from components.register import Register
 from components.login import Login
 from playwright.sync_api import Page
 from components.footer import Footer
+from components.main_body import MainBodyPage
 import allure
 from pytest import Item
 
@@ -33,6 +34,11 @@ def find_tutor(page: Page):
 @pytest.fixture
 def footer(page: Page):
     return Footer(page)
+
+
+@pytest.fixture
+def main_body(page: Page):
+    return MainBodyPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
