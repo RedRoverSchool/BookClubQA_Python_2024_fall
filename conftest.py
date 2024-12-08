@@ -3,6 +3,8 @@ import pytest
 from components.find_tutor import FindTutor
 from components.header import Header
 from components.register import Register
+from components.main_body import MainBodyPage
+
 from components.login import Login
 from playwright.sync_api import Page
 from components.footer import Footer
@@ -22,6 +24,10 @@ def register(page: Page):
 
 
 @pytest.fixture
+def main_body(page: Page):
+    return MainBodyPage(page)
+
+  
 def login(page: Page):
     return Login(page)
 
