@@ -1,17 +1,18 @@
+#For more information see:https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python
 name: CI - BookClubQA
 
 on:
   pull_request:
-    branches: [main]  # Запускать workflow при пуше в ветку main
+    branches: [ main ]  # Запускать workflow при пуше в ветку main
 
 jobs:
   run-tests:
     name: Run tests
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Клонируем репозиторий
+        uses: actions/checkout@v4.2.2  # Клонируем репозиторий
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0  # Настроить Python
@@ -26,6 +27,25 @@ jobs:
       - name: Install Playwright browsers
         run: |
           python -m playwright install chromium    # Install necessary Playwright browser chromium
+      - name: Install the code linting and formatting tool Ruff
+        run: pipx install ruff
+
+      # Шаг 7: Проверка форматирования кода Ruff
+      - name: Lint code with Ruff
+        run: ruff check --output-format=github --target-version=py39
+
+      - name: Check code formatting with Ruff
+        run: ruff format --diff --target-version=py39
+        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
+
+      - name: Load environment variables from .env
+        run: |
+            if [ -f .env ]; then
+              export $(cat .env | xargs)
+            fi
+            echo "Environment variables loaded"
 
       - name: Run tests
         run: pytest  # Запуск всех тестов с помощью pytest
+
+
