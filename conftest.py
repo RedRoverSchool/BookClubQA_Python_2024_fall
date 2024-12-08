@@ -27,7 +27,8 @@ def register(page: Page):
 def main_body(page: Page):
     return MainBodyPage(page)
 
-@pytest.fixture  
+
+@pytest.fixture
 def login(page: Page):
     return Login(page)
 
@@ -40,11 +41,6 @@ def find_tutor(page: Page):
 @pytest.fixture
 def footer(page: Page):
     return Footer(page)
-
-
-@pytest.fixture
-def main_body(page: Page):
-    return MainBodyPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)

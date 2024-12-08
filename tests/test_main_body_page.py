@@ -1,5 +1,3 @@
-
-
 def test_main_page_info_is_same_after_reload(header, main_body, register):
     header.visit()
     main_page_info_before_reload = main_body.check_info_main_page()
@@ -7,7 +5,7 @@ def test_main_page_info_is_same_after_reload(header, main_body, register):
     main_page_info_after_reload = main_body.check_info_main_page()
     assert main_page_info_after_reload == main_page_info_before_reload
 
-    
+
 def test_main_body_page(header, main_body, register):
     header.visit()
     main_body.check_info_welcome_container()
@@ -23,3 +21,9 @@ def test_main_body_page(header, main_body, register):
     main_body.check_regular_funds_in_ad_for_new_students_card_visible()
     main_body.check_professional_tools_for_collaboration_card_visible()
 
+
+def test_more_btn_redirects_telegram_for_students(header, main_body):
+    header.visit()
+    main_body.click_more_button_at_the_top()
+    main_body.students_info_should_be_opened()
+    main_body.check_telegram_channel_should_have_title_for_students()
