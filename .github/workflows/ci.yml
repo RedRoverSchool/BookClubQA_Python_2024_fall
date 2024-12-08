@@ -23,5 +23,9 @@ jobs:
           python -m pip install --upgrade pip  # Обновление pip
           pip install -r requirements.txt  # Установка зависимостей из requirements.txt
 
+      - name: Install Playwright browsers
+        run: |
+          python -m playwright install  # Install necessary Playwright browsers
+
       - name: Run tests
         run: pytest  # Запуск всех тестов с помощью pytest
