@@ -37,3 +37,8 @@ class Header:
         button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
         button.click()
         expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
+
+    @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
+    def become_a_tutor_button_should_be_visible(self):
+        button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
+        assert button.is_visible()
