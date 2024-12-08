@@ -57,4 +57,5 @@ class Header:
     @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
     def become_a_tutor_button_should_be_visible(self):
         button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
+        assert button.is_visible()
 
