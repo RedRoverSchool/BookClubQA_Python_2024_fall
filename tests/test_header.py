@@ -33,3 +33,7 @@ def test_support_clickability_as_teacher(login, header):
     header.click_on_login_button()
     login.full_login("teacher_test", "a.9QA{!@HDB;en2")
     header.click_on_support_button()
+
+def test_login_button_is_visible(login, header):
+    header.visit()
+    header.login_button_should_be_visible()
