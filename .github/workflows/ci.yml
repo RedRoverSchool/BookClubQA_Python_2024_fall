@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]  # Запускать workflow при пуше в ветку main
+
+jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Клонируем репозиторий
+
+      - name: Set up Python
+        uses: actions/setup-python@v4  # Настроить Python
+        with:
+          python-version: "3.11"  # Устанавливаем нужную версию Python
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip  # Обновление pip
+          pip install -r requirements.txt  # Установка зависимостей из requirements.txt
+
+      - name: Run tests
+        run: pytest  # Запуск всех тестов с помощью pytest
