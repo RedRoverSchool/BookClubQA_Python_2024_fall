@@ -1,4 +1,4 @@
-name: CI
+name: CI - BookClubQA
 
 on:
   pull_request:
