@@ -27,7 +27,7 @@ def register(page: Page):
 def main_body(page: Page):
     return MainBodyPage(page)
 
-  
+@pytest.fixture  
 def login(page: Page):
     return Login(page)
 
