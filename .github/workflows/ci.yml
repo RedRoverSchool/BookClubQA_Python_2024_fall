@@ -24,11 +24,14 @@ jobs:
           python -m pip install --upgrade pip  # Обновление pip
           pip install -r requirements.txt  # Установка зависимостей из requirements.txt
 
+      - name: Verify installed packages
+        run: pip freeze
+
       - name: Install Playwright browsers
         run: |
           python -m playwright install chromium    # Install necessary Playwright browser chromium
       - name: Install the code linting and formatting tool Ruff
-        run: pipx install ruff
+        run: pip install ruff
 
       # Шаг 7: Проверка форматирования кода Ruff
       - name: Lint code with Ruff
@@ -40,12 +43,14 @@ jobs:
 
       - name: Load environment variables from .env
         run: |
-            if [ -f .env ]; then
-              export $(cat .env | xargs)
-            fi
+          if [ -f .env ]; then
+            export $(cat .env | xargs)
             echo "Environment variables loaded"
+          else
+            echo "No .env file found. Skipping environment variable loading."
+          fi
 
       - name: Run tests
-        run: pytest  # Запуск всех тестов с помощью pytest
+        run: pytest --maxfail=1 --disable-warnings -q  # Запуск всех тестов с помощью pytest
 
 
