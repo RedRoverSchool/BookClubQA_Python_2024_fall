@@ -35,8 +35,17 @@ jobs:
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
-      # Установка Allure
-      - name: Install Allure
+      # Кэширование:
+      - name: Cache Allure
+        uses: actions/cache@v3
+        with:
+          path: /opt/allure-2.32.0
+          key: allure-2.32.0
+          restore-keys: allure-
+
+      # Установка при отсутствии кэша:
+      - name: Install Allure (if not cached)
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           sudo wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
           sudo tar -zxvf allure-2.32.0.tgz -C /opt/
@@ -79,7 +88,7 @@ jobs:
 
       # Пробный отчет
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
         if: always()
         with:
           junit_files: "report.xml"
