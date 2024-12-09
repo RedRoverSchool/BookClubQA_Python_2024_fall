@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5.2.0  # Настроить Python
         with:
-          python-version: "3.12"  # Устанавливаем нужную версию Python
+          python-version: "3.12"  # Установка нужной версии Python
 
         # Установка зависимостей из requirements.txt
       - name: Install dependencies
@@ -35,16 +35,60 @@ jobs:
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
-      # Проверка форматирования кода Ruff
+      # Кэширование:
+      - name: Cache Allure
+        uses: actions/cache@v3
+        with:
+          path: /opt/allure-2.32.0
+          key: allure-2.32.0
+          restore-keys: allure-
+
+      # Установка при отсутствии кэша:
+      - name: Install Allure (if not cached)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+          sudo tar -zxvf allure-2.32.0.tgz -C /opt/
+          sudo ln -s /opt/allure-2.32.0/bin/allure /usr/bin/allure
+
+      #Установка линтера Ruff
       - name: Lint code with Ruff
         run: ruff check --output-format=github --target-version=py39
 
+      # Проверка форматирования кода Ruff
       - name: Check code formatting with Ruff
         run: ruff format --diff --target-version=py39
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов с помощью pytest
-      - name: Run tests
-        run: pytest --maxfail=1 --disable-warnings -q  
+      # Запуск всех тестов с генерацией Allure-отчетов
+      - name: Run tests with Allure
+        run: |
+          pytest --maxfail=1 --disable-warnings -q --alluredir=allure-results
 
+      # Загрузка результатов Allure как артефактов
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 2
 
+      # Генерация Allure-отчета
+      - name: Generate Allure report
+        run: |
+          allure generate allure-results -o allure-report --clean   
+
+      # Загрузка Allure-отчета как артефакта
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 2
+
+      # Пробный отчет
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+        if: always()
+        with:
+          junit_files: "report.xml"
