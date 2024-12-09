@@ -50,7 +50,7 @@ jobs:
       # Запуск всех тестов(2 ядра, реран 3 раза, стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -n2 --reruns=3 --maxfail=1 --disable-warnings -q 
+          pytest -s -n2 --reruns=3 --maxfail=1 --disable-warnings -q 
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
