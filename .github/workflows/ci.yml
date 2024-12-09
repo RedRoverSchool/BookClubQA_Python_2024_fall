@@ -85,10 +85,3 @@ jobs:
           name: allure-report
           path: allure-report
           retention-days: 2
-
-      # Пробный отчет
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-        if: always()
-        with:
-          junit_files: "report.xml"
