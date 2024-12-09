@@ -47,10 +47,10 @@ jobs:
         run: ruff format --diff --target-version=py39
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов(2 ядра, стоп на 1 упавшем тесте, мин инф о тестах)
+      # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -s -n2 --maxfail=1 --disable-warnings -q 
+          pytest -s --maxfail=1 --disable-warnings -q 
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
