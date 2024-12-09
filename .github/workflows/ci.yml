@@ -41,6 +41,7 @@ jobs:
         run: ruff format --diff --target-version=py39
         continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
 
+
       #      - name: Load environment variables from .env
       #        run: |
       #          if [ -f .env ]; then
@@ -70,7 +71,9 @@ jobs:
 #               echo "DEBUG: No .env file found. Skipping environment variable loading."
 #               fi
 
+
+# Запуск всех тестов с помощью pytest
       - name: Run tests
-        run: pytest --maxfail=1 --disable-warnings -q  # Запуск всех тестов с помощью pytest
+        run: pytest --maxfail=1 --disable-warnings -q  
 
 
