@@ -52,7 +52,6 @@ jobs:
         run: |
           pytest -n2 --reruns=3 --maxfail=1 --disable-warnings -q 
         env:
-          CI_RUN: true
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
 
