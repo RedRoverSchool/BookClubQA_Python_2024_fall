@@ -2,56 +2,71 @@
 name: CI - BookClubQA
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]  # Запускать workflow при пуше в ветку main
+    branches: [ "main" ]  # Запускать workflow при пуше в ветку main
 
 jobs:
-  run-tests:
-    name: Run tests
-    runs-on: ubuntu-latest
+  build:
+    run-tests:
+      name: Run tests
+      runs-on: ubuntu-latest
 
-    steps:
-      # Клонируем репозиторий
-      - name: Checkout code
-        uses: actions/checkout@v4.2.2
+      steps:
+        # Клонируем репозиторий
+        - name: Checkout code
+          uses: actions/checkout@v4.2.2
 
-      # Настройки Python
-      - name: Set up Python
-        uses: actions/setup-python@v5.2.0
-        with:
-          python-version: "3.12"  # Установка нужной версии Python
+        # Настройки Python
+        - name: Set up Python
+          uses: actions/setup-python@v5.2.0
+          with:
+            python-version: "3.12"  # Установка нужной версии Python
 
-        # Установка зависимостей из requirements.txt
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip  # Обновление pip
-          pip install -r requirements.txt  
+          # Установка зависимостей из requirements.txt
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip  # Обновление pip
+            pip install flake8 flask pytest-xdist pytest-rerunfailures pytest
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Verify installed packages
-        run: pip freeze
+        - name: Validate Python syntax
+          run: |
+            python -m compileall -q . || exit 1
+        
 
-      # Установка необходимых браузеров Playwright Chrome.
-      - name: Install Playwright browsers
-        run: |
-          python -m playwright install chromium
-      - name: Install the code linting and formatting tool Ruff
-        run: pip install ruff
+        - name: Verify installed packages
+          run: pip freeze
 
-      #Установка линтера Ruff
-      - name: Lint code with Ruff
-        run: ruff check --output-format=github --target-version=py39
+        # Установка необходимых браузеров Playwright Chrome.
+        - name: Install Playwright browsers
+          run: |
+            python -m playwright install chromium
+        - name: Install the code linting and formatting tool Ruff
+          run: pip install ruff
 
-      # Проверка форматирования кода Ruff
-      - name: Check code formatting with Ruff
-        run: ruff format --diff --target-version=py39
-        continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
+        #Установка линтера Ruff
+        - name: Lint code with Ruff
+          run: ruff check --output-format=github --target-version=py39
 
-      # Запуск всех тестов
-      - name: Run tests
-        run: |
-          pytest --maxfail=1 --disable-warnings -q 
+        # Проверка форматирования кода Ruff
+        - name: Check code formatting with Ruff
+          run: ruff format --diff --target-version=py39
+          continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # - name: Publish Test Results
+        # Запуск всех тестов
+        - name: Run tests
+          run: |
+               pytest -n2 --reruns=5 -sv
+               env:
+                 CI_RUN: true
+                 PYTHONDONTWRITEBYTECODE: 1
+                 PYTHONUNBUFFERED: 1
+
+#          pytest --maxfail=1 --disable-warnings -q
+
+          # - name: Publish Test Results
       #   uses: EnricoMi/publish-unit-test-result-action@v2
       #   if: always()
       #   with:

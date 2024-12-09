@@ -1,5 +1,6 @@
 import allure
-from conftest import valid_password, valid_login, invalid_login, invalid_password
+from Data.data import *
+
 
 def test_login_as_tutor_btn_create_listing(header, login):
     login.open_login_page()
