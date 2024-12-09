@@ -40,10 +40,10 @@ def find_tutor(page: Page):
 def footer(page: Page):
     return Footer(page)
 
-
-@pytest.fixture
-def main_body(page: Page):
-    return MainBodyPage(page)
+# дубль -удалить
+# @pytest.fixture
+# def main_body(page: Page):
+#     return MainBodyPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
