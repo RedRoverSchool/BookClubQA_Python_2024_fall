@@ -45,16 +45,16 @@ jobs:
 
       # Проверка форматирования кода Ruff
       - name: Lint code with Ruff
-        run: ruff check --output-format=github --target-version=py39
+        run: ruff check --output-format=github --target-version=py312
 
       - name: Check code formatting with Ruff
-        run: ruff format --diff --target-version=py39
+        run: ruff format --diff --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов(2 ядра, реран 3 раза, стоп на 1 упавшем тесте, мин инф о тестах)
+      # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -n2 --reruns=3 --maxfail=1 --disable-warnings -q 
+          pytest -s --maxfail=1 --disable-warnings -q 
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
