@@ -2,7 +2,7 @@ import pytest
 
 from components.find_tutor import FindTutor
 from components.header import Header
-from components.header_student import HeaderStudentPage
+from components.my_teachers import MyTeachersPage
 from components.register import Register
 from components.main_body import MainBodyPage
 
@@ -18,7 +18,7 @@ def header(page: Page):
     return Header(page)
 
 @pytest.fixture
-def header_student(page: Page):
+def my_teachers(page: Page):
     return HeaderStudentPage(page)
 
 
