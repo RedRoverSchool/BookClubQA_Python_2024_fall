@@ -34,14 +34,15 @@ jobs:
       - name: Install Playwright browsers
         run: |
           python -m playwright install chromium
+          
+     #Установка линтера Ruff    
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
-      #Установка линтера Ruff
+      # Проверка форматирования кода Ruff
       - name: Lint code with Ruff
         run: ruff check --output-format=github --target-version=py39
 
-      # Проверка форматирования кода Ruff
       - name: Check code formatting with Ruff
         run: ruff format --diff --target-version=py39
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
