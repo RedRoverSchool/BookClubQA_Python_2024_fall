@@ -11,8 +11,8 @@ def test_login_as_tutor_btn_create_listing(header, login):
     header.create_listing_button_should_be_visible
 
 
-@allure.title("TC_03.001.004 ")
-@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/17")
+# @allure.title("TC_03.001.004 ")
+# @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/17")
 def test_check_enter_invalid_username(header, login):
     header.visit()
     header.click_on_login_button()
