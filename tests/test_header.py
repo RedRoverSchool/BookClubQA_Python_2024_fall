@@ -73,3 +73,13 @@ def test_login_button_is_visible(header):
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
     header.become_a_tutor_button_should_be_visible()
+
+def test_see_list_of_tutors_profiles(header, find_tutor):
+   header.visit()
+   header.find_a_tutor_button_should_be_visible()
+   header.click_on_find_tutor_button()
+   find_tutor.check_list_of_tutors_is_opened()
+   find_tutor.check_picture_of_tutor_is_visible()
+   find_tutor.check_name_of_tutor_is_visible()
+   find_tutor.check_subject_of_tutor_is_visible()
+   find_tutor.check_price_is_visible()
