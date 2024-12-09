@@ -56,7 +56,7 @@ def test_become_a_tutor_button_is_visible(header):
 
 
 
-@allure.title("TC_03.001.004 ")
+@allure.title("TC_03.001.005 ")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/17")
 def test_check_enter_invalid_username(header, login):
     header.visit()
