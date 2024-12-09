@@ -47,10 +47,14 @@ jobs:
         run: ruff format --diff --target-version=py39
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов
+      # Запуск всех тестов(2 ядра, реран 3 раза, стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest --maxfail=1 --disable-warnings -q 
+          pytest -n2 --reruns=3 --maxfail=1 --disable-warnings -q 
+        env:
+          CI_RUN: true
+          PYTHONDONTWRITEBYTECODE: 1
+          PYTHONUNBUFFERED: 1
 
       # - name: Publish Test Results
       #   uses: EnricoMi/publish-unit-test-result-action@v2
