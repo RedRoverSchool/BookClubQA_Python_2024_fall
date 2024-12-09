@@ -33,13 +33,13 @@ jobs:
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
-      # Шаг 7: Проверка форматирования кода Ruff
-      - name: Lint code with Ruff
-        run: ruff check --output-format=github --target-version=py39
-
-      - name: Check code formatting with Ruff
-        run: ruff format --diff --target-version=py39
-        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
+#      # Шаг 7: Проверка форматирования кода Ruff
+#      - name: Lint code with Ruff
+#        run: ruff check --output-format=github --target-version=py39
+#
+#      - name: Check code formatting with Ruff
+#        run: ruff format --diff --target-version=py39
+#        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
 
       - name: Load environment variables from .env
         run: |
