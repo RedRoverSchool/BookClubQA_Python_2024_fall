@@ -40,7 +40,7 @@ def find_tutor(page: Page):
 def footer(page: Page):
     return Footer(page)
 
-# дубль -удалить
+# дубль -удалить 25 строка
 # @pytest.fixture
 # def main_body(page: Page):
 #     return MainBodyPage(page)
