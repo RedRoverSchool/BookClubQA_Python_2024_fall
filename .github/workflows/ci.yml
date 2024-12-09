@@ -41,13 +41,33 @@ jobs:
 #        run: ruff format --diff --target-version=py39
 #        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
 
+#      - name: Load environment variables from .env
+#        run: |
+#          if [ -f .env ]; then
+#
+#          set -o allexport
+#          source .env
+#          set +o allexport
+#          echo "Environment variables loaded"
+#          else
+#          echo "No .env file found. Skipping environment variable loading."
+#          fi
       - name: Load environment variables from .env
         run: |
+        # Проверка наличия .env файла
           if [ -f .env ]; then
-            export $(cat .env | xargs)
-            echo "Environment variables loaded"
+          echo "DEBUG: .env file found. Loading environment variables..."
+          set -o allexport
+          source .env
+          set +o allexport
+
+        # Вывод всех переменных окружения для отладки
+          echo "DEBUG: Loaded environment variables:"
+          printenv | grep -E 'INVALID_LOGIN|INVALID_PASSWORD'
+        
+          echo "Environment variables loaded"
           else
-            echo "No .env file found. Skipping environment variable loading."
+          echo "DEBUG: No .env file found. Skipping environment variable loading."
           fi
 
       - name: Run tests
