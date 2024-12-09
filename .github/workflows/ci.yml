@@ -33,38 +33,44 @@ jobs:
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
-#      # Шаг 7: Проверка форматирования кода Ruff
-#      - name: Lint code with Ruff
-#        run: ruff check --output-format=github --target-version=py39
+      # Шаг 7: Проверка форматирования кода Ruff
+      - name: Lint code with Ruff
+        run: ruff check --output-format=github --target-version=py39
+
+      - name: Check code formatting with Ruff
+        run: ruff format --diff --target-version=py39
+        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
+
+
+      #      - name: Load environment variables from .env
+      #        run: |
+      #          if [ -f .env ]; then
+      #
+      #          set -o allexport
+      #          source .env
+      #          set +o allexport
+      #          echo "Environment variables loaded"
+      #          else
+      #          echo "No .env file found. Skipping environment variable loading."
+      #          fi
+#      - name: Load environment variables from .env
+#        run: |
+#          # Проверка наличия .env файла
+#               if [ -f .env ]; then
+#               echo "DEBUG: .env file found. Loading environment variables..."
+#               set -o allexport
+#               source .env
+#               set +o allexport
 #
-#      - name: Check code formatting with Ruff
-#        run: ruff format --diff --target-version=py39
-#        continue-on-error: true # Не останавливаем CI, если есть проблемы с форматированием
+#          # Вывод всех переменных окружения для отладки
+#               echo "DEBUG: Loaded environment variables:"
+#               printenv | grep -E 'INVALID_LOGIN|INVALID_PASSWORD'
+#
+#               echo "Environment variables loaded"
+#               else
+#               echo "DEBUG: No .env file found. Skipping environment variable loading."
+#               fi
 
-       # - name: Load environment variables from .env
-       #   run: |
-       #     if [ -f .env ]; then
-
-       #   set -o allexport
-       #   source .env
-       #   set +o allexport
-       #   echo "Environment variables loaded"
-       #   else
-       #   echo "No .env file found. Skipping environment variable loading."
-       #   fi
-      - name: Load environment variables from .env
-        run: |
-          if [ -f .env ]; then
-            echo "DEBUG: .env file found. Loading environment variables..."
-            set -o allexport
-            source .env
-            set +o allexport
-            echo "DEBUG: Loaded environment variables:"
-            printenv | grep -E 'INVALID_LOGIN|INVALID_PASSWORD'
-            echo "Environment variables loaded"
-          else
-            echo "DEBUG: No .env file found. Skipping environment variable loading."
-          fi
 
 # Запуск всех тестов с помощью pytest
       - name: Run tests

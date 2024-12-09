@@ -1,16 +1,14 @@
+import allure
 import pytest
+from playwright.sync_api import Page
+from pytest import Item
 
 from components.find_tutor import FindTutor
-from components.header import Header
-from components.register import Register
-from components.main_body import MainBodyPage
-
-from components.login import Login
-from playwright.sync_api import Page
 from components.footer import Footer
+from components.header import Header
+from components.login import Login
 from components.main_body import MainBodyPage
-import allure
-from pytest import Item
+from components.register import Register
 
 
 @pytest.fixture
@@ -27,7 +25,8 @@ def register(page: Page):
 def main_body(page: Page):
     return MainBodyPage(page)
 
-@pytest.fixture  
+
+@pytest.fixture
 def login(page: Page):
     return Login(page)
 
@@ -41,10 +40,10 @@ def find_tutor(page: Page):
 def footer(page: Page):
     return Footer(page)
 
-
-@pytest.fixture
-def main_body(page: Page):
-    return MainBodyPage(page)
+# дубль -удалить
+# @pytest.fixture
+# def main_body(page: Page):
+#     return MainBodyPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
