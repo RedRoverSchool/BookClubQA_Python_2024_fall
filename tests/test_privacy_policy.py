@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_presence_of_the_privacy_policy(footer):
     footer.open_main_page()
     footer.scroll_down_to_the_footer()
