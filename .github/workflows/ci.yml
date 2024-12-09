@@ -41,7 +41,7 @@ jobs:
 
       # Проверка форматирования кода Ruff
       - name: Lint code with Ruff
-        run: ruff check --output-format=github --target-version=py39
+        run: ruff check --output-format=github --target-version=py312
 
       - name: Check code formatting with Ruff
         run: ruff format --diff --target-version=py39
