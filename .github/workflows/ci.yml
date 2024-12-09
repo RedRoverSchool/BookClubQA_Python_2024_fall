@@ -1,4 +1,8 @@
-#For more information see:https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python
+# For more information see:
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python
+# https://github:com/actions/upload-artifact
+# https://github.com/actions/checkout
+# https://github.com/actions/setup-python
 name: CI - BookClubQA
 
 on:
@@ -55,11 +59,19 @@ jobs:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
 
-      # - name: Publish Test Results
-      #   uses: EnricoMi/publish-unit-test-result-action@v2
-      #   if: always()
-      #   with:
-      #     files: |
-      #       test-results/**/*.xml
+      # Сохранение логов как артефактов в случае сбоя
+      - name: Save test logs
+        if: failure()
+        run: |
+          pytest --log-cli-level=INFO --capture=tee-sys --disable-warnings > pytest.log || true
+        shell: bash
+
+#      # Загрузка логов как артефактов(в случаем сбоя)
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: pytest-logs
+          path: pytest.log
           
 
