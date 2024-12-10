@@ -67,22 +67,17 @@ jobs:
           tar -xzf allure-2.32.0.tgz
           mv allure-2.32.0 /usr/local/bin/allure
 
-      - name: Check Allure installation
-        run: |
-          echo $PATH
-          allure --version
+      # Загрузка отчета
+      - name: Upload Allure report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-results
 
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
-
-        # Публикация отчета на GitHub Pages(в разработке)
-      - name: Deploy Allure Report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
