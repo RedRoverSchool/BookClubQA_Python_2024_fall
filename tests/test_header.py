@@ -1,10 +1,4 @@
-import allure
 import pytest
-
-from components.header import Header
-from core.settings import base_url
-from conftest import valid_password, valid_login, invalid_login, invalid_password
-
 
 
 

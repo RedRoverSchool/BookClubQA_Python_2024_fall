@@ -1,20 +1,15 @@
 
 import os
 
-import pytest
+
 
 
 import allure
 import pytest
-from playwright.sync_api import Page
 from pytest import Item
-
-
 from components.find_tutor import FindTutor
-from components.footer import Footer
 from components.header import Header
 from components.login import Login
-
 from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
 

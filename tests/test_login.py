@@ -2,7 +2,7 @@
 """"Для проверки CI"""""
 import allure
 from Data.data import invalid_login, valid_password
-from components.header import Header
+
 
 
 def test_login_as_tutor_btn_create_listing(header, login):
