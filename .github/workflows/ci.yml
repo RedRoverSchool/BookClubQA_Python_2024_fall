@@ -63,16 +63,8 @@ jobs:
       # Установка Allure
       - name: Install Allure
         run: |
-        # Скачиваем Allure
-          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz  
-      # Распаковываем архив в директорию, доступную для CI
-          tar -zxvf allure-2.29.0.tgz -C ./allure  # Устанавливаем в директорию внутри проекта
-     # Создаем символическую ссылку, если нужно (опционально)
-          ln -s $(pwd)/allure/allure-2.29.0/bin/allure ./allure/bin/allure  # Устанавливаем в локальную директорию
-      # Добавляем путь к Allure в PATH
-          echo "$(pwd)/allure/allure-2.29.0/bin" >> $GITHUB_PATH
-      # Проверка установки Allure
-         allure --version
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz && sudo tar -zxvf allure-2.29.0.tgz -C /opt/ && sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
+          allure --version
 
       # Генерация отчета Allure
       - name: Generate Allure Report
