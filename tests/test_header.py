@@ -78,6 +78,10 @@ def test_login_button_is_visible(header):
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
 
+def test_login_button_is_enabled(header):
+    header.visit()
+    header.login_button_is_enabled()
+
 
 
 
