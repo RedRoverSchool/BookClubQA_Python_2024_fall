@@ -56,8 +56,8 @@ jobs:
         run: |
           pytest -s --disable-warnings -q --alluredir=allure-results
           env:
-              PYTHONDONTWRITEBYTECODE: 1
-              PYTHONUNBUFFERED: 1
+            PYTHONDONTWRITEBYTECODE: 1
+            PYTHONUNBUFFERED: 1
 
       # Установка Allure CLI
       - name: Install Allure CLI
