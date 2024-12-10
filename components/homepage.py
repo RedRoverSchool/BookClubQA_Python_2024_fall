@@ -158,3 +158,8 @@ class Homepage:
     @allure.step("Нажимаем на кнопку More at the top")
     def click_more_button_at_the_top(self):
         self.page.get_by_role("link", name="Подробнее").first.click()
+
+    @allure.step("Проверка доступности первой кнопки 'Стать репетитором'")
+    def find_first_btn_become_tutor(self):
+        become_tutor_btn = self.page.locator('//a[@class="btn btn-light me-2 rounded btn-sm d-inline d-sm-none"]')
+        assert become_tutor_btn.is_enabled()
