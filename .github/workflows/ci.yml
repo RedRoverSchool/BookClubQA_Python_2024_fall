@@ -3,6 +3,7 @@
 # https://github:com/actions/upload-artifact
 # https://github.com/actions/checkout
 # https://github.com/actions/setup-python
+# https://github.com/peaceiris/actions-gh-pages
 name: CI - BookClubQA
 
 on:
@@ -38,8 +39,8 @@ jobs:
       - name: Install Playwright browsers
         run: |
           python -m playwright install chromium
-          
-     #Установка линтера Ruff    
+
+      #Установка линтера Ruff
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
@@ -51,13 +52,33 @@ jobs:
         run: ruff format --diff --no-cache --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
+      # Установка Allure
+      - name: Install Allure
+        run: |
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz
+          sudo tar -zxvf allure-2.29.0.tgz -C /opt/
+          sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
+          allure --version
+
+        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -s --disable-warnings -q
+          pytest -s --alluredir=allure --disable-warnings -q
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
+
+      # Генерация отчета Allure
+      - name: Generate Allure Report
+        run: |
+          allure generate -c allure -o allure-report
+
+      # Сохранение отчета как артефакт
+      - name: Upload Allure Report as an Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-reports
+          path: allure-report
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
@@ -66,12 +87,10 @@ jobs:
           pytest --log-cli-level=INFO --capture=tee-sys --disable-warnings > pytest.log || true
         shell: bash
 
-#      # Загрузка логов как артефактов(в случаем сбоя)
+        # Загрузка логов как артефактов(в случаем сбоя)
       - name: Upload logs
         if: failure()
         uses: actions/upload-artifact@v4.4.3
         with:
           name: pytest-logs
           path: pytest.log
-          
-
