@@ -67,3 +67,8 @@ class Header:
         button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
         assert button.is_visible()
 
+    @allure.step("Проверяем доступна ли кнопка 'Войти' для взаимодействия")
+    def login_button_is_enabled(self):
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
+        assert button.is_enabled()
+
