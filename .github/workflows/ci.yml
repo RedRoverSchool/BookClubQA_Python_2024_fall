@@ -60,17 +60,24 @@ jobs:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
 
-#      # Установка Allure
-#      - name: Install Allure
-#        run: |
-#          curl -o allure-2.32.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
-#          tar -xzf allure-2.32.0.tgz
-#          mv allure-2.32.0 /usr/local/bin/allure
+      # Установка Allure
+      - name: Install Allure
+        run: |
+        # Скачиваем Allure
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz  
+      # Распаковываем архив в директорию, доступную для CI
+          tar -zxvf allure-2.29.0.tgz -C ./allure  # Устанавливаем в директорию внутри проекта
+     # Создаем символическую ссылку, если нужно (опционально)
+          ln -s $(pwd)/allure/allure-2.29.0/bin/allure ./allure/bin/allure  # Устанавливаем в локальную директорию
+      # Добавляем путь к Allure в PATH
+          echo "$(pwd)/allure/allure-2.29.0/bin" >> $GITHUB_PATH
+      # Проверка установки Allure
+         allure --version
 
-#      # Генерация отчета Allure
-#      - name: Generate Allure Report
-#        run: |
-#          allure generate allure-results --clean -o allure-report
+      # Генерация отчета Allure
+      - name: Generate Allure Report
+        run: |
+          allure generate -c allure-results -o _site
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
