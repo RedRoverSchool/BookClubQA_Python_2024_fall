@@ -14,7 +14,9 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_on_login_button(self):
-        self.page.locator('(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]').click()
+        self.page.locator(
+            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
+        ).click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_on_registration_button(self):
@@ -30,19 +32,27 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Поддержка'")
     def support_button_should_be_visible(self):
-        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
+        button = self.page.locator(
+            "//a[contains(@class, 'btn') and text()='Поддержка']"
+        )
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Поддержка'")
     def click_on_support_button(self):
-        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
+        button = self.page.locator(
+            "//a[contains(@class, 'btn') and text()='Поддержка']"
+        )
         button.click()
         expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
 
     @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
     def hover_support_button_color_check(self):
-        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
-        original_color = button.evaluate("el => window.getComputedStyle(el).backgroundColor")
+        button = self.page.locator(
+            "//a[contains(@class, 'btn') and text()='Поддержка']"
+        )
+        original_color = button.evaluate(
+            "el => window.getComputedStyle(el).backgroundColor"
+        )
         button.hover()
         expect(button).not_to_have_css("background-color", original_color)
 
@@ -59,11 +69,14 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
-        button = self.page.locator('(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]')
-        assert button.is_visible()
-        
-    @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
-    def become_a_tutor_button_should_be_visible(self):
-        button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
+        button = self.page.locator(
+            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
+        )
         assert button.is_visible()
 
+    @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
+    def become_a_tutor_button_should_be_visible(self):
+        button = self.page.locator(
+            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
+        )
+        assert button.is_visible()

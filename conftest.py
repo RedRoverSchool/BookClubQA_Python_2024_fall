@@ -1,7 +1,4 @@
-
 import os
-
-
 
 
 import allure
@@ -47,6 +44,7 @@ def find_tutor(page: Page):
 def footer(page: Page):
     return Footer(page)
 
+
 # дубль -удалить 25 строка
 # @pytest.fixture
 # def main_body(page: Page):
@@ -81,22 +79,25 @@ def pytest_runtest_call(item: Item):
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
 
 
-
-
-
 @pytest.fixture
 def browser_context():
     with sync_playwright() as p:
         # Запускаем Chromium
         browser = p.chromium.launch(
-            headless=os.environ.get("CI_RUN", False),  # Запуск в headless режиме, если это CI/CD
+            headless=os.environ.get(
+                "CI_RUN", False
+            ),  # Запуск в headless режиме, если это CI/CD
             args=[
                 "--start-maximized",  # Максимизация окна
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
-            ] if os.environ.get("CI_RUN") else []
+            ]
+            if os.environ.get("CI_RUN")
+            else [],
         )
-        context = browser.new_context()  # Создаем контекст браузера без изменения размера окна
+        context = (
+            browser.new_context()
+        )  # Создаем контекст браузера без изменения размера окна
         yield context
         context.close()
         browser.close()

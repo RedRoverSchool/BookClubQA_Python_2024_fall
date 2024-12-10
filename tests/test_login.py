@@ -18,5 +18,7 @@ def test_check_enter_invalid_username(header, login):
     login.check_enter_invalid_username(invalid_login)
     login.enter_password(valid_password)
     login.click_login_button()
-    login.should_be_valid_message("Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть "
-                                  "чувствительны к регистру.")
+    login.should_be_valid_message(
+        "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть "
+        "чувствительны к регистру."
+    )
