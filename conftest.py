@@ -1,13 +1,18 @@
+
+import os
+
+
+
+
 import allure
 import pytest
-from playwright.sync_api import Page
 from pytest import Item
-
 from components.find_tutor import FindTutor
-from components.footer import Footer
 from components.header import Header
 from components.login import Login
 from components.homepage import Homepage
+from playwright.sync_api import Page, sync_playwright
+from components.footer import Footer
 from components.register import Register
 from components.telegram_page import TelegramPage
 
@@ -73,3 +78,24 @@ def video_and_screenshot(page: Page):
 def pytest_runtest_call(item: Item):
     yield
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
+
+
+
+
+
+@pytest.fixture
+def browser_context():
+    with sync_playwright() as p:
+        # Запускаем Chromium
+        browser = p.chromium.launch(
+            headless=os.environ.get("CI_RUN", False),  # Запуск в headless режиме, если это CI/CD
+            args=[
+                "--start-maximized",  # Максимизация окна
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ] if os.environ.get("CI_RUN") else []
+        )
+        context = browser.new_context()  # Создаем контекст браузера без изменения размера окна
+        yield context
+        context.close()
+        browser.close()

@@ -31,6 +31,13 @@
 
 ## Установки:
 
-<img src="https://docs.astral.sh/ruff/assets/bolt.svg" width="20" height="20">[Install Ruff](https://docs.astral.sh/ruff/installation/) инструмент для анализа Python-кода   
+<img src="https://docs.astral.sh/ruff/assets/bolt.svg" width="20" height="20">[Install Ruff](https://docs.astral.sh/ruff/installation/) инструмент для анализа Python-кода  
+- Если вы хотите увидеть список доступных подкоманд и опций, используйте:
+```ruff --help```
+- Если вы хотите проверить весь проект на ошибки форматирования, выполните:
+```ruff check .```
+- Для форматирования кода:
+```ruff format .```
+
 
 
