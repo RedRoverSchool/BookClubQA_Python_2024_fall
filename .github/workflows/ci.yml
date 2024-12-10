@@ -71,7 +71,7 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure-results -o allure-rport
+          allure generate -c allure-results -o allure-report
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
