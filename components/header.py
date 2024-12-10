@@ -67,3 +67,14 @@ class Header:
         button = self.page.locator('//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]')
         assert button.is_visible()
 
+    @allure.step("Проверяем видимость кнопки 'Статистика '")
+    def statistics_button_is_visible(self):
+        button = self.page.locator('//a[@class="btn btn-outline-light mb-2 ms-3" and @href="/statistics/statistics/"]')
+        assert button.is_visible()
+
+    @allure.step("Кликаем на кнопку 'Статистика'")
+    def click_on_statistics_button(self):
+        button = self.page.locator('//a[@class="btn btn-outline-light mb-2 ms-3" and @href="/statistics/statistics/"]')
+        button.click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/statistics/statistics/")
+
