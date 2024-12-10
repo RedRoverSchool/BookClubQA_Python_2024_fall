@@ -1,3 +1,6 @@
+from conftest import login
+
+
 def test_login_button_opens_login_page(header, login):
     header.visit()
     header.click_on_login_button()
@@ -72,4 +75,17 @@ def test_login_button_is_visible(header):
 
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
-    header.become_a_tutor_button_should_be_visible()
+    header.become_a_tutor_button_is_visible()
+
+def test_statistics_button_is_visible(header, login):
+    header.visit()
+    header.click_on_login_button()
+    login.full_login("Tutor", "Tutorpassword1")
+    header.statistics_button_is_visible()
+
+def test_verify_redirection_on_statistics_page(login, header):
+    header.visit()
+    header.click_on_login_button()
+    login.full_login("Tutor", "Tutorpassword1")
+    header.statistics_button_is_visible()
+    header.click_on_statistics_button()
