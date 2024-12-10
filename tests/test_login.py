@@ -1,8 +1,5 @@
-
-""""Для проверки CI"""""
 import allure
 from Data.data import invalid_login, valid_password
-
 
 
 def test_login_as_tutor_btn_create_listing(header, login):
@@ -11,7 +8,6 @@ def test_login_as_tutor_btn_create_listing(header, login):
     login.enter_username("test_auth_login")
     login.enter_password("test_auth_pass")
     login.click_login_button()
-    
 
 
 @allure.title("TC_03.001.005")
@@ -24,8 +20,3 @@ def test_check_enter_invalid_username(header, login):
     login.click_login_button()
     login.should_be_valid_message("Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть "
                                   "чувствительны к регистру.")
-
-
-
-
-

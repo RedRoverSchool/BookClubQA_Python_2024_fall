@@ -55,17 +55,17 @@ jobs:
       - name: Run tests
         run: |
           pytest -s --disable-warnings -q --alluredir=allure-results
-          env:
-            PYTHONDONTWRITEBYTECODE: 1
-            PYTHONUNBUFFERED: 1
+        env:
+          PYTHONDONTWRITEBYTECODE: 1
+          PYTHONUNBUFFERED: 1
 
-      # Установка Allure CLI
-      - name: Install Allure CLI
+      # Установка Allure
+      - name: Install Allure
         run: |
           wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
           tar -xzf allure-2.32.0.tgz
           sudo mv allure-2.32.0 /usr/local/bin/allure
-          
+
         # Шаг 5: Генерация отчета Allure
       - name: Generate Allure Report
         run: |
@@ -78,12 +78,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
 
-   # Сохранение логов как артефактов в случае сбоя
+      # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
         if: failure()
         run: |
           pytest --log-cli-level=INFO --capture=tee-sys --disable-warnings > pytest.log || true
-          shell: bash
+        shell: bash
 
         # Загрузка логов как артефактов(в случаем сбоя)
       - name: Upload logs
