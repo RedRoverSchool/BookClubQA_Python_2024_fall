@@ -158,3 +158,7 @@ class Homepage:
     @allure.step("Нажимаем на кнопку More at the top")
     def click_more_button_at_the_top(self):
         self.page.get_by_role("link", name="Подробнее").first.click()
+
+    @allure.step("Нажимаем на кнопку More at the bottom")
+    def click_more_button_at_the_bottom(self):
+        self.page.get_by_role("link", name="Подробнее").last.click()
