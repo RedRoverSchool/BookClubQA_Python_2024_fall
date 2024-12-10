@@ -3,6 +3,7 @@
 # https://github:com/actions/upload-artifact
 # https://github.com/actions/checkout
 # https://github.com/actions/setup-python
+# https://github.com/peaceiris/actions-gh-pages
 name: CI - BookClubQA
 
 on:
@@ -62,18 +63,23 @@ jobs:
       # Установка Allure
       - name: Install Allure
         run: |
-          wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+          curl -o allure-2.32.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
           tar -xzf allure-2.32.0.tgz
-          sudo mv allure-2.32.0 /usr/local/bin/allure
+          mv allure-2.32.0 /usr/local/bin/allure
 
-        # Шаг 5: Генерация отчета Allure
+      - name: Check Allure installation
+        run: |
+          echo $PATH
+          allure --version
+
+      # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
 
-        # Шаг 6: Публикация отчета на GitHub Pages(в разработке)
+        # Публикация отчета на GitHub Pages(в разработке)
       - name: Deploy Allure Report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
