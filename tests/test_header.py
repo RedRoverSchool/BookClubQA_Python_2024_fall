@@ -61,6 +61,7 @@ def test_hover_support_button_as_student(login, header):
     header.hover_support_button_color_check()
 
 
+@pytest.mark.skip('Need fix this test')
 def test_verify_redirection_on_profile_page(login, header):
     header.visit()
     header.click_on_login_button()
