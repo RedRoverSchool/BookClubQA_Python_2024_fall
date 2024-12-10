@@ -13,7 +13,7 @@ class MainBodyPage:
     @allure.step("check_info_main_page_before_and_after_reload")
     def reload(self):
         self.page.reload()
-        
+
     @allure.step("Check info in the \"Добро пожаловать\" container")
     def check_info_welcome_container(self):
         welcome_container = self.page.get_by_text("Добро пожаловать в \"Мыслеплав\"! Платформа, соединяющая учеников и "
@@ -150,3 +150,14 @@ class MainBodyPage:
              f"Expected: {expected_card_text.split()} \n"
              f"Actual: {not_take_interest_for_lesson_card.text_content().split()}")
 
+    @allure.step("Нажимаем на кнопку More at the top")
+    def click_more_button_at_the_top(self):
+        self.page.get_by_role("link", name="Подробнее").first.click()
+
+    @allure.step("Открываем компонент More info about students from the main(body)")
+    def students_info_should_be_opened(self):
+        expect(self.page).to_have_url("https://t.me/misleplav_students/9")
+
+    @allure.step("check_telegram_channel_should_have_title_for_students")
+    def check_telegram_channel_should_have_title_for_students(self):
+        expect(self.page).to_have_title("Telegram: Contact @misleplav_students")

@@ -40,11 +40,6 @@ def find_tutor(page: Page):
 def footer(page: Page):
     return Footer(page)
 
-# дубль -удалить 25 строка
-# @pytest.fixture
-# def main_body(page: Page):
-#     return MainBodyPage(page)
-
 
 @pytest.fixture(scope="function", autouse=True)
 def video_and_screenshot(page: Page):
