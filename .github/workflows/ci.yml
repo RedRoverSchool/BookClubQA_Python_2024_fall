@@ -71,14 +71,14 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure-results -o _site
+          allure generate -c allure-results -o allure-results
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: allure-report
-          path: _site
+          path: allure-results
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
