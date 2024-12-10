@@ -1,5 +1,5 @@
-from faker import Faker
 import pytest
+from faker import Faker
 
 fake = Faker()
 

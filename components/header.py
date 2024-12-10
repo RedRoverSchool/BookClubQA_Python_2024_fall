@@ -1,6 +1,7 @@
-from playwright.sync_api import Page, expect
-from core.settings import base_url
 import allure
+from playwright.sync_api import Page, expect
+
+from core.settings import base_url
 
 
 class Header:
@@ -37,6 +38,13 @@ class Header:
         button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
         button.click()
         expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
+
+    @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
+    def hover_support_button_color_check(self):
+        button = self.page.locator("//a[contains(@class, 'btn') and text()='Поддержка']")
+        original_color = button.evaluate("el => window.getComputedStyle(el).backgroundColor")
+        button.hover()
+        expect(button).not_to_have_css("background-color", original_color)
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):

@@ -1,6 +1,7 @@
-from playwright.sync_api import Page, expect
-from core.settings import base_url, policy_url, list_url, signup_url, login_url, title
 import allure
+from playwright.sync_api import Page, expect
+
+from core.settings import base_url, policy_url, list_url, signup_url, login_url, title
 
 
 class Footer:
