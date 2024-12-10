@@ -1,5 +1,12 @@
-import pytest
 
+import os
+
+
+
+
+import allure
+import pytest
+from pytest import Item
 from components.find_tutor import FindTutor
 from components.header import Header
 from components.my_teachers import MyTeachersPage
@@ -7,10 +14,11 @@ from components.register import Register
 from components.main_body import MainBodyPage
 
 from components.login import Login
-from playwright.sync_api import Page
+from components.homepage import Homepage
+from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
-import allure
-from pytest import Item
+from components.register import Register
+from components.telegram_page import TelegramPage
 
 
 @pytest.fixture
@@ -28,10 +36,11 @@ def register(page: Page):
 
 
 @pytest.fixture
-def main_body(page: Page):
-    return MainBodyPage(page)
+def homepage(page: Page):
+    return Homepage(page)
 
-  
+
+@pytest.fixture
 def login(page: Page):
     return Login(page)
 
@@ -44,6 +53,11 @@ def find_tutor(page: Page):
 @pytest.fixture
 def footer(page: Page):
     return Footer(page)
+
+
+@pytest.fixture
+def telegram_page(page: Page):
+    return TelegramPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -72,3 +86,24 @@ def video_and_screenshot(page: Page):
 def pytest_runtest_call(item: Item):
     yield
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
+
+
+
+
+
+@pytest.fixture
+def browser_context():
+    with sync_playwright() as p:
+        # Запускаем Chromium
+        browser = p.chromium.launch(
+            headless=os.environ.get("CI_RUN", False),  # Запуск в headless режиме, если это CI/CD
+            args=[
+                "--start-maximized",  # Максимизация окна
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ] if os.environ.get("CI_RUN") else []
+        )
+        context = browser.new_context()  # Создаем контекст браузера без изменения размера окна
+        yield context
+        context.close()
+        browser.close()

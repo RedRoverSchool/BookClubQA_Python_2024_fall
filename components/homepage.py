@@ -1,10 +1,23 @@
-from playwright.sync_api import Page, expect
 import allure
+from playwright.sync_api import Page, expect
+from core.settings import base_url
 
 
-class MainBodyPage:
+class Homepage:
     def __init__(self, page: Page):
         self.page = page
+
+    @allure.step("Открываем главную страницу")
+    def visit(self):
+        self.page.goto(base_url)
+
+    @allure.step("check_info_main_page")
+    def check_info_main_page(self):
+        self.page.get_by_role("main").text_content().split()
+
+    @allure.step("check_info_main_page_before_and_after_reload")
+    def reload(self):
+        self.page.reload()
 
     @allure.step("Check info in the \"Добро пожаловать\" container")
     def check_info_welcome_container(self):
@@ -141,3 +154,11 @@ class MainBodyPage:
             (f"Expected text does not match actual text. \n"
              f"Expected: {expected_card_text.split()} \n"
              f"Actual: {not_take_interest_for_lesson_card.text_content().split()}")
+
+    @allure.step("Нажимаем на кнопку More at the top")
+    def click_more_button_at_the_top(self):
+        self.page.get_by_role("link", name="Подробнее").first.click()
+
+    @allure.step("Нажимаем на кнопку More at the bottom")
+    def click_more_button_at_the_bottom(self):
+        self.page.get_by_role("link", name="Подробнее").last.click()
