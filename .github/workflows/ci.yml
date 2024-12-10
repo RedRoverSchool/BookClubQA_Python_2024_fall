@@ -65,18 +65,16 @@ jobs:
         run: |
           curl -o allure-2.32.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
           tar -xzf allure-2.32.0.tgz
-          mv allure-2.32.0 /usr/local/bin/allure
-          allure --version # Проверка установки
+          mv allure-2.32.0 /usr/local/bin/allure 
 
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
-          ls allure-report # Проверка наличия отчета
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4.4.
         with:
           name: allure-report
           path: allure-report
