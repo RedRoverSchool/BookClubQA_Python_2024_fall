@@ -52,14 +52,6 @@ jobs:
         run: ruff format --diff --no-cache --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
-      - name: Run tests
-        run: |
-          pytest -s --alluredir=allure-results --disable-warnings -q
-        env:
-          PYTHONDONTWRITEBYTECODE: 1
-          PYTHONUNBUFFERED: 1
-
       # Установка Allure
       - name: Install Allure
         run: |
@@ -68,17 +60,25 @@ jobs:
           sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
           allure --version
 
+        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
+      - name: Run tests
+        run: |
+          pytest -s --alluredir=allure-results --disable-warnings -q
+        env:
+          PYTHONDONTWRITEBYTECODE: 1
+          PYTHONUNBUFFERED: 1
+
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure-results -o allure-results
+          allure generate -c allure-results -o allure-rport
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
         uses: actions/upload-artifact@v4.4.3
         with:
           name: allure-report
-          path: allure-results
+          path: allure-report
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
