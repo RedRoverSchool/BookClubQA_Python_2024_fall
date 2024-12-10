@@ -7,8 +7,9 @@ from components.find_tutor import FindTutor
 from components.footer import Footer
 from components.header import Header
 from components.login import Login
-from components.main_body import MainBodyPage
+from components.homepage import Homepage
 from components.register import Register
+from components.telegram_page import TelegramPage
 
 
 @pytest.fixture
@@ -22,8 +23,8 @@ def register(page: Page):
 
 
 @pytest.fixture
-def main_body(page: Page):
-    return MainBodyPage(page)
+def homepage(page: Page):
+    return Homepage(page)
 
 
 @pytest.fixture
@@ -39,6 +40,11 @@ def find_tutor(page: Page):
 @pytest.fixture
 def footer(page: Page):
     return Footer(page)
+
+
+@pytest.fixture
+def telegram_page(page: Page):
+    return TelegramPage(page)
 
 
 @pytest.fixture(scope="function", autouse=True)

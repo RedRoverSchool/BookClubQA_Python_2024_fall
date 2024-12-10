@@ -1,10 +1,15 @@
 import allure
 from playwright.sync_api import Page, expect
+from core.settings import base_url
 
 
-class MainBodyPage:
+class Homepage:
     def __init__(self, page: Page):
         self.page = page
+
+    @allure.step("Открываем главную страницу")
+    def visit(self):
+        self.page.goto(base_url)
 
     @allure.step("check_info_main_page")
     def check_info_main_page(self):
@@ -153,11 +158,3 @@ class MainBodyPage:
     @allure.step("Нажимаем на кнопку More at the top")
     def click_more_button_at_the_top(self):
         self.page.get_by_role("link", name="Подробнее").first.click()
-
-    @allure.step("Открываем компонент More info about students from the main(body)")
-    def students_info_should_be_opened(self):
-        expect(self.page).to_have_url("https://t.me/misleplav_students/9")
-
-    @allure.step("check_telegram_channel_should_have_title_for_students")
-    def check_telegram_channel_should_have_title_for_students(self):
-        expect(self.page).to_have_title("Telegram: Contact @misleplav_students")
