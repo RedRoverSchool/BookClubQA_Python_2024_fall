@@ -71,10 +71,11 @@ jobs:
       - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
+        
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
-        uses: actions/upload-artifact@v4.4.
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: allure-report
           path: allure-report
