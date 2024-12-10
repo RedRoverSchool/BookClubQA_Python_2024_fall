@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from dotenv import load_dotenv
+
 
 from components.find_tutor import FindTutor
 from components.header import Header
@@ -79,11 +79,7 @@ def pytest_runtest_call(item: Item):
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
 
 
-# load_dotenv()
-# valid_password = os.getenv("VALID_PASSWORD")
-# valid_login = os.getenv("VALID_LOGIN")
-# invalid_login = os.getenv("INVALID_LOGIN")
-# invalid_password = os.getenv("PASSWORD")
+
 
 
 @pytest.fixture
