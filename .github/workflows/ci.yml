@@ -63,7 +63,7 @@ jobs:
         # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -s --alluredir=allure-results --disable-warnings -q
+          pytest -s --alluredir=allure --disable-warnings -q
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
@@ -71,7 +71,7 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure-results -o allure-report
+          allure generate -c allure -o allure-report
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
