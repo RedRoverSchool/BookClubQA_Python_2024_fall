@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect
 from core.settings import base_url
 import allure
+from core.settings import login_url
 
 
 class Login:
@@ -15,7 +16,7 @@ class Login:
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
         title = self.page.get_by_title("Регистрация")
-        assert "Регистрация",  title
+        assert "Регистрация", title
 
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):
@@ -42,7 +43,6 @@ class Login:
         self.enter_username(username)
         self.enter_password(password)
         self.click_login_button()
-
 
     @allure.step("Выполняем вход с не корректным логином")
     def check_enter_invalid_username(self, username):

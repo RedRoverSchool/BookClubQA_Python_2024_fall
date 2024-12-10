@@ -30,7 +30,8 @@ def register(page: Page):
 def main_body(page: Page):
     return MainBodyPage(page)
 
-@pytest.fixture  
+
+@pytest.fixture
 def login(page: Page):
     return Login(page)
 
@@ -78,22 +79,26 @@ def pytest_runtest_call(item: Item):
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).title())
 
 
-
-
-
-load_dotenv()
-valid_password = os.getenv("VALID_PASSWORD")
-valid_login = os.getenv("VALID_LOGIN")
-invalid_login = os.getenv("INVALID_LOGIN")
-invalid_password = os.getenv("PASSWORD")
+# load_dotenv()
+# valid_password = os.getenv("VALID_PASSWORD")
+# valid_login = os.getenv("VALID_LOGIN")
+# invalid_login = os.getenv("INVALID_LOGIN")
+# invalid_password = os.getenv("PASSWORD")
 
 
 @pytest.fixture
-def browser_fixture():
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context()
-        page = context.new_page()
-        yield page
-        page.close()
+def browser_context():
+    with sync_playwright() as p:
+        # Запускаем Chromium
+        browser = p.chromium.launch(
+            headless=os.environ.get("CI_RUN", False),  # Запуск в headless режиме, если это CI/CD
+            args=[
+                "--start-maximized",  # Максимизация окна
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ] if os.environ.get("CI_RUN") else []
+        )
+        context = browser.new_context()  # Создаем контекст браузера без изменения размера окна
+        yield context
+        context.close()
         browser.close()
