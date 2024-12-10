@@ -1,6 +1,7 @@
-from playwright.sync_api import Page, expect
-from core.settings import base_url
 import allure
+from playwright.sync_api import Page
+
+from core.settings import login_url
 
 
 class Login:
@@ -16,6 +17,9 @@ class Login:
     def check_title_of_registration(self):
         title = self.page.get_by_title("Регистрация")
         assert "Регистрация",  title
+
+    def open_login_page(self):
+        self.page.goto(login_url)
 
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):

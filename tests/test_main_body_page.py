@@ -27,3 +27,4 @@ def test_more_btn_redirects_telegram_for_students(header, main_body):
     main_body.click_more_button_at_the_top()
     main_body.students_info_should_be_opened()
     main_body.check_telegram_channel_should_have_title_for_students()
+
