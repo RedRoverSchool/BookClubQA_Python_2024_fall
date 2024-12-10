@@ -38,8 +38,8 @@ jobs:
       - name: Install Playwright browsers
         run: |
           python -m playwright install chromium
-          
-     #Установка линтера Ruff    
+
+      #Установка линтера Ruff
       - name: Install the code linting and formatting tool Ruff
         run: pip install ruff
 
@@ -51,27 +51,44 @@ jobs:
         run: ruff format --diff --no-cache --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-      # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
+        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -s --disable-warnings -q
-        env:
-          PYTHONDONTWRITEBYTECODE: 1
-          PYTHONUNBUFFERED: 1
+          pytest -s --disable-warnings -q --alluredir=allure-results
+          env:
+              PYTHONDONTWRITEBYTECODE: 1
+              PYTHONUNBUFFERED: 1
 
-      # Сохранение логов как артефактов в случае сбоя
+      # Установка Allure CLI
+      - name: Install Allure CLI
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+          tar -xzf allure-2.32.0.tgz
+          sudo mv allure-2.32.0 /usr/local/bin/allure
+          
+        # Шаг 5: Генерация отчета Allure
+      - name: Generate Allure Report
+        run: |
+          allure generate allure-results --clean -o allure-report
+
+        # Шаг 6: Публикация отчета на GitHub Pages(в разработке)
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+
+   # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
         if: failure()
         run: |
           pytest --log-cli-level=INFO --capture=tee-sys --disable-warnings > pytest.log || true
-        shell: bash
+          shell: bash
 
-#      # Загрузка логов как артефактов(в случаем сбоя)
+        # Загрузка логов как артефактов(в случаем сбоя)
       - name: Upload logs
         if: failure()
         uses: actions/upload-artifact@v4.4.3
         with:
           name: pytest-logs
           path: pytest.log
-          
-
