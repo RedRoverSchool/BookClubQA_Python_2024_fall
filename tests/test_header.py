@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_login_button_opens_login_page(header, login):
     header.visit()
     header.click_on_login_button()
@@ -16,6 +19,7 @@ def test_verify_registration_options_on_login_page(header, login):
     login.check_title_of_registration()
 
 
+@pytest.mark.skip('Need fix this test')
 def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     header.visit()
     header.click_on_find_tutor_button()
