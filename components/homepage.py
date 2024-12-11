@@ -50,6 +50,10 @@ class Homepage:
         )
         assert find_tutor_btns == 2
 
+    @allure.step('Click on "Стать репетитором" button')
+    def click_become_tutor_btn(self):
+        self.page.locator('a.d-none:text("Стать репетитором")').first.click()
+
     @allure.step('Check 2 "Стать репетитором" btns')
     def check_2_become_tutor_btns(self):
         become_tutor_btns = (
