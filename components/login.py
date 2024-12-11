@@ -1,11 +1,5 @@
-from playwright.sync_api import Page, expect
-from core.settings import base_url
 import allure
-
-
 from playwright.sync_api import Page
-
-
 from core.settings import login_url
 
 
