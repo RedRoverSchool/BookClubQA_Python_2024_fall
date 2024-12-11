@@ -1,7 +1,6 @@
-from playwright.sync_api import Page, expect
-from components.login import login_url
+from playwright.sync_api import Page
 from components.my_teachers import MyTeachersPage
-from components.header import Header
+
 
 
 #AT_32.001.001.001 | Student > My teachers> Viewing My Teachers List > Navigate to the "My Teachers" Page
