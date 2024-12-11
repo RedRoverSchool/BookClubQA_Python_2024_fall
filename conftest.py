@@ -6,6 +6,10 @@ import pytest
 from pytest import Item
 from components.find_tutor import FindTutor
 from components.header import Header
+from components.my_teachers import MyTeachersPage
+from components.register import Register
+from components.main_body import MainBodyPage
+
 from components.login import Login
 from components.homepage import Homepage
 from playwright.sync_api import Page, sync_playwright
@@ -17,6 +21,10 @@ from components.telegram_page import TelegramPage
 @pytest.fixture
 def header(page: Page):
     return Header(page)
+
+@pytest.fixture
+def my_teachers(page: Page):
+    return HeaderStudentPage(page)
 
 
 @pytest.fixture
