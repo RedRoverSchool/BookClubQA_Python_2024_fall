@@ -79,6 +79,7 @@ jobs:
         with:
           name: allure-reports
           path: allure-reports
+        continue-on-error: true
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
