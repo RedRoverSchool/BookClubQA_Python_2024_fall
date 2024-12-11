@@ -68,10 +68,15 @@ jobs:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
 
+      - name: Check Allure Results Directory
+        run: ls -la allure-results
+
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
           allure generate -c allure -o allure-reports
+        continue-on-error: true
+
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
