@@ -55,9 +55,12 @@ jobs:
       # Установка Allure
       - name: Install Allure
         run: |
+          echo "Downloading Allure CLI..."
           curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/latest/download/allure-commandline.zip
-          unzip allure.zip -d /usr/local/bin/allure
-          export PATH=$PATH:/usr/local/bin/allure/bin
+          echo "Unzipping Allure CLI..."
+          sudo unzip -q allure.zip -d /opt/allure
+          sudo ln -sf /opt/allure/bin/allure /usr/local/bin/allure
+          echo "Verifying Allure CLI installation..."
           allure --version
 
         # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
@@ -77,14 +80,14 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure-results -o allure-reports
+          allure generate -c allure -o allure-reports
         continue-on-error: true
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
+          name: allure-reports
           path: allure-reports
         continue-on-error: true
 
