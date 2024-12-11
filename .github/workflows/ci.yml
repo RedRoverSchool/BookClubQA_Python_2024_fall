@@ -55,9 +55,9 @@ jobs:
       # Установка Allure
       - name: Install Allure
         run: |
-          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz \
-          && sudo tar -zxvf allure-2.29.0.tgz -C /opt/ \
-          && sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
+          curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/latest/download/allure-commandline.zip
+          unzip allure.zip -d /usr/local/bin/allure
+          export PATH=$PATH:/usr/local/bin/allure/bin
           allure --version
 
         # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
@@ -77,14 +77,14 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure -o allure-reports
+          allure generate -c allure-results -o allure-reports
         continue-on-error: true
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: allure-reports
+          name: allure-report
           path: allure-reports
         continue-on-error: true
 
