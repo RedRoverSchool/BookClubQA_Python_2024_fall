@@ -76,6 +76,7 @@ def test_login_button_is_visible(header):
 
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
+    header.become_a_tutor_button_should_be_visible()
 
 
 def test_login_button_is_enabled(header):
