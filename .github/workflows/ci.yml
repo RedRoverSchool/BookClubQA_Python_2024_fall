@@ -55,15 +55,15 @@ jobs:
       # Установка Allure
       - name: Install Allure
         run: |
-          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz
-          sudo tar -zxvf allure-2.29.0.tgz -C /opt/
-          sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
+          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz \
+          && sudo tar -zxvf allure-2.29.0.tgz -C /opt/ \
+          && sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
           allure --version
 
         # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
-          pytest -s --alluredir=allure --disable-warnings -q
+          pytest -s --alluredir=allure-results --disable-warnings -q
         env:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
@@ -71,14 +71,14 @@ jobs:
       # Генерация отчета Allure
       - name: Generate Allure Report
         run: |
-          allure generate -c allure -o allure-report
+          allure generate -c allure -o allure-reports
 
       # Сохранение отчета как артефакт
       - name: Upload Allure Report as an Artifact
         uses: actions/upload-artifact@v4
         with:
           name: allure-reports
-          path: allure-report
+          path: allure-reports
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
