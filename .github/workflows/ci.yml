@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload Allure archive
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: allure-report.zip
