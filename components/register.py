@@ -1,9 +1,10 @@
 import allure
 from playwright.sync_api import Page, expect
-
+from Data import data
 
 class Register:
     def __init__(self, page: Page):
+        self.password = None
         self.page = page
 
     @allure.step("Проверяем заголовок 'Регистрация'")
@@ -38,3 +39,8 @@ class Register:
         assert registration_title == "Регистрация", (
             f"Ожидался заголовок 'Регистрация', но найдено: {registration_title}"
         )
+
+    @allure.step("Создаем случайный пароль")
+    def generate_valid_password(self):
+        self.password = data.generate_valid_password()
+    
