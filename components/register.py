@@ -43,4 +43,3 @@ class Register:
     @allure.step("Создаем случайный пароль")
     def generate_valid_password(self):
         self.password = data.generate_valid_password()
-    
