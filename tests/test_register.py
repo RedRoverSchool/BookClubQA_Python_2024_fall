@@ -1,6 +1,5 @@
 import pytest
 from faker import Faker
-from Data import data
 
 fake = Faker()
 
