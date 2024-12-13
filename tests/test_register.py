@@ -40,7 +40,7 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
 
 
 def test_verify_successful_message_after_register_as_tutor(
-        homepage, register, find_tutor
+    homepage, register, find_tutor
 ):
     homepage.visit()
     homepage.click_on_registration_button()
