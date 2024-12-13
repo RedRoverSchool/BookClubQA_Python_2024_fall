@@ -76,7 +76,7 @@ class Announcement:
         assert filled_value == "5555555555", "Phone number should be 5555555555"
 
     @allure.step('Нажимаем на кнопку "Создать объявление"')
-    def click_create_announcement_btn(self):
+    def click_create_announcement_btn(self): #click_create_announcement_btn
         create_button = self.page.locator('button.btn.btn-dark.me-2[type="submit"]')
         create_button.click()
         assert (
