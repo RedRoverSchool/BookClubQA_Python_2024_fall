@@ -15,11 +15,7 @@ class Announcement:
 
     @allure.step('Загружаем фото')
     def upload_photo(self):
-        # self.page.wait_for_selector('input[name="photo"]', timeout=90000)
-        self.page.locator('input[name="photo"]').click()
-        self.page.locator('input[name="photo"]').set_input_files('Data/upload_files/download.jfif')
-        # photo_input_selector.set_input_files('Data/upload_files/download.jfif')
-        # self.page.set_input_files('input[name="photo"]', 'Data/upload_files/download.jfif')
+        self.page.locator('input[name="photo"]').set_input_files('../Data/upload_files/download.jfif')
 
     @allure.step('Выбираем категорию')
     def pick_category(self):
