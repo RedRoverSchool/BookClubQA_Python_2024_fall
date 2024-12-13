@@ -27,7 +27,7 @@ def test_register_as_student(header, register):
     register.click_on_registration_button()
 
 
-#TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
+# TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
     header.visit()
