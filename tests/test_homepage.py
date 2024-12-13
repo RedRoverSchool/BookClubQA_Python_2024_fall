@@ -39,3 +39,7 @@ def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
 def test_first_btn_become_a_tutor_is_visible(homepage):
     homepage.visit()
     homepage.first_btn_become_a_tutor_is_visible()
+
+def test_first_btn_become_tutor_is_enabled(homepage):
+    homepage.visit()
+    homepage.find_first_btn_become_tutor()
