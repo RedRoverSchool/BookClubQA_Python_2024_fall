@@ -49,4 +49,26 @@ class CookieBanner:
         except TimeoutError:
             raise AssertionError("Cookie banner not found within 5 seconds")
 
+    @allure.step("Нажимаем на кнопку 'Согласиться'")
+    def click_accept_button(self):
+        try:
+            accept_button = self.page.wait_for_selector('#accept-cookies', timeout=5000)
+            accept_button.click()
+        except TimeoutError:
+            raise AssertionError("Cookie banner not found within 5 seconds")
+
+    @allure.step("Проверяем что сообщения больше не отображается после нажатия кнопки 'Согласиться'")
+    def cookie_banner_is_missing(self):
+        try:
+            self.page.wait_for_selector('#cookie-consent-banner', state='hidden', timeout=5000)
+        except TimeoutError:
+            raise AssertionError("Cookie banner did not disappear as expected")
+
+    @allure.step("Проверяем, что сообщение не появляется при повторном запуске приложения ")
+    def banner_does_not_reappear(self):
+        self.page.reload()
+        try:
+            self.page.wait_for_selector('#cookie-consent-banner', state='hidden', timeout=5000)
+        except TimeoutError:
+            raise AssertionError("Cookie banner reappeared after reopening the app")
 
