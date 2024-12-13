@@ -83,6 +83,7 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
 def test_statistics_button_is_visible(header, login, register):
     header.visit()
     header.click_on_login_button()
