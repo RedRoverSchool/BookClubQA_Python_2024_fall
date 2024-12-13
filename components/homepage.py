@@ -222,3 +222,7 @@ class Homepage:
             '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
         )
         assert button.is_visible()
+
+    @allure.step("Кликаем на кнопку 'Регистрация'")
+    def click_on_registration_button(self):
+        self.page.get_by_test_id("signup").click()

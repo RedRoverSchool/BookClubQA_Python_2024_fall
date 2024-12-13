@@ -17,6 +17,7 @@ from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
 from components.register import Register
 from components.telegram_page import TelegramPage
+from components.user_profile import UserProfile
 
 
 @pytest.fixture
@@ -58,6 +59,9 @@ def footer(page: Page):
 def telegram_page(page: Page):
     return TelegramPage(page)
 
+@pytest.fixture
+def user_profile(page: Page):
+    return UserProfile(page)
 
 @pytest.fixture(scope="function", autouse=True)
 def video_and_screenshot(page: Page):

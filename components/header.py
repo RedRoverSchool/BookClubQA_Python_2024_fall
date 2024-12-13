@@ -99,6 +99,12 @@ class Header:
         )
         assert button.is_visible()
 
+
+    @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
+    def find_a_tutor_button_should_be_visible(self):
+        button = self.page.locator("//li/a[@href = '/list/']")
+        assert button.is_visible()
+
     @allure.step("Кликаем на кнопку 'Статистика'")
     def click_on_statistics_button(self):
         button = self.page.locator(
