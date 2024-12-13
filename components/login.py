@@ -17,7 +17,7 @@ class Login:
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
         title = self.page.get_by_title("Регистрация")
-        assert "Регистрация",  title
+        assert "Регистрация", title
 
     def open_login_page(self):
         self.page.goto(login_url)

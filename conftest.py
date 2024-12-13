@@ -21,6 +21,7 @@ from components.telegram_page import TelegramPage
 def header(page: Page):
     return Header(page)
 
+
 @pytest.fixture
 def my_teachers(page: Page):
     return MyTeachersPage(page)
