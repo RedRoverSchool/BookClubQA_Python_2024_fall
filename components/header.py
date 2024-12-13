@@ -86,7 +86,7 @@ class Header:
         button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
         assert button.is_enabled()
 
-    @allure.step("Проверяем видимость кнопки 'Создать объявление'")
+    @allure.step("Переходим на страницу 'Создать объявление'")
     def click_on_create_announcement_btn(self):
         button = self.page.locator('[data-testid="create-listing"]')
         button.click()
