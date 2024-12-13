@@ -1,6 +1,5 @@
 import os
 
-
 import allure
 import pytest
 from pytest import Item
@@ -8,18 +7,19 @@ from components.find_tutor import FindTutor
 from components.header import Header
 from components.my_teachers import MyTeachersPage
 
-
 from components.login import Login
 from components.homepage import Homepage
 from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
 from components.register import Register
 from components.telegram_page import TelegramPage
+from components.cookie_banner import CookieBanner
 
 
 @pytest.fixture
 def header(page: Page):
     return Header(page)
+
 
 @pytest.fixture
 def my_teachers(page: Page):
@@ -106,3 +106,8 @@ def browser_context():
         yield context
         context.close()
         browser.close()
+
+
+@pytest.fixture
+def cookie_banner(page: Page):
+    return CookieBanner(page)
