@@ -26,7 +26,9 @@ class Footer:
 
     @allure.step("Прокручиваем страницу до Футера")
     def scroll_down_to_the_footer(self):
-        self.page.get_by_text("© 2024 Мыслеплав. Все права защищены.").scroll_into_view_if_needed()
+        self.page.get_by_text(
+            "© 2024 Мыслеплав. Все права защищены."
+        ).scroll_into_view_if_needed()
 
     @allure.step("Кликаем на название url 'Политика конфиденциальности'")
     def click_on_privacy_policy_url(self):

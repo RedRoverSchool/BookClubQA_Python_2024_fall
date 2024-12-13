@@ -4,7 +4,6 @@ from core.settings import list_url
 
 
 class FindTutor:
-
     def __init__(self, page: Page):
         self.page = page
 
@@ -37,3 +36,9 @@ class FindTutor:
     @allure.step("Проверяем видимость цены")
     def check_price_is_visible(self):
         assert self.page.get_by_text("Цена").nth(0).is_visible()
+
+    @allure.step("Проверяем наличие сообщения об успешной регистрации")
+    def check_message_of_registration(self, expected_message):
+        message = self.page.locator("//div[@role='alert']").text_content()
+        assert message.strip() == expected_message
+
