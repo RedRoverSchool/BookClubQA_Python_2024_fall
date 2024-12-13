@@ -57,9 +57,11 @@ def footer(page: Page):
 def telegram_page(page: Page):
     return TelegramPage(page)
 
+
 @pytest.fixture
 def user_profile(page: Page):
     return UserProfile(page)
+
 
 @pytest.fixture(scope="function", autouse=True)
 def video_and_screenshot(page: Page):
