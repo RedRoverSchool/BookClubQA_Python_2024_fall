@@ -1,6 +1,5 @@
 import pytest
 from faker import Faker
-from Data import data
 
 fake = Faker()
 
@@ -39,7 +38,10 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
     homepage.click_become_tutor_btn()
     register.verify_registration_page_opened()
 
-def test_verify_successful_message_after_register_as_tutor(homepage, register, find_tutor):
+
+def test_verify_successful_message_after_register_as_tutor(
+        homepage, register, find_tutor
+):
     homepage.visit()
     homepage.click_on_registration_button()
     # переходим на страницу регистрации

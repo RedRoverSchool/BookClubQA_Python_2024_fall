@@ -23,7 +23,7 @@ jobs:
 
       # Настройки Python
       - name: Set up Python
-        uses: actions/setup-python@v5.2.0
+        uses: actions/setup-python@v5.3.0
         with:
           python-version: "3.12"  # Установка нужной версии Python
 
@@ -72,7 +72,6 @@ jobs:
       - name: Generate allure report
         uses: simple-elf/allure-report-action@master
         if: always()
-#        id: allure-report
         with:
           allure_results: allure-results
           allure_history: allure-history
