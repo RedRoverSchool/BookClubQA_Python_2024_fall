@@ -16,12 +16,13 @@ def generate_valid_password():
     digits = string.digits  # цифры
     chars = string.punctuation  # специальные символы
     # Генерируем пароль
-    password = random.choice(letters) + random.choice(digits) + random.choice(
-        chars)  # гарантируем наличие каждой категории
-    password += ''.join(random.choices(letters + digits + chars,
-                                       k=min_length - len(
-                                           password)))  # добавляем оставшиеся символы
+    password = (
+        random.choice(letters) + random.choice(digits) + random.choice(chars)
+    )  # гарантируем наличие каждой категории
+    password += "".join(
+        random.choices(letters + digits + chars, k=min_length - len(password))
+    )  # добавляем оставшиеся символы
 
     # Перемешиваем пароль, чтобы случайно распределить символы
-    password = ''.join(random.sample(password, len(password)))
+    password = "".join(random.sample(password, len(password)))
     return password
