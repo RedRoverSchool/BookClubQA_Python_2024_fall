@@ -1,4 +1,3 @@
-from conftest import announcement, register
 from tests.test_register import test_register_as_tutor
 
 
