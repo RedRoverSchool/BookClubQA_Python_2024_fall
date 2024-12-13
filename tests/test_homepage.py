@@ -34,3 +34,13 @@ def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     homepage.click_more_button_at_the_bottom()
     telegram_page.tutors_info_should_be_opened()
     telegram_page.check_telegram_channel_should_have_title_for_tutors()
+
+
+def test_first_btn_become_a_tutor_is_visible(homepage):
+    homepage.visit()
+    homepage.first_btn_become_a_tutor_is_visible()
+
+
+def test_first_btn_become_tutor_is_enabled(homepage):
+    homepage.visit()
+    homepage.find_first_btn_become_tutor()

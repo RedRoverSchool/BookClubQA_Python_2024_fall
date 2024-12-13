@@ -4,6 +4,7 @@
 # https://github.com/actions/checkout
 # https://github.com/actions/setup-python
 # https://github.com/peaceiris/actions-gh-pages
+# https://github.com/peaceiris/actions-gh-pages/releases/tag/v4.0.0
 name: CI - BookClubQA
 
 on:
@@ -52,14 +53,6 @@ jobs:
         run: ruff format --diff --no-cache --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-#      # Установка Allure
-#      - name: Install Allure
-#        run: |
-#          sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz \
-#          && sudo tar -zxvf allure-2.29.0.tgz -C /opt/ \
-#          && sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
-#          allure --version
-
         # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
       - name: Run tests
         run: |
@@ -68,48 +61,34 @@ jobs:
           PYTHONDONTWRITEBYTECODE: 1
           PYTHONUNBUFFERED: 1
 
-#      - name: Check Allure Report Files
-#        run: |
-#          echo "Checking files in allure-results..."
-#          ls -la allure-results
-#          du -sh allure-results
-#
-#      # Генерация отчета Allure
-#      - name: Generate Allure Report
-#        run: |
-#          allure generate -c allure -o allure-reports
-#        continue-on-error: true
-#
-#      # Сохранение отчета как артефакт
-#      - name: Upload Allure Report as an Artifact
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: allure-reports
-#          path: allure-reports
-#        continue-on-error: true
+      - name: Get Allure history
+        uses: actions/checkout@v4.2.2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
 
-      - name: Allure Report action
+      - name: Generate allure report
         uses: simple-elf/allure-report-action@master
         if: always()
+#        id: allure-report
         with:
           allure_results: allure-results
           allure_history: allure-history
-          keep_reports: 20
+          allure_report: allure-report
+          gh_pages: gh-pages
+          ref: gh-pages
+          path: gh-pages
+          keep_reports: 30
 
-
-      - name: Create Allure archive
+      - name: Commit (Deploy) allure_report to Github Pages
         if: always()
-        run: |
-          zip -r allure-report.zip allure-history
-        continue-on-error: true
-
-      - name: Upload Allure archive
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: peaceiris/actions-gh-pages@v4.0.0
         with:
-          name: allure-report
-          path: allure-report.zip
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          publish_dir: allure-history
 
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
