@@ -85,3 +85,11 @@ class Header:
     def login_button_is_enabled(self):
         button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
         assert button.is_enabled()
+
+    @allure.step("Наводим мышку на кнопку 'Создать объявление' и проверяем изменение цвета")
+    def hover_create_listing_btn(self):
+        button = self.page.get_by_test_id("create-listing")
+        base_color = button.evaluate('el => getComputedStyle(el).backgroundColor')
+        button.hover()
+        changed_color = button.evaluate('el => getComputedStyle(el).backgroundColor')
+        return base_color,changed_color
