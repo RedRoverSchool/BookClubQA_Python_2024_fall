@@ -85,3 +85,20 @@ class Header:
     def login_button_is_enabled(self):
         button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
         assert button.is_enabled()
+
+    @allure.step("Проверяем видимость кнопки 'Создать объявление'")
+    def click_on_create_announcement_btn(self):
+        button = self.page.locator('[data-testid="create-listing"]')
+        button.click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/listings/create/")
+
+    @allure.step("Проверяем видимость кнопки 'Статистика '")
+    def statistics_button_is_visible(self):
+        button = self.page.locator('a.btn.btn-outline-light.mb-2.ms-3[href="/statistics/statistics/"]')
+        assert button.is_visible()
+
+    @allure.step("Кликаем на кнопку 'Статистика'")
+    def click_on_statistics_button(self):
+        button = self.page.locator('a.btn.btn-outline-light.mb-2.ms-3[href="/statistics/statistics/"]')
+        button.click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/statistics/statistics/")
