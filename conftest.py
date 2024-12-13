@@ -110,6 +110,7 @@ def browser_context():
         context.close()
         browser.close()
 
+
 @pytest.fixture
 def announcement(page: Page):
     return Announcement(page)
