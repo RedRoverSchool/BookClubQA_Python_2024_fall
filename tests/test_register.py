@@ -62,9 +62,9 @@ def test_verify_successful_message_after_register_as_tutor(
 def test_check_placeholders_on_the_register_page(header, register):
     header.visit()
     header.click_on_registration_button()
-    register.verify_username_placeholder_visibility()
+    register.check_username_placeholder_visibility()
     register.check_username_placeholder_text()
-    register.verify_password1_placeholder_visibility()
+    register.check_password1_placeholder_visibility()
     register.check_password1_placeholder_text()
-    register.verify_password2_placeholder_visibility()
+    register.check_password2_placeholder_visibility()
     register.check_password2_placeholder_text()

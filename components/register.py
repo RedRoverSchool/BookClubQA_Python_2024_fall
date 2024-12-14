@@ -1,6 +1,7 @@
 import allure
 from playwright.sync_api import Page, expect
 from Data import data
+from Data import constants
 
 
 class Register:
@@ -46,7 +47,7 @@ class Register:
         self.password = data.generate_valid_password()
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'username'")
-    def verify_username_placeholder_visibility(self):
+    def check_username_placeholder_visibility(self):
         is_placeholder_visible = self.page.locator("#id_username").evaluate("""
                 (el) => {
                     const placeholderStyle = window.getComputedStyle(el, '::placeholder');
@@ -58,11 +59,12 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'username'")
     def check_username_placeholder_text(self):
         assert (
-                self.page.locator("#id_username").get_attribute("placeholder") == "Придумайте ник"
+                self.page.locator("#id_username").get_attribute(
+                    "placeholder") == constants.REGISTER_USERNAME_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'username' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password1'")
-    def verify_password1_placeholder_visibility(self):
+    def check_password1_placeholder_visibility(self):
         is_placeholder_visible = self.page.locator("#id_password1").evaluate("""
                     (el) => {
                         const placeholderStyle = window.getComputedStyle(el, '::placeholder');
@@ -74,11 +76,12 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password1'")
     def check_password1_placeholder_text(self):
         assert (
-                self.page.locator("#id_password1").get_attribute("placeholder") == "Придумайте пароль"
+                self.page.locator("#id_password1").get_attribute(
+                    "placeholder") == constants.REGISTER_PASSWORD1_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password1' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password2'")
-    def verify_password2_placeholder_visibility(self):
+    def check_password2_placeholder_visibility(self):
         is_placeholder_visible = self.page.locator("#id_password2").evaluate("""
                         (el) => {
                             const placeholderStyle = window.getComputedStyle(el, '::placeholder');
@@ -90,5 +93,6 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password2'")
     def check_password2_placeholder_text(self):
         assert (
-                self.page.locator("#id_password2").get_attribute("placeholder") == "Подтвердите пароль"
+                self.page.locator("#id_password2").get_attribute(
+                    "placeholder") == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password2' field"
