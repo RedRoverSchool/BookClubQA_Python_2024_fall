@@ -17,6 +17,7 @@ from components.register import Register
 from components.telegram_page import TelegramPage
 from components.user_profile import UserProfile
 from components.cookie_banner import CookieBanner
+from components.create_announcement import CreateAnnouncement
 
 
 @pytest.fixture
@@ -123,3 +124,7 @@ def cookie_banner(page: Page):
 @pytest.fixture
 def announcement(page: Page):
     return Announcement(page)
+
+@pytest.fixture
+def create_announcement_page(page: Page):
+    return CreateAnnouncement(page)
