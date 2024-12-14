@@ -3,6 +3,8 @@ import os
 import allure
 import pytest
 from pytest import Item
+
+from components.announcement import Announcement
 from components.find_tutor import FindTutor
 from components.header import Header
 from components.my_teachers import MyTeachersPage
@@ -117,3 +119,7 @@ def browser_context():
 @pytest.fixture
 def cookie_banner(page: Page):
     return CookieBanner(page)
+
+@pytest.fixture
+def announcement(page: Page):
+    return Announcement(page)
