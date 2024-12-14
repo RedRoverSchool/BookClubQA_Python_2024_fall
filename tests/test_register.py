@@ -40,7 +40,7 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
 
 
 def test_verify_successful_message_after_register_as_tutor(
-    homepage, register, find_tutor
+        homepage, register, find_tutor
 ):
     homepage.visit()
     homepage.click_on_registration_button()
@@ -57,3 +57,14 @@ def test_verify_successful_message_after_register_as_tutor(
     register.click_on_registration_button()
     text = """Вы успешно зарегистрировались, а так же получаете бесплатный премиум на 3 дня!"""
     find_tutor.check_message_of_registration(text)
+
+
+def test_check_placeholders_on_the_register_page(header, register):
+    header.visit()
+    header.click_on_registration_button()
+    register.check_username_placeholder_visibility()
+    register.check_username_placeholder_text()
+    register.check_password1_placeholder_visibility()
+    register.check_password1_placeholder_text()
+    register.check_password2_placeholder_visibility()
+    register.check_password2_placeholder_text()
