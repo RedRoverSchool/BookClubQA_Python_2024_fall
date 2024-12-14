@@ -16,7 +16,7 @@ class Announcement:
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
-        self.page.locator('input[name="photo"]').set_input_files("../Data/upload_files/download.jfif")
+        self.page.locator('input[name="photo"]').set_input_files("Data/upload_files/stock-photo-handsome-cheerful-man.jfif")
 
     @allure.step("Выбираем категорию")
     def pick_category(self):
@@ -75,7 +75,4 @@ class Announcement:
     def click_create_announcement_btn(self): #click_create_announcement_btn
         create_button = self.page.locator('button.btn.btn-dark.me-2[type="submit"]')
         create_button.click()
-        assert (
-            self.page.url
-            == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-        )
+        assert self.page.url == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
