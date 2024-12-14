@@ -14,10 +14,28 @@ login_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/auth
 title = "Example Domain"
 
 site_pages_urls = [
-    {"name": "Main page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/"},
-    {"name": "Lists Page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/"},
-    {"name": "Signup Page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/signup/"},
-    {"name": "Create list Page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/create/"},
-    {"name": "User profile Page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/profile/"},
-    {"name": "Statistics Page", "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/statistics/"}
+    {
+        "name": "Main page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/",
+    },
+    {
+        "name": "Lists Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/",
+    },
+    {
+        "name": "Signup Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/signup/",
+    },
+    {
+        "name": "Create list Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/create/",
+    },
+    {
+        "name": "User profile Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/profile/",
+    },
+    {
+        "name": "Statistics Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/statistics/",
+    },
 ]

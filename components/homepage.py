@@ -226,3 +226,10 @@ class Homepage:
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_on_registration_button(self):
         self.page.get_by_test_id("signup").click()
+
+    @allure.step("Проверка доступности первой кнопки стать репетиром")
+    def find_first_btn_become_tutor(self):
+        become_tutor_btn = self.page.locator(
+            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
+        )
+        assert become_tutor_btn.is_enabled()
