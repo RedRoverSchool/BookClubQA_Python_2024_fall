@@ -117,6 +117,7 @@ def browser_context():
         context.close()
         browser.close()
 
+
 @pytest.fixture
 def announcement(page: Page):
     return Announcement(page)
@@ -124,3 +125,4 @@ def announcement(page: Page):
 @pytest.fixture
 def cookie_banner(page: Page):
     return CookieBanner(page)
+
