@@ -1,0 +1,80 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4372","Support Clickability As Teacher[Chromium]","tests","Sat Dec 14 04:57:17 GMT 2024","passed","Sat Dec 14 04:57:22 GMT 2024","","test_header","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4077","Profile Btn Redirection[Chromium-Main Page]","tests","Sat Dec 14 04:59:41 GMT 2024","passed","Sat Dec 14 04:59:45 GMT 2024","","test_user_profile","",""
+"","3715","Check Enter Invalid Username[Chromium]","tests","Sat Dec 14 04:58:17 GMT 2024","passed","Sat Dec 14 04:58:20 GMT 2024","","test_login","",""
+"","2350","Login Button Opens Login Page[Chromium]","tests","Sat Dec 14 04:57:00 GMT 2024","passed","Sat Dec 14 04:57:02 GMT 2024","","test_header","",""
+"","2106","Visible Button Accept[Chromium]","tests","Sat Dec 14 04:56:48 GMT 2024","passed","Sat Dec 14 04:56:50 GMT 2024","","test_cookie_banner","",""
+"","2090","Cookie Banner Disappeared[Chromium]","tests","Sat Dec 14 04:56:55 GMT 2024","passed","Sat Dec 14 04:56:57 GMT 2024","","test_cookie_banner","",""
+"Проверка наличия кнопки 'Мои репетиторы'.","3633","My Teachers Btn Exists[Chromium]","tests","Sat Dec 14 04:56:31 GMT 2024","passed","Sat Dec 14 04:56:35 GMT 2024","","test_btn_my_teachers","",""
+"","2595","Homepage Info Is Same After Reload[Chromium]","tests","Sat Dec 14 04:57:56 GMT 2024","passed","Sat Dec 14 04:57:58 GMT 2024","","test_homepage","",""
+"","2205","Become A Tutor Button Is Visible[Chromium]","tests","Sat Dec 14 04:57:41 GMT 2024","passed","Sat Dec 14 04:57:44 GMT 2024","","test_header","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3762","Profile Btn Visibility[Chromium-Signup Page]","tests","Sat Dec 14 04:58:59 GMT 2024","passed","Sat Dec 14 04:59:03 GMT 2024","","test_user_profile","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3913","Profile Btn Visibility[Chromium-User Profile Page]","tests","Sat Dec 14 04:59:07 GMT 2024","passed","Sat Dec 14 04:59:11 GMT 2024","","test_user_profile","",""
+"","34931","Create Announcement[Chromium]","tests","Sat Dec 14 04:55:56 GMT 2024","broken","Sat Dec 14 04:56:31 GMT 2024","","test_announcement","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4041","Profile Btn Redirection[Chromium-Statistics Page]","tests","Sat Dec 14 05:00:03 GMT 2024","passed","Sat Dec 14 05:00:07 GMT 2024","","test_user_profile","",""
+"","2238","Cookie Text Matches[Chromium]","tests","Sat Dec 14 04:56:53 GMT 2024","passed","Sat Dec 14 04:56:55 GMT 2024","","test_cookie_banner","",""
+"","0","test_see_list_of_tutors_profiles[chromium]","tests","Sat Dec 14 04:57:44 GMT 2024","skipped","Sat Dec 14 04:57:44 GMT 2024","","test_header","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3922","Profile Btn Visibility[Chromium-Statistics Page]","tests","Sat Dec 14 04:59:11 GMT 2024","passed","Sat Dec 14 04:59:15 GMT 2024","","test_user_profile","",""
+"","3284","Login As Tutor Btn Create Listing[Chromium]","tests","Sat Dec 14 04:58:13 GMT 2024","passed","Sat Dec 14 04:58:16 GMT 2024","","test_login","",""
+"","2087","Login Button Is Enabled[Chromium]","tests","Sat Dec 14 04:57:44 GMT 2024","passed","Sat Dec 14 04:57:46 GMT 2024","","test_header","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","3911","Profile Btn Hover[Chromium-Statistics Page]","tests","Sat Dec 14 04:59:37 GMT 2024","passed","Sat Dec 14 04:59:41 GMT 2024","","test_user_profile","",""
+"","2181","Enabled Privacy Policy Url[Chromium]","tests","Sat Dec 14 04:58:23 GMT 2024","passed","Sat Dec 14 04:58:25 GMT 2024","","test_privacy_policy","",""
+"","2237","Visible Cookie Banner[Chromium]","tests","Sat Dec 14 04:56:46 GMT 2024","passed","Sat Dec 14 04:56:48 GMT 2024","","test_cookie_banner","",""
+"","3577","Support Visibility As Teacher[Chromium]","tests","Sat Dec 14 04:57:12 GMT 2024","passed","Sat Dec 14 04:57:16 GMT 2024","","test_header","",""
+"","2374","Verify Registration Options On Login Page[Chromium]","tests","Sat Dec 14 04:57:05 GMT 2024","passed","Sat Dec 14 04:57:08 GMT 2024","","test_header","",""
+"","4885","Support Visibility As Student[Chromium]","tests","Sat Dec 14 04:57:23 GMT 2024","passed","Sat Dec 14 04:57:28 GMT 2024","","test_header","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4387","Profile Btn Redirection[Chromium-User Profile Page]","tests","Sat Dec 14 04:59:59 GMT 2024","passed","Sat Dec 14 05:00:03 GMT 2024","","test_user_profile","",""
+"Проверка перехода на страницу регистрации как репетитор из профиля студента.","4851","Become A Teacher From Student Page[Chromium]","tests","Sat Dec 14 04:58:41 GMT 2024","passed","Sat Dec 14 04:58:45 GMT 2024","","test_register","",""
+"","2078","Availability Of The Privacy Policy Link On Find Tutor Page[Chromium]","tests","Sat Dec 14 04:58:28 GMT 2024","passed","Sat Dec 14 04:58:30 GMT 2024","","test_privacy_policy","",""
+"Проверка клика на кнопку 'Мои репетиторы'.","4749","My Teachers Btn Click[Chromium]","tests","Sat Dec 14 04:56:36 GMT 2024","passed","Sat Dec 14 04:56:41 GMT 2024","","test_btn_my_teachers","",""
+"","3963","Register As Tutor[Chromium]","tests","Sat Dec 14 04:58:35 GMT 2024","passed","Sat Dec 14 04:58:39 GMT 2024","","test_register","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4064","Profile Btn Redirection[Chromium-Lists Page]","tests","Sat Dec 14 04:59:45 GMT 2024","passed","Sat Dec 14 04:59:49 GMT 2024","","test_user_profile","",""
+"","2348","First Btn Become Tutor Is Enabled[Chromium]","tests","Sat Dec 14 04:58:11 GMT 2024","passed","Sat Dec 14 04:58:13 GMT 2024","","test_homepage","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4184","Profile Btn Redirection[Chromium-Create List Page]","tests","Sat Dec 14 04:59:54 GMT 2024","passed","Sat Dec 14 04:59:58 GMT 2024","","test_user_profile","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","4210","Profile Btn Hover[Chromium-User Profile Page]","tests","Sat Dec 14 04:59:32 GMT 2024","passed","Sat Dec 14 04:59:37 GMT 2024","","test_user_profile","",""
+"","0","test_verify_redirection_on_profile_page[chromium]","tests","Sat Dec 14 04:57:39 GMT 2024","skipped","Sat Dec 14 04:57:39 GMT 2024","","test_header","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3826","Profile Btn Visibility[Chromium-Create List Page]","tests","Sat Dec 14 04:59:03 GMT 2024","passed","Sat Dec 14 04:59:07 GMT 2024","","test_user_profile","",""
+"","2096","Availability Of The Privacy Policy Link On Login Page[Chromium]","tests","Sat Dec 14 04:58:33 GMT 2024","passed","Sat Dec 14 04:58:35 GMT 2024","","test_privacy_policy","",""
+"","2376","Cookie Banner Does Not Appear When Reopening[Chromium]","tests","Sat Dec 14 04:56:57 GMT 2024","passed","Sat Dec 14 04:57:00 GMT 2024","","test_cookie_banner","",""
+"","2491","More Btn Redirects Telegram Page For Students[Chromium]","tests","Sat Dec 14 04:58:01 GMT 2024","passed","Sat Dec 14 04:58:04 GMT 2024","","test_homepage","",""
+"","2364","Homepage Info[Chromium]","tests","Sat Dec 14 04:57:59 GMT 2024","passed","Sat Dec 14 04:58:01 GMT 2024","","test_homepage","",""
+"","2066","Enable Button Accept[Chromium]","tests","Sat Dec 14 04:56:50 GMT 2024","passed","Sat Dec 14 04:56:52 GMT 2024","","test_cookie_banner","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","4000","Profile Btn Hover[Chromium-Lists Page]","tests","Sat Dec 14 04:59:20 GMT 2024","passed","Sat Dec 14 04:59:24 GMT 2024","","test_user_profile","",""
+"","2193","Presence Of The Privacy Policy[Chromium]","tests","Sat Dec 14 04:58:21 GMT 2024","passed","Sat Dec 14 04:58:23 GMT 2024","","test_privacy_policy","",""
+"Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'
+    TC_11.002.01.003 | [Teacher ] Header > ""Профиль"" button > Redirection check","4198","Profile Btn Redirection[Chromium-Signup Page]","tests","Sat Dec 14 04:59:50 GMT 2024","passed","Sat Dec 14 04:59:54 GMT 2024","","test_user_profile","",""
+"","2553","Verify Registration Options On Registration Page[Chromium]","tests","Sat Dec 14 04:57:03 GMT 2024","passed","Sat Dec 14 04:57:05 GMT 2024","","test_header","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3801","Profile Btn Visibility[Chromium-Main Page]","tests","Sat Dec 14 04:58:51 GMT 2024","passed","Sat Dec 14 04:58:55 GMT 2024","","test_user_profile","",""
+"","2105","First Btn Become A Tutor Is Visible[Chromium]","tests","Sat Dec 14 04:58:08 GMT 2024","passed","Sat Dec 14 04:58:10 GMT 2024","","test_homepage","",""
+"Проверка видимости кнопки 'Профиль'
+    TC_11.002.01.001 | [Teacher ] Header > ""Профиль"" button > Visibility check","3885","Profile Btn Visibility[Chromium-Lists Page]","tests","Sat Dec 14 04:58:55 GMT 2024","passed","Sat Dec 14 04:58:59 GMT 2024","","test_user_profile","",""
+"","2041","Login Button Is Visible[Chromium]","tests","Sat Dec 14 04:57:39 GMT 2024","passed","Sat Dec 14 04:57:41 GMT 2024","","test_header","",""
+"","2330","Availability Of The Privacy Policy Link On Signup Page[Chromium]","tests","Sat Dec 14 04:58:30 GMT 2024","passed","Sat Dec 14 04:58:33 GMT 2024","","test_privacy_policy","",""
+"","3662","Statistics Button Is Visible[Chromium]","tests","Sat Dec 14 04:57:46 GMT 2024","passed","Sat Dec 14 04:57:50 GMT 2024","","test_header","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","4056","Profile Btn Hover[Chromium-Main Page]","tests","Sat Dec 14 04:59:16 GMT 2024","passed","Sat Dec 14 04:59:20 GMT 2024","","test_user_profile","",""
+"","2879","Verify Registration Options On Find Tutor Page[Chromium]","tests","Sat Dec 14 04:57:08 GMT 2024","passed","Sat Dec 14 04:57:11 GMT 2024","","test_header","",""
+"","4183","Support Clickability As Student[Chromium]","tests","Sat Dec 14 04:57:29 GMT 2024","passed","Sat Dec 14 04:57:33 GMT 2024","","test_header","",""
+"","4202","Verify Successful Message After Register As Tutor[Chromium]","tests","Sat Dec 14 04:58:46 GMT 2024","passed","Sat Dec 14 04:58:50 GMT 2024","","test_register","",""
+"","2567","More Btn Redirects Telegram Page For Tutors[Chromium]","tests","Sat Dec 14 04:58:05 GMT 2024","passed","Sat Dec 14 04:58:07 GMT 2024","","test_homepage","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","3960","Profile Btn Hover[Chromium-Signup Page]","tests","Sat Dec 14 04:59:24 GMT 2024","passed","Sat Dec 14 04:59:28 GMT 2024","","test_user_profile","",""
+"Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора
+    TC_11.002.01.002 | [Teacher ] Header > ""Профиль"" button > Hover support check","4135","Profile Btn Hover[Chromium-Create List Page]","tests","Sat Dec 14 04:59:28 GMT 2024","passed","Sat Dec 14 04:59:32 GMT 2024","","test_user_profile","",""
+"","3840","Hover Support Button As Student[Chromium]","tests","Sat Dec 14 04:57:34 GMT 2024","passed","Sat Dec 14 04:57:38 GMT 2024","","test_header","",""
+"","2403","Redirect Privacy Policy Page[Chromium]","tests","Sat Dec 14 04:58:25 GMT 2024","passed","Sat Dec 14 04:58:28 GMT 2024","","test_privacy_policy","",""
+"Проверка что открылась страница 'Мои репетиторы' со списком репетиторов или без с соответствующим сообщением.","4077","Check Teachers List[Chromium]","tests","Sat Dec 14 04:56:41 GMT 2024","passed","Sat Dec 14 04:56:45 GMT 2024","","test_btn_my_teachers","",""
+"","4346","Verify Redirection On Statistics Page[Chromium]","tests","Sat Dec 14 04:57:51 GMT 2024","passed","Sat Dec 14 04:57:55 GMT 2024","","test_header","",""
