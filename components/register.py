@@ -2,6 +2,9 @@ import allure
 from playwright.sync_api import Page, expect
 from Data import data
 from Data import constants
+from faker import Faker
+
+fake = Faker()
 
 
 class Register:
@@ -96,3 +99,15 @@ class Register:
                 self.page.locator("#id_password2").get_attribute(
                     "placeholder") == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password2' field"
+
+    @allure.step('Регистрируем преподавателя')
+    def registration_as_tutor(self, header, register):
+        header.visit()
+        header.click_on_registration_button()
+        register.header_should_contain_text("Регистрация")
+        register.fill_nick(fake.user_name())
+        register.fill_password("sdjflsfdjlksdjflksdjf")
+        register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
+        register.click_on_become_a_teacher_button()
+        register.click_on_registration_button()
+        header.create_listing_button_should_be_visible()
