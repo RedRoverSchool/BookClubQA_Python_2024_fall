@@ -113,3 +113,7 @@ class Header:
         expect(self.page).to_have_url(
             "http://testing.misleplav.ru/statistics/statistics/"
         )
+
+    @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
+    def click_create_announcement_button(self):
+        self.page.locator("a", has_text="Создать объявление").click()

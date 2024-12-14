@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 
 class Announcement:
@@ -76,3 +76,13 @@ class Announcement:
         create_button = self.page.locator('button.btn.btn-dark.me-2[type="submit"]')
         create_button.click()
         assert self.page.url == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+
+    @allure.step("Пройти на страницу объявлений пользователя-учителя")
+    def navigate_to_users_announcement_list(self):
+        announcement_list_url = 'http://testing.misleplav.ru/listings/my_listing/'
+        self.page.goto(announcement_list_url)
+
+    @allure.step("Убедиться, что количество объявлений пользователя-учителя равно нулю")
+    def verify_number_of_announcements_is_zero(self):
+        announcement_list = self.page.locator('main .container h5')
+        expect(announcement_list).to_have_count(0)
