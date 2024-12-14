@@ -18,9 +18,7 @@ class Announcement:
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
-        self.page.locator('input[name="photo"]').set_input_files(
-            "../Data/upload_files/download.jfif"
-        )
+        self.page.locator('input[name="photo"]').set_input_files("../Data/upload_files/download.jfif")
 
     @allure.step("Выбираем категорию")
     def pick_category(self):

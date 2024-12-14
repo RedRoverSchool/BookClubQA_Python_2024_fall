@@ -1,8 +1,6 @@
-from tests.test_register import test_register_as_tutor
-
 
 def test_create_announcement(login, header, announcement, register):
-    test_register_as_tutor(header, register)
+    register.registration_as_tutor(header, register)
     header.click_on_create_announcement_btn()
     announcement.fill_out_fullname()
     announcement.fill_out_descripption()
