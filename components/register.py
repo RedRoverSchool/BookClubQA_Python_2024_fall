@@ -59,3 +59,12 @@ class Register:
         register.click_on_become_a_teacher_button()
         register.click_on_registration_button()
         header.create_listing_button_should_be_visible()
+
+    @allure.step('Регистрируемcя как студент')
+    def registration_as_student(self):
+        self.verify_registration_page_opened()
+        self.fill_nick(fake.user_name())
+        self.generate_valid_password()
+        self.fill_password(self.password)
+        self.fill_confirm_password(self.password)
+        self.click_on_registration_button()

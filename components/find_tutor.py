@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 from core.settings import list_url
 
 
@@ -37,7 +37,15 @@ class FindTutor:
     def check_price_is_visible(self):
         assert self.page.get_by_text("Цена").nth(0).is_visible()
 
-    @allure.step("Проверяем наличие сообщения об успешной регистрации")
+    @allure.step("Проверяем текст сообщения об успешной регистрации")
     def check_message_of_registration(self, expected_message):
         message = self.page.locator("//div[@role='alert']").text_content()
         assert message.strip() == expected_message
+
+    @allure.step("Закрываем сообщение об успешной регистрации")
+    def close_success_registration_message(self):
+        self.page.locator('//button[@class="btn-close"]').click()
+
+    @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
+    def check_success_registration_message_invisible(self):
+        expect(self.page.locator("//div[@role='alert']")).not_to_be_attached(timeout=1000)
