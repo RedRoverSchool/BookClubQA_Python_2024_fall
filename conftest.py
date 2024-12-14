@@ -17,6 +17,8 @@ from playwright.sync_api import Page, sync_playwright
 from components.footer import Footer
 from components.register import Register
 from components.telegram_page import TelegramPage
+from components.user_profile import UserProfile
+from components.cookie_banner import CookieBanner
 
 
 @pytest.fixture
@@ -57,6 +59,11 @@ def footer(page: Page):
 @pytest.fixture
 def telegram_page(page: Page):
     return TelegramPage(page)
+
+
+@pytest.fixture
+def user_profile(page: Page):
+    return UserProfile(page)
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -113,3 +120,7 @@ def browser_context():
 @pytest.fixture
 def announcement(page: Page):
     return Announcement(page)
+
+@pytest.fixture
+def cookie_banner(page: Page):
+    return CookieBanner(page)
