@@ -95,18 +95,11 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
-
-@pytest.mark.skip("Need to be fixed")
 def test_statistics_button_is_visible(header, login, register):
-    header.visit()
-    header.click_on_login_button()
-    login.full_login("Test1", "testpassword1")
+    register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
 
-
-def test_verify_redirection_on_statistics_page(login, header):
-    header.visit()
-    header.click_on_login_button()
-    login.full_login("Test1", "testpassword1")
+def test_verify_redirection_on_statistics_page(login, header, register):
+    register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
     header.click_on_statistics_button()
