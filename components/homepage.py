@@ -235,7 +235,7 @@ class Homepage:
         assert become_tutor_btn.is_enabled()
 
     @allure.step("Проверка редиректа кнопки 'Найти репетитора'")
-    def click_find_tutor(self):
+    def check_find_tutor_btn_redirection(self):
         button_1 = self.page.locator("//a[@class='btn btn-outline-light mb-2 ms-3'][text()='Найти репетитора']")
         button_1.click()
         url1 = self.page.url

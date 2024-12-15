@@ -1,4 +1,4 @@
-from ..core import settings
+from core import settings
 
 
 def test_homepage_info_is_same_after_reload(homepage, register):
@@ -51,5 +51,5 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
-    result = homepage.click_find_tutor()
+    result = homepage.check_find_tutor_btn_redirection
     assert result[0] == result[1] == result[2] == settings.list_url
