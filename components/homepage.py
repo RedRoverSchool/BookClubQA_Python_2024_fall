@@ -1,6 +1,6 @@
 import allure
 from playwright.sync_api import Page, expect
-from BookClubQA_Python_2024_fall.core.settings import base_url
+from core.settings import base_url
 
 
 class Homepage:
