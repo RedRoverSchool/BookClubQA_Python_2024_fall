@@ -76,9 +76,6 @@ class CreateAnnouncement:
         phone_field = self.page.locator('#id_phone')
         telegram_field = self.page.locator('#id_telegram')
         email_field = self.page.locator('#id_email')
-        add_contact_button = self.page.locator('#addContactBtn')
-        contact_method_dropdown = self.page.locator('.form-control.contact-method')
-        contact_field = self.page.locator('.form-control.contact-detail')
         save_button = self.page.locator("button", has_text="Сохранить")
 
         # values
@@ -105,17 +102,7 @@ class CreateAnnouncement:
         phone_field.fill(phone_value)
         telegram_field.fill(telegram_value)
         email_field.fill(email_value)
-        '''contact_values = []
-        for i in range(2):
-            add_contact_button.click()
-            current_contact_method_dropdown = contact_method_dropdown.nth(i)
-            contact_method_selected_option = self.select_random_dropdown_option(current_contact_method_dropdown)['text']
-            contact_value = fake.word()
-            current_contact_field = contact_field.nth(i)
-            current_contact_field.fill(contact_value)
-            contact_values.append([contact_method_selected_option, contact_value])'''
         save_button.click()
-        self.page.wait_for_timeout(15000)
 
         return {
             'fio_value': fio_value,
@@ -131,32 +118,3 @@ class CreateAnnouncement:
             'telegram_value': telegram_value,
             'email_value': email_value,
         }
-
-    @allure.step("Перехват")
-    def intercept(self):
-        # self.page.wait_for_timeout(10000)
-        print('end wait')
-        def handle_route(route, request):
-            print('129aaa', route.request)
-            print('129aaa', request)
-            print('129aaa', request.headers)
-            print('129aaa', route)
-            route.continue_()
-        url = 'http://testing.misleplav.ru/dashboard/generate_invitation_link/'
-        # self.page.route(url, handle_route)
-        # self.page.goto(url)
-        self.page.wait_for_timeout(5000)
-        print('end route')
-        self.page.locator('#generate-link-btn').click()
-        self.page.wait_for_timeout(20000)
-        # with self.page.expect_response(url) as first:
-        #     self.page.locator('#generate-link-btn').click()
-        #     # self.page.get_by_text("trigger request").click()
-        #     first_request = first.value
-        #     print('123', first_request)
-            # response = self.page.request.post('http://testing.misleplav.ru/dashboard/generate_invitation_link/')
-        # print(response)
-        self.page.on('request', lambda x: print(x))
-        self.page.on('response', lambda x: print(x))
-        self.page.wait_for_event('response', lambda x: print(x))
-        self.page.wait_for_event('request', lambda x: print(x))

@@ -17,7 +17,6 @@ class MyStudents:
         self.page.locator('#generate-link-btn').click()
         # invite_create_failure = self.page.locator('#alert-container [role=alert]')
         # expect(invite_create_failure).not_to_be_visible()
-        self.page.wait_for_timeout(30000)
 
     @allure.step("Копируем пригласительную ссылку")
     def get_invite_link(self):

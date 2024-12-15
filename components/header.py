@@ -124,5 +124,4 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Выйти' в хедере")
     def click_logout_button(self):
-        self.page.wait_for_timeout(30000)
         self.page.locator("a", has_text="Выйти").click()
