@@ -18,6 +18,10 @@ from components.telegram_page import TelegramPage
 from components.user_profile import UserProfile
 from components.cookie_banner import CookieBanner
 from components.create_announcement import CreateAnnouncement
+from components.my_students import MyStudents
+from components.workspace import Workspace
+from components.add_edit_resources import AddEditResources
+from components.teacher_profile import TeacherProfile
 
 
 @pytest.fixture
@@ -128,3 +132,19 @@ def announcement(page: Page):
 @pytest.fixture
 def create_announcement_page(page: Page):
     return CreateAnnouncement(page)
+
+@pytest.fixture
+def my_students_page(page: Page):
+    return MyStudents(page)
+
+@pytest.fixture
+def workspace(page: Page):
+    return Workspace(page)
+
+@pytest.fixture
+def add_edit_resources_page(page: Page):
+    return AddEditResources(page)
+
+@pytest.fixture
+def teacher_profile_page(page: Page):
+    return TeacherProfile(page)

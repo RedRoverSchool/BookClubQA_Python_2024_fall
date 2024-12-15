@@ -15,7 +15,7 @@ class Header:
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_on_login_button(self):
         self.page.locator(
-            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
+            'a', has_text='Войти'
         ).click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
@@ -65,7 +65,7 @@ class Header:
     def click_on_profile_button(self):
         button = self.page.get_by_test_id("profile")
         button.click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/profile/")
+        expect(self.page).to_have_url("http://testing.misleplav.ru/subscription/profile/")
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
@@ -117,3 +117,12 @@ class Header:
     @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
+
+    @allure.step("Кликаем на кнопку 'Мои студенты' в хедере")
+    def click_my_students_button(self):
+        self.page.locator("a", has_text="Мои студенты").click()
+
+    @allure.step("Кликаем на кнопку 'Выйти' в хедере")
+    def click_logout_button(self):
+        self.page.wait_for_timeout(30000)
+        self.page.locator("a", has_text="Выйти").click()

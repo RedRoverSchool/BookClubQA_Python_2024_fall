@@ -20,15 +20,19 @@ class Register:
 
     @allure.step("Заполняем поле 'Придумайте ник'")
     def fill_nick(self, nick):
-        self.page.get_by_placeholder("Придумайте ник").fill(nick)
+        self.page.locator('#id_first_name').fill(nick)
 
     @allure.step("Заполняем поле 'Придумайте пароль'")
     def fill_password(self, password):
-        self.page.get_by_placeholder("Придумайте пароль").fill(password)
+        self.page.locator('#id_password1').fill(password)
+
+    @allure.step("Заполняем поле 'Почта'")
+    def fill_email(self, email):
+        self.page.locator('#id_email').fill(email)
 
     @allure.step("Заполняем поле 'Подтвердите пароль'")
     def fill_confirm_password(self, password):
-        self.page.get_by_placeholder("Подтвердите пароль").fill(password)
+        self.page.locator("#id_password2").fill(password)
 
     @allure.step("Кликаем на кнопку 'Я преподаватель'")
     def click_on_become_a_teacher_button(self):
@@ -36,7 +40,7 @@ class Register:
 
     @allure.step("Кликаем на кнопку 'Зарегистрироваться'")
     def click_on_registration_button(self):
-        self.page.get_by_test_id("submit-button").click()
+        self.page.locator("button", has_text="Зарегистрироваться").click()
 
     @allure.step("Проверяем, что страница регистрации открыта")
     def verify_registration_page_opened(self):
@@ -111,3 +115,21 @@ class Register:
         register.click_on_become_a_teacher_button()
         register.click_on_registration_button()
         header.create_listing_button_should_be_visible()
+
+    @allure.step('Регистрируем пользователя с генерацией данных')
+    def registration_new_user(self, user_type):
+        if user_type == 'tutor':
+            self.click_on_become_a_teacher_button()
+        if user_type not in ['tutor', 'student']:
+            assert False, 'Wrong user type'
+        name = fake.user_name()
+        email = fake.email()
+
+        self.generate_valid_password()
+        self.fill_email(email)
+        self.fill_nick(name)
+        self.fill_password(self.password)
+        self.fill_confirm_password(self.password)
+        self.click_on_registration_button()
+        print('133', email, self.password)
+        return {'name': name, 'password': self.password, 'email': email}
