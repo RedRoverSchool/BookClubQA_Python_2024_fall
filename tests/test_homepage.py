@@ -52,4 +52,4 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
     result = homepage.check_find_tutor_btn_redirection
-    assert result[0] == result[1] == result[2] == settings.list_url
+    assert result[0] == result[1] == result[2] == settings.tutors_list_url
