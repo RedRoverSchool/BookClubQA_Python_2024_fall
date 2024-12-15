@@ -17,12 +17,3 @@ def test_verify_registration_options_on_login_page(header, login):
     header.visit()
     header.click_on_login_button()
     login.check_title_of_registration()
-
-
-def test_verify_registration_options_on_find_tutor_page(homepage, find_tutor):
-    homepage.visit()
-    homepage.click_on_find_tutor_button()
-    find_tutor.select_category()
-    find_tutor.free_first_lesson()
-    find_tutor.filter()
-    find_tutor.list_of_card_teacher()

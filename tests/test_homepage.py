@@ -44,3 +44,12 @@ def test_first_btn_become_a_tutor_is_visible(homepage):
 def test_first_btn_become_tutor_is_enabled(homepage):
     homepage.visit()
     homepage.find_first_btn_become_tutor()
+
+
+def test_verify_first_free_lesson_teacher(homepage, find_tutor):
+    homepage.visit()
+    homepage.click_on_find_tutor_button()
+    find_tutor.select_category()
+    find_tutor.free_first_lesson()
+    find_tutor.filter()
+    find_tutor.list_of_card_teacher()
