@@ -16,7 +16,7 @@ def test_register_as_tutor(header, register):
     header.create_listing_button_should_be_visible()
 
 
-@pytest.mark.slow
+#@pytest.mark.slow
 def test_register_as_student(header, register):
     header.visit()
     header.click_on_registration_button()

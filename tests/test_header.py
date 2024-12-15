@@ -1,5 +1,7 @@
 import pytest
 
+from Data.data import valid_login, valid_password
+
 
 
 def test_login_button_opens_login_page(header, login):
@@ -62,13 +64,15 @@ def test_hover_support_button_as_student(login, header):
     header.hover_support_button_color_check()
 
 
-@pytest.mark.skip('Need fix this test')
+
 def test_verify_redirection_on_profile_page(login, header):
     header.visit()
     header.click_on_login_button()
-    login.full_login("Garry", "Potter1$")
+    login.enter_username(valid_login)
+    login.enter_password(valid_password)
+    login.click_login_button()
     header.click_on_profile_button()
-    header.profile_button_should_be_visible()
+
 
 
 def test_login_button_is_visible(header):
