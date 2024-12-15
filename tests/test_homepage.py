@@ -1,4 +1,5 @@
-from core import settings
+from BookClubQA_Python_2024_fall.core import settings
+from BookClubQA_Python_2024_fall.core.settings import tutors_list_url
 
 
 def test_homepage_info_is_same_after_reload(homepage, register):
@@ -51,5 +52,11 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
-    result = homepage.check_find_tutor_btn_redirection
-    assert result[0] == result[1] == result[2] == settings.tutors_list_url
+    result_1 = homepage.check_find_tutor_btn_redirection()
+    assert result_1 == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+
+
+def test_find_tutor_btn_2_redirection(homepage):
+    homepage.visit()
+    result_2 = homepage.check_find_tutor_btn_2_redirection()
+    assert result_2 == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'

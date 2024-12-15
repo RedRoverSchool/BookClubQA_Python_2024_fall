@@ -4,6 +4,7 @@ import allure
 import pytest
 from pytest import Item
 
+from components.teacher_profile import TeacherProfile
 from components.announcement import Announcement
 from components.find_tutor import FindTutor
 from components.header import Header
@@ -63,6 +64,11 @@ def telegram_page(page: Page):
 @pytest.fixture
 def user_profile(page: Page):
     return UserProfile(page)
+
+
+@pytest.fixture
+def teacher_profile(page: Page):
+    return TeacherProfile(page)
 
 
 @pytest.fixture(scope="function", autouse=True)

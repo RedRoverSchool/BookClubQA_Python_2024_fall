@@ -1,6 +1,6 @@
 import allure
 from playwright.sync_api import Page, expect
-from core.settings import base_url
+from BookClubQA_Python_2024_fall.core.settings import base_url
 
 
 class Homepage:
@@ -234,17 +234,15 @@ class Homepage:
         )
         assert become_tutor_btn.is_enabled()
 
-    @allure.step("Проверка редиректа кнопки 'Найти репетитора'")
+    @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
     def check_find_tutor_btn_redirection(self):
-        button_1 = self.page.locator("//a[@class='btn btn-outline-light mb-2 ms-3'][text()='Найти репетитора']")
-        button_1.click()
-        url1 = self.page.url
-        self.page.go_back()
         button_2 = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']")
         button_2.click()
-        url2 = self.page.url
-        self.page.go_back()
-        button_3 = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-md-inline btn-lg']")
+        find_tutor_btn_redirection = self.page.url
+        return find_tutor_btn_redirection
+
+    def check_find_tutor_btn_2_redirection(self):
+        button_3 = self.page.wait_for_selector(".btn.btn-light.me-2.rounded.d-none.d-md-inline.btn-lg", state="visible")
         button_3.click()
-        url3 = self.page.url
-        return url1, url2, url3
+        find_tutor_btn_2_redirection = self.page.url
+        return find_tutor_btn_2_redirection

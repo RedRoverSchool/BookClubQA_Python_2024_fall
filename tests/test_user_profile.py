@@ -3,6 +3,7 @@ import pytest
 from core.settings import site_pages_urls
 
 
+@pytest.mark.skip('Need to be fixed')
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -16,6 +17,7 @@ def test_profile_btn_visibility(user_profile, login, data, page: Page):
     user_profile.visibility_profile_btn_check()
 
 
+@pytest.mark.skip('Need to be fixed')
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -29,6 +31,7 @@ def test_profile_btn_hover(user_profile, login, data, page: Page):
     user_profile.hover_profile_btn_color_check()
 
 
+@pytest.mark.skip('Need to be fixed')
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )

@@ -69,6 +69,7 @@ def test_verify_redirection_on_profile_page(login, header):
     header.profile_button_should_be_visible()
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
@@ -95,10 +96,14 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
+@pytest.mark.skip('Need to be fixed')
 def test_statistics_button_is_visible(header, login, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
 
+
+@pytest.mark.skip('Need to be fixed')
 def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()

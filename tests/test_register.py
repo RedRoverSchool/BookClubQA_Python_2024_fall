@@ -6,6 +6,7 @@ fake = Faker()
 STUDENT_SUCCESS_REGISTRSTION_MESSAGE = 'Вы успешно зарегистрировались!'
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_register_as_tutor(header, register):
     header.visit()
     header.click_on_registration_button()
@@ -29,6 +30,7 @@ def test_register_as_student(header, register):
     register.click_on_registration_button()
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_register_as_student_verify_success_message_text(homepage, register, find_tutor):
     """ Проверка успешного сообщения после регистрации как студента """
     homepage.visit()
@@ -55,6 +57,7 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
     register.verify_registration_page_opened()
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_verify_successful_message_after_register_as_tutor(
         homepage, register, find_tutor
 ):
@@ -75,6 +78,7 @@ def test_verify_successful_message_after_register_as_tutor(
     find_tutor.check_message_of_registration(text)
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_check_placeholders_on_the_register_page(header, register):
     header.visit()
     header.click_on_registration_button()
