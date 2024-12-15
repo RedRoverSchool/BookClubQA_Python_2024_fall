@@ -1,3 +1,6 @@
+from BookClubQA_Python_2024_fall.core import settings
+
+
 def test_homepage_info_is_same_after_reload(homepage, register):
     homepage.visit()
     main_page_info_before_reload = homepage.check_info_main_page()
@@ -44,3 +47,10 @@ def test_first_btn_become_a_tutor_is_visible(homepage):
 def test_first_btn_become_tutor_is_enabled(homepage):
     homepage.visit()
     homepage.find_first_btn_become_tutor()
+
+
+def test_find_tutor_btn_redirection(homepage):
+    homepage.visit()
+    result = homepage.click_find_tutor()
+    assert result[0] == result[1] == result[2] == settings.list_url
+    

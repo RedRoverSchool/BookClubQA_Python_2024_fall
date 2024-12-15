@@ -233,3 +233,18 @@ class Homepage:
             '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
         )
         assert become_tutor_btn.is_enabled()
+
+    @allure.step("Проверка редиректа кнопки 'Найти репетитора'")
+    def click_find_tutor(self):
+        button_1 = self.page.locator("//a[@class='btn btn-outline-light mb-2 ms-3'][text()='Найти репетитора']")
+        button_1.click()
+        url1 = self.page.url
+        self.page.go_back()
+        button_2 = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']")
+        button_2.click()
+        url2 = self.page.url
+        self.page.go_back()
+        button_3 = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-md-inline btn-lg']")
+        button_3.click()
+        url3 = self.page.url
+        return url1, url2, url3
