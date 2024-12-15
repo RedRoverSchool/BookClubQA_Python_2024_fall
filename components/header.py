@@ -65,7 +65,7 @@ class Header:
     def click_on_profile_button(self):
         button = self.page.get_by_test_id("profile")
         button.click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/profile/")
+        expect(self.page).to_have_url("http://testing.misleplav.ru/subscription/profile/")
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
@@ -80,6 +80,8 @@ class Header:
             '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
         )
         assert button.is_visible()
+
+
 
     @allure.step("Проверяем доступна ли кнопка 'Войти' для взаимодействия")
     def login_button_is_enabled(self):
@@ -117,3 +119,4 @@ class Header:
     @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
+
