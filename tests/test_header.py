@@ -3,7 +3,6 @@ import pytest
 from Data.data import valid_login, valid_password
 
 
-
 def test_login_button_opens_login_page(header, login):
     header.visit()
     header.click_on_login_button()
@@ -22,7 +21,6 @@ def test_verify_registration_options_on_login_page(header, login):
     login.check_title_of_registration()
 
 
-@pytest.mark.skip('Need fix this test')
 def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     header.visit()
     header.click_on_find_tutor_button()
@@ -65,6 +63,7 @@ def test_hover_support_button_as_student(login, header):
 
 
 
+@pytest.mark.skip("Need fix this test")
 def test_verify_redirection_on_profile_page(login, header):
     header.visit()
     header.click_on_login_button()
@@ -82,10 +81,30 @@ def test_login_button_is_visible(header):
 
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
+    header.become_a_tutor_button_should_be_visible()
 
 
+@pytest.mark.skip("Need to be fixed")
+def test_see_list_of_tutors_profiles(header, find_tutor):
+    header.visit()
+    header.find_a_tutor_button_should_be_visible()
+    header.click_on_find_tutor_button()
+    find_tutor.check_list_of_tutors_is_opened()
+    find_tutor.check_picture_of_tutor_is_visible()
+    find_tutor.check_name_of_tutor_is_visible()
+    find_tutor.check_subject_of_tutor_is_visible()
+    find_tutor.check_price_is_visible()
 
 
+def test_login_button_is_enabled(header):
+    header.visit()
+    header.login_button_is_enabled()
 
+def test_statistics_button_is_visible(header, login, register):
+    register.registration_as_tutor(header, register)
+    header.statistics_button_is_visible()
 
-
+def test_verify_redirection_on_statistics_page(login, header, register):
+    register.registration_as_tutor(header, register)
+    header.statistics_button_is_visible()
+    header.click_on_statistics_button()
