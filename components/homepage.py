@@ -233,3 +233,7 @@ class Homepage:
             '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
         )
         assert become_tutor_btn.is_enabled()
+
+    @allure.step("Кликаем на кнопку 'Найти репетитора'")
+    def click_on_find_tutor_button(self):
+        self.page.locator("//li/a[text() = 'Найти репетитора']").click()

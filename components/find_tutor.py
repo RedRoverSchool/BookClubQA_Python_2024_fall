@@ -1,5 +1,6 @@
 import allure
-from playwright.sync_api import Page
+
+from playwright.sync_api import Page, expect
 from core.settings import list_url
 
 
@@ -41,3 +42,24 @@ class FindTutor:
     def check_message_of_registration(self, expected_message):
         message = self.page.locator("//div[@role='alert']").text_content()
         assert message.strip() == expected_message
+
+    @allure.step("Выбор категории")
+    def select_category(self):
+        value = self.page.get_by_label('Категория')
+        value.select_option('1')
+
+    @allure.step("Выбор бесплатного урока")
+    def free_first_lesson(self):
+        self.page.locator('//input[@id="firstLessonCheck"]').check()
+
+    @allure.step("Фильтр")
+    def filter(self):
+        self.page.get_by_text('Фильтровать').click()
+
+    @allure.step("Проверяем и подтверждаем наличия преподавателей")
+    def list_of_card_teacher(self):
+        lst = []
+        locator = self.page.locator("//div[@class = 'card h-100']")
+        lst.append(locator)
+        size_list = len(lst)
+        assert size_list, size_list > 0
