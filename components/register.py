@@ -131,5 +131,4 @@ class Register:
         self.fill_password(self.password)
         self.fill_confirm_password(self.password)
         self.click_on_registration_button()
-        print('133', email, self.password)
         return {'name': name, 'password': self.password, 'email': email}
