@@ -1,6 +1,3 @@
-from BookClubQA_Python_2024_fall.core import settings
-from BookClubQA_Python_2024_fall.core.settings import tutors_list_url
-
 
 def test_homepage_info_is_same_after_reload(homepage, register):
     homepage.visit()
