@@ -3,6 +3,8 @@ from faker import Faker
 
 fake = Faker()
 
+STUDENT_SUCCESS_REGISTRSTION_MESSAGE = 'Вы успешно зарегистрировались!'
+
 
 def test_register_as_tutor(header, register):
     header.visit()
@@ -25,6 +27,20 @@ def test_register_as_student(header, register):
     register.fill_password("sdjflsfdjlksdjflksdjf")
     register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
     register.click_on_registration_button()
+
+
+def test_register_as_student_verify_success_message_text(homepage, register, find_tutor):
+    """ Проверка успешного сообщения после регистрации как студента """
+    homepage.visit()
+    homepage.click_on_registration_button()
+    register.verify_registration_page_opened()
+    register.fill_nick(fake.user_name())
+    register.generate_valid_password()
+    register.fill_password(register.password)
+    register.fill_confirm_password(register.password)
+    register.click_on_registration_button()
+    find_tutor.check_message_of_registration(STUDENT_SUCCESS_REGISTRSTION_MESSAGE)
+
 
 
 # TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
