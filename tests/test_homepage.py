@@ -1,3 +1,4 @@
+import pytest
 
 
 def test_homepage_info_is_same_after_reload(homepage, register):
