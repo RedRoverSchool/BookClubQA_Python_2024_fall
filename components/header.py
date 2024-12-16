@@ -117,3 +117,11 @@ class Header:
     @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
+
+    @allure.step("Проверяем отсутствие кнопки 'Выйти'")
+    def logout_is_absent(self):
+        """Проверка отстутствия кнопки 'Выйти' у незарегистрированного пользователя параметризацией
+        для всех доступных страниц
+            """
+        button = self.page.locator("//a[contains(@class, 'btn') and text()='Выйти']")
+        expect(button).not_to_be_attached()

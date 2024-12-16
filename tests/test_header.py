@@ -25,7 +25,6 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     find_tutor.check_title_of_registration()
 
 
-
 def test_support_visibility_as_teacher(login, header):
     header.visit()
     header.click_on_login_button()
@@ -110,3 +109,12 @@ def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
     header.click_on_statistics_button()
+
+
+# TC_11.004.001.001 | Header - Teacher > "Выйти" - button is not available when user don't logined
+def test_header_logout_is_absent(header):
+    """
+    Проверяем отсутствие в хеадер кнопки "Выход" для незарегистрированного пользователя
+    """
+    header.visit()
+    header.logout_is_absent()
