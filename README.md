@@ -5,6 +5,24 @@
 
 ➣ [Баги оставляем в таблице](https://docs.google.com/spreadsheets/d/1NBimEWDxPNVlMtWHc_IML7hvNlYtQSe7i8AkilXUl6A/edit?gid=0#gid=0)
 
+## Требования
+
+Для запуска проекта вам нужно установить следующие библиотеки:
+
+- `pytest` — тестовый фреймворк.
+- `pytest-playwright` — интеграция Playwright с Pytest.
+- `playwright` — для автоматизации браузера.
+- `pytest-xdist` — для параллельного выполнения тестов.
+- `Faker` — для генерации поддельных данных.
+- `pydantic` — для валидации данных.
+- `Ruff` - [инструмент для анализа Python-кода](https://docs.astral.sh/ruff/installation/) 
+  - Если вы хотите увидеть список доступных подкоманд и опций, используйте:
+  ```ruff --help```
+  - Если вы хотите проверить весь проект на ошибки форматирования, выполните:
+  ```ruff check .```
+  - Для форматирования кода:
+  ```ruff format .```
+
 ## Как работаем с репозиторием
 
 1. Клонируем 
@@ -13,6 +31,48 @@
 4. Открываем запрос на слияние с main
 5. Отправляем запрос в slack в чат [#qa_python_project](https://redroverschool.slack.com/archives/C05US8RLPFU) или в свою группу
 6. Обязательно удаляем свою ветку после слияния с main
+
+## Установка
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https:https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall.git
+   cd BookClubQA_Python_2024_fall
+   ```
+
+2. Создайте виртуальное окружение:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Для macOS/Linux
+   venv\Scripts\activate  # Для Windows
+   ```
+
+3. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Для запуска тестов, убедитесь, что у вас установлен Playwright:
+   ```bash
+   playwright install
+   ```
+   ```bash
+   playwright --version
+   ```
+После этого ваш проект будет готов к запуску.
+
+_________
+## Отчеты
+Чтобы получить отчет о тестах в формате Allure, выполните команду:
+
+```bash
+pytest --alluredir=allure-results
+```
+```bash
+allure serve allure-results
+```
+После этого Allure откроет отчет в браузере.
+____________
 
 ## Как пишем тесты 
 
@@ -26,19 +86,7 @@
 
 ## Общая инструкция по работе с доской
 
-
 [<img src="https://github.com/user-attachments/assets/14d75fbd-a1f0-4058-b4f5-05914851e78c" width="90" height="90">](https://docs.google.com/document/d/1ob1So07HGUwlMcEEHpgEYTBLBQzAZ6laPCRItndNJqU/edit?tab=t.0)
-
-
-## Установки:
-
-<img src="https://docs.astral.sh/ruff/assets/bolt.svg" width="20" height="20">[Install Ruff](https://docs.astral.sh/ruff/installation/) инструмент для анализа Python-кода  
-- Если вы хотите увидеть список доступных подкоманд и опций, используйте:
-```ruff --help```
-- Если вы хотите проверить весь проект на ошибки форматирования, выполните:
-```ruff check .```
-- Для форматирования кода:
-```ruff format .```
 
 
 
