@@ -49,11 +49,11 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
-    result_1 = homepage.check_find_tutor_btn_redirection()
-    assert result_1 == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+    url = homepage.check_find_tutor_btn_redirection()
+    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
 
 
 def test_find_tutor_btn_2_redirection(homepage):
     homepage.visit()
-    result_2 = homepage.check_find_tutor_btn_2_redirection()
-    assert result_2 == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+    url = homepage.check_find_tutor_btn_2_redirection()
+    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
