@@ -1,7 +1,7 @@
 # 1.📎Полезное 
-➣ [Ручное тестирование сейчас проводим на проде](https://misleplav.ru/)
+➣ [Ручное тестирование проводим на проде](https://misleplav.ru/)
 
-➣ [Автотесты будут проходить на тесте](http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/)
+➣ [Автотесты проходят на тесте](http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/)
 
 ➣ [Баги оставляем в таблице](https://docs.google.com/spreadsheets/d/1NBimEWDxPNVlMtWHc_IML7hvNlYtQSe7i8AkilXUl6A/edit?gid=0#gid=0)
 
