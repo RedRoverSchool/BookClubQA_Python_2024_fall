@@ -31,7 +31,7 @@ class Footer:
         ).scroll_into_view_if_needed()
 
     @allure.step("Кликаем на название url 'Политика конфиденциальности'")
-    def click_on_privacy_policy_url(self):
+    def click_privacy_policy_url(self):
         self.page.get_by_text("Политика конфиденциальности").click()
 
     @allure.step("Ждем завершения навигации")

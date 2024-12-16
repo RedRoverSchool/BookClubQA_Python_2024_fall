@@ -24,12 +24,12 @@ class Login:
 
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):
-        username_field = self.page.locator("input[name='username']")
+        username_field = self.page.locator("#id_username")
         username_field.fill(username)
 
     @allure.step("Вводим пароль пользователя")
     def enter_password(self, password: str):
-        password_field = self.page.locator("input[name='password']")
+        password_field = self.page.locator("#id_password")
         password_field.fill(password)
 
     @allure.step("Нажимаем кнопку 'Войти'")

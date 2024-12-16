@@ -9,13 +9,13 @@ STUDENT_SUCCESS_REGISTRSTION_MESSAGE = 'Вы успешно зарегистри
 @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_register_as_tutor(header, register):
     header.visit()
-    header.click_on_registration_button()
+    header.click_registration_button()
     register.header_should_contain_text("Регистрация")
     register.fill_nick(fake.user_name())
     register.fill_password("sdjflsfdjlksdjflksdjf")
     register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
-    register.click_on_become_a_teacher_button()
-    register.click_on_registration_button()
+    register.check_become_a_teacher_checkbox()
+    register.click_registration_button()
     header.create_listing_button_should_be_visible()
 
 
@@ -23,12 +23,12 @@ def test_register_as_tutor(header, register):
 @pytest.mark.slow
 def test_register_as_student(header, register):
     header.visit()
-    header.click_on_registration_button()
+    header.click_registration_button()
     register.header_should_contain_text("Регистрация")
     register.fill_nick(fake.user_name())
     register.fill_password("sdjflsfdjlksdjflksdjf")
     register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
-    register.click_on_registration_button()
+    register.click_registration_button()
 
 
 
@@ -36,13 +36,13 @@ def test_register_as_student(header, register):
 def test_register_as_student_verify_success_message_text(homepage, register, find_tutor):
     """ Проверка успешного сообщения после регистрации как студента """
     homepage.visit()
-    homepage.click_on_registration_button()
+    homepage.click_registration_button()
     register.verify_registration_page_opened()
     register.fill_nick(fake.user_name())
     register.generate_valid_password()
     register.fill_password(register.password)
     register.fill_confirm_password(register.password)
-    register.click_on_registration_button()
+    register.click_registration_button()
     find_tutor.check_message_of_registration(STUDENT_SUCCESS_REGISTRSTION_MESSAGE)
 
 
@@ -50,7 +50,7 @@ def test_register_as_student_verify_success_message_text(homepage, register, fin
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
     header.visit()
-    header.click_on_login_button()
+    header.click_login_button()
     login.full_login("student_test", "]<c%ZTHH8EZ3L–+")
     header.visit()
     homepage.check_2_find_tutor_btns()
@@ -63,7 +63,7 @@ def test_verify_successful_message_after_register_as_tutor(
         homepage, register, find_tutor
 ):
     homepage.visit()
-    homepage.click_on_registration_button()
+    homepage.click_registration_button()
     # переходим на страницу регистрации
     register.header_should_contain_text("Регистрация")
     register.fill_nick(fake.user_name())
@@ -73,8 +73,8 @@ def test_verify_successful_message_after_register_as_tutor(
     register.fill_password(register.password)
     register.fill_confirm_password(register.password)
 
-    register.click_on_become_a_teacher_button()
-    register.click_on_registration_button()
+    register.check_become_a_teacher_checkbox()
+    register.click_registration_button()
     text = """Вы успешно зарегистрировались, а так же получаете бесплатный премиум на 3 дня!"""
     find_tutor.check_message_of_registration(text)
 
@@ -83,7 +83,7 @@ def test_verify_successful_message_after_register_as_tutor(
 @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_check_placeholders_on_the_register_page(header, register):
     header.visit()
-    header.click_on_registration_button()
+    header.click_registration_button()
     register.check_username_placeholder_visibility()
     register.check_username_placeholder_text()
     register.check_password1_placeholder_visibility()
