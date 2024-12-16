@@ -9,7 +9,7 @@ from components.my_teachers import MyTeachersPage
 def test_my_teachers_btn_exists(header, login, page: Page):
     """Проверка наличия кнопки 'Мои репетиторы'."""
     header.visit()
-    header.click_on_login_button()
+    header.click_login_button()
     login.full_login("zau4il", "dslfjsdfblkhew@122b1klbfw")
     my_teachers_button = MyTeachersPage(page)
     my_teachers_button.check_my_teachers_btn_exists()
@@ -19,7 +19,7 @@ def test_my_teachers_btn_exists(header, login, page: Page):
 def test_my_teachers_btn_click(header, login, page: Page):
     """Проверка клика на кнопку 'Мои репетиторы'."""
     header.visit()
-    header.click_on_login_button()
+    header.click_login_button()
     login.full_login("zau4il", "dslfjsdfblkhew@122b1klbfw")
     my_teachers_button = MyTeachersPage(page)
     my_teachers_button.click_my_teachers_btn()
@@ -30,7 +30,7 @@ def test_my_teachers_btn_click(header, login, page: Page):
 def test_check_teachers_list(header, login, page: Page):
     """Проверка что открылась страница 'Мои репетиторы' со списком репетиторов или без с соответствующим сообщением."""
     header.visit()
-    header.click_on_login_button()
+    header.click_login_button()
     login.full_login("zau4il", "dslfjsdfblkhew@122b1klbfw")
     my_teachers_button = MyTeachersPage(page)
     my_teachers_button.click_my_teachers_btn()

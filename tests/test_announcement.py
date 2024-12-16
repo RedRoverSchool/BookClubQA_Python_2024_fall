@@ -1,40 +1,23 @@
-import pytest
 from faker import Faker
 
 fake = Faker()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
-def test_create_announcement(login, header, announcement, register):
-    register.registration_as_tutor(header, register)
-    header.click_on_create_announcement_btn()
-    announcement.fill_out_fullname()
-    announcement.fill_out_descripption()
-    announcement.upload_photo()
-    announcement.pick_category()
-    announcement.fill_out_experience()
-    announcement.checkbox_degree()
-    announcement.checkbox_free_first_lesson()
-    announcement.fill_out_price()
-    announcement.fill_out_class_duration()
-    announcement.add_contact_info()
-    announcement.click_create_announcement_btn()
+def test_create_announcement(login, header, announcement, register, create_announcement_page):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user('tutor')
+    header.click_create_announcement_button()
+    create_announcement_page.fill_submit_new_announcement_form()
+    announcement.verify_announcements_page_endpoint()
 
 
 
 # AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement > Verify the announcement is not created when the empty form is submitted
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page):
     header.visit()
-    header.click_on_registration_button()
-
-    register.fill_nick(fake.user_name())
-    register.generate_valid_password()
-    register.click_on_become_a_teacher_button()
-    register.fill_password(register.password)
-    register.fill_confirm_password(register.password)
-    register.click_on_registration_button()
-
+    header.click_registration_button()
+    register.registration_new_user('tutor')
     header.click_create_announcement_button()
 
     create_announcement_page.verify_the_announcement_form_is_blank()
@@ -44,18 +27,10 @@ def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teac
 
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement > Verify the number of announcements remains zero when an empty form is submitted
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_teacher_announcement_blank_form(header, register, my_teachers, create_announcement_page, announcement):
     header.visit()
-    header.click_on_registration_button()
-
-    register.fill_nick(fake.user_name())
-    register.generate_valid_password()
-    register.click_on_become_a_teacher_button()
-    register.fill_password(register.password)
-    register.fill_confirm_password(register.password)
-    register.click_on_registration_button()
-
+    header.click_registration_button()
+    register.registration_new_user('tutor')
     header.click_create_announcement_button()
 
     create_announcement_page.verify_the_announcement_form_is_blank()

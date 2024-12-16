@@ -86,3 +86,10 @@ class Announcement:
     def verify_number_of_announcements_is_zero(self):
         announcement_list = self.page.locator('main .container h5')
         expect(announcement_list).to_have_count(0)
+
+    @allure.step("Убедиться, что пользователь на странице объявлений")
+    def verify_announcements_page_endpoint(self):
+        announcement_page_endpoint = '/listings/list/'
+        current_url = self.page.url
+        print(current_url)
+        assert announcement_page_endpoint in current_url
