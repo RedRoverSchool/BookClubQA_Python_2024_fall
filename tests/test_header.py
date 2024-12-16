@@ -117,4 +117,4 @@ def test_header_logout_is_absent(header):
     Проверяем отсутствие в хеадер кнопки "Выход" для незарегистрированного пользователя
     """
     header.visit()
-    header.logout_is_absent()
+    header.check_logout_is_absent()

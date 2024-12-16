@@ -119,7 +119,7 @@ class Header:
         self.page.locator("a", has_text="Создать объявление").click()
 
     @allure.step("Проверяем отсутствие кнопки 'Выйти'")
-    def logout_is_absent(self):
+    def check_logout_is_absent(self):
         """Проверка отстутствия кнопки 'Выйти' у незарегистрированного пользователя параметризацией
         для всех доступных страниц
             """
