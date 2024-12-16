@@ -110,3 +110,8 @@ def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
     header.click_on_statistics_button()
+
+
+def test_my_announcement_btn_is_invisible_for_logged_out_user(header):
+    header.visit()
+    header.check_my_announcement_button_visibility(should_be_visible=False)

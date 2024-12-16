@@ -117,3 +117,13 @@ class Header:
     @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
+
+    @allure.step("Проверяем наличие или отсутствие кнопки 'Мое объявление'")
+    def check_my_announcement_button_visibility(self, should_be_visible=True):
+        button = self.page.locator('a.btn.btn-outline-light:has-text("Мое объявление")')
+
+        if should_be_visible:
+            assert button.is_visible(), "Кнопки 'Мое объявление' нет на странице"
+        else:
+            button_count = button.count()
+            assert button_count == 0, "Кнопка 'Мое объявление' присутствует на странице"
