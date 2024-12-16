@@ -71,7 +71,6 @@ def test_verify_redirection_on_profile_page(login, header):
     header.profile_button_should_be_visible()
 
 
-@pytest.mark.skip('Need to be fixed')
 def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
@@ -112,6 +111,10 @@ def test_verify_redirection_on_statistics_page(login, header, register):
     header.click_on_statistics_button()
 
 
-def test_my_announcement_btn_is_invisible_for_logged_out_user(header):
+# TC_11.004.001.001 | Header - Teacher > "Выйти" - button is not available when user don't logined
+def test_header_logout_is_absent(header):
+    """
+    Проверяем отсутствие в хеадер кнопки "Выход" для незарегистрированного пользователя
+    """
     header.visit()
-    header.check_my_announcement_button_visibility(should_be_visible=False)
+    header.check_logout_is_absent()

@@ -118,6 +118,16 @@ class Header:
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
 
+
+    @allure.step("Проверяем отсутствие кнопки 'Выйти'")
+    def check_logout_is_absent(self):
+        """Проверка отстутствия кнопки 'Выйти' у незарегистрированного пользователя параметризацией
+        для всех доступных страниц
+            """
+        button = self.page.locator("//a[contains(@class, 'btn') and text()='Выйти']")
+        expect(button).not_to_be_attached()
+
+        
     @allure.step("Проверяем наличие или отсутствие кнопки 'Мое объявление'")
     def check_my_announcement_button_visibility(self, should_be_visible=True):
         button = self.page.locator('a.btn.btn-outline-light:has-text("Мое объявление")')
@@ -127,3 +137,4 @@ class Header:
         else:
             button_count = button.count()
             assert button_count == 0, "Кнопка 'Мое объявление' присутствует на странице"
+
