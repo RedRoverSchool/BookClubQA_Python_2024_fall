@@ -31,6 +31,7 @@ def test_register_as_student(header, register):
     register.click_on_registration_button()
 
 
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_register_as_student_verify_success_message_text(homepage, register, find_tutor):
     """ Проверка успешного сообщения после регистрации как студента """
@@ -76,6 +77,7 @@ def test_verify_successful_message_after_register_as_tutor(
     register.click_on_registration_button()
     text = """Вы успешно зарегистрировались, а так же получаете бесплатный премиум на 3 дня!"""
     find_tutor.check_message_of_registration(text)
+
 
 
 @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")

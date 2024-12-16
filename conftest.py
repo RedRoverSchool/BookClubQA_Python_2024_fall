@@ -3,7 +3,6 @@ import os
 import allure
 import pytest
 from pytest import Item
-
 from components.announcement import Announcement
 from components.find_tutor import FindTutor
 from components.header import Header

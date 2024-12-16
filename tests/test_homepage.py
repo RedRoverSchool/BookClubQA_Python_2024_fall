@@ -55,3 +55,15 @@ def test_first_btn_become_a_tutor_is_visible(homepage):
 def test_first_btn_become_tutor_is_enabled(homepage):
     homepage.visit()
     homepage.find_first_btn_become_tutor()
+
+
+def test_find_tutor_btn_redirection(homepage):
+    homepage.visit()
+    url = homepage.check_find_tutor_btn_redirection()
+    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+
+
+def test_find_tutor_btn_2_redirection(homepage):
+    homepage.visit()
+    url = homepage.check_find_tutor_btn_2_redirection()
+    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'

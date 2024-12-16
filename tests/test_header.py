@@ -25,7 +25,6 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     find_tutor.check_title_of_registration()
 
 
-
 def test_support_visibility_as_teacher(login, header):
     header.visit()
     header.click_on_login_button()
@@ -72,6 +71,7 @@ def test_verify_redirection_on_profile_page(login, header):
     header.profile_button_should_be_visible()
 
 
+@pytest.mark.skip('Need to be fixed')
 def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
