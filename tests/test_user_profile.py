@@ -1,5 +1,6 @@
-from playwright.sync_api import Page
 import pytest
+from playwright.sync_api import Page
+
 from core.settings import site_pages_urls
 
 

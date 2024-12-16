@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from Data.data import invalid_login, valid_password
 

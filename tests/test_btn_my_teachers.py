@@ -1,4 +1,6 @@
+import pytest
 from playwright.sync_api import Page
+
 from components.my_teachers import MyTeachersPage
 
 

@@ -45,7 +45,6 @@ def test_register_as_student_verify_success_message_text(homepage, register, fin
     find_tutor.check_message_of_registration(STUDENT_SUCCESS_REGISTRSTION_MESSAGE)
 
 
-
 # TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
