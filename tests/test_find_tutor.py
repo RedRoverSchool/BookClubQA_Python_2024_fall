@@ -1,4 +1,3 @@
-import pytest
 import allure
 
 @allure.title("TC_05.001.006.003")
