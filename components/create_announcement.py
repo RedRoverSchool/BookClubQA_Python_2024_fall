@@ -96,8 +96,7 @@ class CreateAnnouncement:
         cwd = os.path.abspath('..')
         photo_path = os.path.join(cwd, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
-        rrr = os.path.join('..')
-        print('100aaaa', rrr)
+        print('100aaaa', cwd)
 
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
@@ -109,7 +108,7 @@ class CreateAnnouncement:
         # logic
         fio_field.fill(fio_value)
         body_field.fill(body_value)
-        photo_field.set_input_files(files=[photo_path])
+        photo_field.set_input_files(files=[str(photo_path)])
         category_selected_option = self.select_random_dropdown_option(
             subject_category_dropdown
         )["text"]
