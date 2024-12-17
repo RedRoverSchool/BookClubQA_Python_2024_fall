@@ -4,7 +4,7 @@
 # NOTE Мб локатор не корректный(с абсолютным работает, но в ci упадет)
 # @pytest.mark.xfail(reason='Не загружает фото')
 def test_create_announcement(
-        login, header, announcement, register, create_announcement_page
+    login, header, announcement, register, create_announcement_page
 ):
     header.visit()
     header.click_registration_button()
@@ -17,7 +17,7 @@ def test_create_announcement(
 # AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
 def test_teacher_announcement_blank_form_same_endpoint(
-        header, register, my_teachers, create_announcement_page
+    header, register, my_teachers, create_announcement_page
 ):
     header.visit()
     header.click_registration_button()
@@ -32,7 +32,7 @@ def test_teacher_announcement_blank_form_same_endpoint(
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
 def test_teacher_announcement_blank_form(
-        header, register, my_teachers, create_announcement_page, announcement
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()

@@ -43,3 +43,28 @@ class FindTutor:
         assert (
             message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
+
+        assert message.strip() == expected_message, f"Expected text is \'{expected_message}\', but received \'{message.strip()}\'"
+
+    @allure.step("Проверяем фильтр по категории")
+    def check_filter_form(self):
+        self.page.wait_for_load_state()
+        frw_btn = self.page.get_by_role("link", name="Вперед")
+        all_tutors_math = self.page.get_by_role("heading", name = "Математика").count()
+
+        while frw_btn.count() > 0:
+            frw_btn.click()
+            self.page.wait_for_load_state()
+            all_tutors_math += self.page.get_by_role("heading", name="Математика").count()
+
+        self.page.get_by_label("Категория").select_option('Математика')
+        self.page.get_by_role("button", name="Фильтровать").click()
+        self.page.wait_for_load_state()
+        all_tutors_math_filtered = self.page.get_by_role("heading", name="Математика").count()
+
+        while frw_btn.count() > 0:
+            frw_btn.click()
+            self.page.wait_for_load_state()
+            all_tutors_math_filtered += self.page.get_by_role("heading", name="Математика").count()
+
+        assert all_tutors_math == all_tutors_math_filtered
