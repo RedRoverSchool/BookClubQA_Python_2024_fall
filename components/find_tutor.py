@@ -50,7 +50,6 @@ class FindTutor:
             message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
 
-        assert message.strip() == expected_message, f"Expected text is \'{expected_message}\', but received \'{message.strip()}\'"
 
     @allure.step("Проверяем фильтр по категории")
     def check_filter_form(self):
