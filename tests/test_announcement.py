@@ -2,7 +2,7 @@ import pytest
 
 
 # NOTE Мб локатор не корректный(с абсолютным работает, но в ci упадет)
-@pytest.mark.xfail('Не загружает фото')
+@pytest.mark.xfail(reason='Не загружает фото')
 def test_create_announcement(
         login, header, announcement, register, create_announcement_page
 ):
