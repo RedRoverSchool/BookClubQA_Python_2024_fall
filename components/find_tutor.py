@@ -13,6 +13,14 @@ class FindTutor:
         self.page.goto(tutors_list_url)
 
 
+    @allure.step("Проверяется видимость фильтра по минимальной цене")
+    def check_min_price_field_is_visible(self):
+        label = self.page.get_by_label("Минимальная цена (от)")
+        field = self.page.locator('#minPrice')
+        assert label.is_visible()
+        assert field.is_visible()
+
+
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
         title = self.page.get_by_title("Регистрация")
