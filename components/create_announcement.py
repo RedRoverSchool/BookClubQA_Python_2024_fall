@@ -80,7 +80,7 @@ class CreateAnnouncement:
         data_f = os.walk(r'../Data/upload_files')
         print('12aaa', list([x[0] for x in data_f]))
         new_path = os.path.join(tree, 'Data', 'upload_files', 'silver_angel.png')
-
+        print('13aaa', new_path)
 
         # locators
         # fio_field = self.page.locator("#id_name")
