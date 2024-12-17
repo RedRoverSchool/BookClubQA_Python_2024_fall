@@ -92,7 +92,7 @@ class CreateAnnouncement:
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(500)
-        photo_value = "/Data/upload_files/silver_angel.png"
+        photo_value = "../Data/upload_files/silver_angel.png"
 
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
