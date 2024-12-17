@@ -15,7 +15,7 @@ def test_enabled_privacy_policy_url(footer):
 def test_redirect_privacy_policy_page(footer):
     footer.open_main_page()
     footer.scroll_down_to_the_footer()
-    footer.click_on_privacy_policy_url()
+    footer.click_privacy_policy_url()
     footer.wait_for_navigation()
     footer.privacy_policy_page_should_contain_text()
 

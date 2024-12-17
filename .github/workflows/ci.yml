@@ -90,6 +90,12 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           publish_dir: allure-history
 
+
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Upload test file
+#        run: cp /Data/upload_files/silver_angel.png $GITHUB_WORKSPACE/Data/upload_files/silver_angel.png
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
         if: failure()
