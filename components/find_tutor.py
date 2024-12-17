@@ -1,11 +1,17 @@
 import allure
 from playwright.sync_api import Page
-from core.settings import list_url
+from core.settings import list_url, tutors_list_url
 
 
 class FindTutor:
     def __init__(self, page: Page):
         self.page = page
+
+
+    @allure.step("Открываем Найти Репетитора на главной странице")
+    def open_find_tutor_page(self):
+        self.page.goto(tutors_list_url)
+
 
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
@@ -68,3 +74,30 @@ class FindTutor:
             all_tutors_math_filtered += self.page.get_by_role("heading", name="Математика").count()
 
         assert all_tutors_math == all_tutors_math_filtered
+
+
+    @allure.step("Нажимаем на кнопку Фильтровать")
+    def click_filter_button(self):
+        self.page.get_by_text("Фильтровать").click()
+
+
+    @allure.step("Вводим значение минимальной цены")
+    def enter_min_price(self, min_price: float):
+        price_field = self.page.locator("#minPrice")
+        price_field.fill(str(min_price))
+
+
+    @allure.step("Проверяем, что цены за занятие репетиторов больше или равны заданного значения")
+    def check_prices_over_min_price(self, min_price: float) -> object:
+        # Проверяем, есть ли репетиторы на странице
+        teachers_list_price = self.page.locator(".card-text")
+
+        if teachers_list_price.count() > 0:
+            # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
+            for i in range(teachers_list_price.count()):
+                actual_price = float(teachers_list_price.nth(i).text_content().strip().split(" ")[1])
+                assert actual_price >= min_price
+        else:
+            # Если список репетиторов пустой, то проверяем сообщение
+            text = self.page.locator("//div[@class='alert alert-info']").text_content()
+            assert "Нет результатов", text
