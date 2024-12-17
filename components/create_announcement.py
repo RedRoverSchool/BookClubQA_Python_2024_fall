@@ -95,7 +95,6 @@ class CreateAnnouncement:
         body_value = fake.text(max_nb_chars=500)
         root_dir = os.environ.get('ROOT_DIR')
         photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
-
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
         duration_value = randint(10, 120)
