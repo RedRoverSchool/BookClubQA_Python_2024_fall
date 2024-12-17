@@ -94,11 +94,13 @@ class CreateAnnouncement:
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(500)
         cwd = os.path.abspath('')
-        photo_path = os.path.join(cwd, 'Data', 'upload_files', 'silver_angel.png')
+        root_dir = os.environ.get('ROOT_DIR')
+        print('98aaa', root_dir)
+        photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
         print('100aaaa', cwd)
-        tree = os.walk('..')
-        [print('101aaa', x[0]) for x in tree]
+        # tree = os.walk('..')
+        # [print('101aaa', x[0]) for x in tree]
 
 
         experience_value = randint(0, 120) / 10
