@@ -134,7 +134,7 @@ class Register:
         self.click_registration_button()
         return {"name": name, "password": self.password, "email": email}
 
-    # NOTE: Оставлю пока еще одну регистрацию, через фикстуру
+    # NOTE: Оставлю пока еще одну регистрацию, через фикстуру(есть недочеты)
     def select_role(self, is_teacher=None):
         checkbox = self.page.locator("#id_is_tutor")
         expect(checkbox).to_be_visible()
