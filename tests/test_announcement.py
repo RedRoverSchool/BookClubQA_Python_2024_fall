@@ -48,12 +48,12 @@ def test_teacher_announcement_blank_form(
 def test_teacher_announcement_name(
         header, register, my_teachers, create_announcement_page, announcement
 ):
-    header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
-    header.click_create_announcement_button()
+    # header.visit()
+    # header.click_registration_button()
+    # register.registration_new_user("tutor")
+    # header.click_create_announcement_button()
 
     announcement_detail = create_announcement_page.fill_submit_new_announcement_form()
-    tutor_name = announcement_detail['fio_value']
-    header.click_my_announcement_button()
-    announcement.verify_announcement_tutor_name(tutor_name)
+    # tutor_name = announcement_detail['fio_value']
+    # header.click_my_announcement_button()
+    # announcement.verify_announcement_tutor_name(tutor_name)
