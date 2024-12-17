@@ -70,11 +70,6 @@ def test_teacher_hiding_announcement(header, login, announcement):
             announcement.check_button_text_invisible()
             
     except Exception as e:
-        allure.attach(
-            str(e),
-            name="Test execution error",
-            attachment_type=allure.attachment_type.TEXT
-        )
         raise  
 
     finally:
