@@ -1,4 +1,5 @@
 from random import randint
+import os
 from playwright.sync_api import Page, expect
 import allure
 from faker import Faker
@@ -91,9 +92,9 @@ class CreateAnnouncement:
 
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
-        body_value = fake.text(500)
-        photo_value = "/Data/upload_files/silver_angel.png"
-
+        body_value = fake.text(max_nb_chars=500)
+        root_dir = os.environ.get('ROOT_DIR')
+        photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
         duration_value = randint(10, 120)
@@ -104,7 +105,7 @@ class CreateAnnouncement:
         # logic
         fio_field.fill(fio_value)
         body_field.fill(body_value)
-        photo_field.set_input_files(files=[photo_value])
+        photo_field.set_input_files(photo_path)
         category_selected_option = self.select_random_dropdown_option(
             subject_category_dropdown
         )["text"]
@@ -121,7 +122,7 @@ class CreateAnnouncement:
         return {
             "fio_value": fio_value,
             "body_value": body_value,
-            "photo_value": photo_value,
+            "photo_value": photo_path,
             "category_value": category_selected_option,
             "experience_value": experience_value,
             "education_checkbox": True,

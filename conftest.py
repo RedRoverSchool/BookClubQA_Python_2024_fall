@@ -116,6 +116,10 @@ def browser_context():
         context.close()
         browser.close()
 
+@pytest.fixture(autouse=True)
+def set_root_dir():
+    ci_root_dir = os.environ.get('GITHUB_WORKSPACE', False)
+    os.environ['ROOT_DIR'] = ci_root_dir or '..'
 
 @pytest.fixture
 def cookie_banner(page: Page):

@@ -102,6 +102,7 @@ class Announcement:
         print(current_url)
         assert announcement_page_endpoint in current_url
 
+
     @allure.step("Кликаем на кнопку 'Мое объявление' в хедере")
     def click_my_announcement_button(self):
         self.page.locator("a", has_text="Мое объявление").click()
@@ -154,3 +155,9 @@ class Announcement:
             current_page += 1
 
         assert not teacher_found, f"Объявление с именем '{teacher_name}' найдено!"
+
+    @allure.step("Убедиться что имя в объявлении совпадает с заданным")
+    def verify_announcement_tutor_name(self, expected_name):
+        tutor_name_announcement = self.page.locator('h5').inner_text()
+        assert expected_name == tutor_name_announcement
+
