@@ -99,7 +99,7 @@ class CreateAnnouncement:
         photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
         print('100aaaa', cwd)
-        tree = os.walk('..')
+        tree = os.walk('')
         [print('101aaa', x[0]) for x in tree]
 
 
