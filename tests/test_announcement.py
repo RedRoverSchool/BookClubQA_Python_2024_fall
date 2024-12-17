@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 
 
 # NOTE Мб локатор не корректный(с абсолютным работает, но в ci упадет)
