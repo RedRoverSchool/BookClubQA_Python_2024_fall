@@ -93,7 +93,8 @@ class CreateAnnouncement:
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(500)
-        photo_path = os.path.join('..', 'Data', 'upload_files', 'silver_angel.png')
+        cwd = os.path.abspath('..')
+        photo_path = os.path.join(cwd, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
         rrr = os.path.join('..')
         print('100aaaa', rrr)
