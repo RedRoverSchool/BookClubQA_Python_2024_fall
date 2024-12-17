@@ -93,12 +93,12 @@ class CreateAnnouncement:
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(500)
-        cwd = os.path.abspath('..')
+        cwd = os.path.abspath('')
         photo_path = os.path.join(cwd, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
         print('100aaaa', cwd)
         tree = os.walk('..')
-        print('101aaa', ([x[0] for x in tree]))
+        [print('101aaa', x[0]) for x in tree]
 
 
         experience_value = randint(0, 120) / 10
@@ -111,7 +111,7 @@ class CreateAnnouncement:
         # logic
         fio_field.fill(fio_value)
         body_field.fill(body_value)
-        photo_field.set_input_files(files=[str(photo_path)])
+        photo_field.set_input_files(photo_path)
         category_selected_option = self.select_random_dropdown_option(
             subject_category_dropdown
         )["text"]
