@@ -1,4 +1,5 @@
 from random import randint
+import os
 from playwright.sync_api import Page, expect
 import allure
 from faker import Faker
@@ -74,69 +75,61 @@ class CreateAnnouncement:
 
     @allure.step("Создаём объявление")
     def fill_submit_new_announcement_form(self):
-        import os
-        tree = os.path.abspath('..')
-        print('11aaa', tree)
-        data_f = os.walk(r'../Data/upload_files')
-        print('12aaa', list([x[0] for x in data_f]))
-        new_path = os.path.join(tree, 'Data', 'upload_files', 'silver_angel.png')
-        print('13aaa', new_path)
-
         # locators
-        # fio_field = self.page.locator("#id_name")
-        # body_field = self.page.locator("#id_description")
-        # photo_field = self.page.locator("#id_photo")
-        # subject_category_dropdown = self.page.locator("#id_category")
-        # experience_field = self.page.locator("#id_years_of_experience")
-        # education_checkbox = self.page.locator("#id_has_degree")
-        # price_field = self.page.locator("#id_price")
-        # duration_field = self.page.locator("#id_class_duration")
-        # free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
-        # phone_field = self.page.locator("#id_phone")
-        # telegram_field = self.page.locator("#id_telegram")
-        # email_field = self.page.locator("#id_email")
-        # save_button = self.page.locator("button", has_text="Сохранить")
-        #
-        # # values
-        # fio_value = f"{fake.first_name()} {fake.last_name()}"
-        # body_value = fake.text(500)
-        # photo_value = "/Data/upload_files/silver_angel.png"
-        #
-        # experience_value = randint(0, 120) / 10
-        # price_value = randint(100, 1000)
-        # duration_value = randint(10, 120)
-        # phone_value = fake.phone_number()
-        # telegram_value = fake.word()
-        # email_value = fake.email()
-        #
-        # # logic
-        # fio_field.fill(fio_value)
-        # body_field.fill(body_value)
-        # photo_field.set_input_files(files=[photo_value])
-        # category_selected_option = self.select_random_dropdown_option(
-        #     subject_category_dropdown
-        # )["text"]
-        # experience_field.fill(str(experience_value))
-        # education_checkbox.check()
-        # price_field.fill(str(price_value))
-        # duration_field.fill(str(duration_value))
-        # free_first_lesson_checkbox.check()
-        # phone_field.fill(phone_value)
-        # telegram_field.fill(telegram_value)
-        # email_field.fill(email_value)
-        # save_button.click()
-        #
-        # return {
-        #     "fio_value": fio_value,
-        #     "body_value": body_value,
-        #     "photo_value": photo_value,
-        #     "category_value": category_selected_option,
-        #     "experience_value": experience_value,
-        #     "education_checkbox": True,
-        #     "price_value": price_value,
-        #     "duration_value": duration_value,
-        #     "free_first_lesson_checkbox": True,
-        #     "phone_value": phone_value,
-        #     "telegram_value": telegram_value,
-        #     "email_value": email_value,
-        # }
+        fio_field = self.page.locator("#id_name")
+        body_field = self.page.locator("#id_description")
+        photo_field = self.page.locator("#id_photo")
+        subject_category_dropdown = self.page.locator("#id_category")
+        experience_field = self.page.locator("#id_years_of_experience")
+        education_checkbox = self.page.locator("#id_has_degree")
+        price_field = self.page.locator("#id_price")
+        duration_field = self.page.locator("#id_class_duration")
+        free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
+        phone_field = self.page.locator("#id_phone")
+        telegram_field = self.page.locator("#id_telegram")
+        email_field = self.page.locator("#id_email")
+        save_button = self.page.locator("button", has_text="Сохранить")
+
+        # values
+        fio_value = f"{fake.first_name()} {fake.last_name()}"
+        body_value = fake.text(500)
+        photo_path = os.path.join('..', 'Data', 'upload_files', 'silver_angel.png')
+
+        experience_value = randint(0, 120) / 10
+        price_value = randint(100, 1000)
+        duration_value = randint(10, 120)
+        phone_value = fake.phone_number()
+        telegram_value = fake.word()
+        email_value = fake.email()
+
+        # logic
+        fio_field.fill(fio_value)
+        body_field.fill(body_value)
+        photo_field.set_input_files(files=[photo_path])
+        category_selected_option = self.select_random_dropdown_option(
+            subject_category_dropdown
+        )["text"]
+        experience_field.fill(str(experience_value))
+        education_checkbox.check()
+        price_field.fill(str(price_value))
+        duration_field.fill(str(duration_value))
+        free_first_lesson_checkbox.check()
+        phone_field.fill(phone_value)
+        telegram_field.fill(telegram_value)
+        email_field.fill(email_value)
+        save_button.click()
+
+        return {
+            "fio_value": fio_value,
+            "body_value": body_value,
+            "photo_value": photo_path,
+            "category_value": category_selected_option,
+            "experience_value": experience_value,
+            "education_checkbox": True,
+            "price_value": price_value,
+            "duration_value": duration_value,
+            "free_first_lesson_checkbox": True,
+            "phone_value": phone_value,
+            "telegram_value": telegram_value,
+            "email_value": email_value,
+        }
