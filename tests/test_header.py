@@ -103,7 +103,7 @@ def test_statistics_button_is_visible(header, login, register):
 def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
-    header.click_on_statistics_button()
+    header.click_statistics_button()
 
 
 # TC_11.004.001.001 | Header - Teacher > "Выйти" - button is not available when user don't logined
