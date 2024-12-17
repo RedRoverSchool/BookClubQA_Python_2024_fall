@@ -1,7 +1,7 @@
-from random import randint
-from playwright.sync_api import Page, expect
 import allure
+from random import randint
 from faker import Faker
+from playwright.sync_api import Page, expect
 
 fake = Faker()
 
