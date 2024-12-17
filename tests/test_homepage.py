@@ -1,6 +1,5 @@
 import pytest
 
-
 def test_homepage_info_is_same_after_reload(homepage, register):
     homepage.visit()
     main_page_info_before_reload = homepage.check_info_main_page()
@@ -74,3 +73,10 @@ def test_find_tutor_btn_2_redirection(homepage):
         url
         == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
     )
+
+def test_find_tutor_button_visibility_as_student(homepage, header, register, login):
+    homepage.visit()
+    header.click_registration_button()
+    register.registration_new_user('student')
+    homepage.visit()
+    homepage.find_tutor_button_should_be_visible()
