@@ -92,16 +92,9 @@ class CreateAnnouncement:
 
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
-        body_value = fake.text(500)
-        cwd = os.path.abspath('')
+        body_value = fake.text(max_nb_chars=500)
         root_dir = os.environ.get('ROOT_DIR')
-        print('98aaa', root_dir)
         photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
-        print('97aaaa', photo_path)
-        print('100aaaa', cwd)
-        # tree = os.walk('')
-        # [print('101aaa', x[0]) for x in tree]
-
 
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
