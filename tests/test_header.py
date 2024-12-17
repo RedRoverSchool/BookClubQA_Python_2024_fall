@@ -95,11 +95,21 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
 def test_statistics_button_is_visible(header, login, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
+
 
 def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
     header.click_on_statistics_button()
+
+
+# TC_11.006.003 [Teacher] Header > My students(button) > "Мои студенты" button is not available when logged out
+def test_my_students_btn_is_not_visible_for_guests(header, homepage):
+    homepage.visit()
+    assert header.my_students_button_is_hidden() is True
+
+

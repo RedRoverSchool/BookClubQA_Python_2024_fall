@@ -117,3 +117,7 @@ class Header:
     @allure.step("Кликаем на кнопку 'Создать объявление' в хедере")
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
+
+    @allure.step("Проверяем отсутствие кнопки 'Мои студенты'")
+    def my_students_button_is_hidden(self):
+        return self.page.locator("//a[contains(text(), 'Мои студенты')]").is_hidden()
