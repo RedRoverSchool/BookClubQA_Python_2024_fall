@@ -3,6 +3,8 @@ from playwright.sync_api import Page, expect
 
 from core.settings import base_url
 
+profile_page = "http://testing.misleplav.ru/subscription/profile/"
+
 
 class Header:
     def __init__(self, page: Page):
@@ -43,7 +45,7 @@ class Header:
             "//a[contains(@class, 'btn') and text()='Поддержка']"
         )
         button.click()
-        expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
+        expect(self.page).to_have_url(profile_page)
 
     @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
     def hover_support_button_color_check(self):
@@ -65,7 +67,7 @@ class Header:
     def click_profile_button(self):
         button = self.page.get_by_test_id("profile")
         button.click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/profile/")
+        expect(self.page).to_have_url("http://testing.misleplav.ru/subscription/profile/")
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
@@ -118,7 +120,6 @@ class Header:
     def click_create_announcement_button(self):
         self.page.locator("a", has_text="Создать объявление").click()
 
-
     @allure.step("Проверяем отсутствие кнопки 'Выйти'")
     def check_logout_is_absent(self):
         """Проверка отстутствия кнопки 'Выйти' у незарегистрированного пользователя параметризацией
@@ -127,7 +128,6 @@ class Header:
         button = self.page.locator("//a[contains(@class, 'btn') and text()='Выйти']")
         expect(button).not_to_be_attached()
 
-        
     @allure.step("Проверяем наличие или отсутствие кнопки 'Мое объявление'")
     def check_my_announcement_button_visibility(self, should_be_visible=True):
         button = self.page.locator('a.btn.btn-outline-light:has-text("Мое объявление")')
@@ -137,4 +137,3 @@ class Header:
         else:
             button_count = button.count()
             assert button_count == 0, "Кнопка 'Мое объявление' присутствует на странице"
-

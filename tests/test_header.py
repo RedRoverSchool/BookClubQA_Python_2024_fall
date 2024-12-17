@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 
@@ -62,11 +63,9 @@ def test_hover_support_button_as_student(login, header):
     header.hover_support_button_color_check()
 
 
-@pytest.mark.skip("Need fix this test")
-def test_verify_redirection_on_profile_page(login, header):
-    header.visit()
-    header.click_login_button()
-    login.full_login("Garry", "Potter1$")
+def test_verify_redirection_on_profile_page(login, header, create_user, register):
+    register.select_role(is_teacher=True)
+    register.click_registration_button()
     header.click_profile_button()
     header.profile_button_should_be_visible()
 
