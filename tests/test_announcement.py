@@ -1,6 +1,5 @@
 import pytest
 import allure
-from playwright.sync_api import expect
 
 
 # NOTE Мб локатор не корректный(с абсолютным работает, но в ci упадет)
