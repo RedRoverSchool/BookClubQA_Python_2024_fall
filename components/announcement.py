@@ -100,3 +100,8 @@ class Announcement:
         current_url = self.page.url
         print(current_url)
         assert announcement_page_endpoint in current_url
+
+    @allure.step("Убедиться что имя в объявлении совпадает с заданным")
+    def verify_announcement_tutor_name(self, expected_name):
+        tutor_name_announcement = self.page.locator('h5').inner_text()
+        assert expected_name == tutor_name_announcement

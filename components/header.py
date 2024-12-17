@@ -137,3 +137,7 @@ class Header:
         else:
             button_count = button.count()
             assert button_count == 0, "Кнопка 'Мое объявление' присутствует на странице"
+
+    @allure.step("Кликаем кнопку 'Мое объявление'")
+    def click_my_announcement_button(self):
+        self.page.locator('a', has_text='Мое объявление').click()
