@@ -94,6 +94,9 @@ class CreateAnnouncement:
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(500)
         photo_path = os.path.join('..', 'Data', 'upload_files', 'silver_angel.png')
+        print('97aaaa', photo_path)
+        rrr = os.path.join('..')
+        print('100aaaa', rrr)
 
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
