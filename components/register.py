@@ -18,31 +18,35 @@ class Register:
             title_text
         )
 
-    @allure.step("Заполняем поле 'Придумайте ник'")
-    def fill_nick(self, nick):
-        self.page.get_by_placeholder("Придумайте ник").fill(nick)
+    @allure.step("Заполняем поле 'Почта'")
+    def fill_email(self, email):
+        self.page.locator("#id_email").fill(email)
 
-    @allure.step("Заполняем поле 'Придумайте пароль'")
+    @allure.step("Заполняем поле 'Имя'")
+    def fill_nick(self, name):
+        self.page.locator("#id_first_name").fill(name)
+
+    @allure.step("Заполняем поле 'Пароль'")
     def fill_password(self, password):
-        self.page.get_by_placeholder("Придумайте пароль").fill(password)
+        self.page.locator("#id_password1").fill(password)
 
-    @allure.step("Заполняем поле 'Подтвердите пароль'")
+    @allure.step("Заполняем поле 'Подтверждение пароля'")
     def fill_confirm_password(self, password):
-        self.page.get_by_placeholder("Подтвердите пароль").fill(password)
+        self.page.locator("#id_password2").fill(password)
 
-    @allure.step("Кликаем на кнопку 'Я преподаватель'")
-    def click_on_become_a_teacher_button(self):
+    @allure.step("Включаем флаг 'Я преподаватель'")
+    def check_become_a_teacher_checkbox(self):
         self.page.locator("#id_is_tutor").check()
 
     @allure.step("Кликаем на кнопку 'Зарегистрироваться'")
-    def click_on_registration_button(self):
-        self.page.get_by_test_id("submit-button").click()
+    def click_registration_button(self):
+        self.page.locator("button", has_text="Зарегистрироваться").click()
 
     @allure.step("Проверяем, что страница регистрации открыта")
     def verify_registration_page_opened(self):
         registration_title = self.page.locator("h1").inner_text()
         assert (
-                registration_title == "Регистрация"
+            registration_title == "Регистрация"
         ), f"Ожидался заголовок 'Регистрация', но найдено: {registration_title}"
 
     @allure.step("Создаем случайный пароль")
@@ -62,8 +66,8 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'username'")
     def check_username_placeholder_text(self):
         assert (
-                self.page.locator("#id_username").get_attribute(
-                    "placeholder") == constants.REGISTER_USERNAME_PLACEHOLDER_TEXT
+            self.page.locator("#id_username").get_attribute("placeholder")
+            == constants.REGISTER_USERNAME_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'username' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password1'")
@@ -79,8 +83,8 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password1'")
     def check_password1_placeholder_text(self):
         assert (
-                self.page.locator("#id_password1").get_attribute(
-                    "placeholder") == constants.REGISTER_PASSWORD1_PLACEHOLDER_TEXT
+            self.page.locator("#id_password1").get_attribute("placeholder")
+            == constants.REGISTER_PASSWORD1_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password1' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password2'")
@@ -96,18 +100,55 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password2'")
     def check_password2_placeholder_text(self):
         assert (
-                self.page.locator("#id_password2").get_attribute(
-                    "placeholder") == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
+            self.page.locator("#id_password2").get_attribute("placeholder")
+            == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password2' field"
 
-    @allure.step('Регистрируем преподавателя')
+    @allure.step("Регистрируем преподавателя")
     def registration_as_tutor(self, header, register):
         header.visit()
-        header.click_on_registration_button()
+        header.click_registration_button()
         register.header_should_contain_text("Регистрация")
+        register.fill_email(fake.email())
         register.fill_nick(fake.user_name())
         register.fill_password("sdjflsfdjlksdjflksdjf")
         register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
-        register.click_on_become_a_teacher_button()
-        register.click_on_registration_button()
+        register.check_become_a_teacher_checkbox()
+        register.click_registration_button()
         header.create_listing_button_should_be_visible()
+
+    @allure.step("Регистрируем пользователя с генерацией данных")
+    def registration_new_user(self, user_type):
+        if user_type == "tutor":
+            self.check_become_a_teacher_checkbox()
+        if user_type not in ["tutor", "student"]:
+            assert False, "Wrong user type"
+        name = fake.user_name()
+        email = fake.email()
+
+        self.generate_valid_password()
+        self.fill_email(email)
+        self.fill_nick(name)
+        self.fill_password(self.password)
+        self.fill_confirm_password(self.password)
+        self.click_registration_button()
+        return {"name": name, "password": self.password, "email": email}
+
+    # NOTE: Оставлю пока еще одну регистрацию, через фикстуру
+    def select_role(self, is_teacher=None):
+        checkbox = self.page.locator("#id_is_tutor")
+        expect(checkbox).to_be_visible()
+        if is_teacher is None:
+            return
+        if is_teacher:
+            if not checkbox.is_checked():
+                checkbox.check()
+
+    @allure.step("Заполняет все поля и отправляет форму")
+    def complete_registration(self, fake_data):
+        self.fill_email(fake_data["email"])
+        self.fill_nick(fake_data["name"])
+        self.fill_password(fake_data["password"])
+        self.fill_confirm_password(fake_data["password"])
+
+        return fake_data

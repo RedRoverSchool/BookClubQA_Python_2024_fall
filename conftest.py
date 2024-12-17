@@ -2,8 +2,8 @@ import os
 
 import allure
 import pytest
+from faker import Faker
 from pytest import Item
-
 from components.announcement import Announcement
 from components.find_tutor import FindTutor
 from components.header import Header
@@ -121,10 +121,36 @@ def browser_context():
 def cookie_banner(page: Page):
     return CookieBanner(page)
 
+
 @pytest.fixture
 def announcement(page: Page):
     return Announcement(page)
 
+
 @pytest.fixture
 def create_announcement_page(page: Page):
     return CreateAnnouncement(page)
+
+
+@pytest.fixture(scope="function")
+def fake_data():
+    fake = Faker()
+    data = {
+        "email": fake.email(),
+        "name": fake.name(),
+        "password": fake.password(),
+    }
+    return data
+
+
+@pytest.fixture(scope="function")
+def create_user(fake_data, header, register):
+    # Выполняем регистрацию
+    header.visit()
+    header.click_registration_button()
+    user_data = register.complete_registration(fake_data)
+
+    # Печатаем email и пароль из возвращаемого user_data
+    print(f"Email: {user_data['email']}")
+    print(f"Password: {user_data['password']}")
+    return user_data
