@@ -109,6 +109,7 @@ class Register:
         header.visit()
         header.click_registration_button()
         register.header_should_contain_text("Регистрация")
+        register.fill_email(fake.email())
         register.fill_nick(fake.user_name())
         register.fill_password("sdjflsfdjlksdjflksdjf")
         register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
