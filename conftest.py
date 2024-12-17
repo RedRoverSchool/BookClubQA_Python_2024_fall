@@ -136,9 +136,9 @@ def create_announcement_page(page: Page):
 def fake_data():
     fake = Faker()
     data = {
-        'email': fake.email(),
-        'name': fake.name(),
-        'password': fake.password(),
+        "email": fake.email(),
+        "name": fake.name(),
+        "password": fake.password(),
     }
     return data
 
@@ -154,4 +154,3 @@ def create_user(fake_data, header, register):
     print(f"Email: {user_data['email']}")
     print(f"Password: {user_data['password']}")
     return user_data
-

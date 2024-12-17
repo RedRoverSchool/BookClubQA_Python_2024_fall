@@ -1,4 +1,3 @@
-
 import pytest
 
 
@@ -48,18 +47,17 @@ def test_support_visibility_as_student(login, header):
     header.support_button_should_be_visible()
 
 
-def test_support_clickability_as_student(login, header):
+def test_support_clickability_as_student(register, login, header):
     header.visit()
-    header.click_login_button()
-    login.full_login("student_test", "]<c%ZTHH8EZ3L–+")
+    header.click_registration_button()
+    register.registration_new_user("student")
     header.click_support_button()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024, возможно надо увеличить таймаут")
-def test_hover_support_button_as_student(login, header):
+def test_hover_support_button_as_student(register, login, header):
     header.visit()
-    header.click_login_button()
-    login.full_login("student_test", "]<c%ZTHH8EZ3L–+")
+    header.click_registration_button()
+    register.registration_new_user("student")
     header.hover_support_button_color_check()
 
 

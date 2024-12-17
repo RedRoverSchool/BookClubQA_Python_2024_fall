@@ -45,7 +45,7 @@ class Header:
             "//a[contains(@class, 'btn') and text()='Поддержка']"
         )
         button.click()
-        expect(self.page).to_have_url(profile_page)
+        expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
 
     @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
     def hover_support_button_color_check(self):
@@ -67,7 +67,7 @@ class Header:
     def click_profile_button(self):
         button = self.page.get_by_test_id("profile")
         button.click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/subscription/profile/")
+        expect(self.page).to_have_url(profile_page)
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
@@ -124,7 +124,7 @@ class Header:
     def check_logout_is_absent(self):
         """Проверка отстутствия кнопки 'Выйти' у незарегистрированного пользователя параметризацией
         для всех доступных страниц
-            """
+        """
         button = self.page.locator("//a[contains(@class, 'btn') and text()='Выйти']")
         expect(button).not_to_be_attached()
 
