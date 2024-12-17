@@ -97,6 +97,9 @@ class CreateAnnouncement:
         photo_path = os.path.join(cwd, 'Data', 'upload_files', 'silver_angel.png')
         print('97aaaa', photo_path)
         print('100aaaa', cwd)
+        tree = os.walk('..')
+        print('101aaa', ([x[0] for x in tree]))
+
 
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
