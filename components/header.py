@@ -142,3 +142,18 @@ class Header:
     def my_students_button_is_hidden(self):
         return self.page.locator("//a[contains(text(), 'Мои студенты')]").is_hidden()
 
+    @allure.step("Проверяем видимость кнопки 'Мои студенты'")
+    def my_students_button_is_visible(self):
+        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        return my_students_btn.is_visible()
+
+    @allure.step("Кликаем на кнопку 'Мои студенты'")
+    def click_my_students_btn(self):
+        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        my_students_btn.click()
+        url = self.page.url
+        return url
+
+
+
+

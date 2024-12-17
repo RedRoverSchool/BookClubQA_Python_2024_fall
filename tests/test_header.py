@@ -119,3 +119,13 @@ def test_header_logout_is_absent(header):
 def test_my_students_btn_is_not_visible_for_guests(header, homepage):
     homepage.visit()
     assert header.my_students_button_is_hidden() is True
+
+
+# TC_11.006.005 [Teacher] Header > My students(button) > "Мои студенты" button is not available for students
+def test_my_students_btn_is_not_visible_for_students(register, header, homepage):
+    header.visit()
+    header.click_registration_button()
+    register.select_role(is_teacher=None)
+    register.registration_new_user(user_type='student')
+    assert header.my_students_button_is_hidden() is True
+
