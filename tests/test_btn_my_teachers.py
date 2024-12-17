@@ -5,6 +5,7 @@ from components.my_teachers import MyTeachersPage
 
 # AT_32.001.001.001 | Student > My teachers> Viewing My Teachers List > Navigate to the "My Teachers" Page
 
+
 def test_my_teachers_btn_exists(header, register, page: Page):
     """Проверка наличия кнопки 'Мои репетиторы'."""
     header.visit()

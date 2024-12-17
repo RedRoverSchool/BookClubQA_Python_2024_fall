@@ -94,9 +94,11 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
 def test_statistics_button_is_visible(header, login, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
+
 
 def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)

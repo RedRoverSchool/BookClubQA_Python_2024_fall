@@ -57,8 +57,6 @@ class FindTutor:
             self.page.wait_for_load_state()
             all_tutors_math += self.page.get_by_role("heading", name="Математика").count()
 
-        print(all_tutors_math)
-
         self.page.get_by_label("Категория").select_option('Математика')
         self.page.get_by_role("button", name="Фильтровать").click()
         self.page.wait_for_load_state()
@@ -69,5 +67,4 @@ class FindTutor:
             self.page.wait_for_load_state()
             all_tutors_math_filtered += self.page.get_by_role("heading", name="Математика").count()
 
-        print(all_tutors_math_filtered)
         assert all_tutors_math == all_tutors_math_filtered
