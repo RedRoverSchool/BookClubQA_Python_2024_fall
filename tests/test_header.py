@@ -94,9 +94,11 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
 def test_statistics_button_is_visible(header, login, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
+
 
 def test_verify_redirection_on_statistics_page(login, header, register):
     register.registration_as_tutor(header, register)
@@ -111,3 +113,9 @@ def test_header_logout_is_absent(header):
     """
     header.visit()
     header.check_logout_is_absent()
+
+
+def test_filter_tutor_by_category(header, find_tutor):
+    header.visit()
+    header.click_find_tutor_button()
+    find_tutor.check_filter_form()
