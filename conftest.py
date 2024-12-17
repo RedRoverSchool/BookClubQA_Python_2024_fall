@@ -118,10 +118,10 @@ def browser_context():
 
 @pytest.fixture(autouse=True)
 def set_root_dir():
-    ci_root_dir = 'BookClubQA_Python_2024_fall'
-    print('44aaa', os.environ)
-    is_ci = os.environ.get("CI_RUN", False)
-    os.environ['ROOT_DIR'] = ci_root_dir if is_ci else '..'
+    ci_root_dir = os.environ.get('GITHUB_WORKSPACE', False)
+    # print('44aaa', os.environ)
+    # is_ci = os.environ.get("CI_RUN", False)
+    os.environ['ROOT_DIR'] = ci_root_dir or '..'
 
 @pytest.fixture
 def cookie_banner(page: Page):
