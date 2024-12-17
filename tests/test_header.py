@@ -1,4 +1,4 @@
-import allure
+
 import pytest
 
 
