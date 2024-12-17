@@ -18,8 +18,11 @@ def test_create_announcement(login, header, announcement, register):
     announcement.add_contact_info()
     announcement.click_create_announcement_btn()
 
+
 # AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement > Verify the announcement is not created when the empty form is submitted
-def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page):
+def test_teacher_announcement_blank_form_same_endpoint(
+    header, register, my_teachers, create_announcement_page
+):
     header.visit()
     header.click_on_registration_button()
 
@@ -36,8 +39,11 @@ def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teac
     create_announcement_page.click_finalize_announcement_button()
     create_announcement_page.verify_create_announcement_page_endpoint()
 
+
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement > Verify the number of announcements remains zero when an empty form is submitted
-def test_teacher_announcement_blank_form(header, register, my_teachers, create_announcement_page, announcement):
+def test_teacher_announcement_blank_form(
+    header, register, my_teachers, create_announcement_page, announcement
+):
     header.visit()
     header.click_on_registration_button()
 
