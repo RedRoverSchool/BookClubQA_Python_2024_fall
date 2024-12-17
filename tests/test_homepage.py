@@ -25,7 +25,9 @@ def test_homepage_info(homepage, register):
     homepage.check_professional_tools_for_collaboration_card_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024. Ругается на teardown теста")
+@pytest.mark.skip(
+    reason="не прошёл CI после изменений 16.12.2024. Ругается на teardown теста"
+)
 def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_top()
@@ -33,8 +35,7 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
-@pytest.mark.skip(
-    reason="не прошёл CI после изменений 16.12.2024. ")
+@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024. ")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     """
     CI Ругается на ERROR tests/test_homepage.py::test_more_btn_redirects_telegram_page_for_tutors[chromium] -
@@ -60,10 +61,16 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_redirection()
-    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+    assert (
+        url
+        == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+    )
 
 
 def test_find_tutor_btn_2_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_2_redirection()
-    assert url == 'http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/'
+    assert (
+        url
+        == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+    )
