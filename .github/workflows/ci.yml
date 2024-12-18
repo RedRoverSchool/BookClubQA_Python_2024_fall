@@ -1,0 +1,112 @@
+# For more information see:
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python
+# https://github:com/actions/upload-artifact
+# https://github.com/actions/checkout
+# https://github.com/actions/setup-python
+# https://github.com/peaceiris/actions-gh-pages
+# https://github.com/peaceiris/actions-gh-pages/releases/tag/v4.0.0
+name: CI - BookClubQA
+
+on:
+  pull_request:
+    branches: [ main ]  # Запускать workflow при пуше в ветку main
+
+jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+
+      # Настройки Python
+      - name: Set up Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version: "3.12"  # Установка нужной версии Python
+
+        # Установка зависимостей из requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip  # Обновление pip
+          pip install -r requirements.txt  
+
+      - name: Verify installed packages
+        run: pip freeze
+
+      # Установка необходимых браузеров Playwright Chrome.
+      - name: Install Playwright browsers
+        run: |
+          python -m playwright install chromium
+
+      #Установка линтера Ruff
+      - name: Install the code linting and formatting tool Ruff
+        run: pip install ruff
+
+      # Проверка форматирования кода Ruff
+      - name: Lint code with Ruff
+        run: ruff check --output-format=github --target-version=py312
+
+      - name: Check code formatting with Ruff
+        run: ruff format --diff --no-cache --target-version=py312
+        continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
+
+        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
+      - name: Run tests
+        run: |
+          pytest -s --alluredir=allure-results --disable-warnings -q
+        env:
+          PYTHONDONTWRITEBYTECODE: 1
+          PYTHONUNBUFFERED: 1
+
+      - name: Get Allure history
+        uses: actions/checkout@v4.2.2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate allure report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+#        id: allure-report
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          allure_report: allure-report
+          gh_pages: gh-pages
+          ref: gh-pages
+          path: gh-pages
+          keep_reports: 30
+
+      - name: Commit (Deploy) allure_report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          publish_dir: allure-history
+
+
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Upload test file
+#        run: cp /Data/upload_files/silver_angel.png $GITHUB_WORKSPACE/Data/upload_files/silver_angel.png
+      # Сохранение логов как артефактов в случае сбоя
+      - name: Save test logs
+        if: failure()
+        run: |
+          pytest --log-cli-level=INFO --capture=tee-sys --disable-warnings > pytest.log || true
+        shell: bash
+
+        # Загрузка логов как артефактов(в случаем сбоя)
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: pytest-logs
+          path: pytest.log
