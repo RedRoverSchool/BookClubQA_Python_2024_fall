@@ -46,35 +46,23 @@ def test_teacher_announcement_blank_form(
 
 # TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisibile.
 # Check that option “Сделать объявление невидимым для учеников” switches to the option "Сделать объявление видимым для учеников" and Teacher's announcement became invisibile from the list.
-def test_teacher_hiding_announcement(header, login, announcement):
+def thttps://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/tree/KP/TC_15.001.005.001est_teacher_hiding_announcement(header, login, announcement):
+    header.visit()
+    header.click_login_button()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    announcement.click_my_announcement_button()
+    announcement.click_make_announcement_visible()
+    announcement.check_button_text_visible()
+
+    # Removed try block for check_teacher_announcement_invisible
     try:
-        header.visit()
-        header.click_login_button()
-        login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
-        announcement.click_my_announcement_button()
-        announcement.click_make_announcement_visible()
-        announcement.check_button_text_visible()
-        
-        try:
-            announcement.check_teacher_announcement_invisible()
-        except Exception as e:
-            allure.attach(
-                str(e),
-                name="Error in check_teacher_announcement_invisible",
-                attachment_type=allure.attachment_type.TEXT
-            )
-        finally:
-            
-            announcement.click_my_announcement_button()
-            announcement.click_make_announcement_invisible()
-            announcement.check_button_text_invisible()
-            
+        announcement.check_teacher_announcement_invisible()
     except Exception as e:
-        raise  
+        print(f"Error in check_teacher_announcement_invisible: {e}")
 
-    finally:
-        pass
-
+    announcement.click_my_announcement_button()
+    announcement.click_make_announcement_invisible()
+    announcement.check_button_text_invisible()
 
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
 def test_teacher_announcement_name(
