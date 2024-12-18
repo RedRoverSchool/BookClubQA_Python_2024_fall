@@ -1,5 +1,6 @@
 import allure
 from playwright.sync_api import Page, expect
+from core.settings import list_url
 
 
 class Announcement:
@@ -100,3 +101,63 @@ class Announcement:
         current_url = self.page.url
         print(current_url)
         assert announcement_page_endpoint in current_url
+
+
+    @allure.step("Кликаем на кнопку 'Мое объявление' в хедере")
+    def click_my_announcement_button(self):
+        self.page.locator("a", has_text="Мое объявление").click()
+        expect(self.page).to_have_url(
+            "http://testing.misleplav.ru/listings/my_listing/"
+        )
+
+    @allure.step("Кликаем на кнопку 'Сделать объявление видимым для учеников'")
+    def click_make_announcement_invisible(self):
+        self.page.get_by_role("link", name="Сделать обьявление видимым для учеников").click()
+    
+
+    @allure.step("Проверяем изменение текста кнопки на 'Сделать объявление невидимым для учеников'")
+    def check_button_text_invisible(self):
+        expect(self.page.get_by_role("main")).to_contain_text("Сделать обьявление невидимым для учеников")
+    
+    @allure.step("Кликаем на кнопку 'Сделать объявление невидимым для учеников'")
+    def click_make_announcement_visible(self):
+        self.page.get_by_role("link", name="Сделать обьявление невидимым для учеников").click()
+    
+
+    @allure.step("Проверяем изменение текста кнопки на 'Сделать объявление невидимым для учеников'")
+    def check_button_text_visible(self):
+        expect(self.page.get_by_role("main")).to_contain_text("Сделать обьявление видимым для учеников")
+    
+
+    @allure.step("Проходим по всему списку обьявлений и проверяем, что карточки с именем учителя нет")
+    def check_teacher_announcement_invisible(self):
+        self.page.get_by_role("link", name="Мое объявление").click()
+        self.page.get_by_role("link", name="Редактировать").click()
+        name_field = self.page.get_by_label("ФИО*")
+        teacher_name = name_field.input_value()
+        print("teacher_name",teacher_name)
+        self.page.goto(list_url)
+
+        current_page = 1
+        teacher_found = False
+        while True:
+            allure.step(f"Проверяем страницу {current_page}")
+            if self.page.get_by_text(teacher_name, exact=True).count()>0:
+                teacher_found = True
+                break
+
+            next_button = self.page.get_by_role("link", name="Вперед").first         
+            if not next_button.is_visible():
+                break
+                
+            self.page.get_by_role("link", name="Вперед").click()
+            self.page.wait_for_load_state("networkidle")
+            current_page += 1
+
+        assert not teacher_found, f"Объявление с именем '{teacher_name}' найдено!"
+
+    @allure.step("Убедиться что имя в объявлении совпадает с заданным")
+    def verify_announcement_tutor_name(self, expected_name):
+        tutor_name_announcement = self.page.locator('h5').inner_text()
+        assert expected_name == tutor_name_announcement
+
