@@ -1,6 +1,9 @@
 import allure
 from playwright.sync_api import Page
 from core.settings import list_url, tutors_list_url
+from faker import Faker
+
+fake = Faker()
 
 
 class FindTutor:
@@ -111,3 +114,8 @@ class FindTutor:
         filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
         filter_btn.click()
         assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price=')
+
+    @allure.step('Добавляем случайную минимальную цену')
+    def add_random_min_price(self, fake):
+        min_price = fake.random_int(min=1, max=1000)
+        self.page.locator('#minPrice').fill(str(min_price))
