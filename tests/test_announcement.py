@@ -46,7 +46,7 @@ def test_teacher_announcement_blank_form(
 
 # TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisibile.
 # Check that option “Сделать объявление невидимым для учеников” switches to the option "Сделать объявление видимым для учеников" and Teacher's announcement became invisibile from the list.
-def thttps://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/tree/KP/TC_15.001.005.001est_teacher_hiding_announcement(header, login, announcement):
+def test_teacher_hiding_announcement(header, login, announcement):
     header.visit()
     header.click_login_button()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
