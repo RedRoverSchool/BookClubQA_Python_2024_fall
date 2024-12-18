@@ -100,3 +100,14 @@ class FindTutor:
             # Если список репетиторов пустой, то проверяем сообщение
             text = self.page.locator("//div[@class='alert alert-info']").text_content()
             assert "Нет результатов", text
+
+    @allure.step('Проверяем видимость кнопки "Фильтровать"')
+    def check_filter_btn_is_visible(self):
+        filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Фильтровать"]')
+        assert filter_btn.is_visible()
+
+    @allure.step('Нажимаем на кнопку "Фильтровать"')
+    def click_filter_btn(self):
+        filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
+        filter_btn.click()
+        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price=')
