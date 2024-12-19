@@ -54,9 +54,9 @@ class FindTutor:
 
     @allure.step("Закрываем сообщение об успешной регистрации")
     def close_success_registration_message(self):
-        self.page.click('//button[@class="btn-close"]')
-        # cross.wait_for(state='visible')
-        # cross.click()
+        self.page.wait_for_load_state('load')
+        self.page.locator('//button[@class="btn-close"]').click()
+        
 
     @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
     def check_success_registration_message_invisible(self):
