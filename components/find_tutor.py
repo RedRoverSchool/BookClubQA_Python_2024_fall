@@ -1,3 +1,4 @@
+import time
 import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
@@ -58,6 +59,7 @@ class FindTutor:
 
     @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
     def check_success_registration_message_invisible(self):
+        time.sleep(1)
         expect(self.page.locator("//div[@role='alert']")).not_to_be_visible()
 
   
