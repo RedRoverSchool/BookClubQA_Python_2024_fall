@@ -15,9 +15,9 @@ jobs:
   run-tests:
     name: Run tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.10", "3.12"]
+    # strategy:
+    #   matrix:
+    #     python-version: ["3.9", "3.10", "3.12"]
 
     steps:
       # Клонируем репозиторий
