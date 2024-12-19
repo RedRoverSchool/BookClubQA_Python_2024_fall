@@ -224,7 +224,7 @@ class Homepage:
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
-    def click_on_registration_button(self):
+    def click_registration_button(self):
         self.page.get_by_test_id("signup").click()
 
     @allure.step("Проверка доступности первой кнопки стать репетиром")
@@ -233,3 +233,25 @@ class Homepage:
             '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
         )
         assert become_tutor_btn.is_enabled()
+
+    @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
+    def check_find_tutor_btn_redirection(self):
+        button_2 = self.page.locator(
+            "//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']"
+        )
+        button_2.click()
+        find_tutor_btn_redirection = self.page.url
+        return find_tutor_btn_redirection
+
+    def check_find_tutor_btn_2_redirection(self):
+        button_3 = self.page.wait_for_selector(
+            ".btn.btn-light.me-2.rounded.d-none.d-md-inline.btn-lg", state="visible"
+        )
+        button_3.click()
+        find_tutor_btn_2_redirection = self.page.url
+        return find_tutor_btn_2_redirection
+
+    @allure.step("Проверка видипости кнопки 'Найти репетитора'")
+    def find_tutor_button_should_be_visible(self):
+        button = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']")
+        assert button.is_visible()
