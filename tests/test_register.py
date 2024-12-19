@@ -47,6 +47,18 @@ def test_register_as_student_verify_success_message_text(
     find_tutor.check_message_of_registration(STUDENT_SUCCESS_REGISTRSTION_MESSAGE)
 
 
+
+
+# TC_04.001.003 | Guest > Registration > Create a user account for the guest > Verify closing success message
+def test_closing_success_message_after_registration_as_student(homepage, register, find_tutor):
+    """ Проверяет, что сообщение о регистрации закрывается после клика X иконки"""
+    homepage.visit()
+    homepage.click_registration_button()
+    register.registration_new_user('student')
+    find_tutor.close_success_registration_message()
+    find_tutor.check_success_registration_message_invisible()
+
+
 # TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
