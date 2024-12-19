@@ -29,3 +29,7 @@ def test_verify_tutors_after_entered_min_price_by_random(find_tutor):
     find_tutor.add_random_min_price(fake)
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(fake.random_int(min=1, max=1000))
+
+def test_verify_min_experience_field(find_tutor):
+    find_tutor.open_find_tutor_page()
+    find_tutor.check_min_exp_field_is_visible()
