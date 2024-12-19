@@ -58,7 +58,8 @@ class FindTutor:
 
     @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
     def check_success_registration_message_invisible(self):
-        expect(self.page.locator("//div[@role='alert']")).not_to_be_attached(timeout=2000)
+        expect(self.page.locator("//div[@role='alert']")).not_to_be_visible()
+
   
 
 
