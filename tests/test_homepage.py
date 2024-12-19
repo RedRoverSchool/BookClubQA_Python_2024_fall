@@ -34,13 +34,13 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024. ")
+# @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024. ")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
-    """
-    CI Ругается на ERROR tests/test_homepage.py::test_more_btn_redirects_telegram_page_for_tutors[chromium] -
-    playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
-
-    """
+    # """
+    # CI Ругается на ERROR tests/test_homepage.py::test_more_btn_redirects_telegram_page_for_tutors[chromium] -
+    # playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
+    #
+    # """
     homepage.visit()
     homepage.click_more_button_at_the_bottom()
     telegram_page.tutors_info_should_be_opened()
