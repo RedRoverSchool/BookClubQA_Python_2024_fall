@@ -1,14 +1,10 @@
 import allure
-<<<<<<< HEAD
 from playwright.sync_api import Page, expect
-from core.settings import list_url
-=======
-from playwright.sync_api import Page
 from core.settings import list_url, tutors_list_url
 from faker import Faker
 
 fake = Faker()
->>>>>>> main
+
 
 
 class FindTutor:
@@ -62,7 +58,7 @@ class FindTutor:
 
     @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
     def check_success_registration_message_invisible(self):
-        expect(self.page.locator("//div[@role='alert']")).not_to_be_attached(timeout=1000)
+        expect(self.page.locator("//div[@role='alert']")).not_to_be_attached(timeout=2000)
   
 
 

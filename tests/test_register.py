@@ -53,8 +53,8 @@ def test_register_as_student_verify_success_message_text(
 def test_closing_success_message_after_registration_as_student(homepage, register, find_tutor):
     """ Проверяет, что сообщение о регистрации закрывается после клика X иконки"""
     homepage.visit()
-    homepage.click_on_registration_button()
-    register.registration_as_student()
+    homepage.click_registration_button()
+    register.registration_new_user('student')
     find_tutor.close_success_registration_message()
     find_tutor.check_success_registration_message_invisible()
 
