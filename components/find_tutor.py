@@ -119,3 +119,8 @@ class FindTutor:
     def add_random_min_price(self, fake):
         min_price = fake.random_int(min=1, max=1000)
         self.page.locator('#minPrice').fill(str(min_price))
+
+    @allure.step('Проверяем видимость поля "Минимальный опыт преподавания')
+    def check_min_exp_field_is_visible(self):
+        min_exp_field = self.page.locator('//label[@for="minExperience" and contains(@class, "form-label") and text()="Минимальный опыт преподавания"]')
+        assert min_exp_field.is_visible()
