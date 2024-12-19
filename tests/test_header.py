@@ -131,6 +131,15 @@ def test_my_students_btn_is_not_visible_for_students(register, header, homepage)
     assert header.my_students_button_is_hidden() is True
 
 
+# TC_11.006.004 [Teacher] Header > My students(button) > "Мои студенты" button is not available when no announcement is created
+def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(register, header, homepage):
+    header.visit()
+    header.click_registration_button()
+    register.select_role(is_teacher=True)
+    register.registration_new_user(user_type='tutor')
+    assert header.my_students_button_is_hidden() is True
+
+
 def test_filter_tutor_by_category(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
