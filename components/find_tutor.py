@@ -1,4 +1,3 @@
-import time
 import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
@@ -57,7 +56,6 @@ class FindTutor:
     def close_success_registration_message(self):
         cross = self.page.locator('//button[@class="btn-close"]')
         cross.wait_for(state='visible')
-        time.sleep(3)
         cross.click()
 
     @allure.step("Проверяем отсутствие сообщения об успешной регистрации")
