@@ -109,6 +109,7 @@ class FindTutor:
         filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Фильтровать"]')
         assert filter_btn.is_visible()
 
+
     @allure.step('Нажимаем на кнопку "Фильтровать"')
     def click_filter_btn(self):
         filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
@@ -124,3 +125,10 @@ class FindTutor:
     def check_min_exp_field_is_visible(self):
         min_exp_field = self.page.locator('//label[@for="minExperience" and contains(@class, "form-label") and text()="Минимальный опыт преподавания"]')
         assert min_exp_field.is_visible()
+
+
+    @allure.step('Определяем случайную минимальную цену')
+    def set_random_min_price(self, fake, min_value: int, max_value: int):
+        min_price = fake.random_int(min=min_value, max=max_value)
+        return min_price
+

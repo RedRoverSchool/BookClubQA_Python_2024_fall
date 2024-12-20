@@ -157,4 +157,5 @@ class Header:
     @allure.step("Кликаем кнопку 'Мое объявление'")
     def click_my_announcement_button(self):
         self.page.locator('a', has_text='Мое объявление').click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/listings/my_listing/")
 

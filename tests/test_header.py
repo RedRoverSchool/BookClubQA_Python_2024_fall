@@ -96,7 +96,7 @@ def test_login_button_is_enabled(header):
     header.login_button_is_enabled()
 
 
-def test_statistics_button_is_visible(header, login, register):
+def test_statistics_button_is_visible(header, register):
     register.registration_as_tutor(header, register)
     header.statistics_button_is_visible()
 
