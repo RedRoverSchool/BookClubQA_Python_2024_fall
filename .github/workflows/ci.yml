@@ -38,7 +38,7 @@ jobs:
 
       - name: Verify installed packages
         run: pip freeze
-
+# Отслеживает, какой тест чаще всего не проходит 
       - name: Run tests and generate JUnit report
         run: |
           pytest --junitxml=report.xml
