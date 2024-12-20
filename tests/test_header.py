@@ -1,4 +1,5 @@
 import pytest
+from core.settings import site_pages_urls_for_guest
 
 
 def test_login_button_opens_login_page(header, login):
@@ -145,3 +146,11 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
+
+def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
+    # Iterate through all URLs defined for the Guest role
+    for page_url in site_pages_urls_for_guest:
+        header.page.goto(page_url)
+        home_btn = header.header_home_btn_is_present()
+
+        assert home_btn.is_visible(), f"Home button is not visible on the page: {page_url}"

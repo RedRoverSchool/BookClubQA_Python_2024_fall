@@ -159,3 +159,8 @@ class Header:
         self.page.locator('a', has_text='Мое объявление').click()
         expect(self.page).to_have_url("http://testing.misleplav.ru/listings/my_listing/")
 
+    @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
+    def header_home_btn_is_present(self):
+        # Locate the 'Мыслеплав' button in the header
+        header_home_btn = self.page.locator('//a[@data-testid="logo"]')
+        return header_home_btn
