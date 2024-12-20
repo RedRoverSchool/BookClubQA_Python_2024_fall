@@ -145,3 +145,10 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
+# TC_11.001.001.001 [Teacher] Header ... The "Создать объявление" button changes color on hover
+def test_create_listing_btn_changes_color_on_hover(register,header):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user('tutor')
+    colors = header.hover_create_listing_btn()
+    assert colors[0] != colors[1]
