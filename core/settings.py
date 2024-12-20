@@ -42,3 +42,5 @@ site_pages_urls = [
         "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/statistics/",
     },
 ]
+
+site_pages_urls_for_guest = [base_url, login_url, signup_url, list_url]

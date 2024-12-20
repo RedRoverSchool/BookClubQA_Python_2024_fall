@@ -1,9 +1,9 @@
 import allure
 from playwright.sync_api import Page, expect
-
 from core.settings import base_url
 
 profile_page = "http://testing.misleplav.ru/subscription/profile/"
+
 
 
 class Header:
@@ -157,4 +157,13 @@ class Header:
     @allure.step("Кликаем кнопку 'Мое объявление'")
     def click_my_announcement_button(self):
         self.page.locator('a', has_text='Мое объявление').click()
+
+
+    @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
+    def header_home_btn_is_present(self):
+        # Locate the 'Мыслеплав' button in the header
+        header_home_btn = self.page.locator('//a[@data-testid="logo"]')
+        return header_home_btn
+
+
 
