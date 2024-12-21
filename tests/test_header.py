@@ -1,4 +1,17 @@
 import pytest
+from api_clients.user_api import create_fake_user_with_role, delete_fake_user
+
+@pytest.fixture
+def fake_teacher():
+    user = create_fake_user_with_role("teacher")
+    yield user  # Передаем данные пользователя в тест
+    delete_fake_user(user["email"])  # Удаляем пользователя после теста
+
+@pytest.fixture
+def fake_student():
+    user = create_fake_user_with_role("student")
+    yield user  # Передаем данные пользователя в тест
+    delete_fake_user(user["email"])  # Удаляем пользователя после теста
 
 
 def test_login_button_opens_login_page(header, login):
@@ -25,40 +38,38 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     find_tutor.check_title_of_registration()
 
 
-def test_support_visibility_as_teacher(login, header):
+def test_support_visibility_as_teacher(login, header, fake_teacher):
     header.visit()
     header.click_login_button()
-    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    login.full_login(fake_teacher["email"], fake_teacher["password"])
     header.support_button_should_be_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
-def test_support_clickability_as_teacher(login, header):
+def test_support_clickability_as_teacher(login, header, fake_teacher):
     header.visit()
     header.click_login_button()
-    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    login.full_login(fake_teacher["email"], fake_teacher["password"])
     header.click_support_button()
 
 
-def test_support_visibility_as_student(login, header):
+def test_support_visibility_as_student(login, header, fake_student):
     header.visit()
     header.click_login_button()
-    login.full_login("student_test", "]<c%ZTHH8EZ3L–+")
+    login.full_login(fake_student["email"], fake_student["password"])
     header.support_button_should_be_visible()
 
 
-def test_support_clickability_as_student(register, login, header):
+def test_support_clickability_as_student(login, header, fake_student):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("student")
+    header.click_login_button()
+    login.full_login(fake_student["email"], fake_student["password"])
     header.click_support_button()
 
 
-@pytest.mark.skip(reason="не прошёл CI 17.12.2024")
-def test_hover_support_button_as_student(register, login, header):
+def test_hover_support_button_as_student(login, header, fake_student):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("student")
+    header.click_login_button()
+    login.full_login(fake_student["email"], fake_student["password"])
     header.hover_support_button_color_check()
 
 
