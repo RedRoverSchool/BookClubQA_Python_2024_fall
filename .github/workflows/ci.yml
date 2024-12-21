@@ -47,7 +47,7 @@ jobs:
       # Установка необходимых браузеров Playwright Chrome.
       - name: Install Playwright browsers
         run: |
-          python -m playwright install chromium
+          python -m playwright install 
 
       #Установка линтера Ruff
       - name: Install the code linting and formatting tool Ruff
