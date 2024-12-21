@@ -146,7 +146,7 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
-
+# TC_02.006.001.001_home_page_visible_all_pages_guest
 def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
     # Iterate through all URLs defined for the Guest role
     for page_url in site_pages_urls_for_guest:
@@ -154,3 +154,9 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         home_btn = header.header_home_btn_is_present()
 
         assert home_btn.is_visible(), f"Home button is not visible on the page: {page_url}"
+
+#TC_02.001.001.002 | Guest-Header > Sign in(button) > Verify background color of the button "Войти" is changed while hovering
+def test_login_button_change_color_on_hover(header):
+    header.visit()
+    header.hover_login_button_color_check()
+
