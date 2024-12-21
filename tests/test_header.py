@@ -145,3 +145,7 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
+#TC_02.001.001.002 | Guest-Header > Sign in(button) > Verify background color of the button "Войти" is changed while hovering
+def test_login_button_change_color_on_hover(header):
+    header.visit()
+    header.hover_login_button_color_check()
