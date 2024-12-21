@@ -40,9 +40,9 @@ jobs:
         run: pip freeze
         
 # Отслеживает, какой тест чаще всего не проходит 
-      # - name: Run tests and generate JUnit report
-      #   run: |
-      #     pytest --junitxml=report.xml
+      - name: Run tests and generate JUnit report
+        run: |
+          pytest --junitxml=report.xml
 
       # Установка необходимых браузеров Playwright Chrome.
       - name: Install Playwright browsers
