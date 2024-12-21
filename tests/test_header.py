@@ -1,4 +1,6 @@
 import pytest
+from core.settings import pages_urls_for_guest
+
 
 
 def test_login_button_opens_login_page(header, login):
@@ -149,3 +151,12 @@ def test_filter_tutor_by_category(header, find_tutor):
 def test_login_button_change_color_on_hover(header):
     header.visit()
     header.hover_login_button_color_check()
+
+# TC_02.006.001.001 | Guest - Header > "Мыслеплав" button redirects to the Home page > "Мыслеплав" button (Home button) in the header is visible
+def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
+    # Iterate through all the urls available for Guest
+    for page_url in pages_urls_for_guest:
+        header.page.goto(page_url)
+        home_btn = header.header_home_btn_is_present()
+
+        assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
