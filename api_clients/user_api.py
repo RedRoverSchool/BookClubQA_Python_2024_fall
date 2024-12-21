@@ -57,7 +57,7 @@ def create_fake_user_with_role(role: str) -> dict:
         end_subscription="2024-12-20"
     )
     created_user = create_user(user_data)
-    return {"email": user_data.email, "password": user_data.password, "role": role}
+    return {"email": created_user["email"], "password": created_user["password"], "role": role}
 
 
 def delete_fake_user(email: str):
