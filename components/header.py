@@ -169,5 +169,6 @@ class Header:
             "el => window.getComputedStyle(el).backgroundColor"
         )
         button.hover()
+
         expect(button).not_to_have_css("background-color", original_color)
 
