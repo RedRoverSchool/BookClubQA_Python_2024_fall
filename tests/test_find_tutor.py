@@ -25,3 +25,17 @@ def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     find_tutor.enter_min_price(min_price)
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(min_price)
+
+@allure.title("TC_05.001.005.003")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/251")
+def test_verify_tutors_after_entered_min_experience(find_tutor):
+    """
+    Проверка, что после ввода значения в поле "Минимальный опыт преподавания"
+    отображаются только репетиторы с опытом преподавания >= указанного значения.
+    """
+    min_experience = 5
+
+    find_tutor.open_find_tutor_page()
+    find_tutor.enter_min_experience(min_experience)
+    find_tutor.click_filter_button()
+    find_tutor.check_experience_over_min_value(min_experience)
