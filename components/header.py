@@ -163,6 +163,8 @@ class Header:
     def hover_create_listing_btn(self):
         button = self.page.get_by_test_id("create-listing")
         base_color = button.evaluate('el => getComputedStyle(el).backgroundColor')
+        print(f"Base color: {base_color}")
         button.hover()
         changed_color = button.evaluate('el => getComputedStyle(el).backgroundColor')
+        print(f"Changed color: {changed_color}")
         return base_color, changed_color
