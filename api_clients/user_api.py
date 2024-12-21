@@ -46,10 +46,11 @@ def create_fake_user_with_role(role: str) -> dict:
     :return: dict, данные созданного пользователя.
     """
     fake = Faker()
+    password = fake.password()
     user_data = RegisterRequest(
         first_name=fake.name(),
         email=fake.email(),
-        password=fake.password(),
+        password=password,
         is_tutor=role == "teacher",
         is_premium=role == "teacher",
         is_standart=role == "student",
@@ -57,7 +58,8 @@ def create_fake_user_with_role(role: str) -> dict:
         end_subscription="2024-12-20"
     )
     created_user = create_user(user_data)
-    return {"email": created_user["email"], "password": created_user["password"], "role": role}
+    return {"email": created_user["email"], "password": password, "role": role}
+
 
 
 def delete_fake_user(email: str):
