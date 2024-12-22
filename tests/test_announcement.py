@@ -81,3 +81,17 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
 
+# TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
+def test_teacher_announcement_name(
+        header, register, my_teachers, create_announcement_page, announcement
+):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("tutor")
+    header.click_create_announcement_button()
+
+    announcement_detail = create_announcement_page.fill_submit_new_announcement_form()
+    category = announcement_detail['category_value']
+    header.click_my_announcement_button()
+    announcement.click_view_announcement_button()
+    announcement.verify_announcement_category(category)
