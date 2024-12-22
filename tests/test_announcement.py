@@ -1,10 +1,7 @@
 import pytest
 
-
-@pytest.mark.skip("Need to be fixed")
-def test_create_announcement(
-    login, header, announcement, register, create_announcement_page
-):
+@pytest.mark.skip("Need to be fixed - TimeoutError")
+def test_create_announcement(header, announcement, register, create_announcement_page):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
@@ -77,4 +74,10 @@ def test_teacher_announcement_name(
     tutor_name = announcement_detail['fio_value']
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
+
+def test_redirection_to_my_announcement_page(header, announcement, login):
+    header.visit()
+    header.click_login_button()
+    login.full_login("matthewjackson@example.com", "dh8R4|(s")
+    header.click_my_announcement_button()
 
