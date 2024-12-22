@@ -44,3 +44,4 @@ site_pages_urls = [
 ]
 
 pages_urls_for_guest = [base_url, login_url, signup_url, list_url]
+home_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/"
