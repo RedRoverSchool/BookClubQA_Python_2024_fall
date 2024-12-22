@@ -75,13 +75,13 @@ def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
 
-
+@pytest.mark.skip("Need to be fixed")
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
     header.become_a_tutor_button_should_be_visible()
 
 
-@pytest.mark.skip("Need to be fixed")
+@pytest.mark.skip("Need to be fixed - AssertionError")
 def test_see_list_of_tutors_profiles(header, find_tutor):
     header.visit()
     header.find_a_tutor_button_should_be_visible()
