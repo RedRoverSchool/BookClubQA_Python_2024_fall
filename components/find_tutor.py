@@ -152,15 +152,20 @@ class FindTutor:
     def find_max_tutors_price(self):
         max_price = 0
 
-        while True:  # Начинаем с первой страницы, если имеются еще страницы, то заходим в цикл пока они не закончатся
+        while True:  # Начинаем поиск с первой страницы, если имеются еще страницы, то заходим в цикл пока они не закончатся
             teachers_list_price = self.page.locator(".card-text")
 
             if teachers_list_price.count() > 0:
                 # Если репетиторы есть, то ищем среди них того, чья стоимость занятия больше текущего максимума
                 for i in range(teachers_list_price.count()):
-                    current_price = int(teachers_list_price.nth(i).text_content().strip().split(" ")[1])
-                    if current_price > max_price:
-                        max_price = current_price
+                    text = teachers_list_price.nth(i).text_content().strip()
+                    if "Цена:" in text:
+                        try:
+                            current_price = int(text.split(" ")[1])
+                            if current_price > max_price:
+                                max_price = current_price
+                        except (IndexError, ValueError) as e:
+                            raise AssertionError(f"Failed to parse price from text: '{text}'. Error: {e}")
 
             forward_btn = self.page.get_by_text("Вперед")
             if forward_btn.is_visible():  # Если видна кнопка "Вперед", нажимаем на неё и продолжаем искать max стоимость занятия

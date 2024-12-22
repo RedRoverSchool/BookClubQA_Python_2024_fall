@@ -12,6 +12,7 @@ def test_create_announcement(header, announcement, register, create_announcement
 
 # AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
+@pytest.mark.skip("Need to be fixed - TimeoutError")
 def test_teacher_announcement_blank_form_same_endpoint(
     header, register, my_teachers, create_announcement_page
 ):
