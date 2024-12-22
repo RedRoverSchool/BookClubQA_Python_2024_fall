@@ -167,8 +167,8 @@ class FindTutor:
                     print(intro_without_first_word)
                     space_index = intro_without_first_word.index(" ")
                     print(f"Индекс {space_index}")
-                    print(intro_without_first_word[0:space_index+1])
-                    current_price = int(intro_without_first_word[0:space_index+1])
+                    print(intro_without_first_word[0:space_index])
+                    current_price = int(intro_without_first_word[0:space_index])
                     print(current_price)
                     if current_price > max_price:
                         max_price = current_price
