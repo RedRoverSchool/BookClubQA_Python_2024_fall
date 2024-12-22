@@ -82,7 +82,7 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
     header.click_my_announcement_button()
 
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
-def test_teacher_announcement_name(
+def test_teacher_announcement_category(
         header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
