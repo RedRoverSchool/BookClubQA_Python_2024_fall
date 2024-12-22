@@ -161,3 +161,11 @@ class Announcement:
         tutor_name_announcement = self.page.locator('h5').inner_text()
         assert expected_name == tutor_name_announcement
 
+    @allure.step("Кликаем кнопку 'Просмотреть'")
+    def click_view_announcement_button(self):
+        self.page.locator('a', has_text='Просмотреть').click()
+
+    @allure.step("Убедиться что категория в объявлении совпадает с заданной")
+    def verify_announcement_category(self, expected_category):
+        category_announcement = self.page.locator('section div:first-of-type div:below(:text("Категория"))').inner_text()
+        assert expected_category == category_announcement
