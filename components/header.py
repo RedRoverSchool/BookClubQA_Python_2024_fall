@@ -159,6 +159,15 @@ class Header:
         self.page.locator('a', has_text='Мое объявление').click()
         expect(self.page).to_have_url("http://testing.misleplav.ru/listings/my_listing/")
 
+    @allure.step("Наводим мышку на кнопку 'Создать объявление' и проверяем изменение цвета")
+    def hover_create_listing_btn(self):
+        button = self.page.get_by_test_id("create-listing")
+        base_color = button.evaluate('el => window.getComputedStyle(el).backgroundColor')
+        print(f"Base color: {base_color}")
+        button.hover()
+        changed_color = button.evaluate('el => window.getComputedStyle(el).backgroundColor')
+        print(f"Changed color: {changed_color}")
+        return base_color, changed_color
 
     @allure.step("Наводим мышку на кнопку 'Войти' и проверяем изменение цвета")
     def hover_login_button_color_check(self):

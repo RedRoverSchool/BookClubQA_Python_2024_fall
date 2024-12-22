@@ -147,6 +147,14 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
+# TC_11.001.001.001 [Teacher] Header ... The "Создать объявление" button changes color on hover
+def test_create_listing_btn_changes_color_on_hover(register,header):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user('tutor')
+    colors = header.hover_create_listing_btn()
+    assert colors[0] != colors[1]
+
 #TC_02.001.001.002 | Guest-Header > Sign in(button) > Verify background color of the button "Войти" is changed while hovering
 def test_login_button_change_color_on_hover(header):
     header.visit()
@@ -160,3 +168,4 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         home_btn = header.header_home_btn_is_present()
 
         assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
+
