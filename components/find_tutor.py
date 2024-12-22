@@ -114,3 +114,29 @@ class FindTutor:
     def set_random_min_price(self, fake, min_value: int, max_value: int):
         min_price = fake.random_int(min=min_value, max=max_value)
         return min_price
+
+    @allure.step("Вводим значение минимального опыта преподавания")
+    def enter_min_experience(self, min_experience: int):
+        experience_field = self.page.locator('#minExperience')
+        experience_field.wait_for(state="visible", timeout=3000)
+        assert experience_field.is_visible(), "The 'Minimum Teaching Experience' field is not visible."
+        assert experience_field.is_enabled(), "The 'Minimum Teaching Experience' field is not enabled."
+        experience_field.fill(str(min_experience))
+
+    @allure.step("Проверяем, что опыт преподавания репетиторов больше или равен заданному значению")
+    def check_experience_over_min_value(self, min_experience: int):
+        teachers_list_experience = self.page.locator(".card-text")
+        if teachers_list_experience.count() > 0:
+            for i in range(teachers_list_experience.count()):
+                text_content = teachers_list_experience.nth(i).text_content().strip()
+                if "Опыт:" in text_content:
+                    try:
+                        actual_experience = int(''.join(filter(str.isdigit, text_content.split("Опыт:")[1])))
+                        assert actual_experience >= min_experience, f"Found tutor with experience {actual_experience} < {min_experience}"
+                    except (IndexError, ValueError) as e:
+                        raise AssertionError(f"Failed to parse experience from text: '{text_content}'. Error: {e}")
+                else:
+                    continue
+        else:
+            text = self.page.locator("//div[@class='alert alert-info']").text_content().strip()
+            assert "Нет результатов" in text, f"Unexpected message: '{text}'"
