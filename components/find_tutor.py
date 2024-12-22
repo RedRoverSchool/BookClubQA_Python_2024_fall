@@ -161,14 +161,7 @@ class FindTutor:
             if teachers_list_price.count() > 0:
                 # Если репетиторы есть, то ищем среди них того, чья стоимость занятия больше текущего максимума
                 for i in range(teachers_list_price.count()):
-                    intro = teachers_list_price.nth(i).text_content().strip()
-                    print(intro)
-                    intro_without_first_word = intro.replace("Цена:", '').strip()
-                    print(intro_without_first_word)
-                    space_index = intro_without_first_word.index(" ")
-                    print(f"Индекс {space_index}")
-                    print(intro_without_first_word[0:space_index])
-                    current_price = int(intro_without_first_word[0:space_index])
+                    current_price = float(teachers_list_price.nth(i).text_content().strip().split(" ")[1])
                     print(current_price)
                     if current_price > max_price:
                         max_price = current_price
