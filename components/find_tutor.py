@@ -149,23 +149,24 @@ class FindTutor:
 
 
     @allure.step("В списке репетиторов на всех страницах находим максимальную цену за занятие")
-    def find_max_tutors_price(self):
+    def find_max_tutors_price(self) -> object:
         max_price = 0
+        page = 0
 
         while True:  # Начинаем поиск с первой страницы, если имеются еще страницы, то заходим в цикл пока они не закончатся
             teachers_list_price = self.page.locator(".card-text")
+            page += 1
+            print(f"Страница {page}, текущий максимум {max_price}")
 
             if teachers_list_price.count() > 0:
                 # Если репетиторы есть, то ищем среди них того, чья стоимость занятия больше текущего максимума
                 for i in range(teachers_list_price.count()):
-                    text = teachers_list_price.nth(i).text_content().strip()
-                    if "Цена:" in text:
-                        try:
-                            current_price = int(text.split(" ")[1])
-                            if current_price > max_price:
-                                max_price = current_price
-                        except (IndexError, ValueError) as e:
-                            raise AssertionError(f"Failed to parse price from text: '{text}'. Error: {e}")
+                    intro = teachers_list_price.nth(i).text_content().strip()
+                    intro_without_first_word = intro.replace("Цена:", '').strip()
+                    space_index = intro_without_first_word.index(' ')
+                    current_price = int(intro_without_first_word[0:space_index+1])
+                    if current_price > max_price:
+                        max_price = current_price
 
             forward_btn = self.page.get_by_text("Вперед")
             if forward_btn.is_visible():  # Если видна кнопка "Вперед", нажимаем на неё и продолжаем искать max стоимость занятия
