@@ -1,5 +1,5 @@
 import pytest
-from core.settings import pages_urls_for_guest
+from core.settings import pages_urls_for_guest, home_url
 
 
 
@@ -160,3 +160,13 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         home_btn = header.header_home_btn_is_present()
 
         assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
+
+
+# TC_02.006.001.002 | Guest - Header > "Мыслеплав" button redirects to the Home page > clicking "Мыслеплав" button (Home button) on any page opens the Home page
+def test_header_home_btn_redirects_to_homepage_from_all_pages_for_guest(header, page):
+    for page_url in pages_urls_for_guest:
+        page.goto(page_url)
+        home_btn = header.header_home_btn_is_present()
+        home_btn.click()
+
+        assert page.url == home_url, f"Failed to redirect to the homepage from {page_url}"
