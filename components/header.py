@@ -129,14 +129,9 @@ class Header:
         expect(button).not_to_be_attached()
 
     @allure.step("Проверяем наличие или отсутствие кнопки 'Мое объявление'")
-    def check_my_announcement_button_visibility(self, should_be_visible=True):
-        button = self.page.locator('a.btn.btn-outline-light:has-text("Мое объявление")')
-
-        if should_be_visible:
-            assert button.is_visible(), "Кнопки 'Мое объявление' нет на странице"
-        else:
-            button_count = button.count()
-            assert button_count == 0, "Кнопка 'Мое объявление' присутствует на странице"
+    def my_announcement_button_is_visible(self):
+        my_announcement_button = self.page.locator('a.btn.btn-outline-light:has-text("Мое объявление")')
+        return my_announcement_button.is_visible()
 
     @allure.step("Проверяем отсутствие кнопки 'Мои студенты'")
     def my_students_button_is_hidden(self):

@@ -2,8 +2,13 @@ import os
 
 import allure
 import pytest
+import requests
 from faker import Faker
 from pytest import Item
+from requests.auth import HTTPBasicAuth
+
+from Data.constants import BASE_URL
+from Data.constants import AUTH_CREDENTIALS
 from components.announcement import Announcement
 from components.find_tutor import FindTutor
 from components.header import Header
@@ -116,10 +121,12 @@ def browser_context():
         context.close()
         browser.close()
 
+
 @pytest.fixture(autouse=True)
 def set_root_dir():
     ci_root_dir = os.environ.get('GITHUB_WORKSPACE', False)
     os.environ['ROOT_DIR'] = ci_root_dir or '..'
+
 
 @pytest.fixture
 def cookie_banner(page: Page):
@@ -158,3 +165,40 @@ def create_user(fake_data, header, register):
     print(f"Email: {user_data['email']}")
     print(f"Password: {user_data['password']}")
     return user_data
+
+
+@pytest.fixture(scope="function")
+def api_fake_data():
+    fake = Faker()
+    data = {
+        "first_name": fake.name(),
+        "email": fake.email(),
+        "password": fake.password(),
+        "is_tutor": True,
+        "is_premium": True,
+        "is_standart": True,
+        "is_writer": True,
+        "end_subscription": "2034-12-20",
+    }
+    return data
+
+
+@pytest.fixture(scope="function")
+def api_create_user(api_fake_data):
+    response = requests.post(
+        f'{BASE_URL}/api/users/',
+        json=api_fake_data,
+        auth=HTTPBasicAuth(*AUTH_CREDENTIALS)
+    )
+
+    if response.status_code == 201:
+        created_user = response.json()
+        return {
+            "email": created_user['email'],
+            "password": api_fake_data['password'],
+            "user_data": created_user
+        }
+    else:
+        print(f"Ошибка при создании пользователя: {response.status_code}")
+        print(f"Ответ сервера: {response.text}")
+        return None

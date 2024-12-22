@@ -160,3 +160,15 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         home_btn = header.header_home_btn_is_present()
 
         assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
+
+# TC_11.005.003 [Teacher] Header > My announcement button > "Мое объявление" button is not available for logged out user
+def test_my_announcement_btn_is_not_visible_for_guests(header, homepage):
+    homepage.visit()
+    assert header.my_announcement_button_is_visible() is False, "Кнопка 'Мое объявление' присутствует на странице"
+
+# TC_11.005.002 [Teacher] Header > My announcement button > "Мое объявление" button is not available for teachers when no announcement was created
+def test_my_announcement_btn_is_not_visible_when_no_announcement_created(header, homepage, api_create_user, login):
+    homepage.visit()
+    header.click_login_button()
+    login.full_login(api_create_user['email'], api_create_user['password'])
+    assert header.my_announcement_button_is_visible() is False, "Кнопка 'Мое объявление' присутствует на странице"
