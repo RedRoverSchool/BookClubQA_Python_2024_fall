@@ -10,19 +10,17 @@ def test_create_announcement(header, announcement, register, create_announcement
     announcement.verify_announcements_page_endpoint()
 
 
-# AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement >
+# AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
-def test_teacher_announcement_blank_form_same_endpoint(
-    header, register, my_teachers, create_announcement_page
-):
+def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page, announcement):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
-
     create_announcement_page.verify_the_announcement_form_is_blank()
     create_announcement_page.click_finalize_announcement_button()
     create_announcement_page.verify_create_announcement_page_endpoint()
+    announcement.verify_required_fields_are_not_filled()
 
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >

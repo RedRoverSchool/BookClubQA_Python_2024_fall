@@ -161,3 +161,8 @@ class Announcement:
         tutor_name_announcement = self.page.locator('h5').inner_text()
         assert expected_name == tutor_name_announcement
 
+    @allure.step('Убедиться, что обязательные поля не заполнены')
+    def verify_required_fields_are_not_filled(self):
+        error_message = self.page.locator('//strong[text()="Обязательное поле."]').count()
+        assert error_message == 8
+
