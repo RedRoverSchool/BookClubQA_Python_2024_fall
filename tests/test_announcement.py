@@ -1,4 +1,4 @@
-# import pytest
+import pytest
 
 @pytest.mark.skip("Need to be fixed - TimeoutError")
 def test_create_announcement(header, announcement, register, create_announcement_page):
