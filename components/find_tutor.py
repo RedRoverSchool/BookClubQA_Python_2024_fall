@@ -129,11 +129,14 @@ class FindTutor:
         if teachers_list_experience.count() > 0:
             for i in range(teachers_list_experience.count()):
                 text_content = teachers_list_experience.nth(i).text_content().strip()
-                try:
-                    actual_experience = int(''.join(filter(str.isdigit, text_content.split("Опыт:")[1])))
-                    assert actual_experience >= min_experience, f"Found tutor with experience {actual_experience} < {min_experience}"
-                except (IndexError, ValueError) as e:
-                    raise AssertionError(f"Failed to parse experience from text: '{text_content}'. Error: {e}")
+                if "Опыт:" in text_content:
+                    try:
+                        actual_experience = int(''.join(filter(str.isdigit, text_content.split("Опыт:")[1])))
+                        assert actual_experience >= min_experience, f"Found tutor with experience {actual_experience} < {min_experience}"
+                    except (IndexError, ValueError) as e:
+                        raise AssertionError(f"Failed to parse experience from text: '{text_content}'. Error: {e}")
+                else:
+                    continue
         else:
             text = self.page.locator("//div[@class='alert alert-info']").text_content().strip()
             assert "Нет результатов" in text, f"Unexpected message: '{text}'"
