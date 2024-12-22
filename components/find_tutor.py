@@ -140,3 +140,32 @@ class FindTutor:
         else:
             text = self.page.locator("//div[@class='alert alert-info']").text_content().strip()
             assert "Нет результатов" in text, f"Unexpected message: '{text}'"
+
+
+    @allure.step("Проверяем отображение сообщения о том, что список репетиторов пуст")
+    def check_message_no_results_is_visible(self):
+        text = self.page.locator("//div[@class='alert alert-info']").text_content()
+        assert "Нет результатов", text
+
+
+    @allure.step("В списке репетиторов на всех страницах находим максимальную цену за занятие")
+    def find_max_tutors_price(self):
+        max_price = 0
+
+        while True:  # Начинаем с первой страницы, если имеются еще страницы, то заходим в цикл пока они не закончатся
+            teachers_list_price = self.page.locator(".card-text")
+
+            if teachers_list_price.count() > 0:
+                # Если репетиторы есть, то ищем среди них того, чья стоимость занятия больше текущего максимума
+                for i in range(teachers_list_price.count()):
+                    current_price = int(teachers_list_price.nth(i).text_content().strip().split(" ")[1])
+                    if current_price > max_price:
+                        max_price = current_price
+
+            forward_btn = self.page.get_by_text("Вперед")
+            if forward_btn.is_visible():  # Если видна кнопка "Вперед", нажимаем на неё и продолжаем искать max стоимость занятия
+                forward_btn.click()
+            else:
+                break #Если кнопка "Вперед" не видна, то выходим из цикла
+
+        return max_price
