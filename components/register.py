@@ -132,7 +132,6 @@ class Register:
         self.fill_password(self.password)
         self.fill_confirm_password(self.password)
         self.click_registration_button()
-        print(f"Email: {email}, Password: {self.password}")
         return {"name": name, "password": self.password, "email": email}
 
     # NOTE: Оставлю пока еще одну регистрацию, через фикстуру
