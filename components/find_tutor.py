@@ -165,6 +165,7 @@ class FindTutor:
                     intro_without_first_word = intro.replace("Цена:", '').strip()
                     space_index = intro_without_first_word.index(' ')
                     current_price = int(intro_without_first_word[0:space_index+1])
+                    print(current_price)
                     if current_price > max_price:
                         max_price = current_price
 
