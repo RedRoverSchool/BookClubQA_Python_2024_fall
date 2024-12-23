@@ -2,7 +2,6 @@ import pytest
 from core.settings import pages_urls_for_guest
 
 
-
 def test_login_button_opens_login_page(header, login):
     header.visit()
     header.click_login_button()
@@ -56,7 +55,6 @@ def test_support_clickability_as_student(register, login, header):
     header.click_support_button()
 
 
-@pytest.mark.skip(reason="не прошёл CI 17.12.2024")
 def test_hover_support_button_as_student(register, login, header):
     header.visit()
     header.click_registration_button()
@@ -64,9 +62,10 @@ def test_hover_support_button_as_student(register, login, header):
     header.hover_support_button_color_check()
 
 
-def test_verify_redirection_on_profile_page(login, header, create_user, register):
-    register.select_role(is_teacher=True)
-    register.click_registration_button()
+def test_verify_redirection_on_profile_page(login, header, register):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("tutor")
     header.click_profile_button()
     header.profile_button_should_be_visible()
 
@@ -74,6 +73,7 @@ def test_verify_redirection_on_profile_page(login, header, create_user, register
 def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
+
 
 @pytest.mark.skip("Need to be fixed")
 def test_become_a_tutor_button_is_visible(header):
@@ -128,17 +128,18 @@ def test_my_students_btn_is_not_visible_for_guests(header, homepage):
 def test_my_students_btn_is_not_visible_for_students(register, header, homepage):
     header.visit()
     header.click_registration_button()
-    register.select_role(is_teacher=None)
-    register.registration_new_user(user_type='student')
+    register.registration_new_user(user_type="student")
     assert header.my_students_button_is_hidden() is True
 
 
-# TC_11.006.004 [Teacher] Header > My students(button) > "Мои студенты" button is not available when no announcement is created
-def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(register, header, homepage):
+# TC_11.006.004 [Teacher] Header > My students(button) >
+# "Мои студенты" button is not available when no announcement is created
+def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
+        register, header, homepage
+):
     header.visit()
     header.click_registration_button()
-    register.select_role(is_teacher=True)
-    register.registration_new_user(user_type='tutor')
+    register.registration_new_user(user_type="tutor")
     assert header.my_students_button_is_hidden() is True
 
 
@@ -147,16 +148,22 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
-#TC_02.001.001.002 | Guest-Header > Sign in(button) > Verify background color of the button "Войти" is changed while hovering
+
+# TC_02.001.001.002 | Guest-Header > Sign in(button) >
+# Verify background color of the button "Войти" is changed while hovering
 def test_login_button_change_color_on_hover(header):
     header.visit()
     header.hover_login_button_color_check()
 
-# TC_02.006.001.001 | Guest - Header > "Мыслеплав" button redirects to the Home page > "Мыслеплав" button (Home button) in the header is visible
+
+# TC_02.006.001.001 | Guest - Header > "Мыслеплав" button redirects to the Home page >
+# "Мыслеплав" button (Home button) in the header is visible
 def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
     # Iterate through all the urls available for Guest
     for page_url in pages_urls_for_guest:
         header.page.goto(page_url)
         home_btn = header.header_home_btn_is_present()
 
-        assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
+        assert (
+            home_btn.is_visible()
+        ), f"Home button is not visible on the page with url {page_url}"
