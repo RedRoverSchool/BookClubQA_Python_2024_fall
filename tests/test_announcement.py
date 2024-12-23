@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.mark.skip("Need to be fixed - TimeoutError")
+@pytest.mark.skip("Need to be fixed")
 def test_create_announcement(header, announcement, register, create_announcement_page):
     header.visit()
     header.click_registration_button()
