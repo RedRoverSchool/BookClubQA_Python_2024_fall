@@ -8,11 +8,11 @@ class MyTeachersPage:
 
     @allure.step("Проверяем наличие кнопки 'Мои репетиторы'")
     def check_my_teachers_btn_exists(self):
-        expect(self.page.locator("a", has_text="Мои репетиторы")).to_be_visible()
+        expect(self.page.locator("#navbarNav > ul > li:nth-child(2) > a")).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Мои репетиторы'")
     def click_my_teachers_btn(self):
-        self.page.locator("a", has_text="Мои репетиторы").click()
+        self.page.locator("#navbarNav > ul > li:nth-child(2) > a").click()
 
     @allure.step("Проверяем заголовок - страница Мои репетиторы открылась")
     def verify_page_my_teachers_opened(self):

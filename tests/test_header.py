@@ -76,7 +76,7 @@ def test_login_button_is_visible(header):
 
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
-    header.become_a_tutor_button_should_be_visible()
+    header.become_a_tutor_button_is_visible()
 
 
 @pytest.mark.skip("Need to be fixed")
