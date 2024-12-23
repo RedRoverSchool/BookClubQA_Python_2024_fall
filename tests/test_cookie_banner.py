@@ -17,7 +17,8 @@ def test_enable_button_accept(cookie_banner):
     cookie_banner.cookie_button_should_be_enable()
     
 
-@pytest.mark.skip("Need to be fixed - the text to be match has been changed in the cookie message")
+@pytest.mark.skip(
+    "Need to be fixed - the text to be match has been changed in the cookie message"
 
 def test_cookie_text_matches(cookie_banner):
     cookie_banner.open_main_page()
