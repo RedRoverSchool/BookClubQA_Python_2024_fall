@@ -10,11 +10,9 @@ class FindTutor:
     def __init__(self, page: Page):
         self.page = page
 
-
     @allure.step("Открываем Найти Репетитора на главной странице")
     def open_find_tutor_page(self):
         self.page.goto(tutors_list_url)
-
 
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
@@ -53,43 +51,47 @@ class FindTutor:
             message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
 
-
     @allure.step("Проверяем фильтр по категории")
     def check_filter_form(self):
         self.page.wait_for_load_state()
         frw_btn = self.page.get_by_role("link", name="Вперед")
-        all_tutors_math = self.page.get_by_role("heading", name = "Математика").count()
+        all_tutors_math = self.page.get_by_role("heading", name="Математика").count()
 
         while frw_btn.count() > 0:
             frw_btn.click()
             self.page.wait_for_load_state()
-            all_tutors_math += self.page.get_by_role("heading", name="Математика").count()
+            all_tutors_math += self.page.get_by_role(
+                "heading", name="Математика"
+            ).count()
 
-        self.page.get_by_label("Категория").select_option('Математика')
+        self.page.get_by_label("Категория").select_option("Математика")
         self.page.get_by_role("button", name="Фильтровать").click()
         self.page.wait_for_load_state()
-        all_tutors_math_filtered = self.page.get_by_role("heading", name="Математика").count()
+        all_tutors_math_filtered = self.page.get_by_role(
+            "heading", name="Математика"
+        ).count()
 
         while frw_btn.count() > 0:
             frw_btn.click()
             self.page.wait_for_load_state()
-            all_tutors_math_filtered += self.page.get_by_role("heading", name="Математика").count()
+            all_tutors_math_filtered += self.page.get_by_role(
+                "heading", name="Математика"
+            ).count()
 
         assert all_tutors_math == all_tutors_math_filtered
-
 
     @allure.step("Нажимаем на кнопку Фильтровать")
     def click_filter_button(self):
         self.page.get_by_text("Фильтровать").click()
-
 
     @allure.step("Вводим значение минимальной цены")
     def enter_min_price(self, min_price: float):
         price_field = self.page.locator("#minPrice")
         price_field.fill(str(min_price))
 
-
-    @allure.step("Проверяем, что цены за занятие репетиторов больше или равны заданного значения")
+    @allure.step(
+        "Проверяем, что цены за занятие репетиторов больше или равны заданного значения"
+    )
     def check_prices_over_min_price(self, min_price: float) -> object:
         # Проверяем, есть ли репетиторы на странице
         teachers_list_price = self.page.locator(".card-text")
@@ -97,7 +99,9 @@ class FindTutor:
         if teachers_list_price.count() > 0:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
             for i in range(teachers_list_price.count()):
-                actual_price = float(teachers_list_price.nth(i).text_content().strip().split(" ")[1])
+                actual_price = float(
+                    teachers_list_price.nth(i).text_content().strip().split(" ")[1]
+                )
                 assert actual_price >= min_price
         else:
             # Если список репетиторов пустой, то проверяем сообщение
@@ -106,11 +110,12 @@ class FindTutor:
 
     @allure.step('Проверяем видимость кнопки "Фильтровать"')
     def check_filter_btn_is_visible(self):
-        filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Фильтровать"]')
+        filter_btn = self.page.locator(
+            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Фильтровать"]'
+        )
         assert filter_btn.is_visible()
 
-
-    @allure.step('Определяем случайную минимальную цену')
+    @allure.step("Определяем случайную минимальную цену")
     def set_random_min_price(self, fake, min_value: int, max_value: int):
         min_price = fake.random_int(min=min_value, max=max_value)
         return min_price

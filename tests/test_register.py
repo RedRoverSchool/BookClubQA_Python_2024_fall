@@ -1,6 +1,7 @@
 import pytest
 from faker import Faker
 
+
 fake = Faker()
 
 STUDENT_SUCCESS_REGISTRSTION_MESSAGE = "Вы успешно зарегистрировались!"
@@ -48,11 +49,13 @@ def test_register_as_student_verify_success_message_text(
 
 @pytest.mark.skip("Need to be fixed - AssertionError")
 # TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
+@pytest.mark.skip("Need to be fixed - AssertionError")
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
     header.visit()
     header.click_registration_button()
     register.registration_new_user("student")
+    header.click_login_button()
     header.visit()
     homepage.check_2_find_tutor_btns()
     homepage.click_become_tutor_btn()

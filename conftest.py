@@ -1,23 +1,31 @@
 import os
-
 import allure
 import pytest
-from faker import Faker
-from pytest import Item
-from components.announcement import Announcement
-from components.find_tutor import FindTutor
-from components.header import Header
-from components.my_teachers import MyTeachersPage
 
-from components.login import Login
-from components.homepage import Homepage
+from faker import Faker
 from playwright.sync_api import Page, sync_playwright
+from pytest import Item
+
+from components.announcement import Announcement
+from components.cookie_banner import CookieBanner
+from components.create_announcement import CreateAnnouncement
+from components.find_tutor import FindTutor
 from components.footer import Footer
+from components.header import Header
+from components.homepage import Homepage
+from components.login import Login
+from components.my_teachers import MyTeachersPage
 from components.register import Register
 from components.telegram_page import TelegramPage
 from components.user_profile import UserProfile
-from components.cookie_banner import CookieBanner
-from components.create_announcement import CreateAnnouncement
+from api_clients.user_api import ApiClient
+from Data.constants import AUTH_CREDENTIALS, BASE_URL
+from Data.data import UserFactory
+from models.user_model import RegisterRequest
+import logging
+
+fake = Faker()
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture
@@ -116,10 +124,12 @@ def browser_context():
         context.close()
         browser.close()
 
+
 @pytest.fixture(autouse=True)
 def set_root_dir():
-    ci_root_dir = os.environ.get('GITHUB_WORKSPACE', False)
-    os.environ['ROOT_DIR'] = ci_root_dir or '..'
+    ci_root_dir = os.environ.get("GITHUB_WORKSPACE", False)
+    os.environ["ROOT_DIR"] = ci_root_dir or ".."
+
 
 @pytest.fixture
 def cookie_banner(page: Page):
@@ -136,25 +146,33 @@ def create_announcement_page(page: Page):
     return CreateAnnouncement(page)
 
 
-@pytest.fixture(scope="function")
-def fake_data():
-    fake = Faker()
-    data = {
-        "email": fake.email(),
-        "name": fake.name(),
-        "password": fake.password(),
-    }
-    return data
+@pytest.fixture()
+def api_request(page: Page):
+    return ApiClient(page, base_url=BASE_URL, auth_credentials=AUTH_CREDENTIALS)
 
 
-@pytest.fixture(scope="function")
-def create_user(fake_data, header, register):
-    # Выполняем регистрацию
-    header.visit()
-    header.click_registration_button()
-    user_data = register.complete_registration(fake_data)
+@pytest.fixture()
+def create_user_data():
+    return UserFactory.generate_user()
 
-    # Печатаем email и пароль из возвращаемого user_data
-    print(f"Email: {user_data['email']}")
-    print(f"Password: {user_data['password']}")
-    return user_data
+
+@pytest.fixture()
+def status_user():
+    return RegisterRequest
+
+
+@pytest.fixture
+def user_registration_cleanup(request, api_request):
+    role = request.param[0]
+    is_premium = request.param[1]  # true/false
+    is_writer = request.param[2]  # true/false
+    # Генерация данных пользователя с заданной ролью и статусами
+    user_data = UserFactory.generate_user(role=role, is_premium=is_premium, is_writer=is_writer)
+    # Регистрация пользователя перед тестом
+    api_request.post("/api/users/", user_data.dict())
+    logger.info(f"User registered: Email - {user_data.email}")
+    # Передача данных пользователя в тест
+    yield user_data.email, user_data.password
+    # Удаление пользователя после завершения теста
+    api_request.delete(endpoint="/api/users/", email=user_data.email)
+    logger.info(f"User deleted: Email - {user_data.email}")

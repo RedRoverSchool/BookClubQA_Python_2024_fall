@@ -103,7 +103,9 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
     def find_a_tutor_button_should_be_visible(self):
-        button = self.page.locator('a.btn.btn-light.me-2.rounded.d-none.d-sm-inline.btn-lg[href="/listings/list/"]')
+        button = self.page.locator(
+            'a.btn.btn-light.me-2.rounded.d-none.d-sm-inline.btn-lg[href="/listings/list/"]'
+        )
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Статистика'")
@@ -144,21 +146,26 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Мои студенты'")
     def my_students_button_is_visible(self):
-        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        my_students_btn = self.page.wait_for_selector(
+            "//a[contains(text(), 'Мои студенты')]", state="visible"
+        )
         return my_students_btn.is_visible()
 
     @allure.step("Кликаем на кнопку 'Мои студенты'")
     def click_my_students_btn(self):
-        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        my_students_btn = self.page.wait_for_selector(
+            "//a[contains(text(), 'Мои студенты')]", state="visible"
+        )
         my_students_btn.click()
         url = self.page.url
         return url
 
     @allure.step("Кликаем кнопку 'Мое объявление'")
     def click_my_announcement_button(self):
-        self.page.locator('a', has_text='Мое объявление').click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/listings/my_listing/")
-
+        self.page.locator("a", has_text="Мое объявление").click()
+        expect(self.page).to_have_url(
+            "http://testing.misleplav.ru/listings/my_listing/"
+        )
 
     @allure.step("Наводим мышку на кнопку 'Войти' и проверяем изменение цвета")
     def hover_login_button_color_check(self):
