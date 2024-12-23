@@ -183,3 +183,25 @@ class Header:
         header_home_btn = self.page.locator('//a[@data-testid="logo"]')
 
         return header_home_btn
+
+
+    @allure.step("Проверяем наличие кнопки 'Выйти' в профиле студента")
+    def check_exit_btn_exists_for_student(self):
+        exit_button = self.page.locator("a", has_text="Выйти")
+        return exit_button.is_visible()
+
+
+    @allure.step("Кликаем кнопку 'Выйти' в профиле студента")
+    def click_exit_btn_for_student(self):
+        button = self.page.locator("a", has_text="Выйти")
+        button.click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/")
+
+
+    @allure.step("Наводим мышку на кнопку 'Выйти' и проверяем изменение цвета")
+    def hover_exit_button_for_student_color_check(self):
+        exit_button = self.page.locator("a", has_text="Выйти")
+        original_color = exit_button.evaluate("el => window.getComputedStyle(el).backgroundColor")
+        exit_button.hover()
+        hovered_color = exit_button.evaluate("el => window.getComputedStyle(el).backgroundColor")
+        assert original_color != (hovered_color, f"Цвет кнопки 'Выйти' не изменился при наведении. Исходный: {original_color}, после наведения: {hovered_color}")
