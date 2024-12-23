@@ -218,9 +218,7 @@ class Homepage:
 
     @allure.step("Проверка видимости первой кнопки 'Стать репетитором'")
     def first_btn_become_a_tutor_is_visible(self):
-        button = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
-        )
+        button = self.page.locator('body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)')
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
@@ -229,31 +227,24 @@ class Homepage:
 
     @allure.step("Проверка доступности первой кнопки стать репетиром")
     def find_first_btn_become_tutor(self):
-        become_tutor_btn = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
-        )
+        become_tutor_btn = self.page.locator('body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)')
         assert become_tutor_btn.is_enabled()
 
     @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
     def check_find_tutor_btn_redirection(self):
-        button_2 = self.page.locator(
-            "//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']"
-        )
+        button_2 = self.page.locator("body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg")
         button_2.click()
         find_tutor_btn_redirection = self.page.url
         return find_tutor_btn_redirection
 
     def check_find_tutor_btn_2_redirection(self):
-        button_3 = self.page.wait_for_selector(
-            ".btn.btn-light.me-2.rounded.d-none.d-md-inline.btn-lg", state="visible"
-        )
+        button_3 = self.page.wait_for_selector("body > main > div > div > section:nth-child(6) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg", state="visible")
         button_3.click()
         find_tutor_btn_2_redirection = self.page.url
         return find_tutor_btn_2_redirection
 
     @allure.step("Проверка видипости кнопки 'Найти репетитора'")
     def find_tutor_button_should_be_visible(self):
-        button = self.page.locator(
-            "//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']"
-        )
+        button = self.page.locator("body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg")
         assert button.is_visible()
+

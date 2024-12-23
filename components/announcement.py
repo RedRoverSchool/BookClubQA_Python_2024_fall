@@ -13,15 +13,10 @@ class Announcement:
 
     @allure.step('Заполняем поле "Опишите себя"')
     def fill_out_descripption(self):
-        self.page.fill(
-            'trix-editor[input="id_description"]', "Teacher, that knows everything"
-        )
-
+        self.page.fill('#id_description','Great teacher')
     @allure.step("Загружаем фото")
     def upload_photo(self):
-        self.page.locator('input[name="photo"]').set_input_files(
-            "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
-        )
+        self.page.locator('input[name="photo"]').set_input_files("Data/upload_files/stock-photo-handsome-cheerful-man.jfif")
 
     @allure.step("Выбираем категорию")
     def pick_category(self):
@@ -69,16 +64,14 @@ class Announcement:
 
     @allure.step("Добавляем контактную информацию")
     def add_contact_info(self):
-        add_contact_button = self.page.locator("#addContactBtn")
-        add_contact_button.click()
-        contact_detail_input = self.page.locator("input.form-control.contact-detail")
+        contact_detail_input = self.page.locator("#id_phone")
         contact_detail_input.fill("5555555555")
         filled_value = contact_detail_input.input_value()
         assert filled_value == "5555555555", "Phone number should be 5555555555"
 
-    @allure.step('Нажимаем на кнопку "Создать объявление"')
-    def click_create_announcement_btn(self):  # click_create_announcement_btn
-        create_button = self.page.locator('button.btn.btn-dark.me-2[type="submit"]')
+    @allure.step('Нажимаем на кнопку "Сохранить"')
+    def click_save_announcement_btn(self):  # click_create_announcement_btn
+        create_button = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Сохранить"]')
         create_button.click()
         assert (
             self.page.url
@@ -170,3 +163,23 @@ class Announcement:
     def verify_announcement_tutor_name(self, expected_name):
         tutor_name_announcement = self.page.locator("h5").inner_text()
         assert expected_name == tutor_name_announcement
+
+    @allure.step('Убедиться, что обязательные поля не заполнены')
+    def verify_required_fields_are_not_filled(self):
+        error_message = self.page.locator('//strong[text()="Обязательное поле."]').count()
+        assert error_message == 8
+
+    @allure.step('Создаем объявление')
+    def create_announcement(self):
+        self.fill_out_fullname()
+        self.fill_out_descripption()
+        self.upload_photo()
+        self.pick_category()
+        self.fill_out_experience()
+        self.checkbox_degree()
+        self.fill_out_price()
+        self.fill_out_class_duration()
+        self.checkbox_free_first_lesson()
+        self.add_contact_info()
+        self.click_save_announcement_btn()
+

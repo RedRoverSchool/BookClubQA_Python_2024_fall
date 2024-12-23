@@ -10,6 +10,7 @@ def test_homepage_info_is_same_after_reload(homepage, register):
 
 
 @pytest.mark.skip("Need to be fixed - AssertionError")
+
 def test_homepage_info(homepage, register):
     homepage.visit()
     homepage.check_info_welcome_container()
@@ -56,10 +57,7 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_redirection()
-    assert (
-        url
-        == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-    )
+    assert (url == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/")
 
 
 @pytest.mark.skip("Need to be fixed - TimeoutError")
