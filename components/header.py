@@ -170,3 +170,11 @@ class Header:
 
         expect(button).not_to_have_css("background-color", original_color)
 
+
+    @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
+    def header_home_btn_is_present(self):
+        # Locate the home button in the header
+        header_home_btn = self.page.locator('//a[@data-testid="logo"]')
+
+        return header_home_btn
+
