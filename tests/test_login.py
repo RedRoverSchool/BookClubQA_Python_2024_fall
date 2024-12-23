@@ -23,3 +23,12 @@ def test_check_enter_invalid_username(header, login):
         "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть "
         "чувствительны к регистру."
     )
+
+
+@allure.title("TC_03.002.001")
+def test_email_and_password_and_login_button_is_visible(header, login):
+    header.visit()
+    header.click_on_login_button()
+    login.login_field_should_be_visible()
+    login.password_field_should_be_visible()
+    login.login_blue_button_should_be_visible()

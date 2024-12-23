@@ -22,6 +22,21 @@ class Login:
     def open_login_page(self):
         self.page.goto(login_url)
 
+    @allure.step("Проверяем видимость поля ввода логина")
+    def login_field_should_be_visible(self):
+        field = self.page.locator("#id_username")
+        assert field.is_visible()
+
+    @allure.step("Проверяем видимость поля ввода пароля")
+    def password_field_should_be_visible(self):
+        field = self.page.locator("#id_password")
+        assert field.is_visible()
+
+    @allure.step("Проверяем видимость кнопки 'Войти'(синяя кнопка)")
+    def login_blue_button_should_be_visible(self):
+        button = self.page.locator("button[type='submit']")
+        assert button.is_visible()
+
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):
         username_field = self.page.locator("input[name='username']")
