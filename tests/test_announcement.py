@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.mark.skip("Need to be fixed")
+@pytest.mark.skip("Need to fix")
 def test_create_announcement(header, announcement, register, create_announcement_page):
     header.visit()
     header.click_registration_button()
