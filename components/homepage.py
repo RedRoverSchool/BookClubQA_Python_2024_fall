@@ -247,3 +247,4 @@ class Homepage:
     def find_tutor_button_should_be_visible(self):
         button = self.page.locator("body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg")
         assert button.is_visible()
+

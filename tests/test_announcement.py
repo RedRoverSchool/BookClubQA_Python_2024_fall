@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.skip("Need to be fixed - TimeoutError")
 def test_create_announcement(header, announcement, register, create_announcement_page):
     header.visit()
@@ -43,6 +44,7 @@ def test_teacher_announcement_blank_form(
 # TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisibile.
 # Check that option “Сделать объявление невидимым для учеников” switches to the option "Сделать объявление видимым для учеников" and Teacher's announcement became invisibile from the list.
 @pytest.mark.skip('needs to be fixed')
+
 def test_teacher_hiding_announcement(header, login, announcement):
     header.visit()
     header.click_login_button()
@@ -69,14 +71,15 @@ def test_teacher_announcement_name(header, register, my_teachers, create_announc
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
     announcement_detail = create_announcement_page.fill_submit_new_announcement_form()
-    tutor_name = announcement_detail['fio_value']
+    tutor_name = announcement_detail["fio_value"]
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 
+
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement > Verify the teacher is able go to the page "Мое объявление"#299"
+
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
     header.click_login_button()
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
-
