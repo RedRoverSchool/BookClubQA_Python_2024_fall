@@ -37,7 +37,7 @@ class UserFactory:
         self.page = page
 
     @staticmethod
-    def generate_user(role: str = 'student', **kwargs) -> RegisterRequest:
+    def generate_user(role: str = "student", **kwargs) -> RegisterRequest:
         """Генерирует данные для регистрации пользователя."""
         user_data = {
             "first_name": fake.first_name(),

@@ -46,7 +46,7 @@ class Register:
     def verify_registration_page_opened(self):
         registration_title = self.page.locator("h1").inner_text()
         assert (
-                registration_title == "Регистрация"
+            registration_title == "Регистрация"
         ), f"Ожидался заголовок 'Регистрация', но найдено: {registration_title}"
 
     @allure.step("Создаем случайный пароль")
@@ -66,8 +66,8 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'username'")
     def check_username_placeholder_text(self):
         assert (
-                self.page.locator("#id_username").get_attribute("placeholder")
-                == constants.REGISTER_USERNAME_PLACEHOLDER_TEXT
+            self.page.locator("#id_username").get_attribute("placeholder")
+            == constants.REGISTER_USERNAME_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'username' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password1'")
@@ -83,8 +83,8 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password1'")
     def check_password1_placeholder_text(self):
         assert (
-                self.page.locator("#id_password1").get_attribute("placeholder")
-                == constants.REGISTER_PASSWORD1_PLACEHOLDER_TEXT
+            self.page.locator("#id_password1").get_attribute("placeholder")
+            == constants.REGISTER_PASSWORD1_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password1' field"
 
     @allure.step("Проверяем, что плейсхолдер виден в поле 'password2'")
@@ -100,8 +100,8 @@ class Register:
     @allure.step("Проверяем текст плейсхолдера в поле 'password2'")
     def check_password2_placeholder_text(self):
         assert (
-                self.page.locator("#id_password2").get_attribute("placeholder")
-                == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
+            self.page.locator("#id_password2").get_attribute("placeholder")
+            == constants.REGISTER_PASSWORD2_PLACEHOLDER_TEXT
         ), "Incorrect placeholder text in the 'password2' field"
 
     @allure.step("Регистрируем преподавателя")

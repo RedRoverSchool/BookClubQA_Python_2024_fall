@@ -167,7 +167,9 @@ def user_registration_cleanup(request, api_request):
     is_premium = request.param[1]  # true/false
     is_writer = request.param[2]  # true/false
     # Генерация данных пользователя с заданной ролью и статусами
-    user_data = UserFactory.generate_user(role=role, is_premium=is_premium, is_writer=is_writer)
+    user_data = UserFactory.generate_user(
+        role=role, is_premium=is_premium, is_writer=is_writer
+    )
     # Регистрация пользователя перед тестом
     api_request.post("/api/users/", user_data.dict())
     logger.info(f"User registered: Email - {user_data.email}")

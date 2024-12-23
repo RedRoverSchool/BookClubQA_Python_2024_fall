@@ -135,7 +135,7 @@ def test_my_students_btn_is_not_visible_for_students(register, header, homepage)
 
 # TC_11.006.004 [Teacher] Header > My students(button) > "Мои студенты" button is not available when no announcement is created
 def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-        register, header, homepage
+    register, header, homepage
 ):
     header.visit()
     header.click_registration_button()
@@ -163,4 +163,6 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         header.page.goto(page_url)
         home_btn = header.header_home_btn_is_present()
 
-        assert home_btn.is_visible(), f"Home button is not visible on the page with url {page_url}"
+        assert (
+            home_btn.is_visible()
+        ), f"Home button is not visible on the page with url {page_url}"

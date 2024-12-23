@@ -14,7 +14,7 @@ def test_create_announcement(header, announcement, register, create_announcement
 # AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
 def test_teacher_announcement_blank_form_same_endpoint(
-        header, register, my_teachers, create_announcement_page
+    header, register, my_teachers, create_announcement_page
 ):
     header.visit()
     header.click_registration_button()
@@ -29,7 +29,7 @@ def test_teacher_announcement_blank_form_same_endpoint(
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
 def test_teacher_announcement_blank_form(
-        header, register, my_teachers, create_announcement_page, announcement
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
@@ -67,7 +67,7 @@ def test_teacher_hiding_announcement(header, login, announcement):
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement >
 # Verify the teacher's name in the announcement
 def test_teacher_announcement_name(
-        header, register, my_teachers, create_announcement_page, announcement
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
