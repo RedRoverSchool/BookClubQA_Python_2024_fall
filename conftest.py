@@ -1,6 +1,7 @@
 import os
 import allure
 import pytest
+import logging
 
 from faker import Faker
 from playwright.sync_api import Page, sync_playwright
@@ -22,7 +23,7 @@ from api_clients.user_api import ApiClient
 from Data.constants import AUTH_CREDENTIALS, BASE_URL
 from Data.data import UserFactory
 from models.user_model import RegisterRequest
-import logging
+
 
 fake = Faker()
 logger = logging.getLogger(__name__)
@@ -163,15 +164,14 @@ def status_user():
 
 @pytest.fixture
 def user_registration_cleanup(request, api_request):
-    role = request.param[0]
-    is_premium = request.param[1]  # true/false
-    is_writer = request.param[2]  # true/false
+    role, is_premium, is_writer = request.param
     # Генерация данных пользователя с заданной ролью и статусами
     user_data = UserFactory.generate_user(
         role=role, is_premium=is_premium, is_writer=is_writer
     )
     # Регистрация пользователя перед тестом
-    api_request.post("/api/users/", user_data.dict())
+    api_request.post("/api/users/", user_data.model_dump())
+    print(user_data.model_dump())
     logger.info(f"User registered: Email - {user_data.email}")
     # Передача данных пользователя в тест
     yield user_data.email, user_data.password

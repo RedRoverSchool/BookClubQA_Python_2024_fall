@@ -34,8 +34,7 @@ class Login:
 
     @allure.step("Нажимаем кнопку 'Войти'")
     def click_login_button(self):
-        login_button = self.page.locator("button[type='submit']")
-        login_button.click()
+        self.page.get_by_role("button", name="Войти").click()
 
     @allure.step("Выполняем полный вход пользователя")
     def full_login(self, username: str, password: str):
