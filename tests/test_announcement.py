@@ -1,8 +1,11 @@
 import pytest
 
 
-@pytest.mark.skip("Need to fix")
-def test_create_announcement(header, announcement, register, create_announcement_page):
+# @pytest.mark.skip("Need to fix")
+#TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
+# Verify the announcement is created after filling in all form fields with valid data#163
+#TEST PASSES THROUGH PYTEST ONLY
+def test_create_announcement(header, announcement, register):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
@@ -89,3 +92,14 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
     header.click_login_button()
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
+
+#TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
+# Verify the announcement is created after filling in required form fields with valid data #313
+#TEST PASSES THROUGH PYTEST ONLY
+def test_create_announcement_with_only_required_fields(header, announcement, register):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("tutor")
+    header.click_create_announcement_button()
+    announcement.create_announcement_with_only_required_fields()
+    announcement.verify_announcements_page_endpoint()

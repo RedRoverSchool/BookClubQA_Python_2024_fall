@@ -189,3 +189,15 @@ class Announcement:
         self.checkbox_free_first_lesson()
         self.add_contact_info()
         self.click_save_announcement_btn()
+
+    @allure.step("Создаем объявление с обязательными полями")
+    def create_announcement_with_only_required_fields(self):
+        self.fill_out_fullname()
+        self.fill_out_descripption()
+        self.upload_photo()
+        self.pick_category()
+        self.fill_out_experience()
+        self.fill_out_price()
+        self.fill_out_class_duration()
+        self.add_contact_info()
+        self.click_save_announcement_btn()
