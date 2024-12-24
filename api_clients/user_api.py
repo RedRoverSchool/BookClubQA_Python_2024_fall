@@ -12,12 +12,12 @@ class ApiClient:
         self.auth_credentials = auth_credentials
 
     def _send_request(
-            self,
-            method: str,
-            endpoint: str,
-            email: str = None,
-            data: Dict = None,
-            params: Dict = None,
+        self,
+        method: str,
+        endpoint: str,
+        email: str = None,
+        data: Dict = None,
+        params: Dict = None,
     ):
         # Формирование URL с учетом email, если он передан
         url = f"{self.base_url}{endpoint}"

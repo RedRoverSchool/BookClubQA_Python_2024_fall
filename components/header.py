@@ -77,7 +77,8 @@ class Header:
     @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
     def become_a_tutor_button_is_visible(self):
         button = self.page.locator(
-            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)")
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
+        )
         assert button.is_visible()
 
     @allure.step("Проверяем доступна ли кнопка 'Войти' для взаимодействия")
@@ -100,9 +101,7 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
     def find_a_tutor_button_should_be_visible(self):
-        button = self.page.locator(
-            "//li[@class='nav-item mb-1'][2]"
-        )
+        button = self.page.locator("//li[@class='nav-item mb-1'][2]")
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Статистика'")

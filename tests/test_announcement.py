@@ -13,8 +13,9 @@ def test_create_announcement(header, announcement, register, create_announcement
 
 # AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
-def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page,
-                                                       announcement):
+def test_teacher_announcement_blank_form_same_endpoint(
+    header, register, my_teachers, create_announcement_page, announcement
+):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
@@ -27,9 +28,9 @@ def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teac
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
-@pytest.mark.skip('needs to be fixed')
+@pytest.mark.skip("needs to be fixed")
 def test_teacher_announcement_blank_form(
-        header, register, my_teachers, create_announcement_page, announcement
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
@@ -44,7 +45,7 @@ def test_teacher_announcement_blank_form(
 
 # TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisibile.
 # Check that option “Сделать объявление невидимым для учеников” switches to the option "Сделать объявление видимым для учеников" and Teacher's announcement became invisibile from the list.
-@pytest.mark.skip('needs to be fixed')
+@pytest.mark.skip("needs to be fixed")
 def test_teacher_hiding_announcement(header, login, announcement):
     header.visit()
     header.click_login_button()
@@ -65,14 +66,16 @@ def test_teacher_hiding_announcement(header, login, announcement):
 
 
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
-@pytest.mark.skip('needs to be fixed')
-def test_teacher_announcement_name(header, register, my_teachers, create_announcement_page, announcement):
+@pytest.mark.skip("needs to be fixed")
+def test_teacher_announcement_name(
+    header, register, my_teachers, create_announcement_page, announcement
+):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
     announcement_detail = create_announcement_page.fill_submit_new_announcement_form()
-    tutor_name = announcement_detail['fio_value']
+    tutor_name = announcement_detail["fio_value"]
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 

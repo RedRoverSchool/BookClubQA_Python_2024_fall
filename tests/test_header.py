@@ -34,10 +34,11 @@ def test_support_visibility_as_teacher(login, header):
 
 
 @pytest.mark.parametrize(
-    "user_registration_cleanup",
-    [('teacher', True, False)],
-    indirect=True)
-def test_support_clickability_as_teacher(login, header, user_registration_cleanup, api_request):
+    "user_registration_cleanup", [("teacher", True, False)], indirect=True
+)
+def test_support_clickability_as_teacher(
+    login, header, user_registration_cleanup, api_request
+):
     email, password = user_registration_cleanup
     header.visit()
     header.click_login_button()
@@ -138,7 +139,7 @@ def test_my_students_btn_is_not_visible_for_students(register, header, homepage)
 # TC_11.006.004 [Teacher] Header > My students(button) >
 # "Мои студенты" button is not available when no announcement is created
 def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-        register, header, homepage
+    register, header, homepage
 ):
     header.visit()
     header.click_registration_button()

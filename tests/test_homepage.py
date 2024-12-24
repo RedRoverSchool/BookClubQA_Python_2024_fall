@@ -1,5 +1,4 @@
-import pytest
-from core.settings import *
+from core.settings import list_url
 
 
 def test_homepage_info_is_same_after_reload(homepage, register):
@@ -53,16 +52,13 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_redirection()
-    assert (url == list_url)
+    assert url == list_url
 
 
 def test_find_tutor_btn_2_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_2_redirection()
-    assert (
-            url
-            == list_url
-    )
+    assert url == list_url
 
 
 def test_find_tutor_button_visibility_as_student(homepage, header, register, login):

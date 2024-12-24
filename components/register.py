@@ -134,4 +134,3 @@ class Register:
         self.click_registration_button()
         print(f"Email: {email}, Password: {self.password}")
         return {"name": name, "password": self.password, "email": email}
-

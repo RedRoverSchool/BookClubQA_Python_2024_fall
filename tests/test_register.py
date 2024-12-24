@@ -34,7 +34,7 @@ def test_register_as_student(header, register):
 
 @pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_register_as_student_verify_success_message_text(
-        homepage, register, find_tutor
+    homepage, register, find_tutor
 ):
     """Проверка успешного сообщения после регистрации как студента"""
     homepage.visit()
@@ -62,7 +62,7 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
 
 
 def test_verify_successful_message_after_register_as_tutor(
-        homepage, register, find_tutor
+    homepage, register, find_tutor
 ):
     homepage.visit()
     homepage.click_registration_button()
