@@ -21,18 +21,18 @@ class Homepage:
 
     @allure.step('Check info in the "Добро пожаловать" container')
     def check_info_welcome_container(self):
-        welcome_container = self.page.get_by_text(
-            'Добро пожаловать в "Мыслеплав"! Платформа, соединяющая учеников и '
-            "репетиторов, о"
-        )
-        expect(welcome_container).to_be_visible()
+        welcome_container = self.page.get_by_text("Добро пожаловать в \"Мыслеплав\"! "
+                                                  "Платформа, соединяющая учеников и репетиторов, о").first
+        welcome_container.wait_for(state="visible", timeout=10000)
+        # expect(welcome_container).to_be_visible()
+
         expected_section_text = """
         Добро пожаловать в "Мыслеплав"!
         Платформа, соединяющая учеников и репетиторов, открывает новые горизонты для обучения.
         
             Найти репетитора
-            Найти репетитора
             Стать репетитором
+            Найти репетитора
             Стать репетитором
         """
         assert (
@@ -46,18 +46,18 @@ class Homepage:
     @allure.step('Check 2 "Найти репетитора" btns')
     def check_2_find_tutor_btns(self):
         find_tutor_btns = (
-            self.page.locator('a.d-none:text("Найти репетитора")').filter().count()
+            self.page.locator("div[class*='d-none d-sm-flex'] a:text('Найти репетитора')").filter().count()
         )
         assert find_tutor_btns == 2
 
     @allure.step('Click on "Стать репетитором" button')
     def click_become_tutor_btn(self):
-        self.page.locator('a.d-none:text("Стать репетитором")').first.click()
+        self.page.locator("div[class*='d-sm-flex'] a:text('Стать репетитором')").first.click()
 
     @allure.step('Check 2 "Стать репетитором" btns')
     def check_2_become_tutor_btns(self):
         become_tutor_btns = (
-            self.page.locator('a.d-none:text("Стать репетитором")').filter().count()
+            self.page.locator("div[class*='d-sm-flex'] a:text('Стать репетитором')").filter().count()
         )
         assert become_tutor_btns == 2
 

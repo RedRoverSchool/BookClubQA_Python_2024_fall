@@ -111,5 +111,5 @@ ___
 - В случае возникновения ошибок, связанных с Playwright или другими инструментами, обновление библиотек или повторная настройка окружения может помочь.
 
 ```bash
-playwright codegen demo.playwright.http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/
+playwright codegen http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/
 ```

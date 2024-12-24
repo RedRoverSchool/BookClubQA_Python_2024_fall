@@ -11,7 +11,7 @@ class Login:
     def check_url_login_page(self, expected_part: str):
         current_url = self.page.url
         assert (
-            expected_part in current_url
+                expected_part in current_url
         ), f"Ожидалось, что '{expected_part}' будет частью '{current_url}'"
 
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
@@ -34,8 +34,7 @@ class Login:
 
     @allure.step("Нажимаем кнопку 'Войти'")
     def click_login_button(self):
-        login_button = self.page.locator("button[type='submit']")
-        login_button.click()
+        self.page.get_by_role('button', name="Войти").click()
 
     @allure.step("Выполняем полный вход пользователя")
     def full_login(self, username: str, password: str):

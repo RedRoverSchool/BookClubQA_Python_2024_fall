@@ -15,7 +15,7 @@ class CookieBanner:
     def cookie_banner_should_be_visible(self):
         try:
             accept_cookie_banner = self.page.wait_for_selector(
-                "#cookie-consent-banner", timeout=5000
+                "#cookie-consent-banner", timeout=10000
             )
             assert accept_cookie_banner.is_visible(), "Cookie banner is not visible!"
             return True

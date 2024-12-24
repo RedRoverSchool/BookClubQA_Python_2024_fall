@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.skip("Need to fix")
 def test_create_announcement(header, announcement, register, create_announcement_page):
     header.visit()
@@ -12,7 +13,8 @@ def test_create_announcement(header, announcement, register, create_announcement
 
 # AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
-def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page, announcement):
+def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teachers, create_announcement_page,
+                                                       announcement):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
@@ -27,7 +29,7 @@ def test_teacher_announcement_blank_form_same_endpoint(header, register, my_teac
 # Verify the number of announcements remains zero when an empty form is submitted
 @pytest.mark.skip('needs to be fixed')
 def test_teacher_announcement_blank_form(
-    header, register, my_teachers, create_announcement_page, announcement
+        header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
@@ -61,6 +63,7 @@ def test_teacher_hiding_announcement(header, login, announcement):
     announcement.click_make_announcement_invisible()
     announcement.check_button_text_invisible()
 
+
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
 @pytest.mark.skip('needs to be fixed')
 def test_teacher_announcement_name(header, register, my_teachers, create_announcement_page, announcement):
@@ -73,10 +76,10 @@ def test_teacher_announcement_name(header, register, my_teachers, create_announc
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 
+
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement > Verify the teacher is able go to the page "Мое объявление"#299"
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
     header.click_login_button()
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
-

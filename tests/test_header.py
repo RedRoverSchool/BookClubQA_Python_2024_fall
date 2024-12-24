@@ -33,11 +33,16 @@ def test_support_visibility_as_teacher(login, header):
     header.support_button_should_be_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
-def test_support_clickability_as_teacher(login, header):
+@pytest.mark.parametrize(
+    "user_registration_cleanup",
+    [('teacher', True, False)],
+    indirect=True)
+def test_support_clickability_as_teacher(login, header, user_registration_cleanup, api_request):
+    email, password = user_registration_cleanup
     header.visit()
     header.click_login_button()
-    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    login.full_login(email, password)
+    print(email, password)
     header.click_support_button()
 
 
@@ -75,13 +80,11 @@ def test_login_button_is_visible(header):
     header.login_button_should_be_visible()
 
 
-@pytest.mark.skip("Need to be fixed")
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
     header.become_a_tutor_button_is_visible()
 
 
-@pytest.mark.skip("Need to be fixed - AssertionError")
 def test_see_list_of_tutors_profiles(header, find_tutor):
     header.visit()
     header.find_a_tutor_button_should_be_visible()
