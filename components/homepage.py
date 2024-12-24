@@ -248,3 +248,11 @@ class Homepage:
         button = self.page.locator("body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg")
         assert button.is_visible()
 
+    @allure.step("Check 'Войти' button is visible and enabled")
+    def check_login_button(self):
+        self.page.wait_for_selector("//*[@id='navbarNav']/ul/li[1]/a")
+        login_button = self.page.locator("//*[@id='navbarNav']/ul/li[1]/a")
+        expect(login_button).to_be_visible()
+        expect(login_button).to_be_enabled()
+
+
