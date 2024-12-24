@@ -171,3 +171,25 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         assert (
             home_btn.is_visible()
         ), f"Home button is not visible on the page with url {page_url}"
+
+# TC_31.002.001.001 Header-Student > Sign out > Visibility "Выйти" button
+def test_exit_button_is_visible_for_student(header, register):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("student")
+    assert header.check_exit_btn_exists_for_student()
+
+# TC_31.002.001.002 Header-Student > Sign out > Clickability "Выйти" button
+def test_exit_button_is_clickable_for_student(header, register):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("student")
+    assert header.check_exit_btn_exists_for_student()
+    header.click_exit_btn_for_student()
+
+# TC_31.002.001.003 Header-Student > Sign out > Hover Effect on the "Выйти" button
+def test_hover_exit_button_for_student_color_check(header, register):
+    header.visit()
+    header.click_registration_button()
+    register.registration_new_user("student")
+    header.hover_exit_button_for_student_color_check()
