@@ -1,5 +1,7 @@
 import pytest
 from core.settings import pages_urls_for_guest
+from core.settings import site_pages_urls
+from playwright.sync_api import Page
 
 
 def test_login_button_opens_login_page(header, login):
@@ -204,3 +206,42 @@ def test_hover_exit_button_for_student_color_check(header, register):
     header.click_registration_button()
     register.registration_new_user("student")
     header.hover_exit_button_for_student_color_check()
+
+@pytest.mark.parametrize(
+    "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
+)
+# TC_11.002.01.001 | [Teacher ] Header > "Профиль" button > Visibility check
+def test_profile_btn_visibility(header, login, data, page: Page):
+    """Проверка видимости кнопки 'Профиль'"""
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    page_url = data["url"]
+    page.goto(page_url)
+    header.profile_button_should_be_visible()
+
+
+@pytest.mark.parametrize(
+    "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
+)
+# TC_11.002.01.002 | [Teacher ] Header > "Профиль" button > Hover support check
+def test_profile_btn_hover(header, login, data, page: Page):
+    """Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора"""
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    page_url = data["url"]
+    page.goto(page_url)
+    header.hover_profile_btn_color_check()
+
+
+@pytest.mark.parametrize(
+    "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
+)
+# TC_11.002.01.003 | [Teacher ] Header > "Профиль" button > Redirection check
+def test_profile_btn_redirection(header, user_profile, login, data, page: Page):
+    """Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'"""
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    page_url = data["url"]
+    page.goto(page_url)
+    header.click_profile_button()
+    user_profile.profile_btn_redirection_check()

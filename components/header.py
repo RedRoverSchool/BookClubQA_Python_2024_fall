@@ -207,3 +207,11 @@ class Header:
             hovered_color,
             f"Цвет кнопки 'Выйти' не изменился при наведении. Исходный: {original_color}, после наведения: {hovered_color}",
         )
+
+    @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
+    def hover_profile_btn_color_check(self):
+        button = self.page.locator("//a[@data-testid='profile']")
+        original_color = button.evaluate("el => getComputedStyle(el).backgroundColor")
+        button.hover()
+        expect(button).not_to_have_css("background-color", original_color)
+
