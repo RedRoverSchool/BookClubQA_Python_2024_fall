@@ -184,7 +184,7 @@ class Header:
 
     @allure.step("Проверяем наличие кнопки 'Выйти' в профиле студента")
     def check_exit_btn_exists_for_student(self):
-        exit_button = self.page.locator("a", has_text="Выйти")
+        exit_button = self.page.get_by_role("link", name="Выйти")
         return exit_button.is_visible()
 
     @allure.step("Кликаем кнопку 'Выйти' в профиле студента")

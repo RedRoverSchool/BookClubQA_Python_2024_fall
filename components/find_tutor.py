@@ -47,8 +47,9 @@ class FindTutor:
 
     @allure.step("Проверяем наличие сообщения об успешной регистрации")
     def check_message_of_registration(self, expected_message):
-        message = self.page.locator("//div[@role='alert']").text_content(timeout=5000)
-
+        alert_locator = self.page.locator("//div[@role='alert']")
+        self.page.wait_for_selector("//div[@role='alert']", timeout=7000)
+        message = alert_locator.text_content()
         assert (
             message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
