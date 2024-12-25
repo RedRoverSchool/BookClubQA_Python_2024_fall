@@ -31,23 +31,23 @@ site_pages_urls = [
     },
     {
         "name": "Lists Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/my_listing/",
     },
     {
         "name": "Signup Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/signup/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/signup/",
     },
     {
         "name": "Create list Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/create/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/create/",
     },
     {
         "name": "User profile Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/profile/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/subscription/profile/",
     },
     {
-        "name": "Statistics Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/statistics/",
+        "name": "My students Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/dashboard/my_students/",
     },
 ]
 
