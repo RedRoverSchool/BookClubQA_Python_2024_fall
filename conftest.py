@@ -126,7 +126,7 @@ def browser_context():
         browser.close()
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True, scope="function")
 def set_root_dir():
     ci_root_dir = os.environ.get("GITHUB_WORKSPACE", False)
     os.environ["ROOT_DIR"] = ci_root_dir or ".."
@@ -162,7 +162,7 @@ def status_user():
     return RegisterRequest
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def user_registration_cleanup(request, api_request):
     role, is_premium, is_writer = request.param
     # Генерация данных пользователя с заданной ролью и статусами
@@ -171,7 +171,6 @@ def user_registration_cleanup(request, api_request):
     )
     # Регистрация пользователя перед тестом
     api_request.post("/api/users/", user_data.model_dump())
-    print(user_data.model_dump())
     logger.info(f"User registered: Email - {user_data.email}")
     # Передача данных пользователя в тест
     yield user_data.email, user_data.password

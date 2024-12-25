@@ -2,9 +2,9 @@ import pytest
 
 
 # @pytest.mark.skip("Need to fix")
-#TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
+# TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
-#TEST PASSES THROUGH PYTEST ONLY
+# TEST PASSES THROUGH PYTEST ONLY
 def test_create_announcement(header, announcement, register):
     header.visit()
     header.click_registration_button()
@@ -71,7 +71,8 @@ def test_teacher_hiding_announcement(header, login, announcement):
 
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement >
 # Verify the teacher's name in the announcement
-@pytest.mark.skip("needs to be fixed")
+
+
 def test_teacher_announcement_name(
     header, register, my_teachers, create_announcement_page, announcement
 ):
@@ -93,13 +94,20 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
 
-#TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
+
+# TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is created after filling in required form fields with valid data #313
-#TEST PASSES THROUGH PYTEST ONLY
-def test_create_announcement_with_only_required_fields(header, announcement, register):
+# TEST PASSES THROUGH PYTEST ONLY
+# @pytest.mark.skip("needs to be fixed")
+@pytest.mark.parametrize(
+    "user_registration_cleanup", [("teacher", True, False)], indirect=True
+)
+def test_create_announcement_with_only_required_fields(
+    header, announcement, login, user_registration_cleanup
+):
+    email, password = user_registration_cleanup
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
+    login.full_login(email, password)
     header.click_create_announcement_button()
     announcement.create_announcement_with_only_required_fields()
     announcement.verify_announcements_page_endpoint()

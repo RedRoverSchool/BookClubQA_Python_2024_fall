@@ -1,3 +1,4 @@
+import os
 import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url
@@ -17,9 +18,15 @@ class Announcement:
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
-        self.page.locator('input[name="photo"]').set_input_files(
-            "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
+        root_dir = os.environ.get("ROOT_DIR")
+        photo_path = os.path.join(
+            root_dir, "Data", "upload_files", "stock-photo-handsome-cheerful-man.jfif"
         )
+        photo_field = self.page.locator("#id_photo")
+        photo_field.set_input_files(photo_path)
+        # self.page.locator('input[name="photo"]').set_input_files(
+        #     "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
+        # )
 
     @allure.step("Выбираем категорию")
     def pick_category(self):

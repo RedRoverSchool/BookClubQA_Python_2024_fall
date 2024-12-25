@@ -26,7 +26,7 @@ class FindTutor:
     @allure.step("Проверяем видимость картинок в списке преподавателей")
     def check_picture_of_tutor_is_visible(self):
         picture = self.page.locator('//img[@class="card-img-top"]').nth(0)
-        picture.wait_for(state='visible', timeout=5000)
+        picture.wait_for(state="visible", timeout=5000)
         assert picture.is_visible()
 
     @allure.step("Проверяем видимость имён преподавателей")
@@ -47,9 +47,10 @@ class FindTutor:
 
     @allure.step("Проверяем наличие сообщения об успешной регистрации")
     def check_message_of_registration(self, expected_message):
-        message = self.page.locator("//div[@role='alert']").text_content()
+        message = self.page.locator("//div[@role='alert']").text_content(timeout=5000)
+
         assert (
-                message.strip() == expected_message
+            message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
 
     @allure.step("Проверяем фильтр по категории")
@@ -147,7 +148,7 @@ class FindTutor:
                             "".join(filter(str.isdigit, text_content.split("Опыт:")[1]))
                         )
                         assert (
-                                actual_experience >= min_experience
+                            actual_experience >= min_experience
                         ), f"Found tutor with experience {actual_experience} < {min_experience}"
                     except (IndexError, ValueError) as e:
                         raise AssertionError(
