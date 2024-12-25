@@ -17,6 +17,7 @@ from components.homepage import Homepage
 from components.login import Login
 from components.my_teachers import MyTeachersPage
 from components.register import Register
+from components.teacher_profile import TeacherProfile
 from components.telegram_page import TelegramPage
 from components.user_profile import UserProfile
 from api_clients.user_api import ApiClient
@@ -37,6 +38,10 @@ def header(page: Page):
 @pytest.fixture
 def my_teachers(page: Page):
     return MyTeachersPage(page)
+
+@pytest.fixture
+def teacher_profile(page: Page):
+    return TeacherProfile(page)
 
 
 @pytest.fixture
