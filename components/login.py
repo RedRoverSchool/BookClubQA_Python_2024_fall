@@ -34,7 +34,7 @@ class Login:
 
     @allure.step("Нажимаем кнопку 'Войти'")
     def click_login_button(self):
-        self.page.get_by_role("button", name="Войти").click()
+        self.page.locator('//a[contains(text(),"Войти")]').click()
 
     @allure.step("Выполняем полный вход пользователя")
     def full_login(self, username: str, password: str):
@@ -43,9 +43,10 @@ class Login:
         :param username: Логин пользователя.
         :param password: Пароль пользователя.
         """
+        self.click_login_button()
         self.enter_username(username)
         self.enter_password(password)
-        self.click_login_button()
+        self.click_submit_button()
 
     @allure.step("Выполняем вход с не корректным логином")
     def check_enter_invalid_username(self, username):
@@ -53,10 +54,13 @@ class Login:
 
     def should_be_valid_message(self, expected_text):
         expected_messege_field = self.page.locator(
-            "//*[contains(text(), 'Пожалуйста')]"
+            "//*[contains(text(), 'Пожалуйста,')]"
         )
         actual_text = expected_messege_field.text_content()
         assert (
             expected_messege_field.is_visible()
         ), "Сообщение с текстом 'Пожалуйста' не найдено"
         assert expected_text == actual_text
+
+    def click_submit_button(self):
+        self.page.locator("//*[@type='submit']").click()

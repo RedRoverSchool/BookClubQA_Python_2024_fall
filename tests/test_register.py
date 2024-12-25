@@ -7,32 +7,22 @@ STUDENT_SUCCESS_REGISTRSTION_MESSAGE = "Вы успешно зарегистри
 text = "Вы успешно зарегистрировались, а так же получаете бесплатный премиум на 3 дня!"
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_register_as_tutor(header, register):
     header.visit()
     header.click_registration_button()
     register.header_should_contain_text("Регистрация")
-    register.fill_nick(fake.user_name())
-    register.fill_password("sdjflsfdjlksdjflksdjf")
-    register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
-    register.check_become_a_teacher_checkbox()
-    register.click_registration_button()
+    register.registration_new_user("tutor")
     header.create_listing_button_should_be_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
-@pytest.mark.slow
+# @pytest.mark.slow
 def test_register_as_student(header, register):
     header.visit()
     header.click_registration_button()
     register.header_should_contain_text("Регистрация")
-    register.fill_nick(fake.user_name())
-    register.fill_password("sdjflsfdjlksdjflksdjf")
-    register.fill_confirm_password("sdjflsfdjlksdjflksdjf")
-    register.click_registration_button()
+    register.registration_new_user("student")
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 def test_register_as_student_verify_success_message_text(
     homepage, register, find_tutor
 ):
@@ -40,11 +30,7 @@ def test_register_as_student_verify_success_message_text(
     homepage.visit()
     homepage.click_registration_button()
     register.verify_registration_page_opened()
-    register.fill_nick(fake.user_name())
-    register.generate_valid_password()
-    register.fill_password(register.password)
-    register.fill_confirm_password(register.password)
-    register.click_registration_button()
+    register.registration_new_user("student")
     find_tutor.check_message_of_registration(STUDENT_SUCCESS_REGISTRSTION_MESSAGE)
 
 
