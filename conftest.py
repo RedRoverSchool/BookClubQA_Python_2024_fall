@@ -126,7 +126,7 @@ def browser_context():
         browser.close()
 
 
-@pytest.fixture(autouse=True, scope="function")
+@pytest.fixture(autouse=True, scope="session")
 def set_root_dir():
     ci_root_dir = os.environ.get("GITHUB_WORKSPACE", False)
     os.environ["ROOT_DIR"] = ci_root_dir or ".."
