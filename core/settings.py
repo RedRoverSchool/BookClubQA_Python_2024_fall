@@ -21,6 +21,7 @@ my_announcement_url = f"{base_url}/listings/my_listing/"
 my_student_url = f"{base_url}/dashboard/my_students/"
 teacher_profile_url = f"{base_url}/subscription/profile/"
 statistics_url = f"{base_url}/statistics/statistics/"
+edit_announcement_url = "http://testing.misleplav.ru/listings/update/"
 
 title = "Example Domain"
 
