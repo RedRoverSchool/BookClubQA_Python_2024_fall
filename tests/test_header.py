@@ -30,7 +30,7 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
 
 def test_support_visibility_as_teacher(login, header):
     header.visit()
-    header.click_login_button()
+    # header.click_login_button()
     login.full_login("teacher_test", "a.9QA{!@HDB;en2")
     header.support_button_should_be_visible()
 
