@@ -85,6 +85,29 @@ def test_teacher_announcement_name(
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 
+# TC_13.001.001 | [Teacher]My_announcement > "Просмотреть" button redirection check
+def test_view_announcement_btn_redirection(header, announcement, login):
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    announcement.click_my_announcement_button()
+    announcement.click_view_announcement_button()
+    announcement.check_announcement_url_by_template()
+
+
+# TC_13.001.003 | [Teacher]My_announcement > "Редактировать" button redirection check
+def test_edit_announcement_btn_redirection(header, announcement, login):
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    announcement.click_my_announcement_button()
+    announcement.click_edit_announcement_button()
+    announcement.check_edit_announcement_page_url()
+
+# TC_13.001.004 | [Teacher]My_announcement > Verify the ability to see detailed ad statistics
+def test_announcement_detailed_info(header, announcement, login):
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    announcement.click_my_announcement_button()
+    announcement.check_view_counter_visible()
 
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement >
 # Verify the teacher is able  to the page "Мое объявление"#299"
