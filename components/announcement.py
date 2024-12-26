@@ -2,6 +2,8 @@ import os
 import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url
+from core.settings import edit_announcement_url
+import re
 
 
 class Announcement:
@@ -141,6 +143,29 @@ class Announcement:
         expect(self.page.get_by_role("main")).to_contain_text(
             "Сделать обьявление видимым для учеников"
         )
+
+    @allure.step("Кликаем кнопку 'Редактировать объявление'")
+    def click_edit_announcement_button(self):
+        self.page.get_by_text("Редактировать обьявление").click()
+
+    @allure.step("Кликаем кнопку 'Просмотреть объявление'")
+    def click_view_announcement_button(self):
+        self.page.get_by_text("Просмотреть объявление").click()
+
+    @allure.step("Проверяем URL страницы объявления по шаблону")
+    def check_announcement_url_by_template(self):
+        current_url = self.page.url
+        pattern = r'^http://tester:dslfjsdfblkhew%40122b1klbfw@testing\.misleplav\.ru/listings/\d+/$'
+        assert re.match(pattern, current_url), f"URL не соответствует ожидаемому шаблону: {current_url}"
+
+
+    @allure.step("Проверяем URL страницы редактирования объявления")
+    def check_edit_announcement_page_url(self):
+        expect(self.page).to_have_url(edit_announcement_url)
+
+    @allure.step("Проверяем видимость счетчика просмотров")
+    def check_view_counter_visible(self):
+        expect(self.page.locator('//p[@class="mt-4 text-muted"]')).to_be_visible()
 
     @allure.step(
         "Проходим по всему списку обьявлений и проверяем, что карточки с именем учителя нет"
