@@ -22,17 +22,19 @@ class Homepage:
     @allure.step('Check info in the "Добро пожаловать" container')
     def check_info_welcome_container(self):
         welcome_container = self.page.get_by_text(
-            'Добро пожаловать в "Мыслеплав"! Платформа, соединяющая учеников и '
-            "репетиторов, о"
-        )
-        expect(welcome_container).to_be_visible()
+            'Добро пожаловать в "Мыслеплав"! '
+            "Платформа, соединяющая учеников и репетиторов, о"
+        ).first
+        welcome_container.wait_for(state="visible", timeout=10000)
+        # expect(welcome_container).to_be_visible()
+
         expected_section_text = """
         Добро пожаловать в "Мыслеплав"!
         Платформа, соединяющая учеников и репетиторов, открывает новые горизонты для обучения.
         
             Найти репетитора
-            Найти репетитора
             Стать репетитором
+            Найти репетитора
             Стать репетитором
         """
         assert (
@@ -46,18 +48,26 @@ class Homepage:
     @allure.step('Check 2 "Найти репетитора" btns')
     def check_2_find_tutor_btns(self):
         find_tutor_btns = (
-            self.page.locator('a.d-none:text("Найти репетитора")').filter().count()
+            self.page.locator(
+                "div[class*='d-none d-sm-flex'] a:text('Найти репетитора')"
+            )
+            .filter()
+            .count()
         )
         assert find_tutor_btns == 2
 
     @allure.step('Click on "Стать репетитором" button')
     def click_become_tutor_btn(self):
-        self.page.locator('a.d-none:text("Стать репетитором")').first.click()
+        self.page.locator(
+            "div[class*='d-sm-flex'] a:text('Стать репетитором')"
+        ).first.click()
 
     @allure.step('Check 2 "Стать репетитором" btns')
     def check_2_become_tutor_btns(self):
         become_tutor_btns = (
-            self.page.locator('a.d-none:text("Стать репетитором")').filter().count()
+            self.page.locator("div[class*='d-sm-flex'] a:text('Стать репетитором')")
+            .filter()
+            .count()
         )
         assert become_tutor_btns == 2
 
@@ -219,7 +229,7 @@ class Homepage:
     @allure.step("Проверка видимости первой кнопки 'Стать репетитором'")
     def first_btn_become_a_tutor_is_visible(self):
         button = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
         )
         assert button.is_visible()
 
@@ -230,14 +240,14 @@ class Homepage:
     @allure.step("Проверка доступности первой кнопки стать репетиром")
     def find_first_btn_become_tutor(self):
         become_tutor_btn = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
         )
         assert become_tutor_btn.is_enabled()
 
     @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
     def check_find_tutor_btn_redirection(self):
         button_2 = self.page.locator(
-            "//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']"
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg"
         )
         button_2.click()
         find_tutor_btn_redirection = self.page.url
@@ -245,7 +255,8 @@ class Homepage:
 
     def check_find_tutor_btn_2_redirection(self):
         button_3 = self.page.wait_for_selector(
-            ".btn.btn-light.me-2.rounded.d-none.d-md-inline.btn-lg", state="visible"
+            "body > main > div > div > section:nth-child(6) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg",
+            state="visible",
         )
         button_3.click()
         find_tutor_btn_2_redirection = self.page.url
@@ -253,5 +264,7 @@ class Homepage:
 
     @allure.step("Проверка видипости кнопки 'Найти репетитора'")
     def find_tutor_button_should_be_visible(self):
-        button = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']")
+        button = self.page.locator(
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg"
+        )
         assert button.is_visible()

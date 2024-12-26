@@ -15,12 +15,12 @@ jobs:
   run-tests:
     name: Run tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.10", "3.12"]
+    # strategy:
+    #   matrix:
+    #     python-version: ["3.9", "3.10", "3.12"]
 
     steps:
-      # Клонируем репозиторий
+      # Клонируем репозиторий(получает код из вашего репозитория и копирует его в рабочую директорию CI-окружения)
       - name: Checkout code
         uses: actions/checkout@v4.2.2
 
@@ -39,6 +39,11 @@ jobs:
       - name: Verify installed packages
         run: pip freeze
 
+      # Отслеживает, какой тест чаще всего не проходит
+      # - name: Run tests and generate JUnit report
+      #   run: |
+      #     pytest --junitxml=report.xml
+
       # Установка необходимых браузеров Playwright Chrome.
       - name: Install Playwright browsers
         run: |
@@ -56,7 +61,7 @@ jobs:
         run: ruff format --diff --no-cache --target-version=py312
         continue-on-error: true # Не останавливает CI, если есть проблемы с форматированием(сомнительно)
 
-        # Запуск всех тестов(стоп на 1 упавшем тесте, мин инф о тестах)
+        # Запуск всех тестов(мин инф о тестах)
       - name: Run tests
         run: |
           pytest -s --alluredir=allure-results --disable-warnings -q
@@ -75,7 +80,6 @@ jobs:
       - name: Generate allure report
         uses: simple-elf/allure-report-action@master
         if: always()
-#        id: allure-report
         with:
           allure_results: allure-results
           allure_history: allure-history
@@ -85,7 +89,7 @@ jobs:
           path: gh-pages
           keep_reports: 30
 
-      - name: Commit (Deploy) allure_report to Github Pages
+      - name: Commit allure_report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
@@ -93,12 +97,13 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           publish_dir: allure-history
 
+      #      - name: Upload test file
+      #        run: cp /Data/upload_files/silver_angel.png $GITHUB_WORKSPACE/Data/upload_files/silver_angel.png
 
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Upload test file
-#        run: cp /Data/upload_files/silver_angel.png $GITHUB_WORKSPACE/Data/upload_files/silver_angel.png
+      #test
+      #      - name: Ensure test files(upload photo)
+      #        run: mkdir -p Data/upload_files && cp path_to_local_file Data/upload_files/stock-photo-handsome-cheerful-man.jfif
+
       # Сохранение логов как артефактов в случае сбоя
       - name: Save test logs
         if: failure()

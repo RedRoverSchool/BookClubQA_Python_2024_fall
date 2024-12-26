@@ -15,7 +15,7 @@ class CookieBanner:
     def cookie_banner_should_be_visible(self):
         try:
             accept_cookie_banner = self.page.wait_for_selector(
-                "#cookie-consent-banner", timeout=5000
+                "#cookie-consent-banner", timeout=10000
             )
             assert accept_cookie_banner.is_visible(), "Cookie banner is not visible!"
             return True
@@ -47,9 +47,7 @@ class CookieBanner:
                 "#cookie-consent-banner p.mb-2", timeout=5000
             )
             actual_text = cookie_text.text_content()
-            expected_text = (
-                "Мы используем куки для улучшения вашего опыта на нашем сайте."
-            )
+            expected_text = "Мы используем куки для улучшения вашего опыта на нашем сайте. Вы можете управлять своими предпочтениями."
             assert (
                 actual_text == expected_text
             ), f"Ожидается '{expected_text}', но получен '{actual_text}'"

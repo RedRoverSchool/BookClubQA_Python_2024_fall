@@ -46,7 +46,9 @@ class CreateAnnouncement:
 
     @allure.step("Кликаем на кнопку 'Создать' на странице формы объявления")
     def click_finalize_announcement_button(self):
-        self.page.locator("button", has_text="Сохранить").click()
+        self.page.locator(
+            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Сохранить"]'
+        ).click()
 
     @allure.step(
         "Убедиться, что пользователь находится на странице 'Создать объявление'"
@@ -93,8 +95,8 @@ class CreateAnnouncement:
         # values
         fio_value = f"{fake.first_name()} {fake.last_name()}"
         body_value = fake.text(max_nb_chars=500)
-        root_dir = os.environ.get('ROOT_DIR')
-        photo_path = os.path.join(root_dir, 'Data', 'upload_files', 'silver_angel.png')
+        root_dir = os.environ.get("ROOT_DIR")
+        photo_path = os.path.join(root_dir, "Data", "upload_files", "silver_angel.png")
         experience_value = randint(0, 120) / 10
         price_value = randint(100, 1000)
         duration_value = randint(10, 120)
