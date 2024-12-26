@@ -1,7 +1,6 @@
 import pytest
 
 
-@pytest.mark.skip(reason="не прошёл CI 17.12.2024")
 def test_visible_cookie_banner(cookie_banner):
     cookie_banner.open_main_page()
     cookie_banner.cookie_banner_should_be_visible()
@@ -16,7 +15,10 @@ def test_enable_button_accept(cookie_banner):
     cookie_banner.open_main_page()
     cookie_banner.cookie_button_should_be_enable()
 
-@pytest.mark.skip("Need to be fixed - the text to be match has been changed in the cookie message")
+
+@pytest.mark.skip(
+    "Need to be fixed - the text to be match has been changed in the cookie message"
+)
 def test_cookie_text_matches(cookie_banner):
     cookie_banner.open_main_page()
     cookie_banner.cookie_text_matches()

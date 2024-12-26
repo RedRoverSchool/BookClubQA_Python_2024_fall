@@ -1,19 +1,27 @@
 from faker import Faker
 
-# from pydantic_settings import BaseSettings, SettingsConfigDict
-
 fake = Faker()
-
-base_url = "http://tester:dslfjsdfblkhew@122b1klbfw@testing.misleplav.ru"
 fake_name_for_registration = fake.user_name()
 
+# links
+base_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru"
+
+signup_url = f"{base_url}/authorization/signup/"
+login_url = f"{base_url}/authorization/login/"
+
 policy_url = "https://www.example.com/privacy-policy"
-list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/"
-tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-signup_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/signup/"
-login_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/login/"
+list_url = f"{base_url}/listings/list/"
+
+tutors_list_url = f"{base_url}/listings/list/"
+
+support_url = "https://t.me/misleplav_support_bot"
+
+# tutor's url
+my_announcement_url = f"{base_url}/listings/my_listing/"
+my_student_url = f"{base_url}/dashboard/my_students/"
+teacher_profile_url = f"{base_url}/subscription/profile/"
+statistics_url = f"{base_url}/statistics/statistics/"
+
 title = "Example Domain"
 
 site_pages_urls = [
@@ -23,23 +31,23 @@ site_pages_urls = [
     },
     {
         "name": "Lists Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/my_listing/",
     },
     {
         "name": "Signup Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/signup/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/signup/",
     },
     {
         "name": "Create list Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/create/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/create/",
     },
     {
         "name": "User profile Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/profile/",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/subscription/profile/",
     },
     {
-        "name": "Statistics Page",
-        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/statistics/",
+        "name": "My students Page",
+        "url": "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/dashboard/my_students/",
     },
 ]
 

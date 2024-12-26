@@ -16,9 +16,7 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_login_button(self):
-        self.page.locator(
-            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
-        ).click()
+        self.page.locator('//a[contains(text(),"Войти")]').click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_registration_button(self):
@@ -77,9 +75,9 @@ class Header:
         assert button.is_visible()
 
     @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
-    def become_a_tutor_button_should_be_visible(self):
+    def become_a_tutor_button_is_visible(self):
         button = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
+            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
         )
         assert button.is_visible()
 
@@ -103,7 +101,7 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
     def find_a_tutor_button_should_be_visible(self):
-        button = self.page.locator('a.btn.btn-light.me-2.rounded.d-none.d-sm-inline.btn-lg[href="/listings/list/"]')
+        button = self.page.locator("//li[@class='nav-item mb-1'][2]")
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Статистика'")
@@ -144,21 +142,26 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Мои студенты'")
     def my_students_button_is_visible(self):
-        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        my_students_btn = self.page.wait_for_selector(
+            "//a[contains(text(), 'Мои студенты')]", state="visible"
+        )
         return my_students_btn.is_visible()
 
     @allure.step("Кликаем на кнопку 'Мои студенты'")
     def click_my_students_btn(self):
-        my_students_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои студенты')]", state="visible")
+        my_students_btn = self.page.wait_for_selector(
+            "//a[contains(text(), 'Мои студенты')]", state="visible"
+        )
         my_students_btn.click()
         url = self.page.url
         return url
 
     @allure.step("Кликаем кнопку 'Мое объявление'")
     def click_my_announcement_button(self):
-        self.page.locator('a', has_text='Мое объявление').click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/listings/my_listing/")
-
+        self.page.locator("a", has_text="Мое объявление").click()
+        expect(self.page).to_have_url(
+            "http://testing.misleplav.ru/listings/my_listing/"
+        )
 
     @allure.step("Наводим мышку на кнопку 'Войти' и проверяем изменение цвета")
     def hover_login_button_color_check(self):
@@ -172,11 +175,43 @@ class Header:
 
         expect(button).not_to_have_css("background-color", original_color)
 
-
     @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
     def header_home_btn_is_present(self):
         # Locate the home button in the header
         header_home_btn = self.page.locator('//a[@data-testid="logo"]')
 
         return header_home_btn
+
+    @allure.step("Проверяем наличие кнопки 'Выйти' в профиле студента")
+    def check_exit_btn_exists_for_student(self):
+        exit_button = self.page.get_by_role("link", name="Выйти")
+        return exit_button.is_visible()
+
+    @allure.step("Кликаем кнопку 'Выйти' в профиле студента")
+    def click_exit_btn_for_student(self):
+        button = self.page.locator("a", has_text="Выйти")
+        button.click()
+        expect(self.page).to_have_url("http://testing.misleplav.ru/")
+
+    @allure.step("Наводим мышку на кнопку 'Выйти' и проверяем изменение цвета")
+    def hover_exit_button_for_student_color_check(self):
+        exit_button = self.page.locator("a", has_text="Выйти")
+        original_color = exit_button.evaluate(
+            "el => window.getComputedStyle(el).backgroundColor"
+        )
+        exit_button.hover()
+        hovered_color = exit_button.evaluate(
+            "el => window.getComputedStyle(el).backgroundColor"
+        )
+        assert original_color != (
+            hovered_color,
+            f"Цвет кнопки 'Выйти' не изменился при наведении. Исходный: {original_color}, после наведения: {hovered_color}",
+        )
+
+    @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
+    def hover_profile_btn_color_check(self):
+        button = self.page.locator("//a[@data-testid='profile']")
+        original_color = button.evaluate("el => getComputedStyle(el).backgroundColor")
+        button.hover()
+        expect(button).not_to_have_css("background-color", original_color)
 

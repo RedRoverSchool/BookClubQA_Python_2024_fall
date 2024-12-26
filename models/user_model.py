@@ -12,4 +12,6 @@ class RegisterRequest(BaseModel):
     is_premium: Optional[bool] = Field(False, title="Is premium")
     is_standart: Optional[bool] = Field(False, title="Is standart")
     is_writer: Optional[bool] = Field(False, title="Is writer")
-    end_subscription: Optional[str] = Field(None, title="End subscription", nullable=True)
+    end_subscription: Optional[str] = Field(
+        None, title="End subscription", json_schema_extra={"nullable": True}
+    )

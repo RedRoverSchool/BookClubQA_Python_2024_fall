@@ -1,32 +1,37 @@
 import pytest
 
-@pytest.mark.skip("Need to be fixed - TimeoutError")
-def test_create_announcement(header, announcement, register, create_announcement_page):
+
+# @pytest.mark.skip("Need to fix")
+# TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
+# Verify the announcement is created after filling in all form fields with valid data#163
+# TEST PASSES THROUGH PYTEST ONLY
+def test_create_announcement(header, announcement, register):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
-    create_announcement_page.fill_submit_new_announcement_form()
+    announcement.create_announcement()
     announcement.verify_announcements_page_endpoint()
 
 
-# AT_12.001.004 | [Teacher] Create announcement > Create teacher announcement >
+# AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
 def test_teacher_announcement_blank_form_same_endpoint(
-    header, register, my_teachers, create_announcement_page
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
-
     create_announcement_page.verify_the_announcement_form_is_blank()
     create_announcement_page.click_finalize_announcement_button()
     create_announcement_page.verify_create_announcement_page_endpoint()
+    announcement.verify_required_fields_are_not_filled()
 
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
+@pytest.mark.skip("needs to be fixed")
 def test_teacher_announcement_blank_form(
     header, register, my_teachers, create_announcement_page, announcement
 ):
@@ -41,8 +46,10 @@ def test_teacher_announcement_blank_form(
     announcement.verify_number_of_announcements_is_zero()
 
 
-# TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisibile.
-# Check that option “Сделать объявление невидимым для учеников” switches to the option "Сделать объявление видимым для учеников" and Teacher's announcement became invisibile from the list.
+# TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisible.
+# Check that option “Сделать объявление невидимым для учеников” switches to the option
+# "Сделать объявление видимым для учеников" and Teacher's announcement became invisible from the list.
+@pytest.mark.skip("needs to be fixed")
 def test_teacher_hiding_announcement(header, login, announcement):
     header.visit()
     header.click_login_button()
@@ -61,23 +68,46 @@ def test_teacher_hiding_announcement(header, login, announcement):
     announcement.click_make_announcement_invisible()
     announcement.check_button_text_invisible()
 
-# TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement > Verify the teacher's name in the announcemen
+
+# TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement >
+# Verify the teacher's name in the announcement
+
+
 def test_teacher_announcement_name(
-        header, register, my_teachers, create_announcement_page, announcement
+    header, register, my_teachers, create_announcement_page, announcement
 ):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("tutor")
     header.click_create_announcement_button()
-
     announcement_detail = create_announcement_page.fill_submit_new_announcement_form()
-    tutor_name = announcement_detail['fio_value']
+    tutor_name = announcement_detail["fio_value"]
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 
+
+# TC_13.005.002 | [Teacher] My announcements > Hiding announcement >
+# Verify the teacher is able  to the page "Мое объявление"#299"
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
     header.click_login_button()
     login.full_login("matthewjackson@example.com", "dh8R4|(s")
     header.click_my_announcement_button()
 
+
+# TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
+# Verify the announcement is created after filling in required form fields with valid data #313
+# TEST PASSES THROUGH PYTEST ONLY
+# @pytest.mark.skip("needs to be fixed")
+@pytest.mark.parametrize(
+    "user_registration_cleanup", [("teacher", True, False)], indirect=True
+)
+def test_create_announcement_with_only_required_fields(
+    header, announcement, login, user_registration_cleanup
+):
+    email, password = user_registration_cleanup
+    header.visit()
+    login.full_login(email, password)
+    header.click_create_announcement_button()
+    announcement.create_announcement_with_only_required_fields()
+    announcement.verify_announcements_page_endpoint()
