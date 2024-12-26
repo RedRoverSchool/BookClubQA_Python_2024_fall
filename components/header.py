@@ -16,11 +16,11 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_login_button(self):
-        self.page.locator('//a[contains(text(),"Войти")]').click()
+        self.page.get_by_role('link', name="Войти").click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_registration_button(self):
-        self.page.get_by_test_id("signup").click()
+        self.page.get_by_role('link', name="Регистрация").click()
 
     @allure.step("Проверяем видимость кнопки 'Создать объявление'")
     def create_listing_button_should_be_visible(self):
@@ -214,4 +214,3 @@ class Header:
         original_color = button.evaluate("el => getComputedStyle(el).backgroundColor")
         button.hover()
         expect(button).not_to_have_css("background-color", original_color)
-

@@ -128,7 +128,6 @@ class Register:
 
         self.generate_valid_password()
         self.fill_email(email)
-        self.fill_nick(name)
         self.fill_password(self.password)
         self.fill_confirm_password(self.password)
         self.click_registration_button()
