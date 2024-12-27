@@ -3,7 +3,6 @@ import pytest
 
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
-# TEST PASSES THROUGH PYTEST ONLY
 def test_create_announcement(header, announcement, register):
     header.visit()
     header.click_registration_button()
@@ -122,12 +121,7 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
 
 # TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is created after filling in required form fields with valid data #313
-# TEST PASSES THROUGH PYTEST ONLY
-# @pytest.mark.skip("needs to be fixed")
-# @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-# @pytest.mark.parametrize(
-#     "user_registration_cleanup", [("teacher", True, False)], indirect=True
-# )
+
 def test_create_announcement_with_only_required_fields(header, announcement, register):
     # email, password = user_registration_cleanup
     header.visit()

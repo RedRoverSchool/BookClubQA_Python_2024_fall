@@ -229,7 +229,7 @@ class Homepage:
     @allure.step("Проверка видимости первой кнопки 'Стать репетитором'")
     def first_btn_become_a_tutor_is_visible(self):
         button = self.page.locator(
-            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
+            'a.btn.btn-lg.btn-outline-light.rounded-pill[href="/authorization/signup/"]'
         )
         assert button.is_visible()
 
