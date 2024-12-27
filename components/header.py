@@ -88,7 +88,7 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Создать объявление'")
     def click_create_announcement_btn(self):
-        button = self.page.locator('[data-testid="create-listing"]')
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
         button.click()
         expect(self.page).to_have_url("http://testing.misleplav.ru/listings/create/")
 
