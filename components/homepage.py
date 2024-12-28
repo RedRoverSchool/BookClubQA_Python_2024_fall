@@ -326,10 +326,8 @@ class Homepage:
         return find_tutor_btn_redirection
 
     def check_find_tutor_btn_2_redirection(self):
-        button_3 = self.page.wait_for_selector(
-            "body > main > div > div > section:nth-child(6) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg",
-            state="visible",
-        )
+        button_3 = self.page.locator("role=link[name='Найти репетитора']").last
+        button_3.wait_for(state="visible")
         button_3.click()
         find_tutor_btn_2_redirection = self.page.url
         return find_tutor_btn_2_redirection

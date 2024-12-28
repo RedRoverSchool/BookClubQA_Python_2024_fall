@@ -69,7 +69,6 @@ def test_find_tutor_btn_redirection(homepage):
     assert url == list_url
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_find_tutor_btn_2_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_2_redirection()
