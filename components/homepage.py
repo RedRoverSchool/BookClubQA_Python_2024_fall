@@ -306,9 +306,6 @@ class Homepage:
 
     @allure.step("Проверка видимости первой кнопки 'Стать репетитором'")
     def first_btn_become_a_tutor_is_visible(self):
-        # button = self.page.locator(
-        #     'a.btn.btn-lg.btn-outline-light.rounded-pill[href="/authorization/signup/"]'
-        # )
         button = self.page.get_by_role("link", name="Стать репетитором").first
         assert button.is_visible()
 
@@ -318,9 +315,7 @@ class Homepage:
 
     @allure.step("Проверка доступности первой кнопки стать репетиром")
     def find_first_btn_become_tutor(self):
-        become_tutor_btn = self.page.locator(
-            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
-        )
+        become_tutor_btn = self.page.button = self.page.get_by_role("link", name="Стать репетитором").first
         assert become_tutor_btn.is_enabled()
 
     @allure.step("Проверка редиректа кнопок 'Найти репетитора'")

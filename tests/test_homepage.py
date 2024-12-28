@@ -58,7 +58,7 @@ def test_first_btn_become_a_tutor_is_visible(homepage):
     homepage.first_btn_become_a_tutor_is_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+# @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_first_btn_become_tutor_is_enabled(homepage):
     homepage.visit()
     homepage.find_first_btn_become_tutor()
