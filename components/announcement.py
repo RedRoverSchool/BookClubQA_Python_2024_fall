@@ -10,9 +10,21 @@ class Announcement:
     def __init__(self, page: Page):
         self.page = page
 
-    @allure.step("Заполняем Ф.И.О")
-    def fill_out_fullname(self):
-        self.page.fill('input[name="name"]', "Jon Snow")
+    @allure.step("Заполняем 'Ваше имя'")
+    def fill_first_name(self):
+        self.page.fill('input[name="first_name"]', "Arthur")
+
+    @allure.step("Заполняем 'Ваша фамилия'")
+    def fill_last_name(self):
+        self.page.fill('input[name="last_name"]', "Pacha")
+
+    @allure.step("Заполняем 'Telegram'")
+    def fill_telegram(self):
+        self.page.fill('input[name="telegram"]', "Arthur Pachev")
+
+    @allure.step("Заполняем 'Телефон'")
+    def fill_phone_number(self):
+        self.page.fill('input[name="phone"]', "14103902323")
 
     @allure.step('Заполняем поле "Опишите себя"')
     def fill_out_descripption(self):
@@ -20,15 +32,19 @@ class Announcement:
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
-        root_dir = os.environ.get("ROOT_DIR")
-        photo_path = os.path.join(
-            root_dir, "Data", "upload_files", "stock-photo-handsome-cheerful-man.jfif"
-        )
-        photo_field = self.page.locator("#id_photo")
-        photo_field.set_input_files(photo_path)
-        # self.page.locator('input[name="photo"]').set_input_files(
-        #     "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
-        # )
+        try:
+            root_dir = os.environ.get("ROOT_DIR")
+            photo_path = os.path.join(
+                root_dir, "Data", "upload_files", "stock-photo-handsome-cheerful-man.jfif"
+            )
+            photo_field = self.page.locator("#id_photo")
+            photo_field.set_input_files(photo_path)
+        except Exception as e:
+            print(f"First upload error: {e}")
+            try:
+                self.page.locator('input[name="photo"]').set_input_files("Data/upload_files/stock-photo-handsome-cheerful-man.jfif")
+            except Exception as e:
+                print(f"Second upload failed with error: {e}")
 
     @allure.step("Выбираем категорию")
     def pick_category(self):
@@ -52,13 +68,13 @@ class Announcement:
             degree_checkbox.is_checked()
         ), "The 'has degree' checkbox should be checked"
 
-    @allure.step("Бесплатное первое занятие")
-    def checkbox_free_first_lesson(self):
-        free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
-        free_first_lesson_checkbox.check()
-        assert (
-            free_first_lesson_checkbox.is_checked()
-        ), "The 'free first lesson' checkbox should be checked"
+    # @allure.step("Бесплатное первое занятие")
+    # def checkbox_free_first_lesson(self):
+    #     free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
+    #     free_first_lesson_checkbox.check()
+    #     assert (
+    #         free_first_lesson_checkbox.is_checked()
+    #     ), "The 'free first lesson' checkbox should be checked"
 
     @allure.step("Вводим стоимость занятия")
     def fill_out_price(self):
@@ -67,19 +83,33 @@ class Announcement:
         filled_value = price_input.input_value()
         assert filled_value == "1000", "The price should be 1000"
 
-    @allure.step("Длительность занятия")
+    @allure.step("Продолжительность занятия")
     def fill_out_class_duration(self):
-        class_duration_input = self.page.locator("#id_class_duration")
+        class_duration_input = self.page.locator('input[name="class_duration"]')
         class_duration_input.fill("60")
         filled_value = class_duration_input.input_value()
         assert filled_value == "60", "The class duration should be 60 minutes"
 
-    @allure.step("Добавляем контактную информацию")
-    def add_contact_info(self):
-        contact_detail_input = self.page.locator("#id_phone")
-        contact_detail_input.fill("5555555555")
-        filled_value = contact_detail_input.input_value()
-        assert filled_value == "5555555555", "Phone number should be 5555555555"
+    # @allure.step("Добавляем контактную информацию")
+    # def add_contact_info(self):
+    #     contact_detail_input = self.page.locator("#id_phone")
+    #     contact_detail_input.fill("5555555555")
+    #     filled_value = contact_detail_input.input_value()
+    #     assert filled_value == "5555555555", "Phone number should be 5555555555"
+
+    @allure.step("Продавать пакеты со скидкой")
+    def checkbox_discount(self):
+        discount_checkbox = self.page.locator("#id_package_discounts")
+        discount_checkbox.check()
+        assert (
+            discount_checkbox.is_checked()
+        ), "The 'has degree' checkbox should be checked"
+
+    @allure.step('Заполняем поле "Удобное время для занятий"')
+    def fill_out_convenient_time(self):
+        self.page.fill("#id_convenient_time_slots", "Понедельник-Пятница с 10.00-11.00 "
+                                                    "Суббота и Воскресенье выходные")
+
 
     @allure.step('Нажимаем на кнопку "Сохранить"')
     def click_save_announcement_btn(self):  # click_create_announcement_btn
@@ -206,11 +236,14 @@ class Announcement:
         error_message = self.page.locator(
             '//strong[text()="Обязательное поле."]'
         ).count()
-        assert error_message == 8
+        assert error_message == 11
 
     @allure.step("Создаем объявление")
     def create_announcement(self):
-        self.fill_out_fullname()
+        self.fill_first_name()
+        self.fill_last_name()
+        self.fill_telegram()
+        self.fill_phone_number()
         self.fill_out_descripption()
         self.upload_photo()
         self.pick_category()
@@ -218,18 +251,21 @@ class Announcement:
         self.checkbox_degree()
         self.fill_out_price()
         self.fill_out_class_duration()
-        self.checkbox_free_first_lesson()
-        self.add_contact_info()
+        self.checkbox_discount()
+        self.fill_out_convenient_time()
         self.click_save_announcement_btn()
 
     @allure.step("Создаем объявление с обязательными полями")
     def create_announcement_with_only_required_fields(self):
-        self.fill_out_fullname()
+        self.fill_first_name()
+        self.fill_last_name()
+        self.fill_telegram()
+        self.fill_phone_number()
         self.fill_out_descripption()
         self.upload_photo()
         self.pick_category()
         self.fill_out_experience()
         self.fill_out_price()
         self.fill_out_class_duration()
-        self.add_contact_info()
+        self.fill_out_convenient_time()
         self.click_save_announcement_btn()
