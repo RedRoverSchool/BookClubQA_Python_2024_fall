@@ -320,9 +320,7 @@ class Homepage:
 
     @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
     def check_find_tutor_btn_redirection(self):
-        button_2 = self.page.locator(
-            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a.btn.btn-light.me-2.rounded.btn-lg"
-        )
+        button_2 = self.page.get_by_role("link", name="Найти репетитора").first
         button_2.click()
         find_tutor_btn_redirection = self.page.url
         return find_tutor_btn_redirection
