@@ -1,5 +1,3 @@
-import pytest
-
 from core.settings import list_url
 
 
