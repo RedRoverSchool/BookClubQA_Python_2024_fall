@@ -37,7 +37,6 @@ def test_checking_preferences_for_tutors_section_info_is_visible(homepage):
     homepage.check_powerful_community_card_visible()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_top()
@@ -45,7 +44,6 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_bottom()
@@ -53,7 +51,6 @@ def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_tutors()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 # TC_00.002.002.001 | Main page (body) - All users > Become a Teacher >
 # Verify button "Стать репетитором" is visible below "Добро пожаловать в "Мыслеплав"!" heading #77
 def test_first_btn_become_a_tutor_is_visible(homepage):
