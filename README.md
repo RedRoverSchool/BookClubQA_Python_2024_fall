@@ -99,7 +99,8 @@ ____________
 Чтобы получить доступ нужно:
 1. Открыть тестовое окружение
 2. Войти в аккаунт
-3. Открыть http://testing.misleplav.ru/api/swagger/
+3. <img src='https://github.com/user-attachments/assets/97dc767c-e7a0-4e26-bb54-1d888d4bbb6b'  width="30" height="30"> Открыть ~~http://testing.misleplav.ru/api/swagger/~~
+
 
 ___
 ## 8. Замечания
