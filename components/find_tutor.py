@@ -114,7 +114,7 @@ class FindTutor:
     @allure.step('Проверяем видимость кнопки "Фильтровать"')
     def check_filter_btn_is_visible(self):
         filter_btn = self.page.locator(
-            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Фильтровать"]'
+            'button.btn.btn-primary.me-2.rounded-pill[type="submit"]'
         )
         assert filter_btn.is_visible()
 
