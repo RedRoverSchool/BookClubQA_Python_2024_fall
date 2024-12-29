@@ -39,7 +39,7 @@
 2. Создаем ветку для своих тестов 
 3. Пушим ветку в Github 
 4. Открываем запрос на слияние с main
-5. Отправляем запрос в slack в чат [#qa_python_project](https://redroverschool.slack.com/archives/C05US8RLPFU) или в свою группу
+5. Отправляем запрос в slack чат [#qa_python_project](https://redroverschool.slack.com/archives/C05US8RLPFU) или [#team_python_project_2024_fall](https://redroverschool.slack.com/archives/C084TBYK42F)
 6. Обязательно удаляем свою ветку после слияния с main
 
 ## 4.⚙️ Установка
