@@ -96,10 +96,7 @@ ____________
 6. Не самые важные тесты стоит помечать маркером slow (@pytest.mark.slow)
 
 ## 7. <img src="https://github.com/user-attachments/assets/6498bf14-1bd2-4825-8513-9f16da124dfd" width="30" height="30"> Swagger доступен только на тестовом окружении. 
-Чтобы получить доступ нужно:
-1. Открыть тестовое окружение
-2. Войти в аккаунт
-3. <img src='https://github.com/user-attachments/assets/97dc767c-e7a0-4e26-bb54-1d888d4bbb6b'  width="30" height="30"> Открыть ~~http://testing.misleplav.ru/api/swagger/~~
+<img src='https://github.com/user-attachments/assets/97dc767c-e7a0-4e26-bb54-1d888d4bbb6b'  width="30" height="30"> Открыть ~~http://testing.misleplav.ru/api/swagger/~~
 
 
 ___
