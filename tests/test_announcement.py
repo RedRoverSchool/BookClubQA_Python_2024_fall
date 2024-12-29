@@ -94,7 +94,6 @@ def test_view_announcement_btn_redirection(header, announcement, login):
 
 
 # TC_13.001.003 | [Teacher]My_announcement > "Редактировать" button redirection check
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_edit_announcement_btn_redirection(header, announcement, login):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
@@ -111,12 +110,11 @@ def test_announcement_detailed_info(header, announcement, login):
 
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement >
 # Verify the teacher is able  to the page "Мое объявление"#299"
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
-    header.click_login_button()
-    login.full_login("matthewjackson@example.com", "dh8R4|(s")
-    header.click_my_announcement_button()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    announcement.click_my_announcement_button()
 
 
 # TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
