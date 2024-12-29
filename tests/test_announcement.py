@@ -14,7 +14,6 @@ def test_create_announcement(header, announcement, register):
 
 # AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_teacher_announcement_blank_form_same_endpoint(
     header, register, my_teachers, create_announcement_page, announcement
 ):
@@ -30,7 +29,6 @@ def test_teacher_announcement_blank_form_same_endpoint(
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
-@pytest.mark.skip("needs to be fixed")
 def test_teacher_announcement_blank_form(
     header, register, my_teachers, create_announcement_page, announcement
 ):
