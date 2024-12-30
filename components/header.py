@@ -28,20 +28,17 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Найти репетитора'")
     def click_find_tutor_button(self):
-        self.page.locator("//li/a[text() = 'Найти репетитора']").click()
+        btn = self.page.locator('//html/body/main/div/div/section[1]/div/div/a[1]')
+        btn.click()
 
     @allure.step("Проверяем видимость кнопки 'Поддержка'")
     def support_button_should_be_visible(self):
-        button = self.page.locator(
-            "//a[contains(@class, 'btn') and text()='Поддержка']"
-        )
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Поддержка'")
     def click_support_button(self):
-        button = self.page.locator(
-            "//a[contains(@class, 'btn') and text()='Поддержка']"
-        )
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         button.click()
         expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
 
@@ -58,27 +55,25 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):
-        button = self.page.locator("[data-testid='profile']")
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Профиль'")
     def click_profile_button(self):
-        button = self.page.get_by_test_id("profile")
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         button.click()
         expect(self.page).to_have_url(profile_page)
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
         button = self.page.locator(
-            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
+            '//*[@id="navbarNav"]/ul/li[1]/a'
         )
         assert button.is_visible()
 
     @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
     def become_a_tutor_button_is_visible(self):
-        button = self.page.locator(
-            "body > main > div > div > section:nth-child(1) > div.d-none.d-sm-flex.justify-content-center.mt-4 > a:nth-child(2)"
-        )
+        button = self.page.locator('//html/body/main/div/div/section[1]/div/div/a[2]')
         assert button.is_visible()
 
     @allure.step("Проверяем доступна ли кнопка 'Войти' для взаимодействия")
