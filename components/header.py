@@ -96,7 +96,7 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
     def find_a_tutor_button_should_be_visible(self):
-        button = self.page.locator("//li[@class='nav-item mb-1'][2]")
+        button = self.page.locator("//*[@id='navbarNav']//a[@href ='/listings/list/']")
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Статистика'")
