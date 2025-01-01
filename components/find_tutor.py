@@ -25,20 +25,18 @@ class FindTutor:
 
     @allure.step("Проверяем видимость картинок в списке преподавателей")
     def check_picture_of_tutor_is_visible(self):
-        picture = self.page.locator('//img[@class="card-img-top"]').nth(0)
+        picture = self.page.locator("(//img[@class='img-fluid card-img-top'])[1]")
         picture.wait_for(state="visible", timeout=5000)
         assert picture.is_visible()
 
     @allure.step("Проверяем видимость имён преподавателей")
     def check_name_of_tutor_is_visible(self):
-        name = self.page.locator('//h5[@class="card-title"]').nth(0)
+        name = self.page.locator("(//h5[@class='mb-2 fw-bold text-dark'])[1]")
         assert name.is_visible()
 
     @allure.step("Проверяем видимость названия предмета")
     def check_subject_of_tutor_is_visible(self):
-        subject = self.page.locator('//h6[@class="card-subtitle mb-2 text-muted"]').nth(
-            0
-        )
+        subject = self.page.locator("(//div[@class='d-flex w-100'])[1]/div[1]/div[2]")
         assert subject.is_visible()
 
     @allure.step("Проверяем видимость цены")

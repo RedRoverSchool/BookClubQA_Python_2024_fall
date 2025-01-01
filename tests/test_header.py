@@ -79,7 +79,7 @@ def test_become_a_tutor_button_is_visible(header):
     header.visit()
     header.become_a_tutor_button_is_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_see_list_of_tutors_profiles(header, find_tutor):
     header.visit()
     header.find_a_tutor_button_should_be_visible()
