@@ -65,7 +65,7 @@ class FindTutor:
                 "heading", name="Математика"
             ).count()
 
-        self.page.get_by_label("Категория").select_option("Математика")
+        self.page.locator("//select[@id='categorySelect']").select_option("Математика")
         self.page.get_by_role("button", name="Фильтровать").click()
         self.page.wait_for_load_state()
         all_tutors_math_filtered = self.page.get_by_role(

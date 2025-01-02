@@ -57,7 +57,7 @@ def test_support_clickability_as_student(login, header):
     login.full_login("teststudent12345@yahoo.com", "!!test!!123")
     header.click_support_button()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_hover_support_button_as_student(register, login, header):
     header.visit()
     header.click_registration_button()
@@ -148,7 +148,7 @@ def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
     register.registration_new_user(user_type="tutor")
     assert header.my_students_button_is_hidden() is True
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_filter_tutor_by_category(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
@@ -204,7 +204,6 @@ def test_hover_exit_button_for_student_color_check(header, register):
     register.registration_new_user("student")
     header.hover_exit_button_for_student_color_check()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -217,7 +216,6 @@ def test_profile_btn_visibility(header, login, data, page: Page):
     page.goto(page_url)
     header.profile_button_should_be_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -230,7 +228,6 @@ def test_profile_btn_hover(header, login, data, page: Page):
     page.goto(page_url)
     header.hover_profile_btn_color_check()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
