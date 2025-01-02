@@ -1,5 +1,3 @@
-import pytest
-
 
 def test_visible_cookie_banner(cookie_banner):
     cookie_banner.open_main_page()
