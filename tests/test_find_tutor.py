@@ -28,7 +28,7 @@ def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(min_price)
 
-@allure.title("TC_05.001.005.003")
+@allure.title("TC_05.001.005.001")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/251")
 def test_verify_tutors_after_entered_min_experience(find_tutor):
     """
