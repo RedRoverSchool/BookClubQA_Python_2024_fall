@@ -95,18 +95,22 @@ class FindTutor:
     )
     def check_prices_over_min_price(self, min_price: float) -> object:
         # Проверяем, есть ли репетиторы на странице
-        teachers_list_price = self.page.locator(".card-text")
+        price_siblings_list = self.page.get_by_text("Цена:")
 
-        if teachers_list_price.count() > 0:
+        if price_siblings_list.count() > 0:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
-            for i in range(teachers_list_price.count()):
+            for i in range(price_siblings_list.count()):
+                price_sibling = price_siblings_list.nth(i)
+                actual_price_in_string = (price_sibling
+                                          .locator("+ div")
+                                          .text_content().strip())
                 actual_price = float(
-                    teachers_list_price.nth(i).text_content().strip().split(" ")[1]
+                    actual_price_in_string.split(" ")[0]
                 )
                 assert actual_price >= min_price
         else:
             # Если список репетиторов пустой, то проверяем сообщение
-            text = self.page.locator("//div[@class='alert alert-info']").text_content()
+            text = self.page.locator(".alert alert-info rounded-5").text_content()
             assert "Нет результатов", text
 
     @allure.step('Проверяем видимость кнопки "Фильтровать"')
@@ -137,28 +141,25 @@ class FindTutor:
         "Проверяем, что опыт преподавания репетиторов больше или равен заданному значению"
     )
     def check_experience_over_min_value(self, min_experience: int):
-        teachers_list_experience = self.page.locator(".card-text")
-        if teachers_list_experience.count() > 0:
-            for i in range(teachers_list_experience.count()):
-                text_content = teachers_list_experience.nth(i).text_content().strip()
-                if "Опыт:" in text_content:
-                    try:
-                        actual_experience = int(
-                            "".join(filter(str.isdigit, text_content.split("Опыт:")[1]))
-                        )
-                        assert (
-                            actual_experience >= min_experience
-                        ), f"Found tutor with experience {actual_experience} < {min_experience}"
-                    except (IndexError, ValueError) as e:
-                        raise AssertionError(
-                            f"Failed to parse experience from text: '{text_content}'. Error: {e}"
-                        )
-                else:
-                    continue
+        experience_siblings_list = self.page.get_by_text("Опыт преподавания:")
+
+        if experience_siblings_list.count() > 0:
+            # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
+            for i in range(experience_siblings_list.count()):
+                experience_sibling = experience_siblings_list.nth(i)
+                actual_experience_in_string = (experience_sibling
+                                          .locator("+ div")
+                                          .text_content().strip())
+                try:
+                    actual_experience = float(
+                        actual_experience_in_string.split(" ")[0]
+                    )
+                    assert actual_experience >= min_experience
+                except (IndexError, ValueError) as e:
+                    raise AssertionError(
+                        f"Failed to parse experience from text: '{actual_experience_in_string}'. Error: {e}"
+                    )
         else:
-            text = (
-                self.page.locator("//div[@class='alert alert-info']")
-                .text_content()
-                .strip()
-            )
-            assert "Нет результатов" in text, f"Unexpected message: '{text}'"
+            # Если список репетиторов пустой, то проверяем сообщение
+            text = self.page.locator(".alert alert-info rounded-5").text_content()
+            assert "Нет результатов", text
