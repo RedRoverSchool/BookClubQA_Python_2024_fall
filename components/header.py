@@ -45,13 +45,13 @@ class Header:
     @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
     def hover_support_button_color_check(self):
         button = self.page.locator(
-            "//a[contains(@class, 'btn') and text()='Поддержка']"
+            "//a[contains(., 'Поддержка')]"
         )
         original_color = button.evaluate(
-            "el => window.getComputedStyle(el).backgroundColor"
+            "el => window.getComputedStyle(el).color"
         )
         button.hover()
-        expect(button).not_to_have_css("background-color", original_color)
+        expect(button).not_to_have_css("color", original_color)
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):
