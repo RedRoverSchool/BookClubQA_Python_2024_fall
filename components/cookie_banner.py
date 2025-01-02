@@ -64,7 +64,7 @@ class CookieBanner:
             raise AssertionError("Cookie banner not found within 5 seconds")
 
     @allure.step(
-        "Проверяем что сообщения больше не отображается после нажатия кнопки 'Согласиться'"
+        "Проверяем что банер больше не отображается после нажатия кнопки 'Согласиться'"
     )
     def cookie_banner_is_missing(self):
         try:
@@ -75,7 +75,7 @@ class CookieBanner:
             raise AssertionError("Cookie banner did not disappear as expected")
 
     @allure.step(
-        "Проверяем, что сообщение не появляется при повторном запуске приложения "
+        "Проверяем, что банер не появляется при повторном запуске приложения "
     )
     def banner_does_not_reappear(self):
         self.page.reload()
