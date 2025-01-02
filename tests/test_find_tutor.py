@@ -27,6 +27,8 @@ def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(min_price)
 
+
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @allure.title("TC_05.001.005.003")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/251")
