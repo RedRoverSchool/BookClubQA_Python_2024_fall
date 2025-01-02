@@ -78,8 +78,8 @@ class FindTutor:
             all_tutors_math_filtered += self.page.get_by_role(
                 "heading", name="Математика"
             ).count()
-        #
-        # assert all_tutors_math == all_tutors_math_filtered
+
+        assert all_tutors_math == all_tutors_math_filtered
 
     @allure.step("Нажимаем на кнопку Фильтровать")
     def click_filter_button(self):
