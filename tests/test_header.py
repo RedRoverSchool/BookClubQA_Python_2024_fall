@@ -204,7 +204,6 @@ def test_hover_exit_button_for_student_color_check(header, register):
     register.registration_new_user("student")
     header.hover_exit_button_for_student_color_check()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -217,7 +216,6 @@ def test_profile_btn_visibility(header, login, data, page: Page):
     page.goto(page_url)
     header.profile_button_should_be_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
@@ -230,7 +228,6 @@ def test_profile_btn_hover(header, login, data, page: Page):
     page.goto(page_url)
     header.hover_profile_btn_color_check()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
