@@ -9,7 +9,6 @@ def test_login_button_opens_login_page(header, login):
     header.click_login_button()
     login.check_url_login_page("/login")
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_verify_registration_options_on_registration_page(header, register):
     header.visit()
     header.click_registration_button()
@@ -21,17 +20,16 @@ def test_verify_registration_options_on_login_page(header, login):
     header.click_login_button()
     login.check_title_of_registration()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
     find_tutor.check_title_of_registration()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_support_visibility_as_teacher(login, header):
     header.visit()
-    # header.click_login_button()
-    login.full_login("teacher_test", "a.9QA{!@HDB;en2")
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
     header.support_button_should_be_visible()
 
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
@@ -48,18 +46,15 @@ def test_support_clickability_as_teacher(
     print(email, password)
     header.click_support_button()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_support_visibility_as_student(login, header):
     header.visit()
-    header.click_login_button()
-    login.full_login("student_test", "]<c%ZTHH8EZ3L–+")
+    login.full_login("teststudent12345@yahoo.com", "!!test!!123")
     header.support_button_should_be_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-def test_support_clickability_as_student(register, login, header):
+def test_support_clickability_as_student(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("student")
+    login.full_login("teststudent12345@yahoo.com", "!!test!!123")
     header.click_support_button()
 
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
@@ -69,7 +64,6 @@ def test_hover_support_button_as_student(register, login, header):
     register.registration_new_user("student")
     header.hover_support_button_color_check()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_verify_redirection_on_profile_page(login, header, register):
     header.visit()
     header.click_registration_button()
@@ -77,17 +71,15 @@ def test_verify_redirection_on_profile_page(login, header, register):
     header.click_profile_button()
     header.profile_button_should_be_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_login_button_is_visible(header):
     header.visit()
     header.login_button_should_be_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_become_a_tutor_button_is_visible(header):
     header.visit()
     header.become_a_tutor_button_is_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_see_list_of_tutors_profiles(header, find_tutor):
     header.visit()
     header.find_a_tutor_button_should_be_visible()

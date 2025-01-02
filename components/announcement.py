@@ -176,11 +176,11 @@ class Announcement:
 
     @allure.step("Кликаем кнопку 'Редактировать объявление'")
     def click_edit_announcement_button(self):
-        self.page.get_by_text("Редактировать обьявление").click()
+        self.page.locator('a.btn.btn-outline-primary.w-100.py-3.rounded-pill[href="/listings/update/"]').click()
 
     @allure.step("Кликаем кнопку 'Просмотреть объявление'")
     def click_view_announcement_button(self):
-        self.page.get_by_text("Просмотреть объявление").click()
+        self.page.locator('a.btn.btn-primary.w-100.py-3.rounded-pill[href="/listings/2/"]').click()
 
     @allure.step("Проверяем URL страницы объявления по шаблону")
     def check_announcement_url_by_template(self):
@@ -195,7 +195,7 @@ class Announcement:
 
     @allure.step("Проверяем видимость счетчика просмотров")
     def check_view_counter_visible(self):
-        expect(self.page.locator('//p[@class="mt-4 text-muted"]')).to_be_visible()
+        expect(self.page.locator('p.mt-4.text-center.text-secondary')).to_be_visible()
 
     @allure.step(
         "Проходим по всему списку обьявлений и проверяем, что карточки с именем учителя нет"

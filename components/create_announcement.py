@@ -15,34 +15,37 @@ class CreateAnnouncement:
     def verify_the_announcement_form_is_blank(self):
         NO_CATEGORY_SELECTED_TEXT = "---------"
         # locators
-        fio_field = self.page.locator("#id_name")
+        first_name_field = self.page.locator('input[name="first_name"]')
+        last_name_field = self.page.locator('input[name="last_name"]')
+        telegram_field = self.page.locator('input[name="telegram"]')
+        phone_number_field = self.page.locator('input[name="phone"]')
         body_field = self.page.locator("#id_description")
         photo_field = self.page.locator("#id_photo")
         subject_category_field = self.page.locator("#id_category option[selected]")
         experience_field = self.page.locator("#id_years_of_experience")
         education_checkbox = self.page.locator("#id_has_degree")
         price_field = self.page.locator("#id_price")
-        duration_field = self.page.locator("#id_class_duration")
-        free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
-        phone_field = self.page.locator("#id_phone")
-        telegram_field = self.page.locator("#id_telegram")
-        email_field = self.page.locator("#id_email")
+        duration_field = self.page.locator('input[name="class_duration"]')
+        discount_checkbox = self.page.locator("#id_package_discounts")
+        convenient_time_field = self.page.locator('#id_convenient_time_slots')
 
         photo_field_file_number = photo_field.evaluate("el => el.files.length")
 
         # assertions
-        expect(fio_field).to_be_empty()
+        expect(first_name_field).to_be_empty()
+        expect(last_name_field).to_be_empty()
+        expect(telegram_field).to_be_empty()
+        expect(phone_number_field).to_be_empty()
         expect(body_field).to_be_empty()
         expect(subject_category_field).to_have_text(NO_CATEGORY_SELECTED_TEXT)
         expect(experience_field).to_be_empty()
         expect(education_checkbox).not_to_be_checked()
-        expect(free_first_lesson_checkbox).not_to_be_checked()
         expect(price_field).to_be_empty()
         expect(duration_field).to_be_empty()
         assert photo_field_file_number == 0
-        expect(phone_field).to_be_empty()
-        expect(telegram_field).to_be_empty()
-        expect(email_field).to_be_empty()
+        expect(discount_checkbox).not_to_be_checked()
+        expect(convenient_time_field).to_be_empty()
+
 
     @allure.step("Кликаем на кнопку 'Создать' на странице формы объявления")
     def click_finalize_announcement_button(self):
