@@ -55,12 +55,12 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):
-        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Профиль'")
     def click_profile_button(self):
-        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
         button.click()
         expect(self.page).to_have_url(profile_page)
 
@@ -205,7 +205,7 @@ class Header:
 
     @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
     def hover_profile_btn_color_check(self):
-        button = self.page.locator("//a[@data-testid='profile']")
-        original_color = button.evaluate("el => getComputedStyle(el).backgroundColor")
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
+        original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
-        expect(button).not_to_have_css("background-color", original_color)
+        expect(button).not_to_have_css("color", original_color)
