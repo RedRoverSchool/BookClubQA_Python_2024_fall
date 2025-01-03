@@ -157,7 +157,7 @@ def test_filter_tutor_by_category(header, find_tutor):
 
 # TC_02.001.001.002 | Guest-Header > Sign in(button) >
 # Verify background color of the button "Войти" is changed while hovering
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 def test_login_button_change_color_on_hover(header):
     header.visit()
     header.hover_login_button_color_check()
@@ -165,7 +165,6 @@ def test_login_button_change_color_on_hover(header):
 
 # TC_02.006.001.001 | Guest - Header > "Мыслеплав" button redirects to the Home page >
 # "Мыслеплав" button (Home button) in the header is visible
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
     # Iterate through all the urls available for Guest
     for page_url in pages_urls_for_guest:
