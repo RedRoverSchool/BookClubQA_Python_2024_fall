@@ -28,5 +28,7 @@ class CookieBanner:
             accept_button = self.page.wait_for_selector(
                 "#cookie-consent-banner", state="hidden", timeout=5000
             )
+            assert accept_button.is_visible(), "Button 'Согласиться' is not visible!"
+            return True
         except TimeoutError:
             raise AssertionError("Cookie banner reappeared after reopening the app")
