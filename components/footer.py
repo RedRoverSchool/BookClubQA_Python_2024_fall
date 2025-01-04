@@ -1,7 +1,7 @@
 import allure
 from playwright.sync_api import Page, expect
 
-from core.settings import base_url, policy_url, list_url, signup_url, login_url, title
+from core.settings import base_url, policy_url, list_url, signup_url, login_url
 
 
 class Footer:
@@ -32,7 +32,10 @@ class Footer:
 
     @allure.step("Кликаем на название url 'Политика конфиденциальности'")
     def click_privacy_policy_url(self):
-        self.page.get_by_text("Политика конфиденциальности").click()
+        try:
+            self.page.get_by_role("link", name="Политика конфиденциальности").click()
+        except TimeoutError:
+            raise AssertionError("URL 'Политика конфиденциальности' not found")
 
     @allure.step("Ждем завершения навигации")
     def wait_for_navigation(self):
@@ -40,12 +43,18 @@ class Footer:
 
     @allure.step("Проверяем видимость url 'Политика конфиденциальности'")
     def privacy_policy_url_should_be_visible(self):
-        expect(self.page.get_by_text("Политика конфиденциальности")).to_be_visible()
+        expect(self.page.get_by_role("link", name="Политика конфиденциальности")).to_be_visible()
 
     @allure.step("Проверяем доступность url 'Политика конфиденциальности'")
     def privacy_policy_url_should_be_enabled(self):
-        expect(self.page.get_by_text("Политика конфиденциальности")).to_be_enabled()
+        expect(self.page.get_by_role("link", name="Политика конфиденциальности")).to_be_enabled()
 
-    @allure.step("Проверяем перенаправление на страницу 'Политика Конфиденциальности'")
-    def privacy_policy_page_should_contain_text(self):
-        expect(self.page.get_by_text("Example Domain")).to_contain_text(title)
+    @allure.step("Проверяем успешность перехода на страницу 'Политика Конфиденциальности'")
+    def verify_privacy_policy_page(self):
+        try:
+            expect(self.page).to_have_url("http://testing.misleplav.ru/policy/")
+            title = "Политика конфиденциальности"
+            expect(self.page.get_by_role("heading", name="Политика конфиденциальности")).to_contain_text(title)
+        except Exception as e:
+            print(f"Ошибка проверки страницы: {e}")
+            raise
