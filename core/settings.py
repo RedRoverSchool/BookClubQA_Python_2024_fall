@@ -9,7 +9,7 @@ base_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru"
 signup_url = f"{base_url}/authorization/signup/"
 login_url = f"{base_url}/authorization/login/"
 
-policy_url = "https://www.example.com/privacy-policy"
+policy_url = f"{base_url}/policy/"
 list_url = f"{base_url}/listings/list/"
 
 tutors_list_url = f"{base_url}/listings/list/"
@@ -23,7 +23,7 @@ teacher_profile_url = f"{base_url}/subscription/profile/"
 statistics_url = f"{base_url}/statistics/statistics/"
 edit_announcement_url = "http://testing.misleplav.ru/listings/update/"
 
-title = "Example Domain"
+
 
 site_pages_urls = [
     {

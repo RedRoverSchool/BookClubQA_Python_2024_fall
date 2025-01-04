@@ -49,7 +49,7 @@ class CookieBanner:
             actual_text = cookie_text.text_content()
             expected_text = "Мы используем куки для улучшения вашего опыта на нашем сайте. Вы можете управлять своими предпочтениями."
             assert (
-                actual_text == expected_text
+                    actual_text == expected_text
             ), f"Ожидается '{expected_text}', но получен '{actual_text}'"
             return True
         except TimeoutError:

@@ -1,4 +1,3 @@
-
 def test_visible_cookie_banner(cookie_banner):
     cookie_banner.open_main_page()
     cookie_banner.cookie_banner_should_be_visible()
