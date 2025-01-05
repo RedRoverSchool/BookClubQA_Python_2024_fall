@@ -26,7 +26,7 @@ def test_check_enter_invalid_username(header, login):
     login.enter_password(valid_password)
     login.click_submit_button()
     login.should_be_valid_message(error_messages)
-
+    
 
 @allure.title("TC_03.002.001")
 def test_email_and_password_and_login_button_is_visible(header, login):
