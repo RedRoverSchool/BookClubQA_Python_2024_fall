@@ -22,6 +22,43 @@ class Login:
     def open_login_page(self):
         self.page.goto(login_url)
 
+    @allure.step("Проверяем видимость поля ввода логина")
+    def login_field_should_be_visible(self):
+        field = self.page.locator("#id_username")
+        assert field.is_visible()
+
+    @allure.step("Проверяем видимость поля ввода пароля")
+    def password_field_should_be_visible(self):
+        field = self.page.locator("#id_password")
+        assert field.is_visible()
+
+    @allure.step("Проверяем видимость кнопки 'Войти'")
+    def login_dark_button_should_be_visible(self):
+        button = self.page.locator('button[type="submit"]')
+        assert button.is_visible()
+
+    @allure.step("Проверяем видимость сообщения о не правильном вводе логина и пароля")
+    def invalid_credentials_message_should_be_visible(self):
+        text = "Пожалуйста, введите правильные email и пароль. Оба поля могут быть чувствительны к регистру."
+        message = self.page.locator(f"ul li:has-text('{text}')")
+        assert message.is_visible()
+
+    @allure.step("Проверяем видимость текста 'Нет аккаунта'")
+    def login_text_should_be_visible(self):
+        text = self.page.locator('.text-center.mt-3')
+        assert text.is_visible()
+
+    @allure.step("Проверяем видимость активного URL 'Создать учетную запись'")
+    def login_active_url_should_be_visible(self):
+        active_url = self.page.locator('a.text-dark')
+        assert active_url.is_visible()
+
+    @allure.step("Нажимаем 'Создать учетную запись' URL")
+    def click_create_account_url(self):
+        create_account_url = self.page.locator(".text-dark")
+        create_account_url.click()
+
+
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):
         username_field = self.page.locator("input[name='username']")
