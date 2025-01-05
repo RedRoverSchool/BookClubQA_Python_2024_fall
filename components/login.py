@@ -45,19 +45,18 @@ class Login:
 
     @allure.step("Проверяем видимость текста 'Нет аккаунта'")
     def login_text_should_be_visible(self):
-        text = self.page.locator('.text-center.mt-3')
+        text = self.page.locator(".text-center.mt-3")
         assert text.is_visible()
 
     @allure.step("Проверяем видимость активного URL 'Создать учетную запись'")
     def login_active_url_should_be_visible(self):
-        active_url = self.page.locator('a.text-dark')
+        active_url = self.page.locator("a.text-dark")
         assert active_url.is_visible()
 
     @allure.step("Нажимаем 'Создать учетную запись' URL")
     def click_create_account_url(self):
         create_account_url = self.page.locator(".text-dark")
         create_account_url.click()
-
 
     @allure.step("Вводим логин пользователя")
     def enter_username(self, username: str):

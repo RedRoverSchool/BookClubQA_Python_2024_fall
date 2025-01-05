@@ -103,6 +103,7 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 @pytest.mark.parametrize(
     "user_registration_cleanup", [("teacher", True, False)], indirect=True

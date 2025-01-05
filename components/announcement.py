@@ -28,7 +28,9 @@ class Announcement:
 
     @allure.step('Заполняем поле "Опишите себя"')
     def fill_out_descripption(self):
-        self.page.fill("#id_description", "Great teacher")
+        self.page.fill(
+            "#id_description", "Great teacher"
+        )
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
@@ -42,7 +44,9 @@ class Announcement:
         except Exception as e:
             print(f"First upload error: {e}")
             try:
-                self.page.locator('input[name="photo"]').set_input_files("Data/upload_files/stock-photo-handsome-cheerful-man.jfif")
+                self.page.locator('input[name="photo"]').set_input_files(
+            "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
+        )
             except Exception as e:
                 print(f"Second upload failed with error: {e}")
 
