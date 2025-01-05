@@ -1,4 +1,5 @@
 import pytest
+import time
 
 
 def test_login_button_opens_login_page(header, login):
@@ -136,3 +137,31 @@ def test_filter_tutor_by_category(header, find_tutor):
     header.click_find_tutor_button()
     find_tutor.check_filter_form()
 
+
+# TC_31.003.001.001 | [Student ] Header > My Tutor(button) > Visibility check #326
+def test_my_tutor_btn_visibility_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("timo_s@gmail.com", "Test123$")
+    header.student_my_tutors_button_is_visible()
+
+# TC_31.003.001.003 | [Student ] Header > My Tutor(button) > Visibility check #326
+def test_my_tutor_btn_clickable_redirection_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("timo_s@gmail.com", "Test123$")
+    header.student_my_tutors_button_clickable_redirect()
+
+# TC_31.004.001.001 | [Student ] Header > Find Teacher(button) > Visibility check #321
+def test_find_tutor_btn_visibility_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("timo_s@gmail.com", "Test123$")
+    header.student_find_tutor_button_is_visible()
+
+# TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Visibility check #321
+def test_find_tutor_btn_clickable_redirection_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("timo_s@gmail.com", "Test123$")
+    header.student_find_tutor_button_clickable_redirect()

@@ -12,6 +12,7 @@ list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listi
 tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
 list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/"
 tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+my_tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/dashboard/my_teachers/"
 signup_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/signup/"
 login_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/login/"
 title = "Example Domain"
