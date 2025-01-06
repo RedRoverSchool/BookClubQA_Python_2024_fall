@@ -4,7 +4,8 @@ from faker import Faker
 
 fake = Faker()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+@allure.title("TC_05.001.006.002")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/243")
 def test_redirect_to_tutors_page_with_0_min_price(find_tutor):
     find_tutor.open_find_tutor_page()
     find_tutor.enter_min_price(0)
@@ -12,9 +13,9 @@ def test_redirect_to_tutors_page_with_0_min_price(find_tutor):
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(0)
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-@allure.title("TC_05.001.006.002")
-@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/243")
+@pytest.mark.skip(reason="не прошёл CI из-за бага в фильтре по min и max цене от 02.01.2025")
+@allure.title("TC_05.001.006.004")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/287")
 def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     """
     Проверка, что после ввода в поле фильтра "Минимальная цена (от)" рандомного значения с клавиатуры, в списке
@@ -27,8 +28,7 @@ def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(min_price)
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-@allure.title("TC_05.001.005.003")
+@allure.title("TC_05.001.005.001")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/251")
 def test_verify_tutors_after_entered_min_experience(find_tutor):
     """

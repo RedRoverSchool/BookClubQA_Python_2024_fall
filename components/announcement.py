@@ -233,10 +233,9 @@ class Announcement:
 
     @allure.step("Убедиться, что обязательные поля не заполнены")
     def verify_required_fields_are_not_filled(self):
-        error_message = self.page.locator(
-            '//strong[text()="Обязательное поле."]'
-        ).count()
-        assert error_message == 11
+        error_message_count = self.page.locator( '//strong[text()="Обязательное поле."]' ).count()
+        print(f"Found {error_message_count} error messages.")
+        assert error_message_count == 11 , f"Expected 11 error messages, but found {error_message_count}"
 
     @allure.step("Создаем объявление")
     def create_announcement(self):

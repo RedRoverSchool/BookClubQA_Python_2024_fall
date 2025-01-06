@@ -55,12 +55,12 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):
-        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Профиль'")
     def click_profile_button(self):
-        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
         button.click()
         expect(self.page).to_have_url(profile_page)
 
@@ -161,19 +161,16 @@ class Header:
     @allure.step("Наводим мышку на кнопку 'Войти' и проверяем изменение цвета")
     def hover_login_button_color_check(self):
         button = self.page.locator(
-            '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
+            'a.nav-link[href="/authorization/login/"]'
         )
-        original_color = button.evaluate(
-            "el => window.getComputedStyle(el).backgroundColor"
-        )
+        original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
-
-        expect(button).not_to_have_css("background-color", original_color)
+        expect(button).not_to_have_css("color", original_color)
 
     @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
     def header_home_btn_is_present(self):
         # Locate the home button in the header
-        header_home_btn = self.page.locator('//a[@data-testid="logo"]')
+        header_home_btn = self.page.locator('a.navbar-brand.fw-bold.fs-4.ms-3[href="/"]')
 
         return header_home_btn
 
@@ -205,7 +202,7 @@ class Header:
 
     @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
     def hover_profile_btn_color_check(self):
-        button = self.page.locator("//a[@data-testid='profile']")
-        original_color = button.evaluate("el => getComputedStyle(el).backgroundColor")
+        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
+        original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
-        expect(button).not_to_have_css("background-color", original_color)
+        expect(button).not_to_have_css("color", original_color)
