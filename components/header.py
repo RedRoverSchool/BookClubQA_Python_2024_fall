@@ -174,20 +174,13 @@ class Header:
 
         return header_home_btn
 
-    @allure.step("Проверяем наличие кнопки 'Выйти' в профиле студента")
-    def check_exit_btn_exists_for_student(self):
-        exit_button = self.page.get_by_role("link", name="Выйти")
-        return exit_button.is_visible()
-
-    @allure.step("Кликаем кнопку 'Выйти' в профиле студента")
-    def click_exit_btn_for_student(self):
-        button = self.page.locator("a", has_text="Выйти")
-        button.click()
-        expect(self.page).to_have_url("http://testing.misleplav.ru/")
+    @allure.step("Переходим на страницу 'Профиль'")
+    def go_to_user_profile_page(self):
+        self.page.locator("//a[@href = '/subscription/profile/']").click()
 
     @allure.step("Наводим мышку на кнопку 'Выйти' и проверяем изменение цвета")
     def hover_exit_button_for_student_color_check(self):
-        exit_button = self.page.locator("a", has_text="Выйти")
+        exit_button = self.page.locator("a", has_text="Выйти из аккаунта")
         original_color = exit_button.evaluate(
             "el => window.getComputedStyle(el).backgroundColor"
         )
