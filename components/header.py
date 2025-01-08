@@ -174,10 +174,6 @@ class Header:
 
         return header_home_btn
 
-    @allure.step("Переходим на страницу 'Профиль'")
-    def go_to_user_profile_page(self):
-        self.page.locator("//a[@href = '/subscription/profile/']").click()
-
     @allure.step("Наводим мышку на кнопку 'Выйти' и проверяем изменение цвета")
     def hover_exit_button_for_student_color_check(self):
         exit_button = self.page.locator("a", has_text="Выйти из аккаунта")

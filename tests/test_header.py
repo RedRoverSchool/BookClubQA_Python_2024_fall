@@ -177,12 +177,12 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
 
 
 # TC_31.002.001.001 Header-Student > Sign out > Visibility "Выйти" button
-# @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-def test_exit_button_is_visible_for_student(header, register):
+def test_exit_button_is_visible_for_student(header, register, user_profile):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("student")
-    assert header.check_exit_btn_exists_for_student()
+    header.click_profile_button()
+    assert user_profile.check_exit_btn_exists_for_student()
 
 
 # TC_31.002.001.002 Header-Student > Sign out > Clickability "Выйти" button
@@ -190,7 +190,7 @@ def test_exit_button_is_clickable_for_student(header, user_profile, register):
     header.visit()
     header.click_registration_button()
     register.registration_new_user("student")
-    header.go_to_user_profile_page()
+    header.click_profile_button()
     assert user_profile.profile_btn_redirection_check
     user_profile.click_exit_btn_for_student()
 
