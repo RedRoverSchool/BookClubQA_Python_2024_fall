@@ -174,21 +174,6 @@ class Header:
 
         return header_home_btn
 
-    @allure.step("Наводим мышку на кнопку 'Выйти' и проверяем изменение цвета")
-    def hover_exit_button_for_student_color_check(self):
-        exit_button = self.page.locator("a", has_text="Выйти из аккаунта")
-        original_color = exit_button.evaluate(
-            "el => window.getComputedStyle(el).backgroundColor"
-        )
-        exit_button.hover()
-        hovered_color = exit_button.evaluate(
-            "el => window.getComputedStyle(el).backgroundColor"
-        )
-        assert original_color != (
-            hovered_color,
-            f"Цвет кнопки 'Выйти' не изменился при наведении. Исходный: {original_color}, после наведения: {hovered_color}",
-        )
-
     @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
     def hover_profile_btn_color_check(self):
         button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')

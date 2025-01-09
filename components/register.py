@@ -22,10 +22,6 @@ class Register:
     def fill_email(self, email):
         self.page.locator("#id_email").fill(email)
 
-    # @allure.step("Заполняем поле 'Имя'")
-    # def fill_nick(self, name):
-    #     self.page.locator("#id_first_name").fill(name)
-
     @allure.step("Заполняем поле 'Пароль'")
     def fill_password(self, password):
         self.page.locator("#id_password1").fill(password)
