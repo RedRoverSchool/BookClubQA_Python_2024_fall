@@ -12,19 +12,19 @@ class Announcement:
 
     @allure.step("Заполняем 'Ваше имя'")
     def fill_first_name(self):
-        self.page.fill('input[name="first_name"]', "Arthur")
+        self.page.fill('input[name="first_name"]', "Thomas")
 
     @allure.step("Заполняем 'Ваша фамилия'")
     def fill_last_name(self):
-        self.page.fill('input[name="last_name"]', "Pacha")
+        self.page.fill('input[name="last_name"]', "Peters")
 
     @allure.step("Заполняем 'Telegram'")
     def fill_telegram(self):
-        self.page.fill('input[name="telegram"]', "Arthur Pachev")
+        self.page.fill('input[name="telegram"]', "ThomasP")
 
     @allure.step("Заполняем 'Телефон'")
     def fill_phone_number(self):
-        self.page.fill('input[name="phone"]', "14103902323")
+        self.page.fill('input[name="phone"]', "14103902623")
 
     @allure.step('Заполняем поле "Опишите себя"')
     def fill_out_descripption(self):

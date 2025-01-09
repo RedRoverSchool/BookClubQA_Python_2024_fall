@@ -95,23 +95,16 @@ def test_login_button_is_enabled(header):
     header.visit()
     header.login_button_is_enabled()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-@pytest.mark.parametrize(
-    "user_registration_cleanup", [("teacher", True, False)], indirect=True
-)
-def test_statistics_button_is_visible(
-    header, register, user_registration_cleanup, login
-):
-    email, password = user_registration_cleanup
+# TC_11.007.001|Header - Teacher> Check the "Статистика" button
+def test_statistics_button_is_visible(header, login):
     header.visit()
-    header.click_login_button()
-    login.full_login(email, password)
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
     header.statistics_button_is_visible()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-def test_verify_redirection_on_statistics_page(login, header, register):
-    register.registration_as_tutor(header, register)
-    header.statistics_button_is_visible()
+# TC_11.007.001|Header - Teacher> Check the "Статистика" button
+def test_verify_redirection_on_statistics_page( header, login):
+    header.visit()
+    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
     header.click_statistics_button()
 
 
