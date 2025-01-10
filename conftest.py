@@ -25,7 +25,6 @@ from Data.constants import AUTH_CREDENTIALS, BASE_URL
 from Data.data import UserFactory
 from models.user_model import RegisterRequest
 
-
 fake = Faker()
 logger = logging.getLogger(__name__)
 
@@ -38,6 +37,7 @@ def header(page: Page):
 @pytest.fixture
 def my_teachers(page: Page):
     return MyTeachersPage(page)
+
 
 @pytest.fixture
 def teacher_profile(page: Page):

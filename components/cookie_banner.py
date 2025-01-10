@@ -85,3 +85,20 @@ class CookieBanner:
             )
         except TimeoutError:
             raise AssertionError("Cookie banner reappeared after reopening the app")
+
+    @allure.step("Дожидаемся появления кнопки 'Отклонить все'")
+    def wait_for_reject_cookie_button(self):
+        self.page.wait_for_selector("#reject-cookies", timeout=5000)
+
+    @allure.step("Нажимаем на кнопку 'Отклонить все'")
+    def click_reject_cookie_button(self):
+        self.page.click("#reject-cookies")
+
+    @allure.step("Проверяем, что cookies Yandex Metrica отсутствуют")
+    def verify_ym_cookies_are_missing(self):
+        # Получаем список cookies после нажатия кнопки 'Отклонить все'
+        cookies = self.page.context.cookies()
+        ym_cookies = [cookie for cookie in cookies if '_ym_' in cookie['name']]
+        assert len(ym_cookies) == 0, f"Yandex Metrica cookies найдены: {ym_cookies}"
+
+        print("Тест успешно пройден: Cookies Yandex Metrica не установлены.")
