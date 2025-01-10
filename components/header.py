@@ -162,24 +162,12 @@ class Header:
     # TC_31.003.001.001 | [Student ] Header > My Tutor(button) > Visibility check #326
     @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
     def student_my_tutors_button_is_visible(self):
-        # expect(self.page.wait_for_selector("//a[contains(text(), 'Мои репетиторы')]", state="visible")).to_be_visible
-        # my_tutors_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои репетиторы')]", state="visible")
         my_tutors_btn = self.page.wait_for_selector("(//a[@class='nav-link'])[2]", state="visible")
         return my_tutors_btn.is_visible()
-    
-    # TC_31.003.001.002 | [Student ] Header > My Tutor(button) > Hover support check #326
-    # @allure.step("Проверяем проверяем изменение цвета при наведении на кнопку 'Мои репетиторы'")
-    # def student_hover_my_tutors_button(self):
-    #     my_tutors_btn = self.page.wait_for_selector("//a[contains(text(), 'Мои репетиторы')]")
-    #     my_tutors_btn.hover()
-    #     hover_background = my_tutors_btn.evaluate("btn => getComputedStyle(btn).getPropertyValue('--bs-btn-hover-bg')")
-    #     expected_color = "#f8f9fa"
-    #     assert hover_background.strip() == expected_color
 
     # TC_31.003.001.003 | [Student ] Header > My Tutor(button) > Clickability, Redirect check #326
     @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
     def student_my_tutors_button_clickable_redirect(self):
-        # self.page.wait_for_selector("//a[contains(text(), 'Мои репетиторы')]", state="visible").click()
         self.page.wait_for_selector("(//a[@class='nav-link'])[2]", state="visible").click()
         current_url = self.page.url
         assert current_url == my_tutors_list_url
@@ -187,24 +175,12 @@ class Header:
     # TC_31.004.001.001 | [Student ] Header > Find Teacher(button) > Visibility check #321
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
     def student_find_tutor_button_is_visible(self):
-        # find_tutors_btn = self.page.wait_for_selector("//a[contains(text(), 'Найти репетитора')]", state="visible")
         find_tutors_btn = self.page.wait_for_selector("(//a[@class='nav-link'])[1]", state="visible")
         return find_tutors_btn.is_visible()
-    
-    # TC_31.004.001.002 | [Student ] Header > Find Teacher(button) > Hover support check #321
-    # @allure.step("Проверяем проверяем изменение цвета при наведении на кнопку 'Найти репетитора'")
-    # def student_hover_find_tutor_button(self):
-    #     # find_tutors_btn = self.page.wait_for_selector("//a[contains(text(), 'Найти репетитора')]", state="visible")
-    #     find_tutors_btn = self.page.wait_for_selector("(//a[@class='nav-link'])[1]", state="visible")
-    #     find_tutors_btn.hover()
-    #     hover_background = find_tutors_btn.evaluate("btn => getComputedStyle(btn).getPropertyValue('--bs-btn-hover-bg')")
-    #     expected_color = "#f8f9fa"
-    #     assert hover_background.strip() == expected_color
     
     # TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Clickability, Redirect check #321
     @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
     def student_find_tutor_button_clickable_redirect(self):
-        # self.page.wait_for_selector("//a[contains(text(), 'Найти репетитора')]", state="visible").click()
         self.page.wait_for_selector("(//a[@class='nav-link'])[1]", state="visible").click()
         current_url = self.page.url
         assert current_url == find_tutor_url
