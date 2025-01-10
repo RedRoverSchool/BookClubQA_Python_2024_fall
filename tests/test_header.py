@@ -40,7 +40,7 @@ def test_support_visibility_as_teacher(login, header):
 )
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_support_clickability_as_teacher(
-        login, header, user_registration_cleanup, api_request
+    login, header, user_registration_cleanup, api_request
 ):
     email, password = user_registration_cleanup
     header.visit()
@@ -150,7 +150,7 @@ def test_my_students_btn_is_not_visible_for_students(register, header, homepage)
 # "Мои студенты" button is not available when no announcement is created
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-        register, header, homepage
+    register, header, homepage
 ):
     header.visit()
     header.click_registration_button()
@@ -186,7 +186,8 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
 
 
 # TC_31.002.001.001 Header-Student > Sign out > Visibility "Выйти" button
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_exit_button_is_visible_for_student(header, register):
     header.visit()
@@ -196,7 +197,8 @@ def test_exit_button_is_visible_for_student(header, register):
 
 
 # TC_31.002.001.002 Header-Student > Sign out > Clickability "Выйти" button
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_exit_button_is_clickable_for_student(header, register):
     header.visit()
@@ -207,7 +209,8 @@ def test_exit_button_is_clickable_for_student(header, register):
 
 
 # TC_31.002.001.003 Header-Student > Sign out > Hover Effect on the "Выйти" button
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_hover_exit_button_for_student_color_check(header, register):
     header.visit()

@@ -27,8 +27,8 @@ def test_my_teachers_btn_click(header, register, page: Page):
     my_teachers_button.click_my_teachers_btn()
     my_teachers_button.verify_page_my_teachers_opened()
 
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_check_teachers_list(header, register, page: Page):
     """Проверка что открылась страница 'Мои репетиторы' со списком репетиторов или без с соответствующим сообщением."""
     header.visit()

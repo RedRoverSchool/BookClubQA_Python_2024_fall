@@ -5,8 +5,8 @@ from Data.data import invalid_login, valid_password
 
 error_messages = "Пожалуйста, введите правильные email и пароль. Оба поля могут быть чувствительны к регистру."
 
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_login_as_tutor_btn_create_listing(header, login):
     header.visit()
     header.click_login_button()

@@ -58,6 +58,7 @@ def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
 # TC_00.002.002.001 | Main page (body) - All users > Become a Teacher >
 # Verify button "Стать репетитором" is visible below "Добро пожаловать в "Мыслеплав"!" heading #77
 
+
 def test_first_btn_become_a_tutor_is_visible(homepage):
     homepage.visit()
     homepage.first_btn_become_a_tutor_is_visible()

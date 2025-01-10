@@ -24,7 +24,7 @@ def test_register_as_student(header, register):
     register.header_should_contain_text("Регистрация")
     register.registration_new_user("student")
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_register_as_student_verify_success_message_text(
     homepage, register, find_tutor
@@ -38,7 +38,8 @@ def test_register_as_student_verify_success_message_text(
 
 
 # TC_35.001.001.001 | Student >Become a teacher > Navigate to the "Стать репетитором" page
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_become_a_teacher_from_student_page(header, login, homepage, register):
     """Проверка перехода на страницу регистрации как репетитор из профиля студента."""
@@ -51,7 +52,7 @@ def test_become_a_teacher_from_student_page(header, login, homepage, register):
     homepage.click_become_tutor_btn()
     register.verify_registration_page_opened()
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
+
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_verify_successful_message_after_register_as_tutor(
     homepage, register, find_tutor
@@ -64,7 +65,6 @@ def test_verify_successful_message_after_register_as_tutor(
     find_tutor.check_message_of_registration(text)
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024")
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_check_placeholders_on_the_register_page(header, register):
     header.visit()

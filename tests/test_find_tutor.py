@@ -4,6 +4,7 @@ from faker import Faker
 
 fake = Faker()
 
+
 @allure.title("TC_05.001.006.002")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/243")
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
@@ -14,7 +15,7 @@ def test_redirect_to_tutors_page_with_0_min_price(find_tutor):
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(0)
 
-@pytest.mark.skip(reason="не прошёл CI из-за бага в фильтре по min и max цене от 02.01.2025")
+
 @allure.title("TC_05.001.006.004")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/287")
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
@@ -29,6 +30,7 @@ def test_verify_tutors_with_random_min_price_by_keyboard(find_tutor):
     find_tutor.enter_min_price(min_price)
     find_tutor.click_filter_button()
     find_tutor.check_prices_over_min_price(min_price)
+
 
 @allure.title("TC_05.001.005.001")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/251")
