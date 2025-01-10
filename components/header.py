@@ -17,8 +17,7 @@ class Header:
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_login_button(self):
         self.page.locator(
-            # '(//a[@class="btn btn-outline-light mb-2 me-2 ms-3"])[1]'
-            '//i[@class="fas fa-sign-in-alt me-1"]'
+            '//a[text()="Войти"]' 
         ).click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
