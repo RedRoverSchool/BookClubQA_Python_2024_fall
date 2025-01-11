@@ -5,6 +5,7 @@ from Data import constants
 from faker import Faker
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 fake = Faker()
 
@@ -151,4 +152,5 @@ class Register:
             submit_button = self.page.locator('button:has-text("Войти")')
             submit_button.click()
             print("Login successful!")
-        except Exception as e: print(f"An error occurred: {e}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
