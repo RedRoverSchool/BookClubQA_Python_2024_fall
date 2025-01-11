@@ -83,7 +83,11 @@ class FindTutor:
 
     @allure.step("Нажимаем на кнопку Фильтровать")
     def click_filter_button(self):
-        self.page.get_by_text("Фильтровать").click()
+        self.page.get_by_text("Применить").click()
+
+    @allure.step("Разворачиваем раздел фильтрации")
+    def open_filter_widget(self):
+        self.page.locator("#filterButton").click()
 
     @allure.step("Вводим значение минимальной цены")
     def enter_min_price(self, min_price: float):
@@ -95,26 +99,26 @@ class FindTutor:
     )
     def check_prices_over_min_price(self, min_price: float) -> object:
         # Проверяем, есть ли репетиторы на странице
-        price_siblings_list = self.page.get_by_text("Цена:")
+        price_siblings_list = self.page.get_by_text("Стоимость занятия:")
 
         if price_siblings_list.count() > 0:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
             for i in range(price_siblings_list.count()):
                 price_sibling = price_siblings_list.nth(i)
                 actual_price_in_string = (
-                    price_sibling.locator("+ div").text_content().strip()
+                    price_sibling.locator("+ p").text_content().strip()
                 )
                 actual_price = float(actual_price_in_string.split(" ")[0])
                 assert actual_price >= min_price
         else:
             # Если список репетиторов пустой, то проверяем сообщение
-            text = self.page.locator(".alert alert-info rounded-5").text_content()
-            assert "Нет результатов", text
+            text = self.page.locator(".bg-white.p-3.mt-3").text_content()
+            assert "По вашему запросу нет результатов.", text
 
     @allure.step('Проверяем видимость кнопки "Фильтровать"')
     def check_filter_btn_is_visible(self):
         filter_btn = self.page.locator(
-            'button.btn.btn-primary.me-2.rounded-pill[type="submit"]'
+            'button.btn.btn-primary.btn-lg.me-2[type="submit"]'
         )
         assert filter_btn.is_visible()
 
