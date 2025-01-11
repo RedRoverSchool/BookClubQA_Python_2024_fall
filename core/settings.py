@@ -24,7 +24,6 @@ statistics_url = f"{base_url}/statistics/statistics/"
 edit_announcement_url = "http://testing.misleplav.ru/listings/update/"
 
 
-
 site_pages_urls = [
     {
         "name": "Main page",

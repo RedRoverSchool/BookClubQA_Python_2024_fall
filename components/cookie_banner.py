@@ -49,7 +49,7 @@ class CookieBanner:
             actual_text = cookie_text.text_content()
             expected_text = "Мы используем куки для улучшения вашего опыта на нашем сайте. Вы можете управлять своими предпочтениями."
             assert (
-                    actual_text == expected_text
+                actual_text == expected_text
             ), f"Ожидается '{expected_text}', но получен '{actual_text}'"
             return True
         except TimeoutError:
@@ -74,9 +74,7 @@ class CookieBanner:
         except TimeoutError:
             raise AssertionError("Cookie banner did not disappear as expected")
 
-    @allure.step(
-        "Проверяем, что банер не появляется при повторном запуске приложения "
-    )
+    @allure.step("Проверяем, что банер не появляется при повторном запуске приложения ")
     def banner_does_not_reappear(self):
         self.page.reload()
         try:
@@ -98,7 +96,7 @@ class CookieBanner:
     def verify_ym_cookies_are_missing(self):
         # Получаем список cookies после нажатия кнопки 'Отклонить все'
         cookies = self.page.context.cookies()
-        ym_cookies = [cookie for cookie in cookies if '_ym_' in cookie['name']]
+        ym_cookies = [cookie for cookie in cookies if "_ym_" in cookie["name"]]
         assert len(ym_cookies) == 0, f"Yandex Metrica cookies найдены: {ym_cookies}"
 
         print("Тест успешно пройден: Cookies Yandex Metrica не установлены.")

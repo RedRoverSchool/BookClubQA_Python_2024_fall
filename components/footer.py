@@ -43,18 +43,26 @@ class Footer:
 
     @allure.step("Проверяем видимость url 'Политика конфиденциальности'")
     def privacy_policy_url_should_be_visible(self):
-        expect(self.page.get_by_role("link", name="Политика конфиденциальности")).to_be_visible()
+        expect(
+            self.page.get_by_role("link", name="Политика конфиденциальности")
+        ).to_be_visible()
 
     @allure.step("Проверяем доступность url 'Политика конфиденциальности'")
     def privacy_policy_url_should_be_enabled(self):
-        expect(self.page.get_by_role("link", name="Политика конфиденциальности")).to_be_enabled()
+        expect(
+            self.page.get_by_role("link", name="Политика конфиденциальности")
+        ).to_be_enabled()
 
-    @allure.step("Проверяем успешность перехода на страницу 'Политика Конфиденциальности'")
+    @allure.step(
+        "Проверяем успешность перехода на страницу 'Политика Конфиденциальности'"
+    )
     def verify_privacy_policy_page(self):
         try:
             expect(self.page).to_have_url("http://testing.misleplav.ru/policy/")
             title = "Политика конфиденциальности"
-            expect(self.page.get_by_role("heading", name="Политика конфиденциальности")).to_contain_text(title)
+            expect(
+                self.page.get_by_role("heading", name="Политика конфиденциальности")
+            ).to_contain_text(title)
         except Exception as e:
             print(f"Ошибка проверки страницы: {e}")
             raise

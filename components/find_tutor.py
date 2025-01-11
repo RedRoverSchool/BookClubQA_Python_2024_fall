@@ -101,12 +101,10 @@ class FindTutor:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
             for i in range(price_siblings_list.count()):
                 price_sibling = price_siblings_list.nth(i)
-                actual_price_in_string = (price_sibling
-                                          .locator("+ div")
-                                          .text_content().strip())
-                actual_price = float(
-                    actual_price_in_string.split(" ")[0]
+                actual_price_in_string = (
+                    price_sibling.locator("+ div").text_content().strip()
                 )
+                actual_price = float(actual_price_in_string.split(" ")[0])
                 assert actual_price >= min_price
         else:
             # Если список репетиторов пустой, то проверяем сообщение
@@ -147,13 +145,11 @@ class FindTutor:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
             for i in range(experience_siblings_list.count()):
                 experience_sibling = experience_siblings_list.nth(i)
-                actual_experience_in_string = (experience_sibling
-                                          .locator("+ div")
-                                          .text_content().strip())
+                actual_experience_in_string = (
+                    experience_sibling.locator("+ div").text_content().strip()
+                )
                 try:
-                    actual_experience = float(
-                        actual_experience_in_string.split(" ")[0]
-                    )
+                    actual_experience = float(actual_experience_in_string.split(" ")[0])
                     assert actual_experience >= min_experience
                 except (IndexError, ValueError) as e:
                     raise AssertionError(

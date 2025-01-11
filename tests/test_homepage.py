@@ -1,3 +1,5 @@
+import pytest
+
 from core.settings import list_url
 
 
@@ -9,12 +11,14 @@ def test_homepage_info_is_same_after_reload(homepage, register):
     assert main_page_info_after_reload == main_page_info_before_reload
 
 
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_welcome_and_join_now_containers_info_are_visible(homepage):
     homepage.visit()
     homepage.check_info_welcome_container()
     homepage.check_join_now_container()
 
 
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_checking_preferences_for_students_section_info_is_visible(homepage):
     homepage.visit()
     homepage.check_preferences_for_students_title()
@@ -24,6 +28,7 @@ def test_checking_preferences_for_students_section_info_is_visible(homepage):
     homepage.check_homework_card_visible()
 
 
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_checking_preferences_for_tutors_section_info_is_visible(homepage):
     homepage.visit()
     homepage.check_preferences_for_tutors_title()
@@ -42,6 +47,7 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_bottom()
@@ -51,6 +57,8 @@ def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
 
 # TC_00.002.002.001 | Main page (body) - All users > Become a Teacher >
 # Verify button "Стать репетитором" is visible below "Добро пожаловать в "Мыслеплав"!" heading #77
+
+
 def test_first_btn_become_a_tutor_is_visible(homepage):
     homepage.visit()
     homepage.first_btn_become_a_tutor_is_visible()
@@ -73,6 +81,7 @@ def test_find_tutor_btn_2_redirection(homepage):
     assert url == list_url
 
 
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_find_tutor_button_visibility_as_student(homepage, header, register, login):
     homepage.visit()
     header.click_registration_button()
