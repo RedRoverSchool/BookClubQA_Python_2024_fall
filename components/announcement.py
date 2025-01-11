@@ -12,19 +12,19 @@ class Announcement:
 
     @allure.step("Заполняем 'Ваше имя'")
     def fill_first_name(self):
-        self.page.fill('input[name="first_name"]', "Arthur")
+        self.page.fill('input[name="first_name"]', "Thomas")
 
     @allure.step("Заполняем 'Ваша фамилия'")
     def fill_last_name(self):
-        self.page.fill('input[name="last_name"]', "Pacha")
+        self.page.fill('input[name="last_name"]', "Peters")
 
     @allure.step("Заполняем 'Telegram'")
     def fill_telegram(self):
-        self.page.fill('input[name="telegram"]', "Arthur Pachev")
+        self.page.fill('input[name="telegram"]', "ThomasP")
 
     @allure.step("Заполняем 'Телефон'")
     def fill_phone_number(self):
-        self.page.fill('input[name="phone"]', "14103902323")
+        self.page.fill('input[name="phone"]', "14103902623")
 
     @allure.step('Заполняем поле "Опишите себя"')
     def fill_out_descripption(self):
@@ -35,14 +35,19 @@ class Announcement:
         try:
             root_dir = os.environ.get("ROOT_DIR")
             photo_path = os.path.join(
-                root_dir, "Data", "upload_files", "stock-photo-handsome-cheerful-man.jfif"
+                root_dir,
+                "Data",
+                "upload_files",
+                "stock-photo-handsome-cheerful-man.jfif",
             )
             photo_field = self.page.locator("#id_photo")
             photo_field.set_input_files(photo_path)
         except Exception as e:
             print(f"First upload error: {e}")
             try:
-                self.page.locator('input[name="photo"]').set_input_files("Data/upload_files/stock-photo-handsome-cheerful-man.jfif")
+                self.page.locator('input[name="photo"]').set_input_files(
+                    "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
+                )
             except Exception as e:
                 print(f"Second upload failed with error: {e}")
 
@@ -107,9 +112,10 @@ class Announcement:
 
     @allure.step('Заполняем поле "Удобное время для занятий"')
     def fill_out_convenient_time(self):
-        self.page.fill("#id_convenient_time_slots", "Понедельник-Пятница с 10.00-11.00 "
-                                                    "Суббота и Воскресенье выходные")
-
+        self.page.fill(
+            "#id_convenient_time_slots",
+            "Понедельник-Пятница с 10.00-11.00 " "Суббота и Воскресенье выходные",
+        )
 
     @allure.step('Нажимаем на кнопку "Сохранить"')
     def click_save_announcement_btn(self):  # click_create_announcement_btn
@@ -176,18 +182,23 @@ class Announcement:
 
     @allure.step("Кликаем кнопку 'Редактировать объявление'")
     def click_edit_announcement_button(self):
-        self.page.locator('a.btn.btn-outline-primary.w-100.py-3.rounded-pill[href="/listings/update/"]').click()
+        self.page.locator(
+            'a.btn.btn-outline-primary.w-100.py-3.rounded-pill[href="/listings/update/"]'
+        ).click()
 
     @allure.step("Кликаем кнопку 'Просмотреть объявление'")
     def click_view_announcement_button(self):
-        self.page.locator('a.btn.btn-primary.w-100.py-3.rounded-pill[href="/listings/2/"]').click()
+        self.page.locator(
+            'a.btn.btn-primary.w-100.py-3.rounded-pill[href="/listings/2/"]'
+        ).click()
 
     @allure.step("Проверяем URL страницы объявления по шаблону")
     def check_announcement_url_by_template(self):
         current_url = self.page.url
-        pattern = r'^http://tester:dslfjsdfblkhew%40122b1klbfw@testing\.misleplav\.ru/listings/\d+/$'
-        assert re.match(pattern, current_url), f"URL не соответствует ожидаемому шаблону: {current_url}"
-
+        pattern = r"^http://tester:dslfjsdfblkhew%40122b1klbfw@testing\.misleplav\.ru/listings/\d+/$"
+        assert re.match(
+            pattern, current_url
+        ), f"URL не соответствует ожидаемому шаблону: {current_url}"
 
     @allure.step("Проверяем URL страницы редактирования объявления")
     def check_edit_announcement_page_url(self):
@@ -195,7 +206,7 @@ class Announcement:
 
     @allure.step("Проверяем видимость счетчика просмотров")
     def check_view_counter_visible(self):
-        expect(self.page.locator('p.mt-4.text-center.text-secondary')).to_be_visible()
+        expect(self.page.locator("p.mt-4.text-center.text-secondary")).to_be_visible()
 
     @allure.step(
         "Проходим по всему списку обьявлений и проверяем, что карточки с именем учителя нет"
@@ -233,9 +244,13 @@ class Announcement:
 
     @allure.step("Убедиться, что обязательные поля не заполнены")
     def verify_required_fields_are_not_filled(self):
-        error_message_count = self.page.locator( '//strong[text()="Обязательное поле."]' ).count()
+        error_message_count = self.page.locator(
+            '//strong[text()="Обязательное поле."]'
+        ).count()
         print(f"Found {error_message_count} error messages.")
-        assert error_message_count == 11 , f"Expected 11 error messages, but found {error_message_count}"
+        assert (
+            error_message_count == 11
+        ), f"Expected 11 error messages, but found {error_message_count}"
 
     @allure.step("Создаем объявление")
     def create_announcement(self):

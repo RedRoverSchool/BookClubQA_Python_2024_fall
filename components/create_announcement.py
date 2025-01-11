@@ -27,7 +27,7 @@ class CreateAnnouncement:
         price_field = self.page.locator("#id_price")
         duration_field = self.page.locator('input[name="class_duration"]')
         discount_checkbox = self.page.locator("#id_package_discounts")
-        convenient_time_field = self.page.locator('#id_convenient_time_slots')
+        convenient_time_field = self.page.locator("#id_convenient_time_slots")
 
         photo_field_file_number = photo_field.evaluate("el => el.files.length")
 
@@ -45,7 +45,6 @@ class CreateAnnouncement:
         assert photo_field_file_number == 0
         expect(discount_checkbox).not_to_be_checked()
         expect(convenient_time_field).to_be_empty()
-
 
     @allure.step("Кликаем на кнопку 'Создать' на странице формы объявления")
     def click_finalize_announcement_button(self):

@@ -16,11 +16,11 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_login_button(self):
-        self.page.get_by_role('link', name="Войти").click()
+        self.page.get_by_role("link", name="Войти").click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_registration_button(self):
-        self.page.get_by_role('link', name="Регистрация").click()
+        self.page.get_by_role("link", name="Регистрация").click()
 
     @allure.step("Проверяем видимость кнопки 'Создать объявление'")
     def create_listing_button_should_be_visible(self):
@@ -28,7 +28,7 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Найти репетитора'")
     def click_find_tutor_button(self):
-        btn = self.page.locator('//html/body/main/div/div/section[1]/div/div/a[1]')
+        btn = self.page.locator("//html/body/main/div/div/section[1]/div/div/a[1]")
         btn.click()
 
     @allure.step("Проверяем видимость кнопки 'Поддержка'")
@@ -44,36 +44,34 @@ class Header:
 
     @allure.step("Наводим мышку на кнопку 'Поддержка' и проверяем изменение цвета")
     def hover_support_button_color_check(self):
-        button = self.page.locator(
-            "//a[contains(., 'Поддержка')]"
-        )
-        original_color = button.evaluate(
-            "el => window.getComputedStyle(el).color"
-        )
+        button = self.page.locator("//a[contains(., 'Поддержка')]")
+        original_color = button.evaluate("el => window.getComputedStyle(el).color")
         button.hover()
         expect(button).not_to_have_css("color", original_color)
 
     @allure.step("Проверяем видимость кнопки 'Профиль'")
     def profile_button_should_be_visible(self):
-        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
+        button = self.page.locator(
+            '//*[@id="navbarNav"]//a[@href="/subscription/profile/"]'
+        )
         expect(button).to_be_visible()
 
     @allure.step("Кликаем на кнопку 'Профиль'")
     def click_profile_button(self):
-        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
+        button = self.page.locator(
+            '//*[@id="navbarNav"]//a[@href="/subscription/profile/"]'
+        )
         button.click()
         expect(self.page).to_have_url(profile_page)
 
     @allure.step("Проверяем видимость кнопки 'Войти'")
     def login_button_should_be_visible(self):
-        button = self.page.locator(
-            '//*[@id="navbarNav"]/ul/li[1]/a'
-        )
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[1]/a')
         assert button.is_visible()
 
     @allure.step("Проверяем видимость кнопки 'Стать репетитором'")
     def become_a_tutor_button_is_visible(self):
-        button = self.page.locator('//html/body/main/div/div/section[1]/div/div/a[2]')
+        button = self.page.locator("//html/body/main/div/div/section[1]/div/div/a[2]")
         assert button.is_visible()
 
     @allure.step("Проверяем доступна ли кнопка 'Войти' для взаимодействия")
@@ -89,9 +87,7 @@ class Header:
 
     @allure.step("Проверяем видимость кнопки 'Статистика '")
     def statistics_button_is_visible(self):
-        button = self.page.locator(
-            'a.btn.btn-outline-light.mb-2.ms-3[href="/statistics/statistics/"]'
-        )
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         assert button.is_visible()
 
     @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
@@ -101,9 +97,7 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Статистика'")
     def click_statistics_button(self):
-        button = self.page.locator(
-            'a.btn.btn-outline-light.mb-2.ms-3[href="/statistics/statistics/"]'
-        )
+        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
         button.click()
         expect(self.page).to_have_url(
             "http://testing.misleplav.ru/statistics/statistics/"
@@ -160,9 +154,7 @@ class Header:
 
     @allure.step("Наводим мышку на кнопку 'Войти' и проверяем изменение цвета")
     def hover_login_button_color_check(self):
-        button = self.page.locator(
-            'a.nav-link[href="/authorization/login/"]'
-        )
+        button = self.page.locator('a.nav-link[href="/authorization/login/"]')
         original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
         expect(button).not_to_have_css("color", original_color)
@@ -170,7 +162,9 @@ class Header:
     @allure.step("Кнопка 'Мыслеплав' расположена в хедере")
     def header_home_btn_is_present(self):
         # Locate the home button in the header
-        header_home_btn = self.page.locator('a.navbar-brand.fw-bold.fs-4.ms-3[href="/"]')
+        header_home_btn = self.page.locator(
+            'a.navbar-brand.fw-bold.fs-4.ms-3[href="/"]'
+        )
 
         return header_home_btn
 
@@ -202,7 +196,9 @@ class Header:
 
     @allure.step("Наводим курсор на кнопку 'Профиль' и проверяем изменение ее цвета")
     def hover_profile_btn_color_check(self):
-        button = self.page.locator('//*[@id="navbarNav"]//a[@href="/subscription/profile/"]')
+        button = self.page.locator(
+            '//*[@id="navbarNav"]//a[@href="/subscription/profile/"]'
+        )
         original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
         expect(button).not_to_have_css("color", original_color)

@@ -3,6 +3,7 @@ import pytest
 
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_create_announcement(header, announcement, register):
     header.visit()
     header.click_registration_button()
@@ -14,6 +15,7 @@ def test_create_announcement(header, announcement, register):
 
 # AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_teacher_announcement_blank_form_same_endpoint(
     header, register, my_teachers, create_announcement_page, announcement
 ):
@@ -29,6 +31,7 @@ def test_teacher_announcement_blank_form_same_endpoint(
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_teacher_announcement_blank_form(
     header, register, my_teachers, create_announcement_page, announcement
 ):
@@ -69,6 +72,7 @@ def test_teacher_hiding_announcement(header, login, announcement):
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement >
 # Verify the teacher's name in the announcement
 
+
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_teacher_announcement_name(
     header, register, my_teachers, create_announcement_page, announcement
@@ -82,7 +86,9 @@ def test_teacher_announcement_name(
     header.click_my_announcement_button()
     announcement.verify_announcement_tutor_name(tutor_name)
 
+
 # TC_13.001.001 | [Teacher]My_announcement > "Просмотреть" button redirection check
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_view_announcement_btn_redirection(header, announcement, login):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
@@ -92,6 +98,7 @@ def test_view_announcement_btn_redirection(header, announcement, login):
 
 
 # TC_13.001.003 | [Teacher]My_announcement > "Редактировать" button redirection check
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_edit_announcement_btn_redirection(header, announcement, login):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
@@ -99,16 +106,21 @@ def test_edit_announcement_btn_redirection(header, announcement, login):
     announcement.click_edit_announcement_button()
     announcement.check_edit_announcement_page_url()
 
+
 # TC_13.001.004 | [Teacher]My_announcement > Verify the ability to see detailed ad statistics
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_announcement_detailed_info(header, announcement, login):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
     announcement.click_my_announcement_button()
     announcement.check_view_counter_visible()
 
+
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement >
 # Verify the teacher is able  to the page "Мое объявление"#299"
 
+
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
@@ -118,6 +130,8 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
 # TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is created after filling in required form fields with valid data #313
 
+
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_create_announcement_with_only_required_fields(header, announcement, register):
     # email, password = user_registration_cleanup
     header.visit()

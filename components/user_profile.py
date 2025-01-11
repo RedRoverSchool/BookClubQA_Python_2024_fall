@@ -9,6 +9,6 @@ class UserProfile:
     @allure.step("Проверяем URL страницы 'Профиль'")
     def profile_btn_redirection_check(self):
         assert (
-                self.page.url
-                == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/subscription/profile/"
+            self.page.url
+            == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/subscription/profile/"
         )
