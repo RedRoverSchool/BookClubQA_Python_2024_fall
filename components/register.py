@@ -12,11 +12,9 @@ class Register:
         self.password = None
         self.page = page
 
-    @allure.step("Проверяем заголовок 'Регистрация'")
-    def header_should_contain_text(self, title_text):
-        expect(self.page.get_by_role("link", name=" Регистрация")).to_contain_text(
-            title_text
-        )
+    @allure.step("Проверяем наличие кнопки 'Зарегистрироваться'")
+    def register_page_contains_register_btn(self):
+        expect(self.page.get_by_text("Зарегистрироваться")).to_be_visible()
 
     @allure.step("Заполняем поле 'Почта'")
     def fill_email(self, email):
@@ -132,5 +130,3 @@ class Register:
         self.fill_confirm_password(self.password)
         self.click_registration_button()
         return {"name": name, "password": self.password, "email": email}
-
-

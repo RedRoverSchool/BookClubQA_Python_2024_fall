@@ -10,11 +10,10 @@ def test_login_button_opens_login_page(header, login):
     login.check_url_login_page("/login")
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_verify_registration_options_on_registration_page(header, register):
     header.visit()
     header.click_registration_button()
-    register.header_should_contain_text("Регистрация")
+    register.register_page_contains_register_btn()
 
 
 def test_verify_registration_options_on_login_page(header, login):
@@ -71,11 +70,8 @@ def test_hover_support_button_as_student(register, login, header):
     header.hover_support_button_color_check()
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_verify_redirection_on_profile_page(login, header, register):
-    header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
+def test_verify_redirection_on_profile_page(login, header):
+    login.login_as_tutor(header)
     header.click_profile_button()
     header.profile_button_should_be_visible()
 

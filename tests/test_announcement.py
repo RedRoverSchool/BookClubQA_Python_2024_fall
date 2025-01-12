@@ -1,5 +1,6 @@
 import pytest
 
+
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
