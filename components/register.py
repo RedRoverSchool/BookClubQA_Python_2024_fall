@@ -132,3 +132,5 @@ class Register:
         self.fill_confirm_password(self.password)
         self.click_registration_button()
         return {"name": name, "password": self.password, "email": email}
+
+
