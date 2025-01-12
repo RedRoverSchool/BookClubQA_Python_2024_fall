@@ -5,11 +5,6 @@ from Data.data import invalid_login, valid_password
 
 error_messages = "Пожалуйста, введите правильные email и пароль. Оба поля могут быть чувствительны к регистру."
 
-
-def test_login_as_tutor(login, header):
-    login.login_as_tutor(header)
-
-
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_login_as_tutor_btn_create_listing(header, login):
     header.visit()
