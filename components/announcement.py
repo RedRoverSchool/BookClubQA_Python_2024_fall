@@ -182,15 +182,11 @@ class Announcement:
 
     @allure.step("Кликаем кнопку 'Редактировать объявление'")
     def click_edit_announcement_button(self):
-        self.page.locator(
-            'a.btn.btn-outline-primary.w-100.py-3.rounded-pill[href="/listings/update/"]'
-        ).click()
+        self.page.locator("a", has_text="Редактировать").click()
 
     @allure.step("Кликаем кнопку 'Просмотреть объявление'")
     def click_view_announcement_button(self):
-        self.page.locator(
-            'a.btn.btn-primary.w-100.py-3.rounded-pill[href="/listings/2/"]'
-        ).click()
+        self.page.locator("a", has_text="Просмотреть").click()
 
     @allure.step("Проверяем URL страницы объявления по шаблону")
     def check_announcement_url_by_template(self):
