@@ -1,6 +1,10 @@
 import allure
 from playwright.sync_api import Page
 from core.settings import login_url
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class Login:
@@ -64,3 +68,22 @@ class Login:
 
     def click_submit_button(self):
         self.page.locator("//*[@type='submit']").click()
+
+    @allure.step("Логинимся как учитель с персональными данными")
+    def login_as_tutor(self, header):
+        header.visit()
+        header.click_login_button()
+        try:
+            email = os.getenv("EMAIL_TUTOR")
+            password = os.getenv("PASSWORD_TUTOR")
+            print(f"Email: {email}")
+            print(f"Password: {password}")
+            email_field = self.page.locator('input[name="username"]')
+            email_field.fill(email)
+            password_input = self.page.locator('input[name="password"]')
+            password_input.fill(password)
+            submit_button = self.page.locator('button:has-text("Войти")')
+            submit_button.click()
+            print("Login successful!")
+        except Exception as e:
+            print(f"An error occurred: {e}")
