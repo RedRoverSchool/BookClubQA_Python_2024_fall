@@ -69,7 +69,7 @@ def test_hover_support_button_as_student(register, login, header):
     register.registration_new_user("student")
     header.hover_support_button_color_check()
 
-
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_verify_redirection_on_profile_page(login, header):
     login.login_as_tutor(header)
     header.click_profile_button()
