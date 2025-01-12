@@ -219,11 +219,10 @@ def test_hover_exit_button_for_student_color_check(header, register):
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
 # TC_11.002.01.001 | [Teacher ] Header > "Профиль" button > Visibility check
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_profile_btn_visibility(header, login, data, page: Page):
     """Проверка видимости кнопки 'Профиль'"""
     header.visit()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
     page_url = data["url"]
     page.goto(page_url)
     header.profile_button_should_be_visible()
@@ -233,11 +232,10 @@ def test_profile_btn_visibility(header, login, data, page: Page):
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
 # TC_11.002.01.002 | [Teacher ] Header > "Профиль" button > Hover support check
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_profile_btn_hover(header, login, data, page: Page):
     """Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора"""
     header.visit()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
     page_url = data["url"]
     page.goto(page_url)
     header.hover_profile_btn_color_check()
@@ -247,11 +245,10 @@ def test_profile_btn_hover(header, login, data, page: Page):
     "data", site_pages_urls, ids=[u["name"] for u in site_pages_urls]
 )
 # TC_11.002.01.003 | [Teacher ] Header > "Профиль" button > Redirection check
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_profile_btn_redirection(header, user_profile, login, data, page: Page):
     """Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'"""
     header.visit()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
     page_url = data["url"]
     page.goto(page_url)
     header.click_profile_button()
