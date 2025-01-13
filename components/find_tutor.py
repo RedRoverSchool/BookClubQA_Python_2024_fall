@@ -25,23 +25,41 @@ class FindTutor:
 
     @allure.step("Проверяем видимость картинок в списке преподавателей")
     def check_picture_of_tutor_is_visible(self):
-        picture = self.page.locator("(//img[@class='img-fluid card-img-top'])[1]")
-        picture.wait_for(state="visible", timeout=5000)
-        assert picture.is_visible()
+        pictures = self.page.locator("img")
+        pictures_count = pictures.count()
+        assert pictures_count > 0, "Нет изображений аватарок преподавателей на странице"
+        for i in range(pictures_count):
+            picture = pictures.nth(i)
+            picture.wait_for(state="visible", timeout=5000)
+            assert picture.is_visible(), f"Аватарка преподавателя {i + 1} не видна"
+            image_src = picture.get_attribute("src")
+            assert image_src, f"Изображение {i + 1} не имеет атрибута 'src'"
 
     @allure.step("Проверяем видимость имён преподавателей")
     def check_name_of_tutor_is_visible(self):
-        name = self.page.locator("(//h5[@class='mb-2 fw-bold text-dark'])[1]")
-        assert name.is_visible()
+        names = self.page.locator("//h5[@class='fw-bold text-dark mb-0']")
+        names_count = names.count()
+        assert names_count > 0, "Нет имен преподавателей на странице"
+        for i in range(names_count):
+            name_element = names.nth(i)
+            name_text = name_element.text_content()
+            name_element.wait_for(state="visible", timeout=5000)
+            assert name_text.strip() != "", f"Имя преподавателя {i + 1} пустое"
+            assert name_element.is_visible()
 
     @allure.step("Проверяем видимость названия предмета")
     def check_subject_of_tutor_is_visible(self):
-        subject = self.page.locator("(//div[@class='d-flex w-100'])[1]/div[1]/div[2]")
-        assert subject.is_visible()
+        subjects = self.page.locator("//p[@class='text-secondary']")
+        subjects_count = subjects.count()
+        assert subjects_count > 0, "Нет предметов на странице"
+        for i in range(subjects_count):
+            subject = subjects.nth(i)
+            subject.wait_for(state="visible", timeout=5000)
+            assert subject.is_visible(), f"Предмет {i + 1} не виден"
 
     @allure.step("Проверяем видимость цены")
     def check_price_is_visible(self):
-        assert self.page.get_by_text("Цена").nth(0).is_visible()
+        assert self.page.get_by_text("Стоимость занятия:").nth(0).is_visible()
 
     @allure.step("Проверяем наличие сообщения об успешной регистрации")
     def check_message_of_registration(self, expected_message):
