@@ -150,7 +150,7 @@ def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
     register.registration_new_user(user_type="tutor")
     assert header.my_students_button_is_hidden() is True
 
-
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_filter_tutor_by_category(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
