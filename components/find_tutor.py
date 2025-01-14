@@ -67,7 +67,7 @@ class FindTutor:
         self.page.wait_for_selector("//div[@role='alert']", timeout=7000)
         message = alert_locator.text_content()
         assert (
-                message.strip() == expected_message
+            message.strip() == expected_message
         ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
 
     @allure.step("Проверяем фильтр по категории")
@@ -102,7 +102,6 @@ class FindTutor:
     @allure.step("Нажимаем на кнопку Фильтровать")
     def click_filter_button(self):
         self.page.get_by_text("Применить").click()
-
 
     @allure.step("Разворачиваем раздел фильтрации")
     def open_filter_widget(self):
@@ -169,12 +168,14 @@ class FindTutor:
 
         for i in range(card_count):
             card = filtered_cards.nth(i)
-            more_details_btn = card.get_by_text('Подробнее')
+            more_details_btn = card.get_by_text("Подробнее")
             more_details_btn.click()
-            experience_text = self.page.locator("//p[contains(text(),'лет')]").inner_text()
+            experience_text = self.page.locator(
+                "//p[contains(text(),'лет')]"
+            ).inner_text()
             experience_value = int(experience_text.split()[0])
-            assert experience_value >= min_experience, (
-                f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
-            )
+            assert (
+                experience_value >= min_experience
+            ), f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
 
             self.page.go_back()
