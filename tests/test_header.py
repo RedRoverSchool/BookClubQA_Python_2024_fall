@@ -55,24 +55,21 @@ def test_support_visibility_as_student(login, header):
     header.support_button_should_be_visible()
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_support_clickability_as_student(login, header):
     header.visit()
-    login.full_login("teststudent12345@yahoo.com", "!!test!!123")
+    login.full_login("student849727@gmail.com", "xaD1n0tUfaHN")
     header.click_support_button()
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_hover_support_button_as_student(register, login, header):
+def test_hover_support_button_as_student(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("student")
+    login.full_login("student849727@gmail.com", "xaD1n0tUfaHN")
     header.hover_support_button_color_check()
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_verify_redirection_on_profile_page(login, header):
-    login.login_as_tutor(header)
+    header.visit()
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_profile_button()
     header.profile_button_should_be_visible()
 
@@ -106,7 +103,7 @@ def test_login_button_is_enabled(header):
 # TC_11.007.001|Header - Teacher> Check the "Статистика" button
 def test_statistics_button_is_visible(header, login):
     header.visit()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.statistics_button_is_visible()
 
 
@@ -114,7 +111,7 @@ def test_statistics_button_is_visible(header, login):
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_verify_redirection_on_statistics_page(header, login):
     header.visit()
-    login.login_as_tutor(header)
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_statistics_button()
 
 
@@ -153,11 +150,11 @@ def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
     register.registration_new_user(user_type="tutor")
     assert header.my_students_button_is_hidden() is True
 
-
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_filter_tutor_by_category(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
+    find_tutor.open_filter_widget()
     find_tutor.check_filter_form()
 
 

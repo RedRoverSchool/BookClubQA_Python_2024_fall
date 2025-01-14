@@ -48,9 +48,7 @@ class CreateAnnouncement:
 
     @allure.step("Кликаем на кнопку 'Создать' на странице формы объявления")
     def click_finalize_announcement_button(self):
-        self.page.locator(
-            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Сохранить"]'
-        ).click()
+        self.page.locator("button.btn.btn-primary.btn-lg.px-5.py-3").click()
 
     @allure.step(
         "Убедиться, что пользователь находится на странице 'Создать объявление'"

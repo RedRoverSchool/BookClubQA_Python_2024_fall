@@ -81,10 +81,8 @@ def test_find_tutor_btn_2_redirection(homepage):
     assert url == list_url
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_find_tutor_button_visibility_as_student(homepage, header, register, login):
+def test_find_tutor_button_visibility_as_student(homepage, header, login):
     homepage.visit()
-    header.click_registration_button()
-    register.registration_new_user("student")
+    login.full_login("student849727@gmail.com", "xaD1n0tUfaHN")
     homepage.visit()
     homepage.find_tutor_button_should_be_visible()

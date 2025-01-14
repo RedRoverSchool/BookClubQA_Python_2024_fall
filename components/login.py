@@ -53,7 +53,9 @@ class Login:
 
     @allure.step("Проверяем видимость сообщения о не правильном вводе логина")
     def invalid_credentials_message_should_be_visible(self):
-        invalid_credentials_message = self.page.locator("li:has-text('Пожалуйста, введите правильные Почта и пароль')")
+        invalid_credentials_message = self.page.locator(
+            "li:has-text('Пожалуйста, введите правильные Почта и пароль')"
+        )
         assert invalid_credentials_message.is_visible()
 
     @allure.step("Нажимаем 'Создать учетную запись' URL")

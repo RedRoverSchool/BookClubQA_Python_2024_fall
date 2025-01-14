@@ -88,5 +88,3 @@ def test_redirected_to_the_registration_page(header, login, page):
     header.click_login_button()
     login.click_create_account_url()
     expect(page).to_have_url("http://testing.misleplav.ru/authorization/signup/")
-
-
