@@ -21,8 +21,8 @@ def test_teacher_announcement_blank_form_same_endpoint(
     header.visit()
     login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_create_announcement_button()
-    announcement.verify_required_fields_are_not_filled()
     create_announcement_page.click_finalize_announcement_button()
+    announcement.verify_required_fields_are_not_filled()
     create_announcement_page.verify_create_announcement_page_endpoint()
 
 
