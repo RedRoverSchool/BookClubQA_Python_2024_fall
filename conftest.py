@@ -1,12 +1,15 @@
+import logging
 import os
+
 import allure
 import pytest
-import logging
-
 from faker import Faker
 from playwright.sync_api import Page, sync_playwright
 from pytest import Item
 
+from Data.constants import AUTH_CREDENTIALS, BASE_URL
+from Data.data import UserFactory
+from api_clients.user_api import ApiClient
 from components.announcement import Announcement
 from components.cookie_banner import CookieBanner
 from components.create_announcement import CreateAnnouncement
@@ -15,14 +18,12 @@ from components.footer import Footer
 from components.header import Header
 from components.homepage import Homepage
 from components.login import Login
+from components.my_students import MyStudentsPage
 from components.my_teachers import MyTeachersPage
 from components.register import Register
 from components.teacher_profile import TeacherProfile
 from components.telegram_page import TelegramPage
 from components.user_profile import UserProfile
-from api_clients.user_api import ApiClient
-from Data.constants import AUTH_CREDENTIALS, BASE_URL
-from Data.data import UserFactory
 from models.user_model import RegisterRequest
 
 fake = Faker()
@@ -37,6 +38,11 @@ def header(page: Page):
 @pytest.fixture
 def my_teachers(page: Page):
     return MyTeachersPage(page)
+
+
+@pytest.fixture
+def my_students(page: Page):
+    return MyStudentsPage(page)
 
 
 @pytest.fixture
