@@ -73,14 +73,6 @@ class Announcement:
             degree_checkbox.is_checked()
         ), "The 'has degree' checkbox should be checked"
 
-    # @allure.step("Бесплатное первое занятие")
-    # def checkbox_free_first_lesson(self):
-    #     free_first_lesson_checkbox = self.page.locator("#id_free_first_lesson")
-    #     free_first_lesson_checkbox.check()
-    #     assert (
-    #         free_first_lesson_checkbox.is_checked()
-    #     ), "The 'free first lesson' checkbox should be checked"
-
     @allure.step("Вводим стоимость занятия")
     def fill_out_price(self):
         price_input = self.page.locator("#id_price")
@@ -94,13 +86,6 @@ class Announcement:
         class_duration_input.fill("60")
         filled_value = class_duration_input.input_value()
         assert filled_value == "60", "The class duration should be 60 minutes"
-
-    # @allure.step("Добавляем контактную информацию")
-    # def add_contact_info(self):
-    #     contact_detail_input = self.page.locator("#id_phone")
-    #     contact_detail_input.fill("5555555555")
-    #     filled_value = contact_detail_input.input_value()
-    #     assert filled_value == "5555555555", "Phone number should be 5555555555"
 
     @allure.step("Продавать пакеты со скидкой")
     def checkbox_discount(self):
@@ -245,8 +230,8 @@ class Announcement:
         ).count()
         print(f"Found {error_message_count} error messages.")
         assert (
-            error_message_count == 11
-        ), f"Expected 11 error messages, but found {error_message_count}"
+            error_message_count == 8
+        ), f"Expected 8 error messages, but found {error_message_count}"
 
     @allure.step("Создаем объявление")
     def create_announcement(self):

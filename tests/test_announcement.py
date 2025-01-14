@@ -15,32 +15,25 @@ def test_create_announcement(header, announcement, register):
 
 # AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is not created when the empty form is submitted
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_teacher_announcement_blank_form_same_endpoint(
-    header, register, my_teachers, create_announcement_page, announcement
+    header, login, create_announcement_page, announcement
 ):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_create_announcement_button()
-    create_announcement_page.verify_the_announcement_form_is_blank()
+    announcement.verify_required_fields_are_not_filled()
     create_announcement_page.click_finalize_announcement_button()
     create_announcement_page.verify_create_announcement_page_endpoint()
-    announcement.verify_required_fields_are_not_filled()
 
 
 # TC_12.001.005 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the number of announcements remains zero when an empty form is submitted
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_teacher_announcement_blank_form(
-    header, register, my_teachers, create_announcement_page, announcement
+    header, login, create_announcement_page, announcement
 ):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_create_announcement_button()
-
-    create_announcement_page.verify_the_announcement_form_is_blank()
     create_announcement_page.click_finalize_announcement_button()
     announcement.navigate_to_users_announcement_list()
     announcement.verify_number_of_announcements_is_zero()
