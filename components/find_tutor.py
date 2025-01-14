@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
 
 
@@ -111,3 +111,24 @@ class FindTutor:
         filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
         filter_btn.click()
         assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price=')
+
+    @allure.step('Проверяем видимость кнопки "Подробнее"')
+    def check_btn_more_is_visible(self):
+        btn_more = self.page.locator('//a[@class="btn btn-primary btn-lg mt-3"][1]')
+        assert btn_more.is_visible()
+
+    @allure.step('Проверяем кнопку "Подробнее" на клиабильность')
+    def check_btn_more_is_clickable(self):
+        btn_more = self.page.locator('//a[@class="btn btn-primary btn-lg mt-3"][1]')
+        btn_more.click()
+        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/1/')
+
+    @allure.step('Проверяем каждый профиль содержит кнопку "Подробнее"')
+    def check_btn_more_has_each_profile(self):
+        
+        self.page.wait_for_load_state("networkidle", timeout=5000)
+        btn_more = self.page.locator('//a[@class="btn btn-primary btn-lg mt-3"]')
+        expect(btn_more).not_to_have_count(0, timeout=3000)
+
+        for i in range(btn_more.count()):
+            expect(btn_more.nth(i)).to_be_visible()
