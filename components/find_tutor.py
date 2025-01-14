@@ -164,7 +164,7 @@ class FindTutor:
         filtered_cards = self.page.locator("//div[@class='row']/div")
 
         card_count = filtered_cards.count()
-        assert card_count > 0, "Фильтр вернул пустой список, хотя ожидаются результаты"
+        assert card_count > 0, "The filter returned an empty list"
 
         for i in range(card_count):
             card = filtered_cards.nth(i)
