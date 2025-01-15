@@ -34,7 +34,7 @@ def test_btn_more_find_tutor_is_visible(login, header, find_tutor):
 
 @allure.title("TC_34.001.001.003")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/11")
-# TC_34.001.001.003 [Student ] Find a teacher > Verify button "Подробнее" in a tutor profile clickable and redirectible 
+# TC_34.001.001.003 [Student] Find a teacher > Verify button "Подробнее" in a tutor profile clickable and redirectible 
 def test_btn_more_find_tutor_is_clickable(login, header, find_tutor):
     header.visit()
     header.click_login_button()
@@ -44,7 +44,7 @@ def test_btn_more_find_tutor_is_clickable(login, header, find_tutor):
 
 @allure.title("TC_34.001.001.004")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/11")
-# TC_34.001.001.004 [Student ] Find a teacher > Verify button "Подробнее" has each tutor profile
+# TC_34.001.001.004 [Student] Find a teacher > Verify button "Подробнее" has each tutor profile
 def test_btn_more_find_tutor_has_each_profile(login, header, find_tutor):
     header.visit()
     header.click_login_button()
