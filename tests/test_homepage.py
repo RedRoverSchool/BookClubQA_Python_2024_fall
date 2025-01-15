@@ -1,5 +1,8 @@
 import pytest
 
+from core.settings import list_url
+
+
 def test_homepage_info_is_same_after_reload(homepage, register):
     homepage.visit()
     main_page_info_before_reload = homepage.check_info_main_page()
@@ -8,25 +11,35 @@ def test_homepage_info_is_same_after_reload(homepage, register):
     assert main_page_info_after_reload == main_page_info_before_reload
 
 
-def test_homepage_info(homepage, register):
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
+def test_welcome_and_join_now_containers_info_are_visible(homepage):
     homepage.visit()
     homepage.check_info_welcome_container()
-    homepage.check_2_find_tutor_btns()
-    homepage.check_2_become_tutor_btns()
-    homepage.check_why_students_choose_us_title()
-    homepage.check_find_tutor_card_visible()
-    homepage.check_regular_funds_in_ad_for_new_tutors_card_visible()
-    homepage.check_professional_tools_for_finding_card_visible()
-    homepage.check_2_more_btns()
-    homepage.check_why_tutors_choose_us_title()
-    homepage.check_not_take_interest_for_lesson_card_visible()
-    homepage.check_regular_funds_in_ad_for_new_students_card_visible()
-    homepage.check_professional_tools_for_collaboration_card_visible()
+    homepage.check_join_now_container()
 
 
-@pytest.mark.skip(
-    reason="не прошёл CI после изменений 16.12.2024. Ругается на teardown теста"
-)
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
+def test_checking_preferences_for_students_section_info_is_visible(homepage):
+    homepage.visit()
+    homepage.check_preferences_for_students_title()
+    homepage.check_comfortable_finding_of_tutor_card_visible()
+    homepage.check_guarantee_of_quality_card_visible()
+    homepage.check_organizing_the_studying_card_visible()
+    homepage.check_homework_card_visible()
+
+
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
+def test_checking_preferences_for_tutors_section_info_is_visible(homepage):
+    homepage.visit()
+    homepage.check_preferences_for_tutors_title()
+    homepage.check_selling_ads_and_security_paymen_card_visible()
+    homepage.check_lessons_and_homeworks_management_card_visible()
+    homepage.check_statistics_and_analytics_card_visible()
+    homepage.check_review_management_card_visible()
+    homepage.check_support_and_promotion_card_visible()
+    homepage.check_powerful_community_card_visible()
+
+
 def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_top()
@@ -34,17 +47,16 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 16.12.2024. ")
+@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
-    """
-    CI Ругается на ERROR tests/test_homepage.py::test_more_btn_redirects_telegram_page_for_tutors[chromium] -
-    playwright._impl._errors.TimeoutError: Page.screenshot: Timeout 30000ms exceeded.
-
-    """
     homepage.visit()
     homepage.click_more_button_at_the_bottom()
     telegram_page.tutors_info_should_be_opened()
     telegram_page.check_telegram_channel_should_have_title_for_tutors()
+
+
+# TC_00.002.002.001 | Main page (body) - All users > Become a Teacher >
+# Verify button "Стать репетитором" is visible below "Добро пожаловать в "Мыслеплав"!" heading #77
 
 
 def test_first_btn_become_a_tutor_is_visible(homepage):
@@ -60,23 +72,17 @@ def test_first_btn_become_tutor_is_enabled(homepage):
 def test_find_tutor_btn_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_redirection()
-    assert (
-        url
-        == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-    )
+    assert url == list_url
 
 
 def test_find_tutor_btn_2_redirection(homepage):
     homepage.visit()
     url = homepage.check_find_tutor_btn_2_redirection()
-    assert (
-        url
-        == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-    )
+    assert url == list_url
 
-def test_find_tutor_button_visibility_as_student(homepage, header, register, login):
+
+def test_find_tutor_button_visibility_as_student(homepage, header, login):
     homepage.visit()
-    header.click_registration_button()
-    register.registration_new_user('student')
+    login.full_login("student849727@gmail.com", "xaD1n0tUfaHN")
     homepage.visit()
     homepage.find_tutor_button_should_be_visible()

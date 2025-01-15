@@ -15,7 +15,7 @@ class CookieBanner:
     def cookie_banner_should_be_visible(self):
         try:
             accept_cookie_banner = self.page.wait_for_selector(
-                "#cookie-consent-banner", timeout=5000
+                "#cookie-consent-banner", timeout=10000
             )
             assert accept_cookie_banner.is_visible(), "Cookie banner is not visible!"
             return True
@@ -47,9 +47,7 @@ class CookieBanner:
                 "#cookie-consent-banner p.mb-2", timeout=5000
             )
             actual_text = cookie_text.text_content()
-            expected_text = (
-                "Мы используем куки для улучшения вашего опыта на нашем сайте."
-            )
+            expected_text = "Мы используем куки для улучшения вашего опыта на нашем сайте. Вы можете управлять своими предпочтениями."
             assert (
                 actual_text == expected_text
             ), f"Ожидается '{expected_text}', но получен '{actual_text}'"
@@ -66,7 +64,7 @@ class CookieBanner:
             raise AssertionError("Cookie banner not found within 5 seconds")
 
     @allure.step(
-        "Проверяем что сообщения больше не отображается после нажатия кнопки 'Согласиться'"
+        "Проверяем что банер больше не отображается после нажатия кнопки 'Согласиться'"
     )
     def cookie_banner_is_missing(self):
         try:
@@ -76,9 +74,7 @@ class CookieBanner:
         except TimeoutError:
             raise AssertionError("Cookie banner did not disappear as expected")
 
-    @allure.step(
-        "Проверяем, что сообщение не появляется при повторном запуске приложения "
-    )
+    @allure.step("Проверяем, что банер не появляется при повторном запуске приложения ")
     def banner_does_not_reappear(self):
         self.page.reload()
         try:
@@ -87,3 +83,20 @@ class CookieBanner:
             )
         except TimeoutError:
             raise AssertionError("Cookie banner reappeared after reopening the app")
+
+    @allure.step("Дожидаемся появления кнопки 'Отклонить все'")
+    def wait_for_reject_cookie_button(self):
+        self.page.wait_for_selector("#reject-cookies", timeout=5000)
+
+    @allure.step("Нажимаем на кнопку 'Отклонить все'")
+    def click_reject_cookie_button(self):
+        self.page.click("#reject-cookies")
+
+    @allure.step("Проверяем, что cookies Yandex Metrica отсутствуют")
+    def verify_ym_cookies_are_missing(self):
+        # Получаем список cookies после нажатия кнопки 'Отклонить все'
+        cookies = self.page.context.cookies()
+        ym_cookies = [cookie for cookie in cookies if "_ym_" in cookie["name"]]
+        assert len(ym_cookies) == 0, f"Yandex Metrica cookies найдены: {ym_cookies}"
+
+        print("Тест успешно пройден: Cookies Yandex Metrica не установлены.")

@@ -39,7 +39,7 @@
 2. Создаем ветку для своих тестов 
 3. Пушим ветку в Github 
 4. Открываем запрос на слияние с main
-5. Отправляем запрос в slack в чат [#qa_python_project](https://redroverschool.slack.com/archives/C05US8RLPFU) или в свою группу
+5. Отправляем запрос в slack чат [#qa_python_project](https://redroverschool.slack.com/archives/C05US8RLPFU) или [#team_python_project_2024_fall](https://redroverschool.slack.com/archives/C084TBYK42F)
 6. Обязательно удаляем свою ветку после слияния с main
 
 ## 4.⚙️ Установка
@@ -96,10 +96,8 @@ ____________
 6. Не самые важные тесты стоит помечать маркером slow (@pytest.mark.slow)
 
 ## 7. <img src="https://github.com/user-attachments/assets/6498bf14-1bd2-4825-8513-9f16da124dfd" width="30" height="30"> Swagger доступен только на тестовом окружении. 
-Чтобы получить доступ нужно:
-1. Открыть тестовое окружение
-2. Войти в аккаунт
-3. Открыть http://testing.misleplav.ru/api/swagger/
+<img src='https://github.com/user-attachments/assets/97dc767c-e7a0-4e26-bb54-1d888d4bbb6b'  width="30" height="30"> Открыть ~~http://testing.misleplav.ru/api/swagger/~~
+
 
 ___
 ## 8. Замечания
@@ -110,3 +108,6 @@ ___
 - Если тесты не проходят, пожалуйста, проверьте последние изменения в коде, а также убедитесь, что все зависимости актуальны и правильно настроены.
 - В случае возникновения ошибок, связанных с Playwright или другими инструментами, обновление библиотек или повторная настройка окружения может помочь.
 
+```bash
+playwright codegen http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/
+```

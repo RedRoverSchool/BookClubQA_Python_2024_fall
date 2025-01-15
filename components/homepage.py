@@ -21,20 +21,21 @@ class Homepage:
 
     @allure.step('Check info in the "Добро пожаловать" container')
     def check_info_welcome_container(self):
-        welcome_container = self.page.get_by_text(
-            'Добро пожаловать в "Мыслеплав"! Платформа, соединяющая учеников и '
-            "репетиторов, о"
+        welcome_container = self.page.locator("section").filter(
+            has_text="Добро пожаловать в Мыслеплав! "
+            "Откройте новые горизонты обучения с "
+            "нашей платформ"
         )
-        expect(welcome_container).to_be_visible()
+        welcome_container.wait_for(state="visible", timeout=10000)
+
         expected_section_text = """
-        Добро пожаловать в "Мыслеплав"!
-        Платформа, соединяющая учеников и репетиторов, открывает новые горизонты для обучения.
-        
-            Найти репетитора
-            Найти репетитора
-            Стать репетитором
-            Стать репетитором
+        Добро пожаловать в Мыслеплав!
+            Откройте новые горизонты обучения с нашей платформой!
+            
+                Найти репетитора
+                Стать репетитором
         """
+
         assert (
             welcome_container.text_content().split() == expected_section_text.split()
         ), (
@@ -43,169 +44,250 @@ class Homepage:
             f"Actual: {welcome_container.text_content().split()}"
         )
 
-    @allure.step('Check 2 "Найти репетитора" btns')
-    def check_2_find_tutor_btns(self):
-        find_tutor_btns = (
-            self.page.locator('a.d-none:text("Найти репетитора")').filter().count()
-        )
-        assert find_tutor_btns == 2
-
     @allure.step('Click on "Стать репетитором" button')
     def click_become_tutor_btn(self):
-        self.page.locator('a.d-none:text("Стать репетитором")').first.click()
+        self.page.locator(
+            "div[class*='d-sm-flex'] a:text('Стать репетитором')"
+        ).first.click()
 
-    @allure.step('Check 2 "Стать репетитором" btns')
-    def check_2_become_tutor_btns(self):
-        become_tutor_btns = (
-            self.page.locator('a.d-none:text("Стать репетитором")').filter().count()
+    @allure.step('Check "Преимущества для учеников" title')
+    def check_preferences_for_students_title(self):
+        preferences_for_students_loc = self.page.get_by_role(
+            "heading", name="Преимущества для учеников"
         )
-        assert become_tutor_btns == 2
-
-    @allure.step('Check "Почему ученики выбирают нас?" title')
-    def check_why_students_choose_us_title(self):
-        why_students_choose_us_loc = self.page.get_by_role(
-            "heading", name="Почему ученики выбирают нас?"
-        )
-        expect(why_students_choose_us_loc).to_be_visible()
-        expected_title = "Почему ученики выбирают нас?"
-        actual_title = why_students_choose_us_loc.text_content()
+        preferences_for_students_loc.wait_for(state="visible", timeout=10000)
+        expect(preferences_for_students_loc).to_be_visible()
+        expected_title = "Преимущества для учеников"
+        actual_title = preferences_for_students_loc.text_content()
         assert actual_title == expected_title, (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_title} \n"
             f"Actual: {actual_title}"
         )
 
-    @allure.step('Check "Бесплатный поиск репетиторов" card is visible')
-    def check_find_tutor_card_visible(self):
-        free_find_tutor_card = self.page.get_by_text(
-            "Бесплатный поиск репетиторов Находим лучших репетиторов без лишних затрат"
+    @allure.step('Check "Удобный поиск репетитора" card is visible')
+    def check_comfortable_finding_of_tutor_card_visible(self):
+        comfortable_finding_of_tutor_card = self.page.get_by_text(
+            "Удобный поиск репетитора Изучайте профили репетиторов без рекламы и необходимост"
         )
-        expect(free_find_tutor_card).to_be_visible()
+        expect(comfortable_finding_of_tutor_card).to_be_visible()
         expected_card_text = """
-               Бесплатный поиск репетиторов
-                               Находим лучших репетиторов без лишних затрат.
+               Удобный поиск репетитора
+                        Изучайте профили репетиторов без рекламы и необходимости регистрации.
                """
         assert (
-            free_find_tutor_card.text_content().split() == expected_card_text.split()
+            comfortable_finding_of_tutor_card.text_content().split()
+            == expected_card_text.split()
         ), (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {free_find_tutor_card.text_content().split()}"
+            f"Actual: {comfortable_finding_of_tutor_card.text_content().split()}"
         )
 
-    @allure.step(
-        'Check "Регулярные вложения в рекламу Привлекаем новых репетиторов" card is visible'
-    )
-    def check_regular_funds_in_ad_for_new_tutors_card_visible(self):
-        regular_funds_in_ad_card = self.page.get_by_text(
-            "Регулярные вложения в рекламу Привлекаем новых репетиторов для вас"
+    @allure.step('Check "Гарантия качества" card is visible')
+    def check_guarantee_of_quality_card_visible(self):
+        guarantee_of_quality_card = self.page.get_by_text(
+            "Гарантия качества Если занятие по объективным причинам не устроит, вы сможете ве"
         )
-        expect(regular_funds_in_ad_card).to_be_visible()
+
+        expect(guarantee_of_quality_card).to_be_visible()
         expected_card_text = """
-                   Регулярные вложения в рекламу Привлекаем новых репетиторов для вас.
+                   Гарантия качества
+                        Если занятие по объективным причинам не устроит, вы сможете вернуть свои деньги.
                    """
         assert (
-            regular_funds_in_ad_card.text_content().split()
+            guarantee_of_quality_card.text_content().split()
             == expected_card_text.split()
         ), (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {regular_funds_in_ad_card.text_content().split()}"
+            f"Actual: {guarantee_of_quality_card.text_content().split()}"
         )
 
-    @allure.step('Check "Профессиональные инструменты для поиска" card is visible')
-    def check_professional_tools_for_finding_card_visible(self):
-        professional_tools_card = self.page.get_by_text(
-            "Профессиональные инструменты для поиска Эффективный поиск подходящего репетитора"
+    @allure.step('Check "Организация обучения" card is visible')
+    def check_organizing_the_studying_card_visible(self):
+        organizing_the_studying_card = self.page.get_by_text(
+            "Организация обучения Просматривайте информацию о занятиях, времени проведения, о"
         )
-        expect(professional_tools_card).to_be_visible()
+        expect(organizing_the_studying_card).to_be_visible()
         expected_card_text = """
-                       Профессиональные инструменты для поиска Эффективный поиск подходящего репетитора.
+                       Организация обучения
+                        Просматривайте информацию о занятиях, времени проведения, оплатах и дополнительных материалах 
+                        в одном месте.
                        """
         assert (
-            professional_tools_card.text_content().split() == expected_card_text.split()
-        ), (
-            f"Expected text does not match actual text. \n"
-            f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {professional_tools_card.text_content().split()}"
-        )
-
-    @allure.step(
-        'Check "Регулярные вложения в рекламу Привлекаем новых учеников" card is visible'
-    )
-    def check_regular_funds_in_ad_for_new_students_card_visible(self):
-        regular_funds_in_ad_for_new_student_card = self.page.get_by_text(
-            "Регулярные вложения в рекламу Привлекаем новых учеников для вас"
-        )
-        expect(regular_funds_in_ad_for_new_student_card).to_be_visible()
-        expected_card_text = """
-                       Регулярные вложения в рекламу Привлекаем новых учеников для вас.
-                       """
-        assert (
-            regular_funds_in_ad_for_new_student_card.text_content().split()
+            organizing_the_studying_card.text_content().split()
             == expected_card_text.split()
         ), (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {regular_funds_in_ad_for_new_student_card.text_content().split()}"
+            f"Actual: {organizing_the_studying_card.text_content().split()}"
         )
 
-    @allure.step(
-        'Check "Профессиональные инструменты для взаимодействия" card is visible'
-    )
-    def check_professional_tools_for_collaboration_card_visible(self):
-        professional_tools_for_collaboration_card = self.page.get_by_text(
-            "Профессиональные инструменты для взаимодействия Возможность создавать уроки, доб"
+    @allure.step('Check "Домашние задания" card is visible')
+    def check_homework_card_visible(self):
+        homework_card = self.page.get_by_text(
+            "Домашние задания Выполняйте домашние задания с помощью эффективных инструментов "
         )
-        expect(professional_tools_for_collaboration_card).to_be_visible()
+        expect(homework_card).to_be_visible()
         expected_card_text = """
-                           Профессиональные инструменты для взаимодействия Возможность создавать уроки, 
-                           добавлять домашки и оплаты для ученика.
+                           Домашние задания
+                        Выполняйте домашние задания с помощью эффективных инструментов на платформе.
+                          """
+        assert homework_card.text_content().split() == expected_card_text.split(), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_card_text.split()} \n"
+            f"Actual: {homework_card.text_content().split()}"
+        )
+
+    @allure.step('Check "Управление уроками и домашними заданиями" card is visible')
+    def check_lessons_and_homeworks_management_card_visible(self):
+        lessons_and_homeworks_management_card = self.page.get_by_text(
+            "Управление уроками и домашними заданиями Фиксируйте информацию о занятиях, созда"
+        )
+        expect(lessons_and_homeworks_management_card).to_be_visible()
+        expected_card_text = """
+                       Управление уроками и домашними заданиями
+                        Фиксируйте информацию о занятиях, создавайте и проверяйте домашние задания.
+                       """
+        assert (
+            lessons_and_homeworks_management_card.text_content().split()
+            == expected_card_text.split()
+        ), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_card_text.split()} \n"
+            f"Actual: {lessons_and_homeworks_management_card.text_content().split()}"
+        )
+
+    @allure.step('Check "Статистика и аналитика" card is visible')
+    def check_statistics_and_analytics_card_visible(self):
+        statistics_and_analytics_card = self.page.get_by_text(
+            "Статистика и аналитика Отслеживайте просмотры объявлений и общую статистику, что"
+        )
+        expect(statistics_and_analytics_card).to_be_visible()
+        expected_card_text = """
+                           Статистика и аналитика
+                        Отслеживайте просмотры объявлений и общую статистику, чтобы следить за 
+                        эффективностью продвижения.
                            """
         assert (
-            professional_tools_for_collaboration_card.text_content().split()
+            statistics_and_analytics_card.text_content().split()
             == expected_card_text.split()
         ), (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {professional_tools_for_collaboration_card.text_content().split()}"
+            f"Actual: {statistics_and_analytics_card.text_content().split()}"
         )
 
-    @allure.step('Check 2 "Подробнее" btns')
-    def check_2_more_btns(self):
-        more_btn = self.page.get_by_role("link", name="Подробнее").filter().count()
-        assert more_btn == 2
-
-    @allure.step('Check "Почему репетиторы выбирают нас?" title')
-    def check_why_tutors_choose_us_title(self):
-        why_tutors_choose_us_loc = self.page.get_by_role(
-            "heading", name="Почему репетиторы выбирают нас?"
+    @allure.step('Check "Управление отзывами" card is visible')
+    def check_review_management_card_visible(self):
+        review_management_card = self.page.get_by_text(
+            "Управление отзывами Только ученики, занимавшиеся с вами, могут оставлять отзывы"
         )
-        expect(why_tutors_choose_us_loc).to_be_visible()
-        expected_title = "Почему репетиторы выбирают нас?"
-        actual_title = why_tutors_choose_us_loc.text_content()
+        expect(review_management_card).to_be_visible()
+        expected_card_text = """
+                              Управление отзывами
+                        Только ученики, занимавшиеся с вами, могут оставлять отзывы.
+                              """
+        assert (
+            review_management_card.text_content().split() == expected_card_text.split()
+        ), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_card_text.split()} \n"
+            f"Actual: {review_management_card.text_content().split()}"
+        )
+
+    @allure.step('Check "Поддержка и продвижение" card is visible')
+    def check_support_and_promotion_card_visible(self):
+        support_and_promotion_card = self.page.get_by_text(
+            "Поддержка и продвижение Получайте помощь от менеджеров платформы и рекламируйте "
+        )
+        expect(support_and_promotion_card).to_be_visible()
+        expected_card_text = """
+                            Поддержка и продвижение
+                        Получайте помощь от менеджеров платформы и рекламируйте себя в социальных сетях.
+                                  """
+        assert (
+            support_and_promotion_card.text_content().split()
+            == expected_card_text.split()
+        ), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_card_text.split()} \n"
+            f"Actual: {support_and_promotion_card.text_content().split()}"
+        )
+
+    @allure.step('Check "Мощное сообщество" card is visible')
+    def check_powerful_community_card_visible(self):
+        powerful_community_card = self.page.get_by_text(
+            "Мощное сообщество Общайтесь с другими репетиторами и участвуйте в жизни сообщест"
+        )
+        expect(powerful_community_card).to_be_visible()
+        expected_card_text = """
+                            Мощное сообщество
+                        Общайтесь с другими репетиторами и участвуйте в жизни сообщества.
+                                     """
+        assert (
+            powerful_community_card.text_content().split() == expected_card_text.split()
+        ), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_card_text.split()} \n"
+            f"Actual: {powerful_community_card.text_content().split()}"
+        )
+
+    @allure.step('Check info in the "Присоединяйтесь сейчас!" container')
+    def check_join_now_container(self):
+        join_now_container = self.page.locator("section").filter(
+            has_text="Присоединяйтесь сейчас! Откройте новые "
+            "горизонты обучения с нашей платформой! На"
+        )
+        join_now_container.wait_for(state="visible", timeout=10000)
+        expected_section_text = """
+            Присоединяйтесь сейчас!
+            Откройте новые горизонты обучения с нашей платформой!
+            
+                Найти репетитора
+                Стать репетитором
+           """
+
+        assert (
+            join_now_container.text_content().split() == expected_section_text.split()
+        ), (
+            f"Expected text does not match actual text. \n"
+            f"Expected: {expected_section_text.split()} \n"
+            f"Actual: {join_now_container.text_content().split()}"
+        )
+
+    @allure.step('Check "Преимущества для репетиторов" title')
+    def check_preferences_for_tutors_title(self):
+        preference_for_tutors_loc = self.page.get_by_role(
+            "heading", name="Преимущества для репетиторов"
+        )
+        expect(preference_for_tutors_loc).to_be_visible()
+        expected_title = "Преимущества для репетиторов"
+        actual_title = preference_for_tutors_loc.text_content()
         assert actual_title == expected_title, (
             f"Expected text does not match actual text. \n"
             f"Expected:{expected_title} \n"
             f"Actual: {actual_title}"
         )
 
-    @allure.step('Check "Не берем процент с Ваших занятий" card is visible')
-    def check_not_take_interest_for_lesson_card_visible(self):
-        not_take_interest_for_lesson_card = self.page.get_by_text(
-            "Не берем процент с Ваших занятий Вы можете бесплатно размещать свои обьявления"
+    @allure.step('Check "Продающие объявления и безопасность расчетов" card is visible')
+    def check_selling_ads_and_security_paymen_card_visible(self):
+        selling_ads_and_security_payment_card = self.page.get_by_text(
+            "Продающие объявления и безопасность расчетов Размещайте эффективные объявления и"
         )
-        expect(not_take_interest_for_lesson_card).to_be_visible()
+        expect(selling_ads_and_security_payment_card).to_be_visible()
         expected_card_text = """
-                           Не берем процент с Ваших занятий Вы можете бесплатно размещать свои обьявления
+                           Продающие объявления и безопасность расчетов
+                        Размещайте эффективные объявления и будьте уверены в получении оплаты после каждого урока.
                            """
         assert (
-            not_take_interest_for_lesson_card.text_content().split()
+            selling_ads_and_security_payment_card.text_content().split()
             == expected_card_text.split()
         ), (
             f"Expected text does not match actual text. \n"
             f"Expected: {expected_card_text.split()} \n"
-            f"Actual: {not_take_interest_for_lesson_card.text_content().split()}"
+            f"Actual: {selling_ads_and_security_payment_card.text_content().split()}"
         )
 
     @allure.step("Нажимаем на кнопку More at the top")
@@ -218,9 +300,7 @@ class Homepage:
 
     @allure.step("Проверка видимости первой кнопки 'Стать репетитором'")
     def first_btn_become_a_tutor_is_visible(self):
-        button = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
-        )
+        button = self.page.get_by_role("link", name="Стать репетитором").first
         assert button.is_visible()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
@@ -229,29 +309,26 @@ class Homepage:
 
     @allure.step("Проверка доступности первой кнопки стать репетиром")
     def find_first_btn_become_tutor(self):
-        become_tutor_btn = self.page.locator(
-            '//a[@class="btn btn-light rounded d-none d-sm-inline btn-lg"]'
-        )
+        become_tutor_btn = self.page.button = self.page.get_by_role(
+            "link", name="Стать репетитором"
+        ).first
         assert become_tutor_btn.is_enabled()
 
     @allure.step("Проверка редиректа кнопок 'Найти репетитора'")
     def check_find_tutor_btn_redirection(self):
-        button_2 = self.page.locator(
-            "//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']"
-        )
+        button_2 = self.page.get_by_role("link", name="Найти репетитора").first
         button_2.click()
         find_tutor_btn_redirection = self.page.url
         return find_tutor_btn_redirection
 
     def check_find_tutor_btn_2_redirection(self):
-        button_3 = self.page.wait_for_selector(
-            ".btn.btn-light.me-2.rounded.d-none.d-md-inline.btn-lg", state="visible"
-        )
+        button_3 = self.page.locator("role=link[name='Найти репетитора']").last
+        button_3.wait_for(state="visible")
         button_3.click()
         find_tutor_btn_2_redirection = self.page.url
         return find_tutor_btn_2_redirection
 
-    @allure.step("Проверка видипости кнопки 'Найти репетитора'")
+    @allure.step("Проверка видимости кнопки 'Найти репетитора'")
     def find_tutor_button_should_be_visible(self):
-        button = self.page.locator("//a[@class='btn btn-light me-2 rounded d-none d-sm-inline btn-lg']")
+        button = self.page.get_by_role("link", name="Найти репетитора").first
         assert button.is_visible()

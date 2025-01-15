@@ -12,11 +12,9 @@ class Register:
         self.password = None
         self.page = page
 
-    @allure.step("Проверяем заголовок 'Регистрация'")
-    def header_should_contain_text(self, title_text):
-        expect(self.page.get_by_test_id("registration-header")).to_contain_text(
-            title_text
-        )
+    @allure.step("Проверяем наличие кнопки 'Зарегистрироваться'")
+    def register_page_contains_register_btn(self):
+        expect(self.page.get_by_text("Зарегистрироваться")).to_be_visible()
 
     @allure.step("Заполняем поле 'Почта'")
     def fill_email(self, email):
@@ -128,28 +126,7 @@ class Register:
 
         self.generate_valid_password()
         self.fill_email(email)
-        self.fill_nick(name)
         self.fill_password(self.password)
         self.fill_confirm_password(self.password)
         self.click_registration_button()
-        print(f"Email: {email}, Password: {self.password}")
         return {"name": name, "password": self.password, "email": email}
-
-    # NOTE: Оставлю пока еще одну регистрацию, через фикстуру
-    def select_role(self, is_teacher=None):
-        checkbox = self.page.locator("#id_is_tutor")
-        expect(checkbox).to_be_visible()
-        if is_teacher is None:
-            return
-        if is_teacher:
-            if not checkbox.is_checked():
-                checkbox.check()
-
-    @allure.step("Заполняет все поля и отправляет форму")
-    def complete_registration(self, fake_data):
-        self.fill_email(fake_data["email"])
-        self.fill_nick(fake_data["name"])
-        self.fill_password(fake_data["password"])
-        self.fill_confirm_password(fake_data["password"])
-
-        return fake_data
