@@ -264,3 +264,35 @@ class Announcement:
         self.fill_out_class_duration()
         self.fill_out_convenient_time()
         self.click_save_announcement_btn()
+
+
+    @allure.step("Проверяем, что все обязательные поля отмечены '*'/ 'Обязательное поле'")
+    def mandatory_fields_are_marked_check(self):
+        first_name_mark = self.page.locator('//label[@for="id_first_name"]//span[@class="asteriskField"]')
+        assert first_name_mark.is_visible(), f"Отметка поля с локатором {first_name_mark} не найдена"
+        last_name_mark =  self.page.locator('//label[@for="id_last_name"]//span[@class="asteriskField"]')
+        assert last_name_mark.is_visible(), f"Отметка поля с локатором {last_name_mark} не найдена"
+        telegram_nick_mark = self.page.locator('//label[@for="id_telegram"]//span[@class="asteriskField"]')
+        assert telegram_nick_mark.is_visible(), f"Отметка поля с локатором {telegram_nick_mark} не найдена"
+        phone_mark = self.page.locator('//label[@for="id_phone"]//span[@class="asteriskField"]')
+        assert phone_mark.is_visible(), f"Отметка поля с локатором {phone_mark} не найдена"
+        download_photo_title_text = self.page.get_by_text("Рекомендуемое разрешение:").inner_text()
+        assert "Обязательное поле." in download_photo_title_text,\
+            f"Отметка поля с локатором {download_photo_title_text} не найдена"
+        description_field_mark = self.page.locator('//label[@for="id_description"]//span[@class="asteriskField"]')
+        assert description_field_mark.is_visible(), f"Отметка поля с локатором {description_field_mark} не найдена"
+        student_category_mark = self.page.locator('//legend[@class="form-label requiredField"]//span[@class="asteriskField"]')
+        assert student_category_mark.is_visible(), f"Отметка поля с локатором {student_category_mark} не найдена"
+        can_help_field_mark=  self.page.locator('//label[@for="id_can_help"]//span[@class="asteriskField"]')
+        assert can_help_field_mark.is_visible(), f"Отметка поля с локатором {can_help_field_mark} не найдена"
+        category_mark = self.page.locator('//label[@for="id_category"]//span[@class="asteriskField"]')
+        assert category_mark.is_visible(), f"Отметка поля с локатором {category_mark} не найдена"
+        experience_mark =  self.page.locator('//label[@for="id_years_of_experience"]//span[@class="asteriskField"]')
+        assert experience_mark.is_visible(), f"Отметка поля с локатором {experience_mark} не найдена"
+        price_mark = self.page.locator('//label[@for="id_price"]//span[@class="asteriskField"]')
+        assert price_mark.is_visible(), f"Отметка поля с локатором {price_mark} не найдена"
+        duration_mark = self.page.locator('//label[@for="id_class_duration"]//span[@class="asteriskField"]')
+        assert duration_mark.is_visible(), f"Отметка поля с локатором {duration_mark} не найдена"
+
+
+
