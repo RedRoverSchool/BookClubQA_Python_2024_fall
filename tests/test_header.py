@@ -1,3 +1,5 @@
+from itertools import repeat
+
 import pytest
 from core.settings import pages_urls_for_guest
 from core.settings import site_pages_urls
@@ -39,7 +41,7 @@ def test_support_visibility_as_teacher(login, header):
 )
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_support_clickability_as_teacher(
-    login, header, user_registration_cleanup, api_request
+        login, header, user_registration_cleanup, api_request
 ):
     email, password = user_registration_cleanup
     header.visit()
@@ -143,7 +145,7 @@ def test_my_students_btn_is_not_visible_for_students(register, header, homepage)
 # "Мои студенты" button is not available when no announcement is created
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-    register, header, homepage
+        register, header, homepage
 ):
     header.visit()
     header.click_registration_button()
@@ -151,7 +153,6 @@ def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
     assert header.my_students_button_is_hidden() is True
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_filter_tutor_by_category(header, find_tutor):
     header.visit()
     header.click_find_tutor_button()
