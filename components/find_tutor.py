@@ -82,7 +82,7 @@ class FindTutor:
             all_tutors_math += self.page.get_by_role(
                 "heading", name="Математика"
             ).count()
-
+        self.page.wait_for_load_state()
         self.page.locator("//select[@id='categorySelect']").select_option("Математика")
         self.page.locator("button.btn.btn-primary.btn-lg.me-2").click()
         self.page.wait_for_load_state()
