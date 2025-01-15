@@ -1,7 +1,11 @@
 import allure
 from playwright.sync_api import Page, expect
 
-from core.settings import base_url, my_tutors_list_url, tutors_list_url as find_tutor_url
+from core.settings import (
+    base_url,
+    my_tutors_list_url,
+    tutors_list_url as find_tutor_url,
+)
 
 profile_page = "http://testing.misleplav.ru/subscription/profile/"
 
@@ -16,7 +20,7 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Войти'")
     def click_login_button(self):
-        self.page.get_by_role("link", name="Войти").click()
+        self.page.locator("//a[text()='Войти']").click()
 
     @allure.step("Кликаем на кнопку 'Регистрация'")
     def click_registration_button(self):
@@ -202,3 +206,38 @@ class Header:
         original_color = button.evaluate("el => getComputedStyle(el).color")
         button.hover()
         expect(button).not_to_have_css("color", original_color)
+
+        # TC_31.003.001.001 | [Student ] Header > My Tutor(button) > Visibility check #326
+
+    @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
+    def student_my_tutors_button_is_visible(self):
+        my_tutors_btn = self.page.wait_for_selector(
+            "(//a[@class='nav-link'])[2]", state="visible"
+        )
+        return my_tutors_btn.is_visible()
+
+    # TC_31.003.001.003 | [Student ] Header > My Tutor(button) > Clickability, Redirect check #326
+    @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
+    def student_my_tutors_button_clickable_redirect(self):
+        self.page.wait_for_selector(
+            "(//a[@class='nav-link'])[2]", state="visible"
+        ).click()
+        current_url = self.page.url
+        assert current_url == my_tutors_list_url
+
+    # TC_31.004.001.001 | [Student ] Header > Find Teacher(button) > Visibility check #321
+    @allure.step("Проверяем видимость кнопки 'Найти репетитора'")
+    def student_find_tutor_button_is_visible(self):
+        find_tutors_btn = self.page.wait_for_selector(
+            "(//a[@class='nav-link'])[1]", state="visible"
+        )
+        return find_tutors_btn.is_visible()
+
+    # TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Clickability, Redirect check #321
+    @allure.step("Проверяем видимость кнопки 'Мои репетиторы'")
+    def student_find_tutor_button_clickable_redirect(self):
+        self.page.wait_for_selector(
+            "(//a[@class='nav-link'])[1]", state="visible"
+        ).click()
+        current_url = self.page.url
+        assert current_url == find_tutor_url

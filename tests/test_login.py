@@ -15,7 +15,7 @@ def test_login_as_tutor_btn_create_listing(header, login):
     header.click_login_button()
     login.enter_username("test_auth_login")
     login.enter_password("test_auth_pass")
-    login.click_login_button()
+    login.click_submit_button()
 
 
 @allure.title("TC_03.001.005")

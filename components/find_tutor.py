@@ -82,7 +82,6 @@ class FindTutor:
             all_tutors_math += self.page.get_by_role(
                 "heading", name="Математика"
             ).count()
-
         self.page.locator("//select[@id='categorySelect']").select_option("Математика")
         self.page.locator("button.btn.btn-primary.btn-lg.me-2").click()
         self.page.wait_for_load_state()
@@ -118,7 +117,6 @@ class FindTutor:
     def check_prices_over_min_price(self, min_price: float) -> object:
         # Проверяем, есть ли репетиторы на странице
         price_siblings_list = self.page.get_by_text("Стоимость занятия:")
-
         if price_siblings_list.count() > 0:
             # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
             for i in range(price_siblings_list.count()):
@@ -133,6 +131,29 @@ class FindTutor:
             text = self.page.locator(".bg-white.p-3.mt-3").text_content()
             assert "По вашему запросу нет результатов.", text
 
+    @allure.step(
+        "Проверяем, что опыт преподавания репетиторов больше или равен заданному значению"
+    )
+    def check_experience_over_min_value(self, min_experience: int):
+        filtered_cards = self.page.locator("//div[@class='row']/div")
+
+        card_count = filtered_cards.count()
+        assert card_count > 0, "The filter returned an empty list"
+
+        for i in range(card_count):
+            card = filtered_cards.nth(i)
+            more_details_btn = card.get_by_text("Подробнее")
+            more_details_btn.click()
+            experience_text = self.page.locator(
+                "//p[contains(text(),'лет')]"
+            ).inner_text()
+            experience_value = int(experience_text.split()[0])
+            assert (
+                experience_value >= min_experience
+            ), f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
+
+            self.page.go_back()
+
     @allure.step('Проверяем видимость кнопки "Фильтровать"')
     def check_filter_btn_is_visible(self):
         filter_btn = self.page.locator(
@@ -142,9 +163,13 @@ class FindTutor:
 
     @allure.step('Нажимаем на кнопку "Фильтровать"')
     def click_filter_btn(self):
-        filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
+        filter_btn = self.page.locator(
+            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]'
+        )
         filter_btn.click()
-        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price=')
+        assert self.page.url == (
+            "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price="
+        )
 
     @allure.step('Проверяем видимость кнопки "Подробнее"')
     def check_btn_more_is_visible(self):
@@ -155,7 +180,9 @@ class FindTutor:
     def check_btn_more_is_clickable(self):
         btn_more = self.page.locator('(//a[text()="Подробнее"])[1]')
         btn_more.click()
-        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/1/')
+        assert self.page.url == (
+            "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/1/"
+        )
 
     @allure.step('Проверяем каждый профиль содержит кнопку "Подробнее"')
     def check_btn_more_has_each_profile(self):
@@ -165,3 +192,20 @@ class FindTutor:
 
         for i in range(btn_more.count()):
             expect(btn_more.nth(i)).to_be_visible()
+
+    @allure.step("Определяем случайную минимальную цену")
+    def set_random_min_price(self, fake, min_value: int, max_value: int):
+        min_price = fake.random_int(min=min_value, max=max_value)
+        return min_price
+
+    @allure.step("Вводим значение минимального опыта преподавания")
+    def enter_min_experience(self, min_experience: int):
+        experience_field = self.page.locator("#minExperience")
+        experience_field.wait_for(state="visible", timeout=3000)
+        assert (
+            experience_field.is_visible()
+        ), "The 'Minimum Teaching Experience' field is not visible."
+        assert (
+            experience_field.is_enabled()
+        ), "The 'Minimum Teaching Experience' field is not enabled."
+        experience_field.fill(str(min_experience))
