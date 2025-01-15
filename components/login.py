@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from core.settings import login_url
 from dotenv import load_dotenv
 import os
-import time
+
 
 load_dotenv()
 
@@ -76,7 +76,7 @@ class Login:
 
     @allure.step("Нажимаем кнопку 'Войти'")
     def click_login_button(self):
-        self.page.get_by_text("Войти").click()
+        self.page.locator("//a[text()='Войти']").click()
 
     @allure.step("Выполняем полный вход пользователя")
     def full_login(self, username: str, password: str):
@@ -92,11 +92,12 @@ class Login:
 
     @allure.step("Выполняем вход с не корректным логином")
     def check_enter_invalid_username(self, username):
-        
         self.enter_username(username)
 
     def should_be_valid_error_message(self):
-        error_message = self.page.locator('li:has-text("Пожалуйста, введите правильные Почта и пароль. Оба поля могут быть чувствительны к регистру.")')
+        error_message = self.page.locator(
+            'li:has-text("Пожалуйста, введите правильные Почта и пароль. Оба поля могут быть чувствительны к регистру.")'
+        )
         if error_message.is_visible():
             print("Error message found!")
 
