@@ -11,7 +11,6 @@ def test_homepage_info_is_same_after_reload(homepage, register):
     assert main_page_info_after_reload == main_page_info_before_reload
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_welcome_and_join_now_containers_info_are_visible(homepage):
     homepage.visit()
     homepage.check_info_welcome_container()
