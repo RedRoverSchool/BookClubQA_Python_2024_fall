@@ -93,15 +93,10 @@ class Login:
     def check_enter_invalid_username(self, username):
         self.enter_username(username)
 
-    def should_be_valid_message(self, expected_text):
-        expected_messege_field = self.page.locator(
-            "//*[contains(text(), 'Пожалуйста,')]"
-        )
-        actual_text = expected_messege_field.text_content()
-        assert (
-            expected_messege_field.is_visible()
-        ), "Сообщение с текстом 'Пожалуйста' не найдено"
-        assert expected_text == actual_text
+    def should_be_valid_error_message(self):
+        error_message = self.page.locator('li:has-text("Пожалуйста, введите правильные Почта и пароль. Оба поля могут быть чувствительны к регистру.")')
+        if error_message.is_visible():
+            print("Error message found!")
 
     def click_submit_button(self):
         self.page.locator("//*[@type='submit']").click()

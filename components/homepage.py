@@ -23,14 +23,11 @@ class Homepage:
     def check_info_welcome_container(self):
         welcome_container = self.page.locator("section").filter(
             has_text="Добро пожаловать в Мыслеплав! "
-            "Откройте новые горизонты обучения с "
-            "нашей платформ"
         )
         welcome_container.wait_for(state="visible", timeout=10000)
 
         expected_section_text = """
         Добро пожаловать в Мыслеплав!
-            Откройте новые горизонты обучения с нашей платформой!
             
                 Найти репетитора
                 Стать репетитором
@@ -237,13 +234,11 @@ class Homepage:
     @allure.step('Check info in the "Присоединяйтесь сейчас!" container')
     def check_join_now_container(self):
         join_now_container = self.page.locator("section").filter(
-            has_text="Присоединяйтесь сейчас! Откройте новые "
-            "горизонты обучения с нашей платформой! На"
+            has_text="Присоединяйтесь сейчас!"
         )
         join_now_container.wait_for(state="visible", timeout=10000)
         expected_section_text = """
             Присоединяйтесь сейчас!
-            Откройте новые горизонты обучения с нашей платформой!
             
                 Найти репетитора
                 Стать репетитором
