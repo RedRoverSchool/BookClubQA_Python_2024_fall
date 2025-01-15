@@ -161,23 +161,21 @@ class FindTutor:
         "Проверяем, что опыт преподавания репетиторов больше или равен заданному значению"
     )
     def check_experience_over_min_value(self, min_experience: int):
-        experience_siblings_list = self.page.get_by_text("Опыт преподавания:")
+        filtered_cards = self.page.locator("//div[@class='row']/div")
 
-        if experience_siblings_list.count() > 0:
-            # Если репетиторы есть, то проверяем, что их стоимость занятия >= установленной минимальной цены
-            for i in range(experience_siblings_list.count()):
-                experience_sibling = experience_siblings_list.nth(i)
-                actual_experience_in_string = (
-                    experience_sibling.locator("+ div").text_content().strip()
-                )
-                try:
-                    actual_experience = float(actual_experience_in_string.split(" ")[0])
-                    assert actual_experience >= min_experience
-                except (IndexError, ValueError) as e:
-                    raise AssertionError(
-                        f"Failed to parse experience from text: '{actual_experience_in_string}'. Error: {e}"
-                    )
-        else:
-            # Если список репетиторов пустой, то проверяем сообщение
-            text = self.page.locator(".alert alert-info rounded-5").text_content()
-            assert "Нет результатов", text
+        card_count = filtered_cards.count()
+        assert card_count > 0, "The filter returned an empty list"
+
+        for i in range(card_count):
+            card = filtered_cards.nth(i)
+            more_details_btn = card.get_by_text("Подробнее")
+            more_details_btn.click()
+            experience_text = self.page.locator(
+                "//p[contains(text(),'лет')]"
+            ).inner_text()
+            experience_value = int(experience_text.split()[0])
+            assert (
+                experience_value >= min_experience
+            ), f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
+
+            self.page.go_back()
