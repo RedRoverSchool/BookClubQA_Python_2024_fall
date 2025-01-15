@@ -1,5 +1,5 @@
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
 from faker import Faker
 
@@ -140,42 +140,28 @@ class FindTutor:
         )
         assert filter_btn.is_visible()
 
-    @allure.step("Определяем случайную минимальную цену")
-    def set_random_min_price(self, fake, min_value: int, max_value: int):
-        min_price = fake.random_int(min=min_value, max=max_value)
-        return min_price
+    @allure.step('Нажимаем на кнопку "Фильтровать"')
+    def click_filter_btn(self):
+        filter_btn = self.page.locator('//button[@type="submit" and contains(@class, "btn-dark") and text()="Вперед"]')
+        filter_btn.click()
+        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/?category=&min_experience=0&min_price=&max_price=')
 
-    @allure.step("Вводим значение минимального опыта преподавания")
-    def enter_min_experience(self, min_experience: int):
-        experience_field = self.page.locator("#minExperience")
-        experience_field.wait_for(state="visible", timeout=3000)
-        assert (
-            experience_field.is_visible()
-        ), "The 'Minimum Teaching Experience' field is not visible."
-        assert (
-            experience_field.is_enabled()
-        ), "The 'Minimum Teaching Experience' field is not enabled."
-        experience_field.fill(str(min_experience))
+    @allure.step('Проверяем видимость кнопки "Подробнее"')
+    def check_btn_more_is_visible(self):
+        btn_more = self.page.locator('(//a[text()="Подробнее"])[1]')
+        assert btn_more.is_visible()
 
-    @allure.step(
-        "Проверяем, что опыт преподавания репетиторов больше или равен заданному значению"
-    )
-    def check_experience_over_min_value(self, min_experience: int):
-        filtered_cards = self.page.locator("//div[@class='row']/div")
+    @allure.step('Проверяем кнопку "Подробнее" на клиабильность')
+    def check_btn_more_is_clickable(self):
+        btn_more = self.page.locator('(//a[text()="Подробнее"])[1]')
+        btn_more.click()
+        assert self.page.url == ('http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/1/')
 
-        card_count = filtered_cards.count()
-        assert card_count > 0, "The filter returned an empty list"
+    @allure.step('Проверяем каждый профиль содержит кнопку "Подробнее"')
+    def check_btn_more_has_each_profile(self):
+        self.page.wait_for_load_state("networkidle", timeout=5000)
+        btn_more = self.page.locator('//a[@class="btn btn-primary btn-lg mt-3"]')
+        expect(btn_more).not_to_have_count(0, timeout=3000)
 
-        for i in range(card_count):
-            card = filtered_cards.nth(i)
-            more_details_btn = card.get_by_text("Подробнее")
-            more_details_btn.click()
-            experience_text = self.page.locator(
-                "//p[contains(text(),'лет')]"
-            ).inner_text()
-            experience_value = int(experience_text.split()[0])
-            assert (
-                experience_value >= min_experience
-            ), f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
-
-            self.page.go_back()
+        for i in range(btn_more.count()):
+            expect(btn_more.nth(i)).to_be_visible()

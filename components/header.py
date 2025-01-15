@@ -1,7 +1,7 @@
 import allure
 from playwright.sync_api import Page, expect
 
-from core.settings import base_url
+from core.settings import base_url, my_tutors_list_url, tutors_list_url as find_tutor_url
 
 profile_page = "http://testing.misleplav.ru/subscription/profile/"
 

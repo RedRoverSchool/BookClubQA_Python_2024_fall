@@ -2,6 +2,7 @@ import pytest
 from core.settings import pages_urls_for_guest
 from core.settings import site_pages_urls
 from playwright.sync_api import Page
+import time
 
 
 def test_login_button_opens_login_page(header, login):
@@ -250,3 +251,31 @@ def test_profile_btn_redirection(header, user_profile, login, data, page: Page):
     page.goto(page_url)
     header.click_profile_button()
     user_profile.profile_btn_redirection_check()
+
+# TC_31.003.001.001 | [Student ] Header > My Tutor(button) > Visibility check #326
+def test_my_tutor_btn_visibility_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    header.student_my_tutors_button_is_visible()
+
+# TC_31.003.001.003 | [Student ] Header > My Tutor(button) > Visibility check #326
+def test_my_tutor_btn_clickable_redirection_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    header.student_my_tutors_button_clickable_redirect()
+
+# TC_31.004.001.001 | [Student ] Header > Find Teacher(button) > Visibility check #321
+def test_find_tutor_btn_visibility_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    header.student_find_tutor_button_is_visible()
+
+# TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Visibility check #321
+def test_find_tutor_btn_clickable_redirection_as_student(login, header):
+    header.visit()
+    header.click_login_button()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    header.student_find_tutor_button_clickable_redirect()

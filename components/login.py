@@ -3,6 +3,7 @@ from playwright.sync_api import Page
 from core.settings import login_url
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv()
 
@@ -91,6 +92,7 @@ class Login:
 
     @allure.step("Выполняем вход с не корректным логином")
     def check_enter_invalid_username(self, username):
+        
         self.enter_username(username)
 
     def should_be_valid_error_message(self):
@@ -99,7 +101,7 @@ class Login:
             print("Error message found!")
 
     def click_submit_button(self):
-        self.page.locator("//*[@type='submit']").click()
+        self.page.locator("//button[@type='submit']").click()
 
     @allure.step("Логинимся как учитель с персональными данными")
     def login_as_tutor(self, header):
