@@ -133,7 +133,7 @@ def test_create_announcement_with_only_required_fields(header, announcement, reg
 
 
 # TC_13.002.001| [Teacher] My announcement > Edit announcement > Mandatory fields are marked with "*"
-def test_mandatory_fields_marked(header,login,announcement):
+def test_mandatory_fields_marked(header, login, announcement):
     header.visit()
     login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
     announcement.click_my_announcement_button()
