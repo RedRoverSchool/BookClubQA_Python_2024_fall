@@ -100,21 +100,6 @@ def test_login_button_is_enabled(header):
     header.login_button_is_enabled()
 
 
-# TC_11.007.001|Header - Teacher> Check the "Статистика" button
-def test_statistics_button_is_visible(header, login):
-    header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
-    header.statistics_button_is_visible()
-
-
-# TC_11.007.001|Header - Teacher> Check the "Статистика" button
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_verify_redirection_on_statistics_page(header, login):
-    header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
-    header.click_statistics_button()
-
-
 # TC_11.004.001.001 | Header - Teacher > "Выйти" - button is not available when user don't logined
 def test_header_logout_is_absent(header):
     """
@@ -131,24 +116,19 @@ def test_my_students_btn_is_not_visible_for_guests(header, homepage):
 
 
 # TC_11.006.005 [Teacher] Header > My students(button) > "Мои студенты" button is not available for students
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_my_students_btn_is_not_visible_for_students(register, header, homepage):
+def test_my_students_btn_is_not_visible_for_students(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user(user_type="student")
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     assert header.my_students_button_is_hidden() is True
 
 
 # TC_11.006.004 [Teacher] Header > My students(button) >
 # "Мои студенты" button is not available when no announcement is created
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-    register, header, homepage
-):
+def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user(user_type="tutor")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     assert header.my_students_button_is_hidden() is True
+
 
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_filter_tutor_by_category(header, find_tutor):
