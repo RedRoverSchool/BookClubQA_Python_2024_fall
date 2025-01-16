@@ -11,6 +11,12 @@ valid_login = "Garry"
 invalid_login = "q-"
 invalid_password = "p==="
 
+EMAIL_TUTOR_KM = "tutor_testing@bk.ru"
+PASSWORD_TUTOR_KM = "I165TVAzghk8"
+
+EMAIL_STUDENT_KM = "student-test-misliplav@mail.ru"
+PASSWORD_STUDENT_KM = "JXvNebAMsWb7"
+
 
 def generate_valid_password():
     # Определим минимальную длину пароля

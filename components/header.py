@@ -42,7 +42,7 @@ class Header:
 
     @allure.step("Кликаем на кнопку 'Поддержка'")
     def click_support_button(self):
-        button = self.page.locator('//*[@id="navbarNav"]/ul/li[3]/a')
+        button = self.page.locator("//a[text()='Поддержка']")
         button.click()
         expect(self.page).to_have_url("https://t.me/misleplav_support_bot")
 
