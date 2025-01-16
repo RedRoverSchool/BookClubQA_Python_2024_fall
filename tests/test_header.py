@@ -1,15 +1,19 @@
+import allure
 import pytest
 from core.settings import pages_urls_for_guest
 from core.settings import site_pages_urls
 from playwright.sync_api import Page
+from Data import data
 
 
+@allure.label("test_case_id", "TC_02.001.001.004")
 def test_login_button_opens_login_page(header, login):
     header.visit()
     header.click_login_button()
     login.check_url_login_page("/login")
 
 
+@allure.label("test_case_id", "TC_02.002.001.001")
 def test_verify_registration_options_on_registration_page(header, register):
     header.visit()
     header.click_registration_button()
@@ -28,24 +32,17 @@ def test_verify_registration_options_on_find_tutor_page(header, find_tutor):
     find_tutor.check_title_of_registration()
 
 
+@allure.label("test_case_id", "TC_11.003.001.001")
 def test_support_visibility_as_teacher(login, header):
     header.visit()
     login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
     header.support_button_should_be_visible()
 
 
-@pytest.mark.parametrize(
-    "user_registration_cleanup", [("teacher", True, False)], indirect=True
-)
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_support_clickability_as_teacher(
-    login, header, user_registration_cleanup, api_request
-):
-    email, password = user_registration_cleanup
+@allure.label("test_case_id", "TC_11.003.001.002")
+def test_support_clickability_as_teacher(header, login):
     header.visit()
-    header.click_login_button()
-    login.full_login(email, password)
-    print(email, password)
+    login.full_login(data.EMAIL_TUTOR_KM, data.PASSWORD_TUTOR_KM)
     header.click_support_button()
 
 
