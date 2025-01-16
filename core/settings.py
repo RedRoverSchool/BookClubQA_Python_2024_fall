@@ -4,10 +4,16 @@ fake = Faker()
 fake_name_for_registration = fake.user_name()
 
 policy_url = "https://www.example.com/privacy-policy"
-list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+list_url = (
+    "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+)
+tutors_list_url = (
+    "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+)
 list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/list/"
-tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+tutors_list_url = (
+    "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
+)
 my_tutors_list_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/dashboard/my_teachers/"
 signup_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/signup/"
 login_url = "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/authorization/login/"

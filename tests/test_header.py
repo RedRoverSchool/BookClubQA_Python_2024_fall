@@ -2,7 +2,6 @@ import pytest
 from core.settings import pages_urls_for_guest
 from core.settings import site_pages_urls
 from playwright.sync_api import Page
-import time
 
 
 def test_login_button_opens_login_page(header, login):
@@ -101,21 +100,6 @@ def test_login_button_is_enabled(header):
     header.login_button_is_enabled()
 
 
-# TC_11.007.001|Header - Teacher> Check the "Статистика" button
-def test_statistics_button_is_visible(header, login):
-    header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
-    header.statistics_button_is_visible()
-
-
-# TC_11.007.001|Header - Teacher> Check the "Статистика" button
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_verify_redirection_on_statistics_page(header, login):
-    header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
-    header.click_statistics_button()
-
-
 # TC_11.004.001.001 | Header - Teacher > "Выйти" - button is not available when user don't logined
 def test_header_logout_is_absent(header):
     """
@@ -132,24 +116,19 @@ def test_my_students_btn_is_not_visible_for_guests(header, homepage):
 
 
 # TC_11.006.005 [Teacher] Header > My students(button) > "Мои студенты" button is not available for students
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_my_students_btn_is_not_visible_for_students(register, header, homepage):
+def test_my_students_btn_is_not_visible_for_students(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user(user_type="student")
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     assert header.my_students_button_is_hidden() is True
 
 
 # TC_11.006.004 [Teacher] Header > My students(button) >
 # "Мои студенты" button is not available when no announcement is created
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(
-    register, header, homepage
-):
+def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(login, header):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user(user_type="tutor")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     assert header.my_students_button_is_hidden() is True
+
 
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_filter_tutor_by_category(header, find_tutor):
@@ -252,30 +231,30 @@ def test_profile_btn_redirection(header, user_profile, login, data, page: Page):
     header.click_profile_button()
     user_profile.profile_btn_redirection_check()
 
+
 # TC_31.003.001.001 | [Student ] Header > My Tutor(button) > Visibility check #326
 def test_my_tutor_btn_visibility_as_student(login, header):
     header.visit()
-    header.click_login_button()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     header.student_my_tutors_button_is_visible()
+
 
 # TC_31.003.001.003 | [Student ] Header > My Tutor(button) > Visibility check #326
 def test_my_tutor_btn_clickable_redirection_as_student(login, header):
     header.visit()
-    header.click_login_button()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     header.student_my_tutors_button_clickable_redirect()
+
 
 # TC_31.004.001.001 | [Student ] Header > Find Teacher(button) > Visibility check #321
 def test_find_tutor_btn_visibility_as_student(login, header):
     header.visit()
-    header.click_login_button()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     header.student_find_tutor_button_is_visible()
+
 
 # TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Visibility check #321
 def test_find_tutor_btn_clickable_redirection_as_student(login, header):
     header.visit()
-    # header.click_login_button()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     header.student_find_tutor_button_clickable_redirect()
