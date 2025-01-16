@@ -21,7 +21,7 @@ class MyTeachersPage:
         title = self.page.get_by_title("Объявления")
         assert "Объявления", title
 
-    @allure.step("Проверяем, что список репетиторов отображается или нет")
+    @allure.step("Проверяем, что список репетиторов отображается или нет ")
     def check_teachers_list(self) -> object:
         # Проверяем, есть ли элементы репетиторов на странице
         teachers_list = self.page.locator(".card-body")
