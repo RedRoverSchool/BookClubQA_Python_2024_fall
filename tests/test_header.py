@@ -276,6 +276,6 @@ def test_find_tutor_btn_visibility_as_student(login, header):
 # TC_31.004.001.003 | [Student ] Header > Find Teacher(button) > Visibility check #321
 def test_find_tutor_btn_clickable_redirection_as_student(login, header):
     header.visit()
-    header.click_login_button()
+    # header.click_login_button()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     header.student_find_tutor_button_clickable_redirect()
