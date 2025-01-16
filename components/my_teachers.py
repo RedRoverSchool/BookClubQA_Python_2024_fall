@@ -41,6 +41,6 @@ class MyTeachersPage:
         else:
             # Если репетиторов нет, проверяем сообщение
             no_teachers_message = self.page.locator(
-                'text="У вас пока нет Репетиторов. Попросите репетитора отправить вам приглашение."'
+                'text="Пока у вас нет репетиторов."'
             )
             expect(no_teachers_message).to_be_visible()
