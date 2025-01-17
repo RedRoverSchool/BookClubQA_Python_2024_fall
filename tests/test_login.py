@@ -1,20 +1,18 @@
 import re
 
 import allure
-import pytest
 from playwright.sync_api import expect
 
-from Data.data import invalid_login, valid_password
+from Data.data import invalid_login, valid_password, EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM
 
 error_messages = "Пожалуйста, введите правильные email и пароль. Оба поля могут быть чувствительны к регистру."
 
 
-@pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_login_as_tutor_btn_create_listing(header, login):
     header.visit()
     header.click_login_button()
-    login.enter_username("test_auth_login")
-    login.enter_password("test_auth_pass")
+    login.enter_username(EMAIL_TUTOR_KM)
+    login.enter_password(PASSWORD_TUTOR_KM)
     login.click_submit_button()
 
 

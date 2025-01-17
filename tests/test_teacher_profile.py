@@ -1,13 +1,11 @@
 import allure
-import pytest
 from playwright.sync_api import Page
 from components.teacher_profile import TeacherProfile
 from core.settings import tutors_list_url
 
 
-# TC_05.001.008.001 | Guest > Find a Teacher page > Teacher Profile > Navigate to the detailed profile page
-@allure.title("Проверка перехода на страницу профиля учителя через список объявлений")
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
+@allure.title("TC_05.001.008.001 | Navigate to the detailed profile page")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/296")
 def test_teacher_profile_navigation(page: Page):
     page.goto(tutors_list_url, wait_until="domcontentloaded")
 
