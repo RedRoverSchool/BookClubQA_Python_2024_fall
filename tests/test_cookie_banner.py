@@ -40,7 +40,6 @@ def test_cookie_banner_does_not_appear_when_reopening(cookie_banner):
     cookie_banner.banner_does_not_reappear()
 
 
-@allure.title("TC_51.001.002.001")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/422")
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_the_functionality_of_the_reject_cookie(cookie_banner):
