@@ -72,3 +72,30 @@ def test_btn_more_find_tutor_has_each_profile(login, header, find_tutor):
     header.visit()
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     find_tutor.check_btn_more_has_each_profile()
+
+@allure.title("TC_37.001.001.001")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/416")
+# TC_37.001.001.001 [Student ] Find a teacher > More > Verify tutor profile contains full details
+def test_tutor_profile_has_require_details(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_has_require_details()
+
+@allure.title("TC_37.001.001.002")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/416")
+# TC_37.001.001.002 [Student ] Find a teacher > More > Verify the tutor profile has the button "Хочу заниматься!"
+def test_tutor_profile_has_btn_request_lesson(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_has_btn_request_lesson()
+
+@allure.title("TC_37.001.001.003")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/416")
+# TC_37.001.001.003 [Student ] Find a teacher > More > Verify the button "Хочу заниматься!" is clickable and redirectable
+def test_tutor_profile_btn_request_lesson_clickable_redirect(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
