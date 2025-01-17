@@ -176,7 +176,7 @@ class FindTutor:
         btn_more = self.page.locator('(//a[text()="Подробнее"])[1]')
         assert btn_more.is_visible()
 
-    @allure.step('Проверяем кнопку "Подробнее" на клиабильность')
+    @allure.step('Проверяем кнопку "Подробнее" на кликабильность')
     def check_btn_more_is_clickable(self):
         btn_more = self.page.locator('(//a[text()="Подробнее"])[1]')
         btn_more.click()
@@ -209,3 +209,46 @@ class FindTutor:
             experience_field.is_enabled()
         ), "The 'Minimum Teaching Experience' field is not enabled."
         experience_field.fill(str(min_experience))
+
+    @allure.step('Проверяем страница Профайл репетитора содержит требующие детали')
+    def check_tutor_profile_has_require_details(self):
+        # Verify Tutor name
+        tutor_name = self.page.locator('//h2[@class="fw-bold"]')
+        assert tutor_name.is_visible(), "Element Tutor name is not visible"
+        name_text = tutor_name.inner_text().strip()
+        assert name_text != "", "Text Tutor name has empty text"
+        # Verify Tutor category
+        tutor_category = self.page.locator('//p[@class="mb-3 text-muted"]')
+        assert tutor_category.is_visible(), "Element Tutor category is not visible"
+        category_text = tutor_category.inner_text().strip()
+        assert category_text != "", "Text Tutor category has empty text"
+        # Verify Lesson details
+        lesson_details = self.page.locator('//div/p[@class="mb-0"]')
+        count_ld_items = lesson_details.count()
+        for i in range(count_ld_items):
+            elem = lesson_details.nth(i)
+            assert elem.is_visible(), f"Element Lesson details at index {i} is not visible"
+            elem_text = elem.inner_text().strip()
+            assert elem_text != "", f"Text Lesson details at index {i} is empty"
+        # Verify Tutor details
+        tutor_details = self.page.locator('//article/p[@class="text-dark"]')
+        count_td_items = tutor_details.count()
+        for i in range(count_td_items):
+            elem = tutor_details.nth(i)
+            assert elem.is_visible(), "Element Tutor details is not visible"
+            elem_text = elem.inner_text().strip()
+            assert elem_text != "", "Text Tutor details is empty"
+
+    @allure.step('Проверяем страница Профайл репетитора содержит кнопку "Хочу заниматься!"')
+    def check_tutor_profile_has_btn_request_lesson(self):
+        request_btn = self.page.locator('//a[@class="btn-primary btn btn-lg"]')
+        assert request_btn.is_visible()
+
+    @allure.step('Проверяем кнопку "Хочу заниматься!" на кликабильность')
+    def check_tutor_profile_btn_request_lesson_clickable_redirect(self):
+        request_btn = self.page.locator('//a[@class="btn-primary btn btn-lg"]')
+        request_btn.click()
+        assert self.page.url == (
+            "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/lesson_request/1/"
+        )
+
