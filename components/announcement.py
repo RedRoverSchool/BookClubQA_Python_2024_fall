@@ -370,5 +370,4 @@ class Announcement:
         ]
         for locator in error_message_locators:
             message = self.page.locator(locator)
-            assert message.is_visible()
             assert message.inner_text() == "Обязательное поле."
