@@ -11,24 +11,24 @@ class Announcement:
         self.page = page
 
     @allure.step("Заполняем 'Ваше имя'")
-    def fill_first_name(self):
-        self.page.fill('input[name="first_name"]', "Thomas")
+    def fill_first_name(self, first_name):
+        self.page.fill('input[name="first_name"]', first_name)
 
     @allure.step("Заполняем 'Ваша фамилия'")
-    def fill_last_name(self):
-        self.page.fill('input[name="last_name"]', "Peters")
+    def fill_last_name(self, last_name):
+        self.page.fill('input[name="last_name"]', last_name)
 
     @allure.step("Заполняем 'Telegram'")
-    def fill_telegram(self):
-        self.page.fill('input[name="telegram"]', "ThomasP")
+    def fill_telegram(self, telegram_id):
+        self.page.fill('input[name="telegram"]', telegram_id)
 
     @allure.step("Заполняем 'Телефон'")
-    def fill_phone_number(self):
-        self.page.fill('input[name="phone"]', "14103902623")
+    def fill_phone_number(self, phone_number):
+        self.page.fill('input[name="phone"]', phone_number)
 
     @allure.step('Заполняем поле "Опишите себя"')
-    def fill_out_descripption(self):
-        self.page.fill("#id_description", "Great teacher")
+    def fill_out_description(self, description):
+        self.page.fill("#id_description", description)
 
     @allure.step("Загружаем фото")
     def upload_photo(self):
@@ -52,48 +52,52 @@ class Announcement:
                 print(f"Second upload failed with error: {e}")
 
     @allure.step("Выбираем категорию")
-    def pick_category(self):
+    def pick_category(self, category):
         dropdown = self.page.locator("#id_category")
-        dropdown.select_option(value="1")
+        dropdown.select_option(value=category)
         selected_value = dropdown.input_value()
-        assert selected_value == "1", "The category 'Математика' should be selected"
+        if category == 1:
+            assert selected_value == "1", "The category 'Математика' should be selected"
 
     @allure.step("Указываем опыт")
-    def fill_out_experience(self):
+    def fill_out_experience(self, years_experience):
         years_of_experience_input = self.page.locator("#id_years_of_experience")
-        years_of_experience_input.fill("5")
+        years_of_experience_input.fill(years_experience)
         filled_value = years_of_experience_input.input_value()
-        assert filled_value == "5", "The years of experience should be 5"
+        if years_experience == 5:
+            assert filled_value == "5", "The years of experience should be 5"
 
     @allure.step("Есть профильное образование")
     def checkbox_degree(self):
         degree_checkbox = self.page.locator("#id_has_degree")
         degree_checkbox.check()
-        assert degree_checkbox.is_checked(), (
-            "The 'has degree' checkbox should be checked"
-        )
+        assert (
+            degree_checkbox.is_checked()
+        ), "The 'has degree' checkbox should be checked"
 
     @allure.step("Вводим стоимость занятия")
-    def fill_out_price(self):
+    def fill_out_price(self, price):
         price_input = self.page.locator("#id_price")
-        price_input.fill("1000")
+        price_input.fill(price)
         filled_value = price_input.input_value()
-        assert filled_value == "1000", "The price should be 1000"
+        if price == "1000":
+            assert filled_value == "1000", "The price should be 1000"
 
     @allure.step("Продолжительность занятия")
-    def fill_out_class_duration(self):
+    def fill_out_class_duration(self, duration):
         class_duration_input = self.page.locator('input[name="class_duration"]')
-        class_duration_input.fill("60")
+        class_duration_input.fill(duration)
         filled_value = class_duration_input.input_value()
-        assert filled_value == "60", "The class duration should be 60 minutes"
+        if duration == "60":
+            assert filled_value == "60", "The class duration should be 60 minutes"
 
     @allure.step("Продавать пакеты со скидкой")
     def checkbox_discount(self):
         discount_checkbox = self.page.locator("#id_package_discounts")
         discount_checkbox.check()
-        assert discount_checkbox.is_checked(), (
-            "The 'has degree' checkbox should be checked"
-        )
+        assert (
+            discount_checkbox.is_checked()
+        ), "The 'has degree' checkbox should be checked"
 
     @allure.step('Заполняем поле "Удобное время для занятий"')
     def fill_out_convenient_time(self):
@@ -102,16 +106,25 @@ class Announcement:
             "Понедельник-Пятница с 10.00-11.00 Суббота и Воскресенье выходные",
         )
 
+    @allure.step("Отчищаем чекбоксы категорий учеников")
+    def clear_student_category_checkboxes(self):
+        checkboxes = self.page.locator(
+            '//div[@id="div_id_student_categories"]//input[@type="checkbox"]'
+        )
+        count = checkboxes.count()
+        for i in range(count):
+            if checkboxes.nth(i).is_checked():
+                checkboxes.nth(i).uncheck()
+
+    def fill_out_can_help_field(self, text):
+        self.page.fill("#id_can_help", text)
+
+    def fill_out_lesson_style(self, text):
+        self.page.fill("#id_lesson_style", text)
+
     @allure.step('Нажимаем на кнопку "Сохранить"')
-    def click_save_announcement_btn(self):  # click_create_announcement_btn
-        create_button = self.page.locator(
-            '//button[@type="submit" and contains(@class, "btn-dark") and text()="Сохранить"]'
-        )
-        create_button.click()
-        assert (
-            self.page.url
-            == "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/list/"
-        )
+    def click_save_announcement_btn(self):
+        self.page.locator('//button[@type="submit"]').click()
 
     @allure.step("Пройти на страницу объявлений пользователя-учителя")
     def navigate_to_users_announcement_list(self):
@@ -177,9 +190,9 @@ class Announcement:
     def check_announcement_url_by_template(self):
         current_url = self.page.url
         pattern = r"^http://tester:dslfjsdfblkhew%40122b1klbfw@testing\.misleplav\.ru/listings/\d+/$"
-        assert re.match(pattern, current_url), (
-            f"URL не соответствует ожидаемому шаблону: {current_url}"
-        )
+        assert re.match(
+            pattern, current_url
+        ), f"URL не соответствует ожидаемому шаблону: {current_url}"
 
     @allure.step("Проверяем URL страницы редактирования объявления")
     def check_edit_announcement_page_url(self):
@@ -229,46 +242,46 @@ class Announcement:
             '//strong[text()="Обязательное поле."]'
         ).count()
         print(f"Found {error_message_count} error messages.")
-        assert error_message_count == 8, (
-            f"Expected 8 error messages, but found {error_message_count}"
-        )
+        assert (
+            error_message_count == 8
+        ), f"Expected 8 error messages, but found {error_message_count}"
 
     @allure.step("Создаем объявление")
     def create_announcement(self):
-        self.fill_first_name()
-        self.fill_last_name()
-        self.fill_telegram()
-        self.fill_phone_number()
-        self.fill_out_descripption()
+        self.fill_first_name("Thomas")
+        self.fill_last_name("Peters")
+        self.fill_telegram("ThomasP")
+        self.fill_phone_number("14103902623")
+        self.fill_out_description("Great teacher")
         self.upload_photo()
-        self.pick_category()
-        self.fill_out_experience()
+        self.pick_category("1")
+        self.fill_out_experience("5")
         self.checkbox_degree()
-        self.fill_out_price()
-        self.fill_out_class_duration()
+        self.fill_out_price("1000")
+        self.fill_out_class_duration("60")
         self.checkbox_discount()
         self.fill_out_convenient_time()
         self.click_save_announcement_btn()
 
     @allure.step("Создаем объявление с обязательными полями")
     def create_announcement_with_only_required_fields(self):
-        self.fill_first_name()
-        self.fill_last_name()
-        self.fill_telegram()
-        self.fill_phone_number()
-        self.fill_out_descripption()
+        self.fill_first_name("Thomas")
+        self.fill_last_name("Peters")
+        self.fill_telegram("ThomasP")
+        self.fill_phone_number("14103902623")
+        self.fill_out_description("Great teacher")
         self.upload_photo()
-        self.pick_category()
-        self.fill_out_experience()
-        self.fill_out_price()
-        self.fill_out_class_duration()
+        self.pick_category("1")
+        self.fill_out_experience("5")
+        self.fill_out_price("1000")
+        self.fill_out_class_duration("60")
         self.fill_out_convenient_time()
         self.click_save_announcement_btn()
 
     @allure.step(
         "Проверяем, что все обязательные поля отмечены '*'/ 'Обязательное поле'"
     )
-    def mandatory_fields_are_marked_check(self):
+    def verify_mandatory_fields_are_marked(self):
         fields_to_check = [
             (
                 "//label[@for='id_first_name']//span[@class='asteriskField']",
@@ -312,13 +325,49 @@ class Announcement:
 
         for locator, field_name in fields_to_check:
             field_mark = self.page.locator(locator)
-            assert field_mark.is_visible(), (
-                f"Отметка поля с локатором {field_name} не найдена"
-            )
+            assert (
+                field_mark.is_visible()
+            ), f"Отметка поля с локатором {field_name} не найдена"
 
         download_photo_title_text = self.page.get_by_text(
             "Рекомендуемое разрешение:"
         ).inner_text()
-        assert "Обязательное поле." in download_photo_title_text, (
-            f"Текст 'Обязательное поле.' не найден в {download_photo_title_text}"
-        )
+        assert (
+            "Обязательное поле." in download_photo_title_text
+        ), f"Текст 'Обязательное поле.' не найден в {download_photo_title_text}"
+
+    @allure.step("Отчищаем все обязательные поля")
+    def clear_mandatory_fields(self):
+        self.fill_first_name("")
+        self.fill_last_name("")
+        self.fill_telegram("")
+        self.fill_phone_number("")
+        self.fill_out_description("")
+        self.clear_student_category_checkboxes()
+        self.fill_out_can_help_field("")
+        self.fill_out_lesson_style("")
+        self.pick_category("")
+        self.fill_out_experience("")
+        self.fill_out_price("")
+        self.fill_out_class_duration("")
+        self.click_save_announcement_btn()
+
+    @allure.step("Проверяем наличие сообщений 'Обязательное поле' в пустых полях")
+    def verify_mandatory_field_error_messages(self):
+        error_message_locators = [
+            "#error_1_id_first_name strong",
+            "#error_1_id_last_name strong",
+            "#error_1_id_telegram strong",
+            "#error_1_id_phone strong",
+            "#error_1_id_description strong",
+            "#error_1_id_student_categories strong",
+            "#error_1_id_can_help strong",
+            "#error_1_id_lesson_style strong",
+            "#error_1_id_category strong",
+            "#error_1_id_years_of_experience strong",
+            "#error_1_id_years_of_experience strong",
+            "#error_1_id_class_duration strong",
+        ]
+        for locator in error_message_locators:
+            message = self.page.locator(locator)
+            assert message.inner_text() == "Обязательное поле."

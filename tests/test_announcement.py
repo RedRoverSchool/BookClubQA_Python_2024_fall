@@ -133,9 +133,19 @@ def test_create_announcement_with_only_required_fields(header, announcement, reg
 
 
 # TC_13.002.001| [Teacher] My announcement > Edit announcement > Mandatory fields are marked with "*"
-def test_mandatory_fields_marked(header, login, announcement):
+def test_mandatory_field_marks_on_edit_announcement_page(header, login, announcement):
     header.visit()
     login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
     announcement.click_my_announcement_button()
     announcement.click_edit_announcement_button()
-    announcement.mandatory_fields_are_marked_check()
+    announcement.verify_mandatory_fields_are_marked()
+
+
+# TC_13.007.002| [Teacher] My announcement > Edit announcement > Mandatory fields are required to be filled
+def test_mandatory_fields_on_edit_announcement_page(header, login, announcement):
+    header.visit()
+    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    announcement.click_my_announcement_button()
+    announcement.click_edit_announcement_button()
+    announcement.clear_mandatory_fields()
+    announcement.verify_mandatory_field_error_messages()
