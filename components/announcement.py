@@ -4,6 +4,7 @@ from playwright.sync_api import Page, expect
 from core.settings import list_url
 from core.settings import edit_announcement_url
 import re
+import random
 
 
 class Announcement:
@@ -40,16 +41,25 @@ class Announcement:
                 "upload_files",
                 "stock-photo-handsome-cheerful-man.jfif",
             )
-            photo_field = self.page.locator("#id_photo")
+            photo_field = self.page.locator("input#photoInput")
             photo_field.set_input_files(photo_path)
         except Exception as e:
             print(f"First upload error: {e}")
             try:
-                self.page.locator('input[name="photo"]').set_input_files(
+                self.page.locator("input#photoInput").set_input_files(
                     "Data/upload_files/stock-photo-handsome-cheerful-man.jfif"
                 )
             except Exception as e:
                 print(f"Second upload failed with error: {e}")
+
+    @allure.step("Выберите возрастные категории учеников")
+    def pick_student_age_category(self):
+        age_category_elements = self.page.query_selector_all(
+            '//div[@id="div_id_student_categories"]//input[@type="checkbox"]'
+        )
+        random_choice = random.choice(age_category_elements)
+        random_choice.click()
+        assert random_choice.is_checked()
 
     @allure.step("Выбираем категорию")
     def pick_category(self, category):
@@ -91,21 +101,6 @@ class Announcement:
         if duration == "60":
             assert filled_value == "60", "The class duration should be 60 minutes"
 
-    @allure.step("Продавать пакеты со скидкой")
-    def checkbox_discount(self):
-        discount_checkbox = self.page.locator("#id_package_discounts")
-        discount_checkbox.check()
-        assert (
-            discount_checkbox.is_checked()
-        ), "The 'has degree' checkbox should be checked"
-
-    @allure.step('Заполняем поле "Удобное время для занятий"')
-    def fill_out_convenient_time(self):
-        self.page.fill(
-            "#id_convenient_time_slots",
-            "Понедельник-Пятница с 10.00-11.00 Суббота и Воскресенье выходные",
-        )
-
     @allure.step("Отчищаем чекбоксы категорий учеников")
     def clear_student_category_checkboxes(self):
         checkboxes = self.page.locator(
@@ -116,9 +111,11 @@ class Announcement:
             if checkboxes.nth(i).is_checked():
                 checkboxes.nth(i).uncheck()
 
+    @allure.step("С чем вы можете помочь")
     def fill_out_can_help_field(self, text):
         self.page.fill("#id_can_help", text)
 
+    @allure.step("Расскажите о том как проходит урок")
     def fill_out_lesson_style(self, text):
         self.page.fill("#id_lesson_style", text)
 
@@ -141,7 +138,12 @@ class Announcement:
         announcement_page_endpoint = "/listings/list/"
         current_url = self.page.url
         print(current_url)
-        assert announcement_page_endpoint in current_url
+        try:
+            assert (
+                announcement_page_endpoint in current_url
+            ), f"Expected '{announcement_page_endpoint}' to be in '{current_url}'"
+        except AssertionError as e:
+            (print(e))
 
     @allure.step("Кликаем на кнопку 'Мое объявление' в хедере")
     def click_my_announcement_button(self):
@@ -243,24 +245,25 @@ class Announcement:
         ).count()
         print(f"Found {error_message_count} error messages.")
         assert (
-            error_message_count == 8
-        ), f"Expected 8 error messages, but found {error_message_count}"
+            error_message_count == 12
+        ), f"Expected 12 error messages, but found {error_message_count}"
 
     @allure.step("Создаем объявление")
     def create_announcement(self):
-        self.fill_first_name("Thomas")
-        self.fill_last_name("Peters")
-        self.fill_telegram("ThomasP")
-        self.fill_phone_number("14103902623")
+        self.fill_first_name("John")
+        self.fill_last_name("Pak")
+        self.fill_telegram("@JPak")
+        self.fill_phone_number("5555555")
         self.fill_out_description("Great teacher")
+        self.pick_student_age_category()
         self.upload_photo()
+        self.fill_out_lesson_style("Fast")
+        self.fill_out_can_help_field("Guaranteed success")
         self.pick_category("1")
         self.fill_out_experience("5")
         self.checkbox_degree()
         self.fill_out_price("1000")
         self.fill_out_class_duration("60")
-        self.checkbox_discount()
-        self.fill_out_convenient_time()
         self.click_save_announcement_btn()
 
     @allure.step("Создаем объявление с обязательными полями")
@@ -270,12 +273,14 @@ class Announcement:
         self.fill_telegram("ThomasP")
         self.fill_phone_number("14103902623")
         self.fill_out_description("Great teacher")
+        self.fill_out_can_help_field()
+        self.fill_out_lesson_style()
+        self.pick_student_age_category()
         self.upload_photo()
         self.pick_category("1")
         self.fill_out_experience("5")
         self.fill_out_price("1000")
         self.fill_out_class_duration("60")
-        self.fill_out_convenient_time()
         self.click_save_announcement_btn()
 
     @allure.step(

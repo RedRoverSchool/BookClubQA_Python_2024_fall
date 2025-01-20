@@ -4,10 +4,9 @@ import pytest
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
-def test_create_announcement(header, announcement, register):
+def test_create_announcement(header, announcement, login):
     header.visit()
-    header.click_registration_button()
-    register.registration_new_user("tutor")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     header.click_create_announcement_btn()
     announcement.create_announcement()
     announcement.verify_announcements_page_endpoint()
@@ -19,7 +18,7 @@ def test_teacher_announcement_blank_form_same_endpoint(
     header, login, create_announcement_page, announcement
 ):
     header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
+    login.full_login("zpak7760@gmail.com", "q4fLncSv9Lgx")
     header.click_create_announcement_button()
     create_announcement_page.click_finalize_announcement_button()
     announcement.verify_required_fields_are_not_filled()
@@ -32,7 +31,7 @@ def test_teacher_announcement_blank_form(
     header, login, create_announcement_page, announcement
 ):
     header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
+    login.full_login("zpak7760@gmail.com", "q4fLncSv9Lgx")
     header.click_create_announcement_button()
     create_announcement_page.click_finalize_announcement_button()
     announcement.navigate_to_users_announcement_list()
@@ -108,12 +107,9 @@ def test_announcement_detailed_info(header, announcement, login):
 
 # TC_13.005.002 | [Teacher] My announcements > Hiding announcement >
 # Verify the teacher is able  to the page "Мое объявление"#299"
-
-
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_redirection_to_my_announcement_page(header, announcement, login):
     header.visit()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
     announcement.click_my_announcement_button()
 
 
