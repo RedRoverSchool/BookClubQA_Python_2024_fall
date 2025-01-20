@@ -17,6 +17,12 @@ PASSWORD_TUTOR_KM = "I165TVAzghk8"
 EMAIL_STUDENT_KM = "student-test-misliplav@mail.ru"
 PASSWORD_STUDENT_KM = "JXvNebAMsWb7"
 
+EMAIL_TUTOR_ZU = "zayatest55@gmail.com"
+PASSWORD_TUTOR_ZU = "RM7tAgSYSh7X"
+
+EMAIL_STUDENT_ZU = "zarinatest4@gmail.com"
+PASSWORD_STUDENT_ZU = "q2e6hXVgsy0W"
+
 
 def generate_valid_password():
     # Определим минимальную длину пароля

@@ -43,9 +43,9 @@ class Register:
     @allure.step("Проверяем, что страница регистрации открыта")
     def verify_registration_page_opened(self):
         registration_title = self.page.locator("h1").inner_text()
-        assert registration_title == "Регистрация", (
-            f"Ожидался заголовок 'Регистрация', но найдено: {registration_title}"
-        )
+        assert (
+            registration_title == "Регистрация"
+        ), f"Ожидался заголовок 'Регистрация', но найдено: {registration_title}"
 
     @allure.step("Создаем случайный пароль")
     def generate_valid_password(self):

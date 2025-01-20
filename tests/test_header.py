@@ -123,7 +123,7 @@ def test_my_students_btn_is_not_visible_for_students(login, header):
 # "Мои студенты" button is not available when no announcement is created
 def test_my_students_btn_is_not_visible_for_teacher_with_no_announcement(login, header):
     header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
+    login.full_login("zpak7760@gmail.com", "q4fLncSv9Lgx")
     assert header.my_students_button_is_hidden() is True
 
 
@@ -150,9 +150,9 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         header.page.goto(page_url)
         home_btn = header.header_home_btn_is_present()
 
-        assert home_btn.is_visible(), (
-            f"Home button is not visible on the page with url {page_url}"
-        )
+        assert (
+            home_btn.is_visible()
+        ), f"Home button is not visible on the page with url {page_url}"
 
 
 # TC_31.002.001.001 Header-Student > Sign out > Visibility "Выйти" button
