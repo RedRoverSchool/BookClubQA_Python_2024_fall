@@ -1,24 +1,29 @@
+import allure
 import pytest
+from Data.data import EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM, EMAIL_TUTOR_WA_KM, PASSWORD_TUTOR_WA_KM
 
 
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
 # Verify the announcement is created after filling in all form fields with valid data#163
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
+@pytest.mark.skip(
+    reason="Тест был признан неактуальным из-за обновления процесса регистрации, внедренного 09.01.2025."
+)
 def test_create_announcement(header, announcement, login):
     header.visit()
-    login.full_login("zayatest55@gmail.com", "RM7tAgSYSh7X")
+    login.full_login(EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM)
     header.click_create_announcement_btn()
     announcement.create_announcement()
     announcement.verify_announcements_page_endpoint()
 
 
-# AT_12.002.002 | [Teacher] Create announcement > Create teacher announcement >
-# Verify the announcement is not created when the empty form is submitted
+@allure.label(
+    "TC_12.003.002|[Teacher] Verify the announcement is not created when the empty form is submitted"
+)
 def test_teacher_announcement_blank_form_same_endpoint(
     header, login, create_announcement_page, announcement
 ):
     header.visit()
-    login.full_login("zpak7760@gmail.com", "q4fLncSv9Lgx")
+    login.full_login(EMAIL_TUTOR_WA_KM, PASSWORD_TUTOR_WA_KM)
     header.click_create_announcement_button()
     create_announcement_page.click_finalize_announcement_button()
     announcement.verify_required_fields_are_not_filled()
@@ -45,7 +50,7 @@ def test_teacher_announcement_blank_form(
 def test_teacher_hiding_announcement(header, login, announcement):
     header.visit()
     header.click_login_button()
-    login.full_login("teacher-test@gmail.com", "Auah7bD2hS5Si7H")
+    login.full_login(EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM)
     announcement.click_my_announcement_button()
     announcement.click_make_announcement_visible()
     announcement.check_button_text_visible()
