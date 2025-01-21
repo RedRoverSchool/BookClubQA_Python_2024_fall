@@ -43,9 +43,7 @@ class Homepage:
 
     @allure.step('Click on "Стать репетитором" button')
     def click_become_tutor_btn(self):
-        self.page.locator(
-            "div[class*='d-sm-flex'] a:text('Стать репетитором')"
-        ).first.click()
+        self.page.locator("(//a[text()='Стать репетитором'])[1]").first.click()
 
     @allure.step('Check "Преимущества для учеников" title')
     def check_preferences_for_students_title(self):

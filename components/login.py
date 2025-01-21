@@ -15,9 +15,9 @@ class Login:
     @allure.step("Проверяем URL страницы 'Логин'")
     def check_url_login_page(self, expected_part: str):
         current_url = self.page.url
-        assert (
-            expected_part in current_url
-        ), f"Ожидалось, что '{expected_part}' будет частью '{current_url}'"
+        assert expected_part in current_url, (
+            f"Ожидалось, что '{expected_part}' будет частью '{current_url}'"
+        )
 
     @allure.step("Проверяем наличие кнопки 'Регистрация'")
     def check_title_of_registration(self):
