@@ -17,7 +17,7 @@ def test_create_announcement(header, announcement, login):
 
 
 @allure.label(
-    "AT_12.002.002|[Teacher] Verify the announcement is not created when the empty form is submitted"
+    "TC_12.003.002|[Teacher] Verify the announcement is not created when the empty form is submitted"
 )
 def test_teacher_announcement_blank_form_same_endpoint(
     header, login, create_announcement_page, announcement
