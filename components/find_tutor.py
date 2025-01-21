@@ -66,9 +66,9 @@ class FindTutor:
         alert_locator = self.page.locator("//div[@role='alert']")
         self.page.wait_for_selector("//div[@role='alert']", timeout=7000)
         message = alert_locator.text_content()
-        assert (
-            message.strip() == expected_message
-        ), f"Expected text is '{expected_message}', but received '{message.strip()}'"
+        assert message.strip() == expected_message, (
+            f"Expected text is '{expected_message}', but received '{message.strip()}'"
+        )
 
     @allure.step("Проверяем фильтр по категории")
     def check_filter_form(self):
@@ -148,9 +148,9 @@ class FindTutor:
                 "//p[contains(text(),'лет')]"
             ).inner_text()
             experience_value = int(experience_text.split()[0])
-            assert (
-                experience_value >= min_experience
-            ), f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
+            assert experience_value >= min_experience, (
+                f"The Teaching Experience {experience_value} less than expected minimum {min_experience}"
+            )
 
             self.page.go_back()
 
@@ -202,12 +202,12 @@ class FindTutor:
     def enter_min_experience(self, min_experience: int):
         experience_field = self.page.locator("#minExperience")
         experience_field.wait_for(state="visible", timeout=3000)
-        assert (
-            experience_field.is_visible()
-        ), "The 'Minimum Teaching Experience' field is not visible."
-        assert (
-            experience_field.is_enabled()
-        ), "The 'Minimum Teaching Experience' field is not enabled."
+        assert experience_field.is_visible(), (
+            "The 'Minimum Teaching Experience' field is not visible."
+        )
+        assert experience_field.is_enabled(), (
+            "The 'Minimum Teaching Experience' field is not enabled."
+        )
         experience_field.fill(str(min_experience))
 
     @allure.step("Проверяем страница Профайл репетитора содержит требующие детали")
@@ -227,9 +227,9 @@ class FindTutor:
         count_ld_items = lesson_details.count()
         for i in range(count_ld_items):
             elem = lesson_details.nth(i)
-            assert (
-                elem.is_visible()
-            ), f"Element Lesson details at index {i} is not visible"
+            assert elem.is_visible(), (
+                f"Element Lesson details at index {i} is not visible"
+            )
             elem_text = elem.inner_text().strip()
             assert elem_text != "", f"Text Lesson details at index {i} is empty"
         # Verify Tutor details

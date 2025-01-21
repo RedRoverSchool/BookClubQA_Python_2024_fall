@@ -150,9 +150,9 @@ def test_header_home_btn_is_visible_on_all_pages_for_guest(header):
         header.page.goto(page_url)
         home_btn = header.header_home_btn_is_present()
 
-        assert (
-            home_btn.is_visible()
-        ), f"Home button is not visible on the page with url {page_url}"
+        assert home_btn.is_visible(), (
+            f"Home button is not visible on the page with url {page_url}"
+        )
 
 
 # TC_31.002.001.001 Header-Student > Sign out > Visibility "Выйти" button

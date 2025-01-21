@@ -81,9 +81,9 @@ class Announcement:
     def checkbox_degree(self):
         degree_checkbox = self.page.locator("#id_has_degree")
         degree_checkbox.check()
-        assert (
-            degree_checkbox.is_checked()
-        ), "The 'has degree' checkbox should be checked"
+        assert degree_checkbox.is_checked(), (
+            "The 'has degree' checkbox should be checked"
+        )
 
     @allure.step("Вводим стоимость занятия")
     def fill_out_price(self, price):
@@ -139,9 +139,9 @@ class Announcement:
         current_url = self.page.url
         print(current_url)
         try:
-            assert (
-                announcement_page_endpoint in current_url
-            ), f"Expected '{announcement_page_endpoint}' to be in '{current_url}'"
+            assert announcement_page_endpoint in current_url, (
+                f"Expected '{announcement_page_endpoint}' to be in '{current_url}'"
+            )
         except AssertionError as e:
             (print(e))
 
@@ -192,9 +192,9 @@ class Announcement:
     def check_announcement_url_by_template(self):
         current_url = self.page.url
         pattern = r"^http://tester:dslfjsdfblkhew%40122b1klbfw@testing\.misleplav\.ru/listings/\d+/$"
-        assert re.match(
-            pattern, current_url
-        ), f"URL не соответствует ожидаемому шаблону: {current_url}"
+        assert re.match(pattern, current_url), (
+            f"URL не соответствует ожидаемому шаблону: {current_url}"
+        )
 
     @allure.step("Проверяем URL страницы редактирования объявления")
     def check_edit_announcement_page_url(self):
@@ -244,9 +244,9 @@ class Announcement:
             '//strong[text()="Обязательное поле."]'
         ).count()
         print(f"Found {error_message_count} error messages.")
-        assert (
-            error_message_count == 12
-        ), f"Expected 12 error messages, but found {error_message_count}"
+        assert error_message_count == 12, (
+            f"Expected 12 error messages, but found {error_message_count}"
+        )
 
     @allure.step("Создаем объявление")
     def create_announcement(self):
@@ -330,16 +330,16 @@ class Announcement:
 
         for locator, field_name in fields_to_check:
             field_mark = self.page.locator(locator)
-            assert (
-                field_mark.is_visible()
-            ), f"Отметка поля с локатором {field_name} не найдена"
+            assert field_mark.is_visible(), (
+                f"Отметка поля с локатором {field_name} не найдена"
+            )
 
         download_photo_title_text = self.page.get_by_text(
             "Рекомендуемое разрешение:"
         ).inner_text()
-        assert (
-            "Обязательное поле." in download_photo_title_text
-        ), f"Текст 'Обязательное поле.' не найден в {download_photo_title_text}"
+        assert "Обязательное поле." in download_photo_title_text, (
+            f"Текст 'Обязательное поле.' не найден в {download_photo_title_text}"
+        )
 
     @allure.step("Отчищаем все обязательные поля")
     def clear_mandatory_fields(self):
