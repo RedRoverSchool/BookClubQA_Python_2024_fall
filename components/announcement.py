@@ -153,32 +153,28 @@ class Announcement:
         )
 
     @allure.step("Кликаем на кнопку 'Сделать объявление видимым для учеников'")
-    def click_make_announcement_invisible(self):
-        self.page.get_by_role(
-            "link", name="Сделать обьявление видимым для учеников"
-        ).click()
-
-    @allure.step(
-        "Проверяем изменение текста кнопки на 'Сделать объявление невидимым для учеников'"
-    )
-    def check_button_text_invisible(self):
-        expect(self.page.get_by_role("main")).to_contain_text(
-            "Сделать обьявление невидимым для учеников"
-        )
-
-    @allure.step("Кликаем на кнопку 'Сделать объявление невидимым для учеников'")
     def click_make_announcement_visible(self):
         self.page.get_by_role(
-            "link", name="Сделать обьявление невидимым для учеников"
+            "link", name="Сделать видимым "
         ).click()
 
-    @allure.step(
-        "Проверяем изменение текста кнопки на 'Сделать объявление невидимым для учеников'"
-    )
-    def check_button_text_visible(self):
-        expect(self.page.get_by_role("main")).to_contain_text(
-            "Сделать обьявление видимым для учеников"
-        )
+    @allure.step("Кликаем на кнопку 'Сделать невидимым'")
+    def click_make_announcement_invisible(self):
+        self.page.get_by_role(
+            "link", name="Сделать невидимым"
+        ).click()
+
+    @allure.step("Проверяем отсутствие скрытого объявления в листинге")
+    def verify_announcement_hiding(self, footer, header, announcement):
+        collected_announcement =[]
+        footer.open_find_tutor_page()
+        announcements= self.page.locator('//div[@class="p-3 flex-grow-1 d-flex flex-column"]//h5')
+        announcements_count = announcements.count()
+        for i in range(announcements_count):
+            announcement_text = announcements.nth(i).inner_text()
+            collected_announcement.append(announcement_text)
+        print(f"Relevant announcements: {collected_announcement}")
+        assert "Leeloo Minai" not in collected_announcement, "Объявление Leeloo Minai отображается в листинге"
 
     @allure.step("Кликаем кнопку 'Редактировать объявление'")
     def click_edit_announcement_button(self):
