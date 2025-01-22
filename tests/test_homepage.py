@@ -46,7 +46,6 @@ def test_more_btn_redirects_telegram_page_for_students(homepage, telegram_page):
     telegram_page.check_telegram_channel_should_have_title_for_students()
 
 
-@pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_more_btn_redirects_telegram_page_for_tutors(homepage, telegram_page):
     homepage.visit()
     homepage.click_more_button_at_the_bottom()

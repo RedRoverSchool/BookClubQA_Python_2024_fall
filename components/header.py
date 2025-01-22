@@ -241,3 +241,8 @@ class Header:
         ).click()
         current_url = self.page.url
         assert current_url == find_tutor_url
+
+    @allure.step("Клик на логотип 'Мыслеплав'")
+    def click_logo_misleplav(self):
+        logo = self.page.locator('a.navbar-brand.fw-bold.fs-4.ms-3[href="/"]')
+        logo.click()

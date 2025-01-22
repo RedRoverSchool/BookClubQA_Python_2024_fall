@@ -5,14 +5,20 @@ from faker import Faker
 from playwright.sync_api import Page
 
 fake = Faker()
+
 valid_password = "Potter1$"
 valid_login = "Garry"
 
 invalid_login = "q-"
 invalid_password = "p==="
 
+# with announcement
 EMAIL_TUTOR_KM = "tutor_testing@bk.ru"
 PASSWORD_TUTOR_KM = "I165TVAzghk8"
+
+# without announcement
+EMAIL_TUTOR_WA_KM = "tutor_test_misliplav@mail.ru"
+PASSWORD_TUTOR_WA_KM = "iZ52toubKacm"
 
 EMAIL_STUDENT_KM = "student-test-misliplav@mail.ru"
 PASSWORD_STUDENT_KM = "JXvNebAMsWb7"

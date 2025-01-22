@@ -113,7 +113,7 @@ def test_verify_fields_lesson_page(login, header, find_tutor):
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     find_tutor.check_btn_more_is_clickable()
     find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
-    find_tutor.verify_fields_visibility_lesson_page()
+    find_tutor.verify_fields_to_be_visible_lesson_page()
 
 
 @allure.title("TC_39.001.001.002")
@@ -147,7 +147,7 @@ def test_verify_negative_require_fields_to_submit(login, header, find_tutor):
     find_tutor.check_btn_more_is_clickable()
     find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
     find_tutor.verify_negative_require_fields_to_submit()
-    
+
 
 @allure.title("TC_39.001.001.005")
 @allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
