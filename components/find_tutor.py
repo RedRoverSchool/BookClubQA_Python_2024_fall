@@ -2,7 +2,6 @@ import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
 from faker import Faker
-import time
 
 fake = Faker()
 
@@ -309,7 +308,7 @@ class FindTutor:
     def verify_negative_require_fields_to_submit(self):
         req_id_fields = ['id_first_name', 'id_last_name', 'id_telegram', 'id_phone', 'id_goal', 'id_count_of_lessons']
         for field_to_test in req_id_fields:
-            error_locator = self.page.locator(f'//strong[text()="Обязательное поле."]')
+            error_locator = self.page.locator('//strong[text()="Обязательное поле."]')
             self.fill_fields(req_id_fields)
             cleared_locator = self.page.locator(f'//div/*[(self::input or self::textarea) and @id="{field_to_test}"]')
             cleared_locator.fill("")  # Make it empty
@@ -322,5 +321,4 @@ class FindTutor:
         'Проверяем сообщение "Платеж успешно произведен. Скоро с вами свяжемся"'
     )
     def verify_request_success_message(self):
-        btn_pay = self.page.locator('//a[text()="Добавить чек"]')
         pass

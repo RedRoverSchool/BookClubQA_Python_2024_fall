@@ -1,6 +1,5 @@
 import allure
 from faker import Faker
-import time
 
 fake = Faker()
 
