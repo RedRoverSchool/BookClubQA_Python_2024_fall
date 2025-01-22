@@ -2,6 +2,7 @@ import allure
 from playwright.sync_api import Page, expect
 from core.settings import list_url, tutors_list_url
 from faker import Faker
+import time
 
 fake = Faker()
 
@@ -255,3 +256,71 @@ class FindTutor:
         assert self.page.url == (
             "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/listings/lesson_request/1/"
         )
+
+    # TC_39.001.001.001 - 004
+    @allure.step(
+        'Проверяем доступность полей на странице "Запрос занятия!"'
+    )
+    def verify_fields_to_be_visible_lesson_page(self):
+        req_id_title = ['div_id_first_name', 'div_id_last_name', 'div_id_telegram', 'div_id_phone', 'div_id_goal', 'div_id_count_of_lessons']
+        for title in req_id_title:
+            expect(self.page.locator(f'//div[@id="{title}"]')).to_be_visible()
+
+    @allure.step(
+        'Проверяем кнопку "Отправить" на странице "Запрос занятия!"'
+    )
+    def verify_btn_submit_and_pay_is_visible(self):
+        submit_btn = self.page.locator('//button[@type="submit"]')
+        assert submit_btn.is_visible()
+
+    def click_btn_submit_request(self):
+        submit_btn = self.page.locator('//button[@type="submit"]')
+        submit_btn.click()
+
+    def fill_fields(self, field_list):
+        for field in field_list:
+            locator = self.page.locator(f'//div/*[(self::input or self::textarea) and @id="{field}"]')
+            val = locator.evaluate("el => el.value")
+            if not val or not val.strip():
+                tag_name = locator.evaluate("el => el.tagName.toLowerCase()")
+                if tag_name == "input":
+                    input_type = locator.get_attribute("type") or ""
+                    if input_type == "number":
+                        locator.fill("33")
+                    else:
+                        locator.fill("TESTING")
+                elif tag_name == "textarea":
+                    locator.fill("TESTING")
+
+    @allure.step(
+        'Проверяем позитивный кейс по заполнению обязательных полей на странице "Запрос занятия!" и переход на страницу "Dashboard'
+    )
+    def verify_positive_require_fields_to_submit(self):
+        req_id_fields = ['id_first_name', 'id_last_name', 'id_telegram', 'id_phone', 'id_goal', 'id_count_of_lessons']
+        self.fill_fields(req_id_fields)
+        self.click_btn_submit_request()
+        assert self.page.url == (
+            "http://tester:dslfjsdfblkhew%40122b1klbfw@testing.misleplav.ru/dashboard/dashboard/7/"
+        )
+        
+    @allure.step(
+        'Проверяем отрицательный кейс по заполнению обязательных полей на странице "Запрос занятия!"'
+    )
+    def verify_negative_require_fields_to_submit(self):
+        req_id_fields = ['id_first_name', 'id_last_name', 'id_telegram', 'id_phone', 'id_goal', 'id_count_of_lessons']
+        for field_to_test in req_id_fields:
+            error_locator = self.page.locator(f'//strong[text()="Обязательное поле."]')
+            self.fill_fields(req_id_fields)
+            cleared_locator = self.page.locator(f'//div/*[(self::input or self::textarea) and @id="{field_to_test}"]')
+            cleared_locator.fill("")  # Make it empty
+            self.click_btn_submit_request()  # or however you submit the form
+            assert error_locator.is_visible(), (
+                f"No 'Обязательное поле.' message for empty field {field_to_test}"
+            )
+
+    @allure.step(
+        'Проверяем сообщение "Платеж успешно произведен. Скоро с вами свяжемся"'
+    )
+    def verify_request_success_message(self):
+        btn_pay = self.page.locator('//a[text()="Добавить чек"]')
+        pass
