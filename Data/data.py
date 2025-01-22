@@ -16,6 +16,9 @@ invalid_password = "p==="
 EMAIL_TUTOR_KM = "tutor_testing@bk.ru"
 PASSWORD_TUTOR_KM = "I165TVAzghk8"
 
+EMAIL_TUTOR_MV = "teacher-test@yopmail.com"
+PASSWORD_TUTOR_MV = "5uR94zLhF80r"
+
 # without announcement
 EMAIL_TUTOR_WA_KM = "tutor_test_misliplav@mail.ru"
 PASSWORD_TUTOR_WA_KM = "iZ52toubKacm"
