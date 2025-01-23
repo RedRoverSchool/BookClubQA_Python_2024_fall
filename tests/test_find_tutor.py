@@ -102,3 +102,54 @@ def test_tutor_profile_btn_request_lesson_clickable_redirect(login, header, find
     login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
     find_tutor.check_btn_more_is_clickable()
     find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
+
+
+@allure.title("TC_39.001.001.001")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
+# TC_39.001.001.001 [Student ] Find a teacher > More > Lesson request > Verify fields required to be filled
+def test_verify_fields_lesson_page(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
+    find_tutor.verify_fields_to_be_visible_lesson_page()
+
+
+@allure.title("TC_39.001.001.002")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
+# TC_39.001.001.002 [Student ] Find a teacher > More > Lesson request > Verify the button "Оплатить и записаться" visible
+def test_verify_btn_submit_and_pay(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
+    find_tutor.verify_btn_submit_and_pay_is_visible()
+
+
+@allure.title("TC_39.001.001.003")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
+# TC_39.001.001.003 [Student ] Find a teacher > More > Lesson request > Verify user ABLE to submit form only with require fields
+def test_verify_positive_require_fields_to_submit(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
+    find_tutor.verify_positive_require_fields_to_submit()
+
+
+@allure.title("TC_39.001.001.004")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
+# TC_39.001.001.004 [Student ] Find a teacher > More > Lesson request > Verify user UNABLE to submit form if the require field missed
+def test_verify_negative_require_fields_to_submit(login, header, find_tutor):
+    header.visit()
+    login.full_login("acc.python.test@gmail.com", "jUvJ5ZSxzdIr")
+    find_tutor.check_btn_more_is_clickable()
+    find_tutor.check_tutor_profile_btn_request_lesson_clickable_redirect()
+    find_tutor.verify_negative_require_fields_to_submit()
+
+
+@allure.title("TC_39.001.001.005")
+@allure.link("https://github.com/RedRoverSchool/BookClubQA_Python_2024_fall/issues/417")
+# TC_39.001.001.006 [Student ] Find a teacher > More > Lesson request > Verify after submit the request the user receive success message : ""Платеж успешно произведен. Скоро с вами свяжемся""
+def test_verify_success_message_of_request(login, header, find_tutor):
+    pass
