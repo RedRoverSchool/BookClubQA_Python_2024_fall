@@ -1,6 +1,6 @@
 import allure
 import pytest
-from Data.data import EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM, EMAIL_TUTOR_WA_KM, PASSWORD_TUTOR_WA_KM
+from Data.data import EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM, EMAIL_TUTOR_WA_KM, PASSWORD_TUTOR_WA_KM, EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV
 
 
 # TC_12.002.001| [Teacher] Create announcement > Create teacher announcement.
@@ -43,33 +43,20 @@ def test_teacher_announcement_blank_form(
     announcement.verify_number_of_announcements_is_zero()
 
 
-# TC_15.001.005.001 | Teacher Profile > Hiding announcement > Name changes and teacher's announcement became invisible.
-# Check that option “Сделать объявление невидимым для учеников” switches to the option
-# "Сделать объявление видимым для учеников" and Teacher's announcement became invisible from the list.
-@pytest.mark.skip("needs to be fixed")
-def test_teacher_hiding_announcement(header, login, announcement):
+# TC_13.001.005 | [Teacher]My_announcement > Verify the ability to hide the ad from students
+def test_teacher_hiding_announcement(header, login, announcement, footer):
     header.visit()
     header.click_login_button()
-    login.full_login(EMAIL_TUTOR_KM, PASSWORD_TUTOR_KM)
-    announcement.click_my_announcement_button()
-    announcement.click_make_announcement_visible()
-    announcement.check_button_text_visible()
-
-    # Removed try block for check_teacher_announcement_invisible
-    try:
-        announcement.check_teacher_announcement_invisible()
-    except Exception as e:
-        print(f"Error in check_teacher_announcement_invisible: {e}")
-
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.click_make_announcement_invisible()
-    announcement.check_button_text_invisible()
+    announcement.verify_announcement_hiding(footer, header, announcement)
+    header.click_my_announcement_button()
+    announcement.click_make_announcement_visible()
 
 
 # TC_15.001.002 | Header-Teacher > My announcements ("Мои объявления") when User has an announcement >
 # Verify the teacher's name in the announcement
-
-
 @pytest.mark.skip(reason="не прошёл CI после изменений 26.12.2024")
 def test_teacher_announcement_name(
     header, register, my_teachers, create_announcement_page, announcement
@@ -87,7 +74,7 @@ def test_teacher_announcement_name(
 # TC_13.001.001 | [Teacher]My_announcement > "Просмотреть" button redirection check
 def test_view_announcement_btn_redirection(header, announcement, login):
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.click_view_announcement_button()
     announcement.check_announcement_url_by_template()
@@ -96,7 +83,7 @@ def test_view_announcement_btn_redirection(header, announcement, login):
 # TC_13.001.003 | [Teacher]My_announcement > "Редактировать" button redirection check
 def test_edit_announcement_btn_redirection(header, announcement, login):
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.click_edit_announcement_button()
     announcement.check_edit_announcement_page_url()
@@ -105,7 +92,7 @@ def test_edit_announcement_btn_redirection(header, announcement, login):
 # TC_13.001.004 | [Teacher]My_announcement > Verify the ability to see detailed ad statistics
 def test_announcement_detailed_info(header, announcement, login):
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.check_view_counter_visible()
 
@@ -120,8 +107,6 @@ def test_redirection_to_my_announcement_page(header, announcement, login):
 
 # TC_12.002.003 | [Teacher] Create announcement > Create teacher announcement >
 # Verify the announcement is created after filling in required form fields with valid data #313
-
-
 @pytest.mark.skip(reason="Тест временно отключен после обновления 09.01.2025")
 def test_create_announcement_with_only_required_fields(header, announcement, register):
     # email, password = user_registration_cleanup
@@ -136,7 +121,7 @@ def test_create_announcement_with_only_required_fields(header, announcement, reg
 # TC_13.002.001| [Teacher] My announcement > Edit announcement > Mandatory fields are marked with "*"
 def test_mandatory_field_marks_on_edit_announcement_page(header, login, announcement):
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.click_edit_announcement_button()
     announcement.verify_mandatory_fields_are_marked()
@@ -145,7 +130,7 @@ def test_mandatory_field_marks_on_edit_announcement_page(header, login, announce
 # TC_13.007.002| [Teacher] My announcement > Edit announcement > Mandatory fields are required to be filled
 def test_mandatory_fields_on_edit_announcement_page(header, login, announcement):
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     announcement.click_my_announcement_button()
     announcement.click_edit_announcement_button()
     announcement.clear_mandatory_fields()

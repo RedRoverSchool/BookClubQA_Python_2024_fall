@@ -1,5 +1,7 @@
 import allure
 import pytest
+
+from Data.data import EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV
 from core.settings import pages_urls_for_guest
 from core.settings import site_pages_urls
 from playwright.sync_api import Page
@@ -196,7 +198,7 @@ def test_hover_exit_button_for_student_color_check(header, register):
 def test_profile_btn_visibility(header, login, data, page: Page):
     """Проверка видимости кнопки 'Профиль'"""
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     page_url = data["url"]
     page.goto(page_url)
     header.profile_button_should_be_visible()
@@ -209,7 +211,7 @@ def test_profile_btn_visibility(header, login, data, page: Page):
 def test_profile_btn_hover(header, login, data, page: Page):
     """Проверка смены цвета кнопки 'Профиль' при наведении на нее курсора"""
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     page_url = data["url"]
     page.goto(page_url)
     header.hover_profile_btn_color_check()
@@ -222,7 +224,7 @@ def test_profile_btn_hover(header, login, data, page: Page):
 def test_profile_btn_redirection(header, user_profile, login, data, page: Page):
     """Проверка перенаправления на страницу профиля пользователя после нажатия кнопки 'Профиль'"""
     header.visit()
-    login.full_login("teacher-test@yopmail.com", "5uR94zLhF80r")
+    login.full_login(EMAIL_TUTOR_MV, PASSWORD_TUTOR_MV)
     page_url = data["url"]
     page.goto(page_url)
     header.click_profile_button()
